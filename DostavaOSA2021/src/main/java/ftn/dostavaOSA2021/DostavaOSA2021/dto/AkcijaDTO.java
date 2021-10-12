@@ -11,24 +11,26 @@ public class AkcijaDTO {
 	private Integer procenat;
 	private Date odKad;
 	private Date doKad;
-//	private Long prodavac;
+	private Long idProdavac;
+	private String prodavac;
 	
 	public AkcijaDTO() {
 		super();
 	}
 
-	public AkcijaDTO(Long idAkcija, String tekst, Integer procenat, Date odKad, Date doKad) {
+	public AkcijaDTO(Long idAkcija, String tekst, Integer procenat, Date odKad, Date doKad, Long idProdavac, String prodavac) {
 		super();
 		this.idAkcija = idAkcija;
 		this.tekst = tekst;
 		this.procenat = procenat;
 		this.odKad = odKad;
 		this.doKad = doKad;
-//		this.prodavac = prodavac;
+		this.idProdavac = idProdavac;
+		this.prodavac = prodavac;
 	}
 	
 	public AkcijaDTO(Akcija akcija) {
-		this(akcija.getIdAkcija(), akcija.getTekst(), akcija.getProcenat(), akcija.getOdKad(), akcija.getDoKad());
+		this(akcija.getIdAkcija(), akcija.getTekst(), akcija.getProcenat(), akcija.getOdKad(), akcija.getDoKad(), akcija.getProdavac().getIdProdavac(), akcija.getProdavac().getIme());
 	}
 
 	public Long getIdAkcija() {
@@ -71,11 +73,19 @@ public class AkcijaDTO {
 		this.doKad = doKad;
 	}
 
-//	public Long getProdavac() {
-//		return prodavac;
-//	}
-//
-//	public void setProdavac(Long prodavac) {
-//		this.prodavac = prodavac;
-//	}
+	public Long getIdProdavac() {
+		return idProdavac;
+	}
+
+	public void setIdProdavac(Long idProdavac) {
+		this.idProdavac = idProdavac;
+	}
+
+	public String getProdavac() {
+		return prodavac;
+	}
+
+	public void setProdavac(String prodavac) {
+		this.prodavac = prodavac;
+	}
 }

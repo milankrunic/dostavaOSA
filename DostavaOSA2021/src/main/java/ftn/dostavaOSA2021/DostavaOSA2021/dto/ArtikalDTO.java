@@ -9,24 +9,26 @@ public class ArtikalDTO {
 	private String opis;
 	private Double cena;
 	private String putanjaSlike;
-//	private Long prodavac;
+	private Long idProdavac;
+	private String prodavac;
 	
 	public ArtikalDTO() {
 		super();
 	}
 
-	public ArtikalDTO(Long idArtikla, String naziv, String opis, Double cena, String putanjaSlike) {
+	public ArtikalDTO(Long idArtikla, String naziv, String opis, Double cena, String putanjaSlike, Long idProdavac, String prodavac) {
 		super();
 		this.idArtikla = idArtikla;
 		this.naziv = naziv;
 		this.opis = opis;
 		this.cena = cena;
 		this.putanjaSlike = putanjaSlike;
-//		this.prodavac = prodavac;
+		this.idProdavac = idProdavac;
+		this.prodavac = prodavac;
 	}
 	
 	public ArtikalDTO(Artikal artikal) {
-		this(artikal.getIdArtikal(), artikal.getNaziv(), artikal.getOpis(), artikal.getCena(), artikal.getPutanjaSlike());
+		this(artikal.getIdArtikal(), artikal.getNaziv(), artikal.getOpis(), artikal.getCena(), artikal.getPutanjaSlike(), artikal.getProdavac().getIdProdavac(), artikal.getProdavac().getIme());
 	}
 
 	public Long getIdArtikla() {
@@ -69,12 +71,19 @@ public class ArtikalDTO {
 		this.putanjaSlike = putanjaSlike;
 	}
 
-//	public Long getProdavac() {
-//		return prodavac;
-//	}
-//
-//	public void setProdavac(Long prodavac) {
-//		this.prodavac = prodavac;
-//	}
-	
+	public Long getIdProdavac() {
+		return idProdavac;
+	}
+
+	public void setIdProdavac(Long idProdavac) {
+		this.idProdavac = idProdavac;
+	}
+
+	public String getProdavac() {
+		return prodavac;
+	}
+
+	public void setProdavac(String prodavac) {
+		this.prodavac = prodavac;
+	}
 }

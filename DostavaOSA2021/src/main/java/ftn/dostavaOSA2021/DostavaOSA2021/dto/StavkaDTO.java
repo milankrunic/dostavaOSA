@@ -6,23 +6,25 @@ public class StavkaDTO {
 	
 	private Long idStavka;
 	private int kolicina;
-//	private Long artikal;
-//	private Long porudzbina;
+	private Long idArtikal;
+	private String artikal;
+	private Long porudzbina;
 	
 	public StavkaDTO() {
 		super();
 	}
 
-	public StavkaDTO(Long idStavka, int kolicina) {
+	public StavkaDTO(Long idStavka, int kolicina, Long idArtikal, String artikal, Long porudzbina) {
 		super();
 		this.idStavka = idStavka;
 		this.kolicina = kolicina;
-//		this.artikal = artikal;
-//		this.porudzbina = porudzbina;
+		this.idArtikal = idArtikal;
+		this.artikal = artikal;
+		this.porudzbina = porudzbina;
 	}
 	
 	public StavkaDTO(Stavka stavka) {
-		this(stavka.getIdStavka(), stavka.getKolicina());
+		this(stavka.getIdStavka(), stavka.getKolicina(), stavka.getArtikal().getIdArtikal(), stavka.getArtikal().getNaziv(), stavka.getPorudzbina().getIdPorudzbina());
 	}
 
 	public Long getIdStavka() {
@@ -40,20 +42,28 @@ public class StavkaDTO {
 	public void setKolicina(int kolicina) {
 		this.kolicina = kolicina;
 	}
+	
+	public Long getIdArtikal() {
+		return idArtikal;
+	}
 
-//	public Long getArtikal() {
-//		return artikal;
-//	}
-//
-//	public void setArtikal(Long artikal) {
-//		this.artikal = artikal;
-//	}
-//
-//	public Long getPorudzbina() {
-//		return porudzbina;
-//	}
-//
-//	public void setPorudzbina(Long porudzbina) {
-//		this.porudzbina = porudzbina;
-//	}
+	public void setIdArtikal(Long idArtikal) {
+		this.idArtikal = idArtikal;
+	}
+
+	public String getArtikal() {
+		return artikal;
+	}
+
+	public void setArtikal(String artikal) {
+		this.artikal = artikal;
+	}
+
+	public Long getPorudzbina() {
+		return porudzbina;
+	}
+
+	public void setPorudzbina(Long porudzbina) {
+		this.porudzbina = porudzbina;
+	}
 }
