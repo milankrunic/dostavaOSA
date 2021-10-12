@@ -7,7 +7,7 @@ public class AdministratorDTO {
 	private Long idAdministrator;
 	private String ime;
 	private String prezime;
-	private String korIme;
+	private String korIme; 
 	private String lozinka;
 	private boolean blokiran;
 	
