@@ -30,7 +30,7 @@ public class AkcijaDTO {
 	}
 	
 	public AkcijaDTO(Akcija akcija) {
-		this(akcija.getIdAkcija(), akcija.getTekst(), akcija.getProcenat(), akcija.getOdKad(), akcija.getDoKad(), akcija.getProdavac().getIdProdavac(), akcija.getProdavac().getIme());
+		this(akcija.getIdAkcija(), akcija.getTekst(), akcija.getProcenat(), akcija.getOdKad(), akcija.getDoKad(), akcija.getProdavac().getIdProdavac(), akcija.getProdavac().getKorisnickoIme());
 	}
 
 	public Long getIdAkcija() {

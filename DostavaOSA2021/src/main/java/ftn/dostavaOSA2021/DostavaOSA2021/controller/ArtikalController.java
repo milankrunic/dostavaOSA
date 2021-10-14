@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ftn.dostavaOSA2021.DostavaOSA2021.dto.ArtikalDTO;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Artikal;
+import ftn.dostavaOSA2021.DostavaOSA2021.model.Prodavac;
 import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.ArtikalServiceInterface;
+import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.ProdavacServiceInterface;
 
 @RestController
 @RequestMapping(value = "api/artikal")
@@ -25,6 +27,9 @@ public class ArtikalController {
 	
 	@Autowired
 	ArtikalServiceInterface artikalServiceInterface;
+	
+	@Autowired
+	ProdavacServiceInterface prodavacServiceInterface;
 	
 	@GetMapping
 	public ResponseEntity<List<ArtikalDTO>> getArtikle(){
@@ -51,11 +56,14 @@ public class ArtikalController {
 	@PostMapping
 	public ResponseEntity<ArtikalDTO> addArtikal(@RequestBody ArtikalDTO artikalDTO){
 
+		Prodavac prodavac = prodavacServiceInterface.findById(artikalDTO.getIdProdavac());
+		
 		Artikal a = new Artikal();
 		a.setNaziv(artikalDTO.getNaziv());
 		a.setOpis(artikalDTO.getOpis());
 		a.setCena(artikalDTO.getCena());
 		a.setPutanjaSlike(artikalDTO.getPutanjaSlike());
+		a.setProdavac(prodavac);
 		
 		a = artikalServiceInterface.save(a);
 		return new ResponseEntity<ArtikalDTO>(new ArtikalDTO(a), HttpStatus.CREATED);
@@ -63,16 +71,19 @@ public class ArtikalController {
 
 	@PutMapping(value = "/{id}", consumes = "application/json")
 	public ResponseEntity<ArtikalDTO> updateArtikal(@RequestBody ArtikalDTO artikalDTO, @PathVariable("id") Long id){
-
+		
 		Artikal artikal = artikalServiceInterface.findById(id);
+		Prodavac prodavac = prodavacServiceInterface.findById(artikalDTO.getIdProdavac());
 		
 		if(artikal == null) {
 			return new ResponseEntity<ArtikalDTO>(HttpStatus.BAD_REQUEST);
 		}
+		
 		artikal.setNaziv(artikalDTO.getNaziv());
 		artikal.setOpis(artikalDTO.getOpis());
 		artikal.setCena(artikalDTO.getCena());
 		artikal.setPutanjaSlike(artikalDTO.getPutanjaSlike());
+		artikal.setProdavac(prodavac);
 
 		artikal = artikalServiceInterface.save(artikal);
 		return new ResponseEntity<ArtikalDTO>(new ArtikalDTO(artikal), HttpStatus.OK);
