@@ -8,19 +8,19 @@ public class StavkaDTO {
 	private int kolicina;
 	private Long idArtikal;
 	private String artikal;
-	private Long porudzbina;
+	private Long idPorudzbina;
 	
 	public StavkaDTO() {
 		super();
 	}
 
-	public StavkaDTO(Long idStavka, int kolicina, Long idArtikal, String artikal, Long porudzbina) {
+	public StavkaDTO(Long idStavka, int kolicina, Long idArtikal, String artikal, Long idPorudzbina) {
 		super();
 		this.idStavka = idStavka;
 		this.kolicina = kolicina;
 		this.idArtikal = idArtikal;
 		this.artikal = artikal;
-		this.porudzbina = porudzbina;
+		this.idPorudzbina = idPorudzbina;
 	}
 	
 	public StavkaDTO(Stavka stavka) {
@@ -59,11 +59,11 @@ public class StavkaDTO {
 		this.artikal = artikal;
 	}
 
-	public Long getPorudzbina() {
-		return porudzbina;
+	public Long getIdPorudzbina() {
+		return idPorudzbina;
 	}
 
-	public void setPorudzbina(Long porudzbina) {
-		this.porudzbina = porudzbina;
+	public void setIdPorudzbina(Long idPorudzbina) {
+		this.idPorudzbina = idPorudzbina;
 	}
 }

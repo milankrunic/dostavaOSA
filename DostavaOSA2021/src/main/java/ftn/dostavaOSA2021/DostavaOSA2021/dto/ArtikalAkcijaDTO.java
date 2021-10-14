@@ -8,21 +8,23 @@ public class ArtikalAkcijaDTO {
 	private Long idArtikal;
 	private Long idAkcija;
 	private String artikal;
+	private Integer procenat;
 	
 	public ArtikalAkcijaDTO() {
 		super();
 	}
 
-	public ArtikalAkcijaDTO(Long idArtikalAkcija, Long idArtikal, Long idAkcija, String artikal) {
+	public ArtikalAkcijaDTO(Long idArtikalAkcija, Long idArtikal, Long idAkcija, String artikal, Integer procenat) {
 		super();
 		this.idArtikalAkcija = idArtikalAkcija;
 		this.idArtikal = idArtikal;
 		this.idAkcija = idAkcija;
 		this.artikal = artikal;
+		this.procenat = procenat;
 	}
 	
 	public ArtikalAkcijaDTO(ArtikalAkcija aa) {
-		this(aa.getIdArtikalAkcija(), aa.getArtikal().getIdArtikal(), aa.getAkcija().getIdAkcija(), aa.getArtikal().getNaziv());
+		this(aa.getIdArtikalAkcija(), aa.getArtikal().getIdArtikal(), aa.getAkcija().getIdAkcija(), aa.getArtikal().getNaziv(), aa.getAkcija().getProcenat());
 	}
 
 	public Long getIdArtikalAkcija() {
@@ -56,4 +58,13 @@ public class ArtikalAkcijaDTO {
 	public void setArtikal(String artikal) {
 		this.artikal = artikal;
 	}
+
+	public Integer getProcenat() {
+		return procenat;
+	}
+
+	public void setProcenat(Integer procenat) {
+		this.procenat = procenat;
+	}
+	
 }
