@@ -26,8 +26,8 @@ public class KupacService implements KupacServiceInterface{
 	}
 
 	@Override
-	public Kupac findById(Long kupacId) {
-		return kupacRepository.findByIdKupac(kupacId);
+	public Kupac findById(Long korisnikId) {
+		return kupacRepository.findByIdKorisnik(korisnikId);
 	}
 
 	@Override

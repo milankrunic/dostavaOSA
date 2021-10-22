@@ -39,7 +39,7 @@ public class Akcija {
 	private Date doKad;
 	
 	@ManyToOne
-	@JoinColumn(name = "prodavac", referencedColumnName = "idProdavac", nullable = false)
+	@JoinColumn(name = "korisnik", referencedColumnName = "idKorisnik", nullable = false)
 	private Prodavac prodavac;
 	
 	@OneToMany(cascade = {ALL}, fetch=LAZY, mappedBy="akcija")

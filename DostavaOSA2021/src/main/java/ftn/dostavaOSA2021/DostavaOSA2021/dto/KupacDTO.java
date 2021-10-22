@@ -1,6 +1,7 @@
 package ftn.dostavaOSA2021.DostavaOSA2021.dto;
 
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Kupac;
+import ftn.dostavaOSA2021.DostavaOSA2021.model.TipKorisnika;
 
 public class KupacDTO {
 
@@ -11,13 +12,14 @@ public class KupacDTO {
 	private String korIme;
 	private String lozinka;
 	private boolean blokiran;
+	private TipKorisnika tipKorisnika;
 	
 	public KupacDTO() {
 		super();
 	}
 
 	public KupacDTO(Long idKupac, String adresa, String ime, String prezime, String korIme, String lozinka,
-			boolean blokiran) {
+			boolean blokiran, TipKorisnika tipKorisnika) {
 		super();
 		this.idKupac = idKupac;
 		this.adresa = adresa;
@@ -26,10 +28,11 @@ public class KupacDTO {
 		this.korIme = korIme;
 		this.lozinka = lozinka;
 		this.blokiran = blokiran;
+		this.tipKorisnika = tipKorisnika;
 	}
 	
 	public KupacDTO(Kupac kupac) {
-		this(kupac.getIdKupac(), kupac.getAdresa(), kupac.getIme(), kupac.getPrezime(), kupac.getKorisnickoIme(), kupac.getLozinka(), kupac.isBlokiran());
+		this(kupac.getIdKorisnik(), kupac.getAdresa(), kupac.getIme(), kupac.getPrezime(), kupac.getKorisnickoIme(), kupac.getLozinka(), kupac.isBlokiran(), kupac.getTipKorisnika());
 	}
 
 	public Long getIdKupac() {
@@ -86,5 +89,13 @@ public class KupacDTO {
 
 	public void setBlokiran(boolean blokiran) {
 		this.blokiran = blokiran;
+	}
+
+	public TipKorisnika getTipKorisnika() {
+		return tipKorisnika;
+	}
+
+	public void setTipKorisnika(TipKorisnika tipKorisnika) {
+		this.tipKorisnika = tipKorisnika;
 	}
 }

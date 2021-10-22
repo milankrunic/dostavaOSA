@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ftn.dostavaOSA2021.DostavaOSA2021.dto.KupacDTO;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Kupac;
+import ftn.dostavaOSA2021.DostavaOSA2021.model.TipKorisnika;
 import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.KupacServiceInterface;
 
 @RestController
@@ -58,6 +59,7 @@ public class KupacController {
 		kupac.setLozinka(kupacDTO.getLozinka());
 		kupac.setBlokiran(kupacDTO.isBlokiran()); //?
 		kupac.setAdresa(kupacDTO.getAdresa());
+		kupac.setTipKorisnika(TipKorisnika.KUPAC);
 		
 		kupac = kupacServiceInterface.save(kupac);
 		return new ResponseEntity<KupacDTO>(new KupacDTO(kupac), HttpStatus.CREATED);

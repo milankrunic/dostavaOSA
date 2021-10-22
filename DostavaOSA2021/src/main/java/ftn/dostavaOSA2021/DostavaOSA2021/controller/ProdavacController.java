@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ftn.dostavaOSA2021.DostavaOSA2021.dto.ProdavacDTO;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Prodavac;
+import ftn.dostavaOSA2021.DostavaOSA2021.model.TipKorisnika;
 import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.ProdavacServiceInterface;
 
 @RestController
@@ -61,6 +62,7 @@ public class ProdavacController {
 		prodavac.setEmail(prodavacDTO.getEmail());
 		prodavac.setAdresa(prodavacDTO.getAdresa());
 		prodavac.setPoslujeOd(prodavacDTO.getPoslujeOd());
+		prodavac.setTipKorisnika(TipKorisnika.PRODAVAC);
 		
 		prodavac = prodavacServiceInterface.save(prodavac);
 		return new ResponseEntity<ProdavacDTO>(new ProdavacDTO(prodavac), HttpStatus.CREATED);

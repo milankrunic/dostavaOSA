@@ -26,8 +26,8 @@ public class ProdavacService implements ProdavacServiceInterface{
 	}
 
 	@Override
-	public Prodavac findById(Long prodavacId) {
-		return prodavacRepository.findByIdProdavac(prodavacId);
+	public Prodavac findById(Long korisnikId) {
+		return prodavacRepository.findByIdKorisnik(korisnikId);
 	}
 
 	@Override

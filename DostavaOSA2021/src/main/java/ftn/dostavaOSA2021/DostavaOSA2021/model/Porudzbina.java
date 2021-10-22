@@ -45,7 +45,7 @@ public class Porudzbina {
 	private boolean arhiviranKomentar;
 	
 	@ManyToOne
-	@JoinColumn(name = "kupac", referencedColumnName = "idKupac", nullable = false)
+	@JoinColumn(name = "korisnik", referencedColumnName = "idKorisnik", nullable = false)
 	private Kupac kupac;
 	
 	@OneToMany(cascade = {ALL}, fetch=LAZY, mappedBy="porudzbina")

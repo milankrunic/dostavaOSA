@@ -1,6 +1,8 @@
 package ftn.dostavaOSA2021.DostavaOSA2021.dto;
 
-import ftn.dostavaOSA2021.DostavaOSA2021.model.Korisnik;
+import java.util.Date;
+
+import ftn.dostavaOSA2021.DostavaOSA2021.model.TipKorisnika;
 
 public class KorisnikDTO {
 	
@@ -9,25 +11,38 @@ public class KorisnikDTO {
 	private String prezime;
 	private String korIme;
 	private String lozinka;
+	private String adresa;
+	private String email;
+	private String nazivProdavca;
+	private Date poslujeOd;
+	private TipKorisnika tipKorisnika;
 	private boolean blokiran;
 	
 	public KorisnikDTO() {
 		super();
 	}
-
-	public KorisnikDTO(Long idKorisnik, String ime, String prezime, String korIme, String lozinka, boolean blokiran) {
+	
+	public KorisnikDTO(Long idKorisnik, String ime, String prezime, String korIme, String lozinka, String adresa,
+			String email, String nazivProdavca, Date poslujeOd, TipKorisnika tipKorisnika, boolean blokiran) {
 		super();
 		this.idKorisnik = idKorisnik;
 		this.ime = ime;
 		this.prezime = prezime;
 		this.korIme = korIme;
 		this.lozinka = lozinka;
+		this.adresa = adresa;
+		this.email = email;
+		this.nazivProdavca = nazivProdavca;
+		this.poslujeOd = poslujeOd;
+		this.tipKorisnika = tipKorisnika;
 		this.blokiran = blokiran;
 	}
-	
-	public KorisnikDTO(Korisnik korisnik) {
-		this(korisnik.getIdKorisnik(), korisnik.getIme(), korisnik.getPrezime(), korisnik.getKorisnickoIme(), korisnik.getLozinka(), korisnik.isBlokiran());
-	}
+
+
+
+//	public KorisnikDTO(Korisnik korisnik) {
+//		this(korisnik.getIdKorisnik(), korisnik.getIme(), korisnik.getPrezime(), korisnik.getKorisnickoIme(), korisnik.getLozinka(), korisnik.get korisnik.isBlokiran());
+//	}
 
 	public Long getIdKorisnik() {
 		return idKorisnik;
@@ -69,6 +84,46 @@ public class KorisnikDTO {
 		this.lozinka = lozinka;
 	}
 
+	public String getAdresa() {
+		return adresa;
+	}
+
+	public void setAdresa(String adresa) {
+		this.adresa = adresa;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getNazivProdavca() {
+		return nazivProdavca;
+	}
+
+	public void setNazivProdavca(String nazivProdavca) {
+		this.nazivProdavca = nazivProdavca;
+	}
+
+	public Date getPoslujeOd() {
+		return poslujeOd;
+	}
+
+	public void setPoslujeOd(Date poslujeOd) {
+		this.poslujeOd = poslujeOd;
+	}
+
+	public TipKorisnika getTipKorisnika() {
+		return tipKorisnika;
+	}
+
+	public void setTipKorisnika(TipKorisnika tipKorisnika) {
+		this.tipKorisnika = tipKorisnika;
+	}
+
 	public boolean isBlokiran() {
 		return blokiran;
 	}
@@ -76,4 +131,5 @@ public class KorisnikDTO {
 	public void setBlokiran(boolean blokiran) {
 		this.blokiran = blokiran;
 	}
+
 }

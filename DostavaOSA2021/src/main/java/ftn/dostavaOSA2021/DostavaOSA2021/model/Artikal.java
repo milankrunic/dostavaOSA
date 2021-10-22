@@ -41,7 +41,7 @@ public class Artikal {
 	private List<ArtikalAkcija> artikalAkcija = new ArrayList<ArtikalAkcija>();
 	
 	@ManyToOne
-	@JoinColumn(name = "prodavac", referencedColumnName = "idProdavac", nullable = false)
+	@JoinColumn(name = "korisnik", referencedColumnName = "idKorisnik", nullable = false)
 	private Prodavac prodavac;
 	
 	@OneToMany(cascade = {ALL}, fetch=LAZY, mappedBy="artikal")

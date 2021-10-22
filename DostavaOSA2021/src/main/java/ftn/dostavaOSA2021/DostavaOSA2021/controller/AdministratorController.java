@@ -17,11 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ftn.dostavaOSA2021.DostavaOSA2021.dto.AdministratorDTO;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Administrator;
+import ftn.dostavaOSA2021.DostavaOSA2021.model.TipKorisnika;
 import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.AdministratorServiceInterface;
 
 @RestController
 @RequestMapping(value = "api/admin")
-public class AdministratorController {
+public class AdministratorController { 
 
 	@Autowired
 	AdministratorServiceInterface administratorServiceInterface;
@@ -57,6 +58,7 @@ public class AdministratorController {
 		admin.setKorisnickoIme(administratorDTO.getKorIme());
 		admin.setLozinka(administratorDTO.getLozinka());
 		admin.setBlokiran(administratorDTO.isBlokiran()); //?
+		admin.setTipKorisnika(TipKorisnika.ADMINISTRATOR);
 		
 		admin = administratorServiceInterface.save(admin);
 		return new ResponseEntity<AdministratorDTO>(new AdministratorDTO(admin), HttpStatus.CREATED);

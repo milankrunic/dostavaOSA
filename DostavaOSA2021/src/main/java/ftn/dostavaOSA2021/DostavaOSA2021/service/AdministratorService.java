@@ -26,8 +26,8 @@ public class AdministratorService implements AdministratorServiceInterface{
 	}
 
 	@Override
-	public Administrator findById(Long administratorId) {
-		return administratorRepository.findByIdAdministrator(administratorId);
+	public Administrator findById(Long korisnikId) {
+		return administratorRepository.findByIdKorisnik(korisnikId);
 	}
 
 	@Override

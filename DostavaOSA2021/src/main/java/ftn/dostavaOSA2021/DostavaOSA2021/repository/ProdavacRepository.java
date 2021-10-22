@@ -6,6 +6,6 @@ import ftn.dostavaOSA2021.DostavaOSA2021.model.Prodavac;
 
 public interface ProdavacRepository extends JpaRepository<Prodavac, Long>{
 
-	Prodavac findByIdProdavac(Long idProdavac);
+	Prodavac findByIdKorisnik(Long idKorisnik);
 	
 }

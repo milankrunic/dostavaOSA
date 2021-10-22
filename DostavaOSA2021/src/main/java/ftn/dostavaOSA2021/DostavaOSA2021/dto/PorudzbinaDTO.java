@@ -35,7 +35,7 @@ public class PorudzbinaDTO {
 	}
 
 	public PorudzbinaDTO(Porudzbina p) {
-		this(p.getIdPorudzbina(), p.getSatnica(), p.getOcena(), p.getKomentar(), p.isDostavljeno(), p.isAnonimanKomentar(), p.isArhiviranKomentar(), p.getKupac().getIdKupac(), p.getKupac().getIme());
+		this(p.getIdPorudzbina(), p.getSatnica(), p.getOcena(), p.getKomentar(), p.isDostavljeno(), p.isAnonimanKomentar(), p.isArhiviranKomentar(), p.getKupac().getIdKorisnik(), p.getKupac().getIme());
 	}
 
 	public Long getIdPorudzbina() {

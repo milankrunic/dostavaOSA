@@ -8,7 +8,7 @@ public interface KupacServiceInterface {
 	
 	public List<Kupac> findAll();
 	public Kupac findOne(Long id);
-	public Kupac findById(Long kupacId);
+	public Kupac findById(Long korisnikId);
 	public Kupac save(Kupac kupac);
 	public void remove(Long id);
 

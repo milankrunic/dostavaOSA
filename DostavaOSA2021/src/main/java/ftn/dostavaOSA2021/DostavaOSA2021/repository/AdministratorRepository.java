@@ -6,6 +6,6 @@ import ftn.dostavaOSA2021.DostavaOSA2021.model.Administrator;
 
 public interface AdministratorRepository extends JpaRepository<Administrator, Long>{
 
-	Administrator findByIdAdministrator(Long idAdministrator);
+	Administrator findByIdKorisnik(Long idKorisnik);
 	
 }

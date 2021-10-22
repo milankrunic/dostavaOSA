@@ -9,47 +9,23 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "prodavac")
-public class Prodavac{
-
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idProdavac", nullable = false, unique = true)
-	private Long idProdavac;
+public class Prodavac extends Korisnik{
 	
-	@Column(name = "ime", nullable = false)
-	private String ime;
-	
-	@Column(name = "prezime", nullable = false)
-	private String prezime;
-	
-	@Column(name = "korisnickoIme", nullable = false)
-	private String korisnickoIme;
-	
-	@Column(name = "lozinka", nullable = false)
-	private String lozinka;
-	
-	@Column(name = "blokiran", nullable = false)
-	private boolean blokiran;
-	
-	@Column(name = "naziv_prodavca", nullable = false)
+	@Column(name = "naziv_prodavca", nullable = true)
 	private String nazivProdavca;
 	
-	@Column(name = "email", nullable = false)
+	@Column(name = "email", nullable = true)
 	private String email;
 	
-	@Column(name = "adresa", nullable = false)
+	@Column(name = "adresa", nullable = true)
 	private String adresa;
 	
-	@Column(name = "poslujeOd", nullable = false)
+	@Column(name = "poslujeOd", nullable = true)
 	private Date poslujeOd;
+	 
 	
 	@OneToMany(mappedBy="prodavac", cascade = {ALL}, fetch=LAZY)
 	private List<Artikal> artikli = new ArrayList<Artikal>();
@@ -61,70 +37,16 @@ public class Prodavac{
 		super();
 	}
 
-	public Prodavac(Long idProdavac, String ime, String prezime, String korisnickoIme, String lozinka, boolean blokiran,
-			String nazivProdavca, String email, String adresa, Date poslujeOd, List<Artikal> artikli,
-			List<Akcija> akcije) {
-		super();
-		this.idProdavac = idProdavac;
-		this.ime = ime;
-		this.prezime = prezime;
-		this.korisnickoIme = korisnickoIme;
-		this.lozinka = lozinka;
-		this.blokiran = blokiran;
+	public Prodavac(Long idKorisnik, String ime, String prezime, String korisnickoIme, String lozinka, boolean blokiran,
+			TipKorisnika tipKorisnika, String nazivProdavca, String email, String adresa, Date poslujeOd,
+			List<Artikal> artikli, List<Akcija> akcije) {
+		super(idKorisnik, ime, prezime, korisnickoIme, lozinka, blokiran, tipKorisnika);
 		this.nazivProdavca = nazivProdavca;
 		this.email = email;
 		this.adresa = adresa;
 		this.poslujeOd = poslujeOd;
 		this.artikli = artikli;
 		this.akcije = akcije;
-	}
-
-	public Long getIdProdavac() {
-		return idProdavac;
-	}
-
-	public void setIdProdavac(Long idProdavac) {
-		this.idProdavac = idProdavac;
-	}
-
-	public String getIme() {
-		return ime;
-	}
-
-	public void setIme(String ime) {
-		this.ime = ime;
-	}
-
-	public String getPrezime() {
-		return prezime;
-	}
-
-	public void setPrezime(String prezime) {
-		this.prezime = prezime;
-	}
-
-	public String getKorisnickoIme() {
-		return korisnickoIme;
-	}
-
-	public void setKorisnickoIme(String korisnickoIme) {
-		this.korisnickoIme = korisnickoIme;
-	}
-
-	public String getLozinka() {
-		return lozinka;
-	}
-
-	public void setLozinka(String lozinka) {
-		this.lozinka = lozinka;
-	}
-
-	public boolean isBlokiran() {
-		return blokiran;
-	}
-
-	public void setBlokiran(boolean blokiran) {
-		this.blokiran = blokiran;
 	}
 
 	public String getNazivProdavca() {

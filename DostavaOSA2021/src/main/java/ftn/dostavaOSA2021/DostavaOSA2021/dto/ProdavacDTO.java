@@ -3,6 +3,7 @@ package ftn.dostavaOSA2021.DostavaOSA2021.dto;
 import java.util.Date;
 
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Prodavac;
+import ftn.dostavaOSA2021.DostavaOSA2021.model.TipKorisnika;
 
 public class ProdavacDTO{
 	
@@ -16,13 +17,14 @@ public class ProdavacDTO{
 	private String korIme;
 	private String lozinka;
 	private boolean blokiran;
+	private TipKorisnika tipKorisnika;
 	
 	public ProdavacDTO() {
 		super();
 	}
 
 	public ProdavacDTO(Long idProdavac, String nazivProdavca, String email, String adresa, Date poslujeOd, String ime,
-			String prezime, String korIme, String lozinka, boolean blokiran) {
+			String prezime, String korIme, String lozinka, boolean blokiran, TipKorisnika tipKorisnika) {
 		super();
 		this.idProdavac = idProdavac;
 		this.nazivProdavca = nazivProdavca;
@@ -34,10 +36,12 @@ public class ProdavacDTO{
 		this.korIme = korIme;
 		this.lozinka = lozinka;
 		this.blokiran = blokiran;
+		this.tipKorisnika = tipKorisnika;
 	}
+
 	
 	public ProdavacDTO(Prodavac p) {
-		this(p.getIdProdavac(), p.getNazivProdavca(), p.getEmail(), p.getAdresa(), p.getPoslujeOd(), p.getIme(), p.getPrezime(), p.getKorisnickoIme(), p.getLozinka(), p.isBlokiran());
+		this(p.getIdKorisnik(), p.getNazivProdavca(), p.getEmail(), p.getAdresa(), p.getPoslujeOd(), p.getIme(), p.getPrezime(), p.getKorisnickoIme(), p.getLozinka(), p.isBlokiran(), p.getTipKorisnika());
 	}
 
 	public Long getIdProdavac() {
@@ -118,5 +122,13 @@ public class ProdavacDTO{
 
 	public void setBlokiran(boolean blokiran) {
 		this.blokiran = blokiran;
+	}
+
+	public TipKorisnika getTipKorisnika() {
+		return tipKorisnika;
+	}
+
+	public void setTipKorisnika(TipKorisnika tipKorisnika) {
+		this.tipKorisnika = tipKorisnika;
 	}
 }
