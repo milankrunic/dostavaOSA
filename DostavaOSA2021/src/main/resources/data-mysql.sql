@@ -19,9 +19,9 @@ INSERT INTO korisnik(dtype, ime, prezime, korisnicko_ime, lozinka, blokiran, tip
 	VALUES('prodavac', 'Jova', 'Jovic', 'jovaj', 'jova123', false, 'PRODAVAC', 'Zlatiborska 3', 'naziv3', 'jova@gmail.com', '2019-08-12');
 
 --ARTIKLI
-INSERT INTO artikal(naziv, opis, cena, putanja_slike, korisnik) VALUES('Hleb', 'Artikal za ishranu', 50, 'neka putanja', 1);
-INSERT INTO artikal(naziv, opis, cena, putanja_slike, korisnik) VALUES('Mleko', 'Artikal za ishranu', 100, 'neka putanja', 1);
-INSERT INTO artikal(naziv, opis, cena, putanja_slike, korisnik) VALUES('Banane', 'Voce', 120, 'neka putanja', 1);
+INSERT INTO artikal(naziv, opis, cena, putanja_slike, korisnik) VALUES('Hleb', 'Artikal za ishranu', 50, 'neka putanja', 5);
+INSERT INTO artikal(naziv, opis, cena, putanja_slike, korisnik) VALUES('Mleko', 'Artikal za ishranu', 100, 'neka putanja', 6);
+INSERT INTO artikal(naziv, opis, cena, putanja_slike, korisnik) VALUES('Banane', 'Voce', 120, 'neka putanja', 7);
 
 --AKCIJE
 INSERT INTO akcija(tekst, procenat, od_kad, do_kad, korisnik) VALUES('Na akciji', 10, '2020-05-03', '2020-05-03', 1);

@@ -1,0 +1,59 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: rgb(175, 171, 171);
+    background-size: cover;
+}
+
+main{
+    width: 50%;
+    height: 100vh;
+    margin: 0 auto;
+    background-color: rgba(219, 234, 235, 0.7);
+    font-family: 'Heebo', sans-serif;
+}
+
+h1{
+    color: black;
+    font-family: 'Diplomata', cursive;
+    text-align: center;
+    padding-top: 10%;
+}
+
+h2{
+    color: rgb(13, 168, 189); 
+    text-transform: uppercase;
+    size: 20px;
+    font-family: 'Diplomata', cursive;
+    text-align: center;
+    padding-top: 7%;
+    padding-bottom: 3%;
+}
+
+form{
+    color: white;
+}
+
+#prijava{
+    margin: 1% 0;
+}
+
+#dugmeLogin{
+    padding: 10px;
+    background-color: rgb(4, 105, 236);
+    color: white;
+}
+
+#dugmeRegistracija{
+    padding: 10px;
+    background-color: rgb(4, 105, 236);
+    color: white;
+}
+
+#dugmici{
+    margin-left: 1%;
+    padding: 10px;
+}
