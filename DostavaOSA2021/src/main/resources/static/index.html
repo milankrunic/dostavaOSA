@@ -35,7 +35,7 @@
 	       <h2>Dobrodosli</h2>
 	
 	
-	       <form method="post" action="Login">
+	       <form method="post" action="api/login">
 	           <div id="korisnickoIme">
 	             <label class="col-sm-2 col-form-label">Korisnicko Ime:</label>
 	             <div class="col-sm-10">
@@ -51,7 +51,7 @@
 	           
 	           <div id="dugmici">
 	             <div>
-	               <input class="btn btn-primary" type="submit" id="Login" value="Prijava"/>
+	               <input class="btn btn-primary" onclick="odrediPrikaz('prijava')" type="submit" id="Login" value="Prijava"/>
 	             </div>
 	             <div id="registracija">
 	               <a href="/Knjizara/Korisnici/Registracija">Registruj se</a>
@@ -59,24 +59,60 @@
 	           </div>
 	         </form>
 		</div>
-		
+
+<!-- ARTIKLI ----------------------------------------------------------------------------------------------------------------- -->		
         <button class="btn btn-primary" onclick="odrediPrikaz('sviArtikli')" id="DugmePrikazArtikala">Svi Artikli</button>
-                  <!-- Prikaz svih artikala -->
-        <table class="table" id="artikliTable" style="display: none;">
-            <thead>
-              <tr>
-                <th style="text-align: center;">Naziv</th>
-                <th style="text-align: center;">Opis</th>
-                <th style="text-align: center;">Cena</th>
-                <th style="text-align: center;">Korisnicko Ime prodavca</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody id="tbodyArtikla">
-  
-            </tbody>
-        </table>
+        
+<!-- Prikaz svih artikala -->
+
+		<div id="artikliTable" style="display: none;">
+	        <table class="table">
+	            <thead>
+	              <tr>
+	                <th style="text-align: center;">ID</th>
+	                <th style="text-align: center;">Naziv</th>
+	                <th style="text-align: center;">Opis</th>
+	                <th style="text-align: center;">Cena</th>
+	                <th style="text-align: center;">Prodavnica</th>
+	                <th></th>
+	              </tr>
+	            </thead>
+	            <tbody id="tbodyArtikla">
+	  
+	            </tbody>
+	        </table>
+	        <button id="dodavanje" class="btn btn-success" onclick="odrediPrikaz('dodajArtikal')">Dodaj artikal</button>
+	        <button id="nazad" class="btn btn-primary" onclick="vratiNaPocetnu()">Vrati</button>
+		</div>
+<!-- Forma za dodavanje artikla -->
+
+        <div id="dodajArtikal" style="display: none;">
+            <div class="form-group">
+                <label for="naziv">Naziv:</label> 
+                <input type="text"
+                    class="form-control col-sm-5" id="nazivArtikla" placeholder="Unesite naziv artikla">
+                 <input type="hidden" id="idArtikla">
+
+                 <label for="naziv">Opis:</label>
+                 <input type="text"
+                 class="form-control col-sm-5" id="opis" placeholder="Unesite opis artikla">
+
+                 <label for="naziv">Cena:</label>
+                 <input type="number"
+                 class="form-control col-sm-5" id="cena" placeholder="Unesite cenu artikla">
+
+            </div>
+            
+        <div id="selectProdavce" class="form-group">
           
+        </div>
+
+            <button id="btnDodajArtikal" onclick="submitArtikal()" type="submit" class="btn btn-secondary">Dodaj</button>
+            <button id="izmeniArtikal" type="submit" class="btn btn-warning" style="display: none;" onclick="submitUpdateArtikal()">Izmeni</button> 
+            <button id="nazad" class="btn btn-primary" onclick="vratiSaDodavanjaIizmene()">Vrati</button>
+        </div>
+<!-- ------------------------------------------------------------------------------------------------------------------------------ -->         
+    
     </main>
     
 </body>

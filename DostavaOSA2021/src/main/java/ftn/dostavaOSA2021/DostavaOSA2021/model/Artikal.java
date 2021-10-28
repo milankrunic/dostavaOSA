@@ -34,7 +34,7 @@ public class Artikal {
 	@Column(name = "cena", nullable = false)
 	private Double cena;
 	
-	@Column(name = "putanja_slike", nullable = false)
+	@Column(name = "putanja_slike", nullable = true)
 	private String putanjaSlike;
 	
 	@OneToMany(cascade = {ALL}, fetch=LAZY, mappedBy="artikal")

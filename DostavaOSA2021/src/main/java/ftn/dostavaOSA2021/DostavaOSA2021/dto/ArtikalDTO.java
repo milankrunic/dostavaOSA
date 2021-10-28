@@ -28,7 +28,7 @@ public class ArtikalDTO {
 	}
 	
 	public ArtikalDTO(Artikal artikal) {
-		this(artikal.getIdArtikal(), artikal.getNaziv(), artikal.getOpis(), artikal.getCena(), artikal.getPutanjaSlike(), artikal.getProdavac().getIdKorisnik(), artikal.getProdavac().getKorisnickoIme());
+		this(artikal.getIdArtikal(), artikal.getNaziv(), artikal.getOpis(), artikal.getCena(), artikal.getPutanjaSlike(), artikal.getProdavac().getIdKorisnik(), artikal.getProdavac().getNazivProdavca());
 	}
 
 	public Long getIdArtikla() {

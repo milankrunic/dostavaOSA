@@ -62,7 +62,7 @@ public class ArtikalController {
 		a.setNaziv(artikalDTO.getNaziv());
 		a.setOpis(artikalDTO.getOpis());
 		a.setCena(artikalDTO.getCena());
-		a.setPutanjaSlike(artikalDTO.getPutanjaSlike());
+		a.setPutanjaSlike(null);
 		a.setProdavac(prodavac);
 		
 		a = artikalServiceInterface.save(a);
@@ -82,7 +82,7 @@ public class ArtikalController {
 		artikal.setNaziv(artikalDTO.getNaziv());
 		artikal.setOpis(artikalDTO.getOpis());
 		artikal.setCena(artikalDTO.getCena());
-		artikal.setPutanjaSlike(artikalDTO.getPutanjaSlike());
+//		artikal.setPutanjaSlike(artikalDTO.getPutanjaSlike());
 		artikal.setProdavac(prodavac);
 
 		artikal = artikalServiceInterface.save(artikal);

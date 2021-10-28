@@ -18,34 +18,35 @@ import ftn.dostavaOSA2021.DostavaOSA2021.model.Prodavac;
 import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.KorisnikServiceInterface;
 
 @RestController
-@RequestMapping(value = "/")
+@RequestMapping(value = "api/login")
 public class LoginController {
 
 	@Autowired
 	KorisnikServiceInterface korisnikServiceInterface;
 	
-//	@GetMapping
-//	public ResponseEntity<List<KorisnikDTO>> getKorisnici(){
-//		List<Korisnik> korisnici = korisnikServiceInterface.findAll();
-//		List<KorisnikDTO> korisniciDTO = new ArrayList<KorisnikDTO>();
-//		for (Prodavac kor : korisnici) {
-//			korisniciDTO.add(new KorisnikDTO(kor));
-//		}
-//		return new ResponseEntity<List<KorisnikDTO>>(korisniciDTO, HttpStatus.OK);
-//	}
-//	
-//	@PostMapping(consumes="application/json")
-//	public ResponseEntity<KorisnikDTO> login(@RequestBody KorisnikDTO korisnikDTO){
-//		Korisnik korisnik = korisnikServiceInterface.findByKorImeAndLozinka(korisnikDTO.getKorIme(), korisnikDTO.getLozinka());
-//		if (korisnik==null) {
-//			return new ResponseEntity<KorisnikDTO>(HttpStatus.NOT_FOUND); 
-//		}else {
-//			KorisnikDTO korDTO = new KorisnikDTO();
-//			korDTO.setKorIme(korisnik.getKorisnickoIme());
-//
-//			return new ResponseEntity<KorisnikDTO>(korDTO, HttpStatus.OK);
-//		}
-//	}
+	@GetMapping
+	public ResponseEntity<List<KorisnikDTO>> getKorisnici(){
+		List<Korisnik> korisnici = korisnikServiceInterface.findAll();
+		List<KorisnikDTO> korisniciDTO = new ArrayList<KorisnikDTO>();
+		for (Korisnik kor : korisnici) {
+			korisniciDTO.add(new KorisnikDTO(kor));
+		}
+		return new ResponseEntity<List<KorisnikDTO>>(korisniciDTO, HttpStatus.OK);
+	}
+	
+	@PostMapping
+	public ResponseEntity<KorisnikDTO> login(@RequestBody KorisnikDTO korisnikDTO){
+		Korisnik korisnik = korisnikServiceInterface.findByKorImeAndLozinka(korisnikDTO.getKorIme(), korisnikDTO.getLozinka());
+		if (korisnik==null) {
+			return new ResponseEntity<KorisnikDTO>(HttpStatus.NOT_FOUND); 
+		}else {
+			KorisnikDTO korDTO = new KorisnikDTO();
+			korDTO.setKorIme(korisnik.getKorisnickoIme());
+			korDTO.setLozinka(korisnik.getLozinka());
+
+			return new ResponseEntity<KorisnikDTO>(korDTO, HttpStatus.OK);
+		}
+	}
 	
 	
 }
