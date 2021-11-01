@@ -23,7 +23,7 @@ import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.ProdavacServiceInterfa
 @RestController
 @RequestMapping(value = "api/prodavac")
 public class ProdavacController {
-
+	
 	@Autowired
 	ProdavacServiceInterface prodavacServiceInterface;
 	

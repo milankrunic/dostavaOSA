@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ftn.dostavaOSA2021.DostavaOSA2021.dto.KorisnikDTO;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Korisnik;
-import ftn.dostavaOSA2021.DostavaOSA2021.model.Prodavac;
 import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.KorisnikServiceInterface;
 
 @RestController

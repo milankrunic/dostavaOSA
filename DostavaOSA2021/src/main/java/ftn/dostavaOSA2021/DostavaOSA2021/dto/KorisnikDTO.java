@@ -22,6 +22,13 @@ public class KorisnikDTO {
 		super();
 	}
 	
+	public KorisnikDTO(String korIme, String lozinka, TipKorisnika tipKorisnika) {
+	super();
+	this.korIme = korIme;
+	this.lozinka = lozinka;
+	this.tipKorisnika = tipKorisnika;
+}
+
 	public KorisnikDTO(Long idKorisnik, String ime, String prezime, String korIme, String lozinka, TipKorisnika tipKorisnika) {
 		super();
 		this.idKorisnik = idKorisnik;

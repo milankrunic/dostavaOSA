@@ -11,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+
 @Entity
 public class Prodavac extends Korisnik{
 	

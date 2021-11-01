@@ -20,6 +20,7 @@
     <!-- Ukljucivanje js fajlova -->
     <script src="js/app.js"></script>
     <script src="js/artikli.js"></script>
+    <script src="js/prodavci.js"></script>
     
     <!-- Ukljucivanje css-a -->
     <link rel="stylesheet" href="css/style.css">
@@ -31,11 +32,11 @@
 
 	       <h1>Dostava</h1>
 	       
-	       <div id="prijava">
+	       <div id="prijava" style="display: none;">
 	       <h2>Dobrodosli</h2>
 	
 	
-	       <form method="post" action="api/login">
+	       <form > <!-- method="post" action="api/login" -->
 	           <div id="korisnickoIme">
 	             <label class="col-sm-2 col-form-label">Korisnicko Ime:</label>
 	             <div class="col-sm-10">
@@ -51,15 +52,16 @@
 	           
 	           <div id="dugmici">
 	             <div>
-	               <input class="btn btn-primary" onclick="odrediPrikaz('prijava')" type="submit" id="Login" value="Prijava"/>
+	               <input class="btn btn-primary" onclick="login()" type="submit" id="Login" value="Prijava"/>
 	             </div>
 	             <div id="registracija">
-	               <a href="/Knjizara/Korisnici/Registracija">Registruj se</a>
+	   <!--              <a href="/Knjizara/Korisnici/Registracija">Registruj se</a>      -->
 	             </div>
 	           </div>
 	         </form>
 		</div>
 
+		<button class="btn btn-primary" onclick="pokaziLogin()" id="DugmePrikazLogiina">Login</button>
 <!-- ARTIKLI ----------------------------------------------------------------------------------------------------------------- -->		
         <button class="btn btn-primary" onclick="odrediPrikaz('sviArtikli')" id="DugmePrikazArtikala">Svi Artikli</button>
         
@@ -103,16 +105,93 @@
 
             </div>
             
-        <div id="selectProdavce" class="form-group">
-          
-        </div>
+	        <div id="selectProdavce" class="form-group">
+	          
+	        </div>
 
             <button id="btnDodajArtikal" onclick="submitArtikal()" type="submit" class="btn btn-secondary">Dodaj</button>
             <button id="izmeniArtikal" type="submit" class="btn btn-warning" style="display: none;" onclick="submitUpdateArtikal()">Izmeni</button> 
             <button id="nazad" class="btn btn-primary" onclick="vratiSaDodavanjaIizmene()">Vrati</button>
         </div>
-<!-- ------------------------------------------------------------------------------------------------------------------------------ -->         
+<!-- ------------------------------------------------------------------------------------------------------------------------------ -->     
+<!-- PRODAVCI ----------------------------------------------------------------------------------------------------------------- -->		
+        
+<!-- Prikaz svih prodavaca -->
+
+		<div id="prodavciTable" style="display: none;">
+	        <table class="table">
+	            <thead>
+	              <tr>
+	                <th style="text-align: center;">ID</th>
+	                <th style="text-align: center;">Ime</th>
+	                <th style="text-align: center;">Prezime</th>
+	                <th style="text-align: center;">Korisnicko ime</th>
+	                <th style="text-align: center;">Naziv prodavnice</th>
+	                <th style="text-align: center;">Email</th>
+	                <th style="text-align: center;">Adresa</th>
+	                <th style="text-align: center;">Posluje od</th>
+	                <th></th>
+	              </tr>
+	            </thead>
+	            <tbody id="tbodyProdavac">
+	  
+	            </tbody>
+	        </table>
+	        <button id="dodavanjeProdavca" class="btn btn-success" onclick="odrediPrikaz('dodajProdavca')">Dodaj prodavca</button>
+	        <button id="nazad" class="btn btn-primary" onclick="vratiNaPocetnuProdavci()">Vrati</button>
+		</div>
+<!-- Forma za dodavanje prodavca -->
+
+        <div id="dodajProdavca" style="display: none;">
+            <div class="form-group">
+                <label>Ime:</label> 
+                <input type="text"
+                class="form-control col-sm-5" id="ime" placeholder="">
+                 <input type="hidden" id="idProdavac">
+
+                 <label>Prezime:</label>
+                 <input type="text"
+                 class="form-control col-sm-5" id="prezime" placeholder="">
+
+                <label>Korisnicko Ime:</label> 
+                <input type="text"
+                class="form-control col-sm-5" id="korIme" placeholder="">
+                 
+                <label>Lozinka:</label> 
+                <input type="password"
+                class="form-control col-sm-5" id="lozinka" placeholder="">
+                 
+                <label>Naziv prodavnice:</label> 
+                <input type="text"
+                class="form-control col-sm-5" id="nazivProdavca" placeholder="">
+                 
+                <label>Email:</label> 
+                <input type="text"
+                class="form-control col-sm-5" id="email" placeholder="">
+                 
+                <label>Adresa:</label> 
+                <input type="text"
+                class="form-control col-sm-5" id="adresa" placeholder="">
+                 
+                <label>Posluje od:</label> 
+                <input type="date"
+                class="form-control col-sm-5" id="poslujeOd" placeholder="">
+                 
+            </div>
+          
+
+            <button id="btnDodajProdavca" onclick="submitProdavac()" type="submit" class="btn btn-secondary" style="display: none;">Dodaj</button>
+            <button id="izmeniProdavca" type="submit" class="btn btn-warning" style="display: none;" onclick="submitUpdateProdavac()">Izmeni</button> 
+            <button id="nazad" class="btn btn-primary" onclick="vratiSaDodavanjaIizmeneProdavci()">Vrati</button>
+        </div>
+<!-- ------------------------------------------------------------------------------------------------------------------------------ -->     
+    	<button class="btn btn-primary" onclick="pokaziDugmiceKorisnika()" id="DugmePrikazKorisnike">Korisnici</button>
     
+    <div id="prikazDugicaSvihKorisnika" style="display: none;">
+	    <button class="btn btn-primary" onclick="odrediPrikaz('sviAdministratori')" id="DugmePrikazAdmina">Administratori</button>
+	    <button class="btn btn-primary" onclick="odrediPrikaz('sviProdavci')" id="DugmePrikazProdavaca">Prodavci</button>
+	    <button class="btn btn-primary" onclick="odrediPrikaz('sviKupci')" id="DugmePrikazKupaca">Kupci</button>
+    </div>
     </main>
     
 </body>

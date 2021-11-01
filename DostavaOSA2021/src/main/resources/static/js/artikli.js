@@ -7,6 +7,9 @@ function PrikazSvihArtikala(){ //prikaz svih artikala na pocetnoj strani
     	$('#dodavanje').show();
     	$('#prijava').hide();
     	$('#DugmePrikazArtikala').hide();
+    	$('#btnLogin').hide();
+    	$('#DugmePrikazKorisnike').hide();
+    	$('#DugmePrikazLogiina').hide();
         $.ajax({
 
             type: "GET",
@@ -45,7 +48,7 @@ function PrikazSvihArtikala(){ //prikaz svih artikala na pocetnoj strani
 }
 
 function submitArtikal(){ //dodavanje artikala nalazi se u index.html kod forme za dodavanje
-	console.log("ovde!!!");
+
     var greska = "";
     var nazivInput = "";
     var opisInput = "";
@@ -79,7 +82,6 @@ function submitArtikal(){ //dodavanje artikala nalazi se u index.html kod forme 
         console.log("do ovde dodje!!!");
     }
     else{
-    	console.log("ovde upadaj!!!");
         var formData = {
             "naziv" : nazivInput,
             "opis" : opisInput,
@@ -232,8 +234,10 @@ function dajProdavce(id){ //ubacivanje prodavca u listu za izmenu i dodavanje
 
 function vratiNaPocetnu(){
 	$('#artikliTable').hide();
-	$('#prijava').show();
+	$('#prijava').hide();
+	$('#DugmePrikazLogiina').show();
 	$('#DugmePrikazArtikala').show();
+	$('#DugmePrikazKorisnike').show();
 }
 
 function vratiSaDodavanjaIizmene(){

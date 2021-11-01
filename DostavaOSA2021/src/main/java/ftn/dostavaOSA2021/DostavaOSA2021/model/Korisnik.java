@@ -25,7 +25,7 @@ public abstract class Korisnik {
 	@Column(name = "prezime", nullable = false)
 	private String prezime;
 	
-	@Column(name = "korisnickoIme", nullable = false, unique = true)
+	@Column(name = "korisnickoIme", nullable = false)
 	private String korisnickoIme;
 	
 	@Column(name = "lozinka", nullable = false)
@@ -51,6 +51,13 @@ public abstract class Korisnik {
 		this.korisnickoIme = korisnickoIme;
 		this.lozinka = lozinka;
 		this.blokiran = blokiran;
+		this.tipKorisnika = tipKorisnika;
+	}
+
+	public Korisnik(String korisnickoIme, String lozinka, TipKorisnika tipKorisnika) {
+		super();
+		this.korisnickoIme = korisnickoIme;
+		this.lozinka = lozinka;
 		this.tipKorisnika = tipKorisnika;
 	}
 
