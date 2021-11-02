@@ -53,10 +53,10 @@ public class AdministratorController {
 	public ResponseEntity<AdministratorDTO> addAdministrator(@RequestBody AdministratorDTO administratorDTO){
 
 		Administrator admin = new Administrator();
-		admin.setIme(administratorDTO.getIme());
-		admin.setPrezime(administratorDTO.getPrezime());
-		admin.setKorisnickoIme(administratorDTO.getKorIme());
-		admin.setLozinka(administratorDTO.getLozinka());
+		admin.setIme(administratorDTO.getImeAdmina());
+		admin.setPrezime(administratorDTO.getPrezimeAdmina());
+		admin.setKorisnickoIme(administratorDTO.getKorImeAdmina());
+		admin.setLozinka(administratorDTO.getLozinkaAdmina());
 		admin.setBlokiran(administratorDTO.isBlokiran()); //?
 		admin.setTipKorisnika(TipKorisnika.ADMINISTRATOR);
 		
@@ -72,10 +72,10 @@ public class AdministratorController {
 		if(admin == null) {
 			return new ResponseEntity<AdministratorDTO>(HttpStatus.BAD_REQUEST);
 		}
-		admin.setIme(administratorDTO.getIme());
-		admin.setPrezime(administratorDTO.getPrezime());
-		admin.setKorisnickoIme(administratorDTO.getKorIme());
-		admin.setLozinka(administratorDTO.getLozinka());
+		admin.setIme(administratorDTO.getImeAdmina());
+		admin.setPrezime(administratorDTO.getPrezimeAdmina());
+		admin.setKorisnickoIme(administratorDTO.getKorImeAdmina());
+		admin.setLozinka(administratorDTO.getLozinkaAdmina());
 		admin.setBlokiran(administratorDTO.isBlokiran()); //?
 
 		admin = administratorServiceInterface.save(admin);

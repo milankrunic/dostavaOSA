@@ -4,7 +4,7 @@ function PrikazSvihProdavaca(){
     var tbodyProdavac = $("#tbodyProdavac");
 
     function prikaziProdavce(){
-    	$('#dodavanje').show();
+    	$('#dodavanje').hide();
     	$('#prijava').hide();
     	$('#DugmePrikazArtikala').hide();
     	$('#btnLogin').hide();
@@ -221,7 +221,7 @@ function submitUpdateProdavac(){
         contentType: 'application/json; charset=utf-8',
         data : JSON.stringify(formData),
         success: function(result){
-            alert('Prodavac je uspesno izmenjen!');
+            alert('Prodavac ' + result.korIme + ' je uspesno izmenjen!');
             odrediPrikaz('sviProdavci');
         },
         error : function(e){

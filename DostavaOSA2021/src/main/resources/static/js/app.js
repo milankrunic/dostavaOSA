@@ -78,17 +78,24 @@ function odrediPrikaz(id){
     prikaziArtikle = false;
     dodavanjeArtikla = false;
     
+    prikaziAdmine = false;
+    dodavanjeAdmina = false;
+    
     prikaziProdavce = false;
-    dodajProdavca = false;
+    dodavanjeProdavca = false;
     
     if(id === "sviArtikli"){
         prikaziArtikle = true;
     }else if(id === "dodajArtikal"){
     	dodavanjeArtikla = true;
+    }else if(id === "sviAdministratori"){
+    	prikaziAdmine = true;
+    }else if(id === "dodajAdmina"){
+    	dodavanjeAdmina = true;
     }else if(id === "sviProdavci"){
     	prikaziProdavce = true;
-    }else if(id === dodajProdavca){
-    	dodajProdavca = true;
+    }else if(id === "dodajProdavca"){
+    	dodavanjeProdavca = true;
     }
 
     prikazi();
@@ -99,11 +106,17 @@ function prikazi(){
     var artikliTable = $("#artikliTable");
     var dodajArtikal = $("#dodajArtikal");
     
+    var adminTable = $("#adminTable");
+    var dodajAdmina = $("#dodajAdmina");
+    
     var prodavciTable = $("#prodavciTable");
     var dodajProdavca = $("#dodajProdavca");
 
     artikliTable.hide();
     dodajArtikal.hide();
+    
+    adminTable.hide();
+    dodajAdmina.hide();
     
     prodavciTable.hide();
     dodajProdavca.hide();
@@ -115,9 +128,15 @@ function prikazi(){
         $('#btnDodajArtikal').show();
         dajProdavce();
     	dodajArtikal.show();
+    }else if(prikaziAdmine){
+    	PrikazSvihAdministratora()
+    }else if(dodavanjeAdmina){
+    	$("#izmeniAdmina").hide();
+    	$("#btnDodajAdmina").show();
+    	dodajAdmina.show();
     }else if(prikaziProdavce){
     	PrikazSvihProdavaca();
-    }else if(dodajProdavca){
+    }else if(dodavanjeProdavca){
     	$("#izmeniProdavca").hide();
     	$("#btnDodajProdavca").show();
         dodajProdavca.show();

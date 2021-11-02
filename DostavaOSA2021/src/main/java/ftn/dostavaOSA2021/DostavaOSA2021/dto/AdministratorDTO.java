@@ -6,10 +6,10 @@ import ftn.dostavaOSA2021.DostavaOSA2021.model.TipKorisnika;
 public class AdministratorDTO {
 	
 	private Long idAdministrator;
-	private String ime;
-	private String prezime;
-	private String korIme; 
-	private String lozinka;
+	private String imeAdmina;
+	private String prezimeAdmina;
+	private String korImeAdmina; 
+	private String lozinkaAdmina;
 	private boolean blokiran;
 	private TipKorisnika tipKorisnika;
 	
@@ -17,14 +17,14 @@ public class AdministratorDTO {
 		super();
 	}
 
-	public AdministratorDTO(Long idAdministrator, String ime, String prezime, String korIme, String lozinka,
+	public AdministratorDTO(Long idAdministrator, String imeAdmina, String prezimeAdmina, String korImeAdmina, String lozinkaAdmina,
 			boolean blokiran, TipKorisnika tipKorisnika) {
 		super();
 		this.idAdministrator = idAdministrator;
-		this.ime = ime;
-		this.prezime = prezime;
-		this.korIme = korIme;
-		this.lozinka = lozinka;
+		this.imeAdmina = imeAdmina;
+		this.prezimeAdmina = prezimeAdmina;
+		this.korImeAdmina = korImeAdmina;
+		this.lozinkaAdmina = lozinkaAdmina;
 		this.blokiran = blokiran;
 		this.tipKorisnika = tipKorisnika;
 	}
@@ -41,36 +41,36 @@ public class AdministratorDTO {
 		this.idAdministrator = idAdministrator;
 	}
 
-	public String getIme() {
-		return ime;
+	public String getImeAdmina() {
+		return imeAdmina;
 	}
 
-	public void setIme(String ime) {
-		this.ime = ime;
+	public void setImeAdmina(String imeAdmina) {
+		this.imeAdmina = imeAdmina;
 	}
 
-	public String getPrezime() {
-		return prezime;
+	public String getPrezimeAdmina() {
+		return prezimeAdmina;
 	}
 
-	public void setPrezime(String prezime) {
-		this.prezime = prezime;
+	public void setPrezimeAdmina(String prezimeAdmina) {
+		this.prezimeAdmina = prezimeAdmina;
 	}
 
-	public String getKorIme() {
-		return korIme;
+	public String getKorImeAdmina() {
+		return korImeAdmina;
 	}
 
-	public void setKorIme(String korIme) {
-		this.korIme = korIme;
+	public void setKorImeAdmina(String korImeAdmina) {
+		this.korImeAdmina = korImeAdmina;
 	}
 
-	public String getLozinka() {
-		return lozinka;
+	public String getLozinkaAdmina() {
+		return lozinkaAdmina;
 	}
 
-	public void setLozinka(String lozinka) {
-		this.lozinka = lozinka;
+	public void setLozinkaAdmina(String lozinkaAdmina) {
+		this.lozinkaAdmina = lozinkaAdmina;
 	}
 
 	public boolean isBlokiran() {

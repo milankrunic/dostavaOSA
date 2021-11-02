@@ -20,6 +20,7 @@
     <!-- Ukljucivanje js fajlova -->
     <script src="js/app.js"></script>
     <script src="js/artikli.js"></script>
+    <script src="js/admin.js"></script>
     <script src="js/prodavci.js"></script>
     
     <!-- Ukljucivanje css-a -->
@@ -113,7 +114,60 @@
             <button id="izmeniArtikal" type="submit" class="btn btn-warning" style="display: none;" onclick="submitUpdateArtikal()">Izmeni</button> 
             <button id="nazad" class="btn btn-primary" onclick="vratiSaDodavanjaIizmene()">Vrati</button>
         </div>
-<!-- ------------------------------------------------------------------------------------------------------------------------------ -->     
+<!-- ------------------------------------------------------------------------------------------------------------------------------ -->  
+
+<!-- ADMINISTRATORI ----------------------------------------------------------------------------------------------------------------- -->		
+        
+<!-- Prikaz svih administratora -->
+
+		<div id="adminTable" style="display: none;">
+	        <table class="table">
+	            <thead>
+	              <tr>
+	                <th style="text-align: center;">ID</th>
+	                <th style="text-align: center;">Ime</th>
+	                <th style="text-align: center;">Prezime</th>
+	                <th style="text-align: center;">Korisnicko ime</th>
+	                <th></th>
+	              </tr>
+	            </thead>
+	            <tbody id="tbodyAdmin">
+	  
+	            </tbody>
+	        </table>
+	        <button id="dodavanjeAdmina" class="btn btn-success" onclick="odrediPrikaz('dodajAdmina')">Dodaj administratora</button>
+	        <button id="nazad" class="btn btn-primary" onclick="vratiNaPocetnuAdmin()">Vrati</button>
+		</div>
+<!-- Forma za dodavanje administratora -->
+
+        <div id="dodajAdmina" style="display: none;">
+            <div class="form-group">
+                <label>Ime:</label> 
+                <input type="text"
+                class="form-control col-sm-5" id="imeAdmina" placeholder="Unesite ime administratora">
+                 <input type="hidden" id="idAdministrator">
+
+                 <label>Prezime:</label>
+                 <input type="text"
+                 class="form-control col-sm-5" id="prezimeAdmina" placeholder="Unesite prezime administratora">
+
+                <label>Korisnicko Ime:</label> 
+                <input type="text"
+                class="form-control col-sm-5" id="korImeAdmina" placeholder="Unesite korisnicko ime administratora">
+                
+                <label>Lozinka:</label> 
+                <input type="text"
+                class="form-control col-sm-5" id="lozinkaAdmina" placeholder="Unesite lozinku administratora">
+                 
+            </div>
+          
+
+            <button id="btnDodajAdmina" onclick="submitAdmin()" type="submit" class="btn btn-secondary" style="display: none;">Dodaj</button>
+            <button id="izmeniAdmina" type="submit" class="btn btn-warning" style="display: none;" onclick="submitUpdateAdmin()">Izmeni</button> 
+            <button id="nazad" class="btn btn-primary" onclick="vratiSaDodavanjaIizmeneAdmin()">Vrati</button>
+        </div>
+<!-- ------------------------------------------------------------------------------------------------------------------------------ -->
+   
 <!-- PRODAVCI ----------------------------------------------------------------------------------------------------------------- -->		
         
 <!-- Prikaz svih prodavaca -->
@@ -146,32 +200,32 @@
             <div class="form-group">
                 <label>Ime:</label> 
                 <input type="text"
-                class="form-control col-sm-5" id="ime" placeholder="">
+                class="form-control col-sm-5" id="ime" placeholder="Unesite ime prodavca">
                  <input type="hidden" id="idProdavac">
 
                  <label>Prezime:</label>
                  <input type="text"
-                 class="form-control col-sm-5" id="prezime" placeholder="">
+                 class="form-control col-sm-5" id="prezime" placeholder="Unesite prezime prodavca">
 
                 <label>Korisnicko Ime:</label> 
                 <input type="text"
-                class="form-control col-sm-5" id="korIme" placeholder="">
+                class="form-control col-sm-5" id="korIme" placeholder="Unesite korisnicko ime prodavca">
                  
                 <label>Lozinka:</label> 
-                <input type="password"
-                class="form-control col-sm-5" id="lozinka" placeholder="">
+                <input type="text"
+                class="form-control col-sm-5" id="lozinka" placeholder="Unesite lozinku prodavca">
                  
                 <label>Naziv prodavnice:</label> 
                 <input type="text"
-                class="form-control col-sm-5" id="nazivProdavca" placeholder="">
+                class="form-control col-sm-5" id="nazivProdavca" placeholder="Unesite naziv prodavnice u kojoj prodavac radi">
                  
                 <label>Email:</label> 
                 <input type="text"
-                class="form-control col-sm-5" id="email" placeholder="">
+                class="form-control col-sm-5" id="email" placeholder="Unesite email prodavca">
                  
                 <label>Adresa:</label> 
                 <input type="text"
-                class="form-control col-sm-5" id="adresa" placeholder="">
+                class="form-control col-sm-5" id="adresa" placeholder="Unesite adresu prodavca">
                  
                 <label>Posluje od:</label> 
                 <input type="date"
