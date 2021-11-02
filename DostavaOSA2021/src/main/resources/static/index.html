@@ -22,6 +22,7 @@
     <script src="js/artikli.js"></script>
     <script src="js/admin.js"></script>
     <script src="js/prodavci.js"></script>
+    <script src="js/kupci.js"></script>
     
     <!-- Ukljucivanje css-a -->
     <link rel="stylesheet" href="css/style.css">
@@ -238,7 +239,64 @@
             <button id="izmeniProdavca" type="submit" class="btn btn-warning" style="display: none;" onclick="submitUpdateProdavac()">Izmeni</button> 
             <button id="nazad" class="btn btn-primary" onclick="vratiSaDodavanjaIizmeneProdavci()">Vrati</button>
         </div>
-<!-- ------------------------------------------------------------------------------------------------------------------------------ -->     
+<!-- ------------------------------------------------------------------------------------------------------------------------------ -->    
+
+<!-- KUPCI ----------------------------------------------------------------------------------------------------------------- -->		
+        
+<!-- Prikaz svih kupaca -->
+
+		<div id="kupciTable" style="display: none;">
+	        <table class="table">
+	            <thead>
+	              <tr>
+	                <th style="text-align: center;">ID</th>
+	                <th style="text-align: center;">Ime</th>
+	                <th style="text-align: center;">Prezime</th>
+	                <th style="text-align: center;">Korisnicko ime</th>
+	                <th style="text-align: center;">Adresa</th>
+	                <th></th>
+	              </tr>
+	            </thead>
+	            <tbody id="tbodyKupac">
+	  
+	            </tbody>
+	        </table>
+	        <button id="dodavanjeKupca" class="btn btn-success" onclick="odrediPrikaz('dodajKupca')">Dodaj kupca</button>
+	        <button id="nazad" class="btn btn-primary" onclick="vratiNaPocetnuKupac()">Vrati</button>
+		</div>
+<!-- Forma za dodavanje kupca -->
+
+        <div id="dodajKupca" style="display: none;">
+            <div class="form-group">
+                <label>Ime:</label> 
+                <input type="text"
+                class="form-control col-sm-5" id="imeKupca" placeholder="Unesite ime kupca">
+                 <input type="hidden" id="idKupac">
+
+                 <label>Prezime:</label>
+                 <input type="text"
+                 class="form-control col-sm-5" id="prezimeKupca" placeholder="Unesite prezime kupca">
+
+                <label>Korisnicko Ime:</label> 
+                <input type="text"
+                class="form-control col-sm-5" id="korImeKupca" placeholder="Unesite korisnicko ime kupca">
+                 
+                <label>Lozinka:</label> 
+                <input type="text"
+                class="form-control col-sm-5" id="lozinkaKupca" placeholder="Unesite lozinku kupca">
+                 
+                <label>Adresa:</label> 
+                <input type="text"
+                class="form-control col-sm-5" id="adresaKupca" placeholder="Unesite adresu kupca">
+                 
+            </div>
+          
+
+            <button id="btnDodajKupca" onclick="submitKupac()" type="submit" class="btn btn-secondary" style="display: none;">Dodaj</button>
+            <button id="izmeniKupca" type="submit" class="btn btn-warning" style="display: none;" onclick="submitUpdateKupac()">Izmeni</button> 
+            <button id="nazad" class="btn btn-primary" onclick="vratiSaDodavanjaIizmeneKupac()">Vrati</button>
+        </div>
+<!-- ------------------------------------------------------------------------------------------------------------------------------ --> 
     	<button class="btn btn-primary" onclick="pokaziDugmiceKorisnika()" id="DugmePrikazKorisnike">Korisnici</button>
     
     <div id="prikazDugicaSvihKorisnika" style="display: none;">

@@ -84,6 +84,9 @@ function odrediPrikaz(id){
     prikaziProdavce = false;
     dodavanjeProdavca = false;
     
+    prikaziKupce = false;
+    dodavanjeKupca = false;
+    
     if(id === "sviArtikli"){
         prikaziArtikle = true;
     }else if(id === "dodajArtikal"){
@@ -96,6 +99,10 @@ function odrediPrikaz(id){
     	prikaziProdavce = true;
     }else if(id === "dodajProdavca"){
     	dodavanjeProdavca = true;
+    }else if(id === "sviKupci"){
+    	prikaziKupce = true;
+    }else if(id === "dodajKupca"){
+    	dodavanjeKupca = true;
     }
 
     prikazi();
@@ -111,6 +118,9 @@ function prikazi(){
     
     var prodavciTable = $("#prodavciTable");
     var dodajProdavca = $("#dodajProdavca");
+    
+    var kupciTable = $("#kupciTable");
+    var dodajKupca = $("#dodajKupca");
 
     artikliTable.hide();
     dodajArtikal.hide();
@@ -120,6 +130,9 @@ function prikazi(){
     
     prodavciTable.hide();
     dodajProdavca.hide();
+    
+    kupciTable.hide();
+    dodajKupca.hide();
 
     if(prikaziArtikle){   
         PrikazSvihArtikala();
@@ -140,5 +153,11 @@ function prikazi(){
     	$("#izmeniProdavca").hide();
     	$("#btnDodajProdavca").show();
         dodajProdavca.show();
+    }else if(prikaziKupce){
+    	PrikazSvihKupaca();
+    }else if(dodavanjeKupca){
+    	$("#izmeniKupca").hide();
+    	$("#btnDodajKupca").show();
+    	dodajKupca.show();
     }
 }

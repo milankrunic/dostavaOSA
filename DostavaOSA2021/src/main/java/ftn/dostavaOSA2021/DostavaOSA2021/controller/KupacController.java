@@ -53,12 +53,12 @@ public class KupacController {
 	public ResponseEntity<KupacDTO> addKupac(@RequestBody KupacDTO kupacDTO){
 
 		Kupac kupac = new Kupac();
-		kupac.setIme(kupacDTO.getIme());
-		kupac.setPrezime(kupacDTO.getPrezime());
-		kupac.setKorisnickoIme(kupacDTO.getKorIme());
-		kupac.setLozinka(kupacDTO.getLozinka());
+		kupac.setIme(kupacDTO.getImeKupca());
+		kupac.setPrezime(kupacDTO.getPrezimeKupca());
+		kupac.setKorisnickoIme(kupacDTO.getKorImeKupca());
+		kupac.setLozinka(kupacDTO.getLozinkaKupca());
 		kupac.setBlokiran(kupacDTO.isBlokiran()); //?
-		kupac.setAdresa(kupacDTO.getAdresa());
+		kupac.setAdresa(kupacDTO.getAdresaKupca());
 		kupac.setTipKorisnika(TipKorisnika.KUPAC);
 		
 		kupac = kupacServiceInterface.save(kupac);
@@ -73,12 +73,12 @@ public class KupacController {
 		if(kupac == null) {
 			return new ResponseEntity<KupacDTO>(HttpStatus.BAD_REQUEST);
 		}
-		kupac.setIme(kupacDTO.getIme());
-		kupac.setPrezime(kupacDTO.getPrezime());
-		kupac.setKorisnickoIme(kupacDTO.getKorIme());
-		kupac.setLozinka(kupacDTO.getLozinka());
+		kupac.setIme(kupacDTO.getImeKupca());
+		kupac.setPrezime(kupacDTO.getPrezimeKupca());
+		kupac.setKorisnickoIme(kupacDTO.getKorImeKupca());
+		kupac.setLozinka(kupacDTO.getLozinkaKupca());
 		kupac.setBlokiran(kupacDTO.isBlokiran()); //?
-		kupac.setAdresa(kupacDTO.getAdresa());
+		kupac.setAdresa(kupacDTO.getAdresaKupca());
 
 		kupac = kupacServiceInterface.save(kupac);
 		return new ResponseEntity<KupacDTO>(new KupacDTO(kupac), HttpStatus.OK);

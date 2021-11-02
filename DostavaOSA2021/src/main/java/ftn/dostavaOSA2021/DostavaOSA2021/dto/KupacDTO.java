@@ -6,11 +6,11 @@ import ftn.dostavaOSA2021.DostavaOSA2021.model.TipKorisnika;
 public class KupacDTO {
 
 	private Long idKupac;
-	private String adresa;
-	private String ime;
-	private String prezime;
-	private String korIme;
-	private String lozinka;
+	private String adresaKupca;
+	private String imeKupca;
+	private String prezimeKupca;
+	private String korImeKupca;
+	private String lozinkaKupca;
 	private boolean blokiran;
 	private TipKorisnika tipKorisnika;
 	
@@ -18,82 +18,116 @@ public class KupacDTO {
 		super();
 	}
 
-	public KupacDTO(Long idKupac, String adresa, String ime, String prezime, String korIme, String lozinka,
-			boolean blokiran, TipKorisnika tipKorisnika) {
+	
+	
+	public KupacDTO(Long idKupac, String adresaKupca, String imeKupca, String prezimeKupca, String korImeKupca,
+			String lozinkaKupca, boolean blokiran, TipKorisnika tipKorisnika) {
 		super();
 		this.idKupac = idKupac;
-		this.adresa = adresa;
-		this.ime = ime;
-		this.prezime = prezime;
-		this.korIme = korIme;
-		this.lozinka = lozinka;
+		this.adresaKupca = adresaKupca;
+		this.imeKupca = imeKupca;
+		this.prezimeKupca = prezimeKupca;
+		this.korImeKupca = korImeKupca;
+		this.lozinkaKupca = lozinkaKupca;
 		this.blokiran = blokiran;
 		this.tipKorisnika = tipKorisnika;
 	}
-	
+
 	public KupacDTO(Kupac kupac) {
 		this(kupac.getIdKorisnik(), kupac.getAdresa(), kupac.getIme(), kupac.getPrezime(), kupac.getKorisnickoIme(), kupac.getLozinka(), kupac.isBlokiran(), kupac.getTipKorisnika());
 	}
+
+
 
 	public Long getIdKupac() {
 		return idKupac;
 	}
 
+
+
 	public void setIdKupac(Long idKupac) {
 		this.idKupac = idKupac;
 	}
 
-	public String getAdresa() {
-		return adresa;
+
+
+	public String getAdresaKupca() {
+		return adresaKupca;
 	}
 
-	public void setAdresa(String adresa) {
-		this.adresa = adresa;
+
+
+	public void setAdresaKupca(String adresaKupca) {
+		this.adresaKupca = adresaKupca;
 	}
 
-	public String getIme() {
-		return ime;
+
+
+	public String getImeKupca() {
+		return imeKupca;
 	}
 
-	public void setIme(String ime) {
-		this.ime = ime;
+
+
+	public void setImeKupca(String imeKupca) {
+		this.imeKupca = imeKupca;
 	}
 
-	public String getPrezime() {
-		return prezime;
+
+
+	public String getPrezimeKupca() {
+		return prezimeKupca;
 	}
 
-	public void setPrezime(String prezime) {
-		this.prezime = prezime;
+
+
+	public void setPrezimeKupca(String prezimeKupca) {
+		this.prezimeKupca = prezimeKupca;
 	}
 
-	public String getKorIme() {
-		return korIme;
+
+
+	public String getKorImeKupca() {
+		return korImeKupca;
 	}
 
-	public void setKorIme(String korIme) {
-		this.korIme = korIme;
+
+
+	public void setKorImeKupca(String korImeKupca) {
+		this.korImeKupca = korImeKupca;
 	}
 
-	public String getLozinka() {
-		return lozinka;
+
+
+	public String getLozinkaKupca() {
+		return lozinkaKupca;
 	}
 
-	public void setLozinka(String lozinka) {
-		this.lozinka = lozinka;
+
+
+	public void setLozinkaKupca(String lozinkaKupca) {
+		this.lozinkaKupca = lozinkaKupca;
 	}
+
+
 
 	public boolean isBlokiran() {
 		return blokiran;
 	}
 
+
+
 	public void setBlokiran(boolean blokiran) {
 		this.blokiran = blokiran;
 	}
 
+
+
 	public TipKorisnika getTipKorisnika() {
 		return tipKorisnika;
 	}
+
+
 
 	public void setTipKorisnika(TipKorisnika tipKorisnika) {
 		this.tipKorisnika = tipKorisnika;
