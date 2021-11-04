@@ -29,9 +29,12 @@ function PrikazSvihProdavaca(){
                         +'<td align="center">'+result[prodavac].email+'</td>'
                         +'<td align="center">'+result[prodavac].adresa+'</td>'
                         +'<td align="center">'+result[prodavac].poslujeOd+'</td>'
+                        +'<td align="center">'+result[prodavac].blokiran+'</td>'
                         +'<td>'
+                        	+'<button type="submit" class="btn btn-success" style="margin-right: 5%;" onclick="PrikazSvihArtikalaProdavaca('+result[prodavac].idProdavac+')">ARTIKLI</button>'
 	                        +'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="editProdavac('+result[prodavac].idProdavac+')">IZMENI</button>'
 	                        +'<button type="submit" class="btn btn-danger" onclick="deleteProdavac('+result[prodavac].idProdavac+')">OBRIŠI</button>'
+	                        +'<button type="submit" class="btn btn-dark" style="margin-right: 5%;" onclick="blokirajProdavca('+result[prodavac].idProdavac+')">BLOK</button>'
                         +'</td>'
                     +'</tr>'
                     
@@ -248,6 +251,26 @@ function deleteProdavac(id){
     });
 }
 
+function blokirajProdavca(id){
+    $.ajax({
+        url:'http://localhost:8080/api/prodavac/' + id + '/blokiranje',
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        success: function(result){
+        	if(result.blokiran){
+        		alert("Prodavac je blokiran!");
+        	}else{
+        		alert("Prodavac je odblokiran!");
+        	}
+            odrediPrikaz('sviProdavci');
+        },
+        error : function(e){
+            alert('Doslo je do neke greške!')
+            console.log("ERROR: ", e);
+        }
+    });
+}
+
 function vratiNaPocetnuProdavci(){
 	$('#prodavciTable').hide();
 	$('#prijava').hide();
@@ -260,4 +283,242 @@ function vratiSaDodavanjaIizmeneProdavci(){
 	$('#prodavciTable').show();
 	$('#dodajProdavca').hide();
 	$('#dodavanjeProdavca').show();
+}
+
+// ----------------- CRUD OPERACIJE ZA NJEGOVE ARTIKLE --------------------------------------------------------------
+
+function PrikazSvihArtikalaProdavaca(id){
+
+    var tabelaArtiklaProdavca = $("#artikliTableProdavac");
+    var tbodyArtiklaProdavca = $("#tbodyArtiklaProdavca");
+
+    function prikaziArtikleProdavca(){
+    	$('#dodavanje').show();
+    	$('#prodavciTable').hide();
+    	$('#DugmePrikazArtikala').hide();
+    	$('#btnLogin').hide();
+    	$('#DugmePrikazKorisnike').hide();
+    	$('#DugmePrikazLogiina').hide();
+        $.ajax({
+
+            type: "GET",
+            contentType : 'application/json; charset=utf-8',
+            url : "http://localhost:8080/api/prodavac/" + id + "/artikli",
+            success : function(result){
+            	tabelaArtiklaProdavca.show();
+            	tbodyArtiklaProdavca.empty();
+                for(artikal in result){
+                	tbodyArtiklaProdavca.append(
+                    '<tr>'
+                			
+                        +'<td align="center">'+result[artikal].idArtikla+'</td>'
+                        +'<td align="center">'+result[artikal].naziv+'</td>'
+                        +'<td align="center">'+result[artikal].opis+'</a>'+'</td>'
+                        +'<td align="center">'+result[artikal].cena+'</td>'
+                        +'<td align="center">'+result[artikal].prodavac+'</td>'
+                        +'<td>'
+	                        +'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="editArtikalProdavac('+result[artikal].idArtikla+')">IZMENI</button>'
+	                        +'<button type="submit" class="btn btn-danger" onclick="deleteArtikalProdavac('+result[artikal].idArtikla+')">OBRIŠI</button>'
+                        +'</td>'
+                    +'</tr>'
+                  
+                    )};
+                    
+            },
+            error :function(e){
+                alert('Doslo je do neke greške!');
+            }
+
+        });
+    }
+    prikaziArtikleProdavca();
+    
+}
+
+function submitArtikalProdavac(){ //dodavanje artikala nalazi se u index.html kod forme za dodavanje
+
+    var greska = "";
+    var nazivInput = "";
+    var opisInput = "";
+    var cenaInput = "";
+    var prodavacInput = "";
+
+    nazivInput = $("#nazivArtikla").val();
+    opisInput = $("#opis").val();
+    cenaInput = $("#cena").val();
+    prodavacInput = $("#inputProdavac").val();
+
+    var nazivGreska;
+    var opisGreska;
+    var cenaGreska;
+    
+    if(nazivInput === ""){
+    	nazivGreska = true;
+        greska += "\nMorate uneti naziv artikla!";
+    }
+    if(opisInput === ""){
+    	opisGreska = true;
+        greska += "\nMorate uneti opis artikla!";
+    }
+    if(cenaInput === ""){
+    	cenaGreska = true;
+        greska += "\nMorate uneti cenu artikla!";
+    }
+
+    if(nazivGreska || opisGreska || cenaGreska){
+        alert(greska);
+        console.log("do ovde dodje!!!");
+    }
+    else{
+        var formData = {
+            "naziv" : nazivInput,
+            "opis" : opisInput,
+            "cena" : cenaInput,
+            "idProdavac" : prodavacInput
+        }
+
+        $.ajax({
+            url : "http://localhost:8080/api/artikal",
+            type : "POST",
+            contentType: 'application/json; charset=utf-8',
+            data : JSON.stringify(formData),
+            success: function(){
+                alert('Artikal je uspesno dodattt!');
+                odrediPrikaz('sviArtikli');
+            },
+            error : function(e){
+                alert('Doslo je do neke greške!');
+                console.log("ERROR: ", e);
+            }
+        });
+    }
+
+}
+
+function editArtikalProdavac(id){ 
+
+	$('#artikliTableProdavac').hide();
+	$('#dodajArtikal').show();
+	$('#izmeniArtikalProdavca').show();
+	$('#btnDodajArtikalProdavca').hide();
+	$('#btnDodajArtikal').hide();
+	
+    function prikaziArtikalProdavca(){
+        $.ajax({
+            type: "GET",
+            contentType : 'application/json; charset=utf-8',
+            url : "http://localhost:8080/api/artikal/" + id,
+
+            success: function(result){
+            	
+            	dajProdavce(result.idProdavac);
+            	
+                var idArtikla = $("#idArtikla");
+                var nazivArtikla = $("#nazivArtikla");
+                var opis = $("#opis");
+                var cena = $("#cena");
+
+                idArtikla.val(result.idArtikla);
+                nazivArtikla.val(result.naziv);
+                opis.val(result.opis);
+                cena.val(result.cena);
+
+            },
+            error : function(e){
+                alert('Doslo je do neke greške!')
+                console.log("ERROR: ", e);
+            }
+        });
+    }
+    prikaziArtikalProdavca();
+
+}
+
+function submitUpdateArtikalProdavac(id){ //pritiskom na izmenu se dobija ovo, nalazi se u index.html kod forme za dodavanje
+
+    var id = $("#idArtikla").val();
+    var naziv = $("#nazivArtikla").val();
+    var opis = $("#opis").val();
+    var cena = $("#cena").val();
+    var prodavac = $("#inputProdavac").val();
+
+    var formData = {
+        "naziv" : naziv,
+        "opis" : opis,
+        "cena" : cena,
+        "idProdavac" : prodavac
+    }
+
+    $.ajax({
+
+        url: "http://localhost:8080/api/artikal/" + id,
+        type: "PUT",
+        contentType: 'application/json; charset=utf-8',
+        data : JSON.stringify(formData),
+        success: function(result){
+            alert('Artikal je uspesno izmenjen!');
+//            PrikazSvihArtikalaProdavaca(id);
+            location.reload();         //privremeno resenje
+        },
+        error : function(e){
+            alert('Doslo je do neke greške!')
+            console.log("ERROR: ", e);
+        }
+    });
+
+}
+
+function deleteArtikalProdavac(id){ //brisanje
+    $.ajax({
+        url:'http://localhost:8080/api/artikal/' + id,
+        type: 'DELETE',
+        contentType: 'application/json; charset=utf-8',
+        success: function(result){
+            alert("Artikal je obrisan!");
+//            PrikazSvihArtikalaProdavaca(id);
+            location.reload();       //privremeno resenje
+        },
+        error : function(e){
+            alert('Doslo je do neke greške!')
+            console.log("ERROR: ", e);
+        }
+    });
+}
+
+function dajProdavce(id){ //ubacivanje prodavca u listu za izmenu i dodavanje
+    var prodavac1 = "";
+    var prodavac2 = "";
+    var selectProdavce = $("#selectProdavce");
+    selectProdavce.empty();
+    var html = '<label>Izaberite Prodavnicu:';
+    html += '<select class="form-control" id="inputProdavac">';
+    $.ajax({
+        type: "GET",
+        contentType : 'application/json; charset=utf-8',
+        url : "http://localhost:8080/api/prodavac",
+        success : function(result){
+            if(id != undefined){
+                result.forEach(prodavac => {
+                    if(id == prodavac.idProdavac){
+                    	prodavac1 = '<option value="' + prodavac.idProdavac + '">' + prodavac.nazivProdavca + '</option>';
+                    }else{
+                    	prodavac2 += '<option value="' + prodavac.idProdavac + '">' + prodavac.nazivProdavca + '</option>';
+                    }
+                });
+                html += prodavac1;
+                html += prodavac2;
+            }
+            else{
+                result.forEach(prodavac => {
+                    html += '<option value="' + prodavac.idProdavac + '">' + prodavac.nazivProdavca + '</option>';
+                }); 
+            }
+            html += '</select>';
+            html += '</label>';
+            selectProdavce.append(html);
+        },
+        error :function(e){
+            console.log("Greska!!!");
+        }
+    });
 }

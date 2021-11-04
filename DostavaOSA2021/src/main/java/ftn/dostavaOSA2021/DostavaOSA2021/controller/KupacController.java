@@ -96,4 +96,19 @@ public class KupacController {
 		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 	}
 	
+	@PostMapping(value = "/{id}/blokiranje")
+	public ResponseEntity<KupacDTO> blok(@PathVariable("id") Long id){
+
+		Kupac kupac = kupacServiceInterface.findById(id);
+		
+		if(kupac.isBlokiran() == false) {
+			kupac.setBlokiran(true);
+		}else {
+			kupac.setBlokiran(false);
+		}
+		
+		kupac = kupacServiceInterface.save(kupac);
+		return new ResponseEntity<KupacDTO>(new KupacDTO(kupac), HttpStatus.CREATED);
+	}
+	
 }

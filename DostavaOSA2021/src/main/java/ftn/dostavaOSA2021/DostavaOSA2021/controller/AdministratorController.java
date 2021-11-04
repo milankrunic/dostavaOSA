@@ -93,4 +93,19 @@ public class AdministratorController {
 		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 	}
 	
+	@PostMapping(value = "/{id}/blokiranje")
+	public ResponseEntity<AdministratorDTO> blok(@PathVariable("id") Long id){
+
+		Administrator admin = administratorServiceInterface.findById(id);
+		
+		if(admin.isBlokiran() == false) {
+			admin.setBlokiran(true);
+		}else {
+			admin.setBlokiran(false);
+		}
+		
+		admin = administratorServiceInterface.save(admin);
+		return new ResponseEntity<AdministratorDTO>(new AdministratorDTO(admin), HttpStatus.CREATED);
+	}
+	
 }

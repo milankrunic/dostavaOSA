@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Artikal;
+import ftn.dostavaOSA2021.DostavaOSA2021.model.Prodavac;
 import ftn.dostavaOSA2021.DostavaOSA2021.repository.ArtikalRepository;
 import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.ArtikalServiceInterface;
 
@@ -39,6 +40,11 @@ public class ArtikalService implements ArtikalServiceInterface{
 	public void remove(Long id) {
 		artikalRepository.deleteById(id);
 		
+	}
+
+	@Override
+	public List<Artikal> findAllByProdavac(Prodavac prodavac) {
+		return artikalRepository.findByProdavac(prodavac);
 	}
 
 }

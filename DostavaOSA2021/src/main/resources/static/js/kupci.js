@@ -25,7 +25,9 @@ function PrikazSvihKupaca(){
                         +'<td align="center">'+result[kupac].prezimeKupca+'</a>'+'</td>'
                         +'<td align="center">'+result[kupac].korImeKupca+'</td>'
                         +'<td align="center">'+result[kupac].adresaKupca+'</td>'
+                        +'<td align="center">'+result[kupac].blokiran+'</td>'
                         +'<td>'
+                        	+'<button type="submit" class="btn btn-dark" style="margin-right: 5%;" onclick="blokirajKupca('+result[kupac].idKupac+')">BLOK</button>'
 	                        +'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="editKupac('+result[kupac].idKupac+')">IZMENI</button>'
 	                        +'<button type="submit" class="btn btn-danger" onclick="deleteKupac('+result[kupac].idKupac+')">OBRIŠI</button>'
                         +'</td>'
@@ -199,6 +201,26 @@ function deleteKupac(id){
         contentType: 'application/json; charset=utf-8',
         success: function(result){
             alert("Kupac je obrisan!");
+            odrediPrikaz('sviKupci');
+        },
+        error : function(e){
+            alert('Doslo je do neke greške!')
+            console.log("ERROR: ", e);
+        }
+    });
+}
+
+function blokirajKupca(id){
+    $.ajax({
+        url:'http://localhost:8080/api/kupac/' + id + '/blokiranje',
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        success: function(result){
+        	if(result.blokiran){
+        		alert("Kupac je blokiran!");
+        	}else{
+        		alert("Kupac je odblokiran!");
+        	}
             odrediPrikaz('sviKupci');
         },
         error : function(e){

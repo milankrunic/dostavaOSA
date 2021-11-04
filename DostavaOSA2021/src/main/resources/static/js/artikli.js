@@ -142,7 +142,6 @@ function editArtikal(id){ //samo prikaz stranice kod izmene (editArtikal je u Pr
         });
     }
     prikaziArtikal();
-
 }
 
 function submitUpdateArtikal(){ //pritiskom na izmenu se dobija ovo, nalazi se u index.html kod forme za dodavanje

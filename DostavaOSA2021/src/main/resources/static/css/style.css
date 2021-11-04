@@ -9,7 +9,7 @@ body{
 }
 
 main{
-    width: 80%;
+    width: 90%;
     height: 150vh;
     margin: 0 auto;
     background-color: rgba(219, 234, 235, 0.7);
@@ -56,4 +56,17 @@ form{
 #dugmici{
     margin-left: 1%;
     padding: 10px;
+}
+
+#registracija{
+	margin-left: 35%;
+	padding-top: 30%;
+}
+
+#reg{
+    width: 50%;
+    height: 120vh;
+    margin: 0 auto;
+    background-color: rgba(219, 234, 235, 0.7);
+    font-family: 'Heebo', sans-serif;
 }

@@ -1,5 +1,6 @@
 function pokaziLogin(){
 	$('#prijava').show();
+	$('#btnRegistracija').show();
 	$('#btnLogin').hide();
 	$('#DugmePrikazArtikala').hide();
 }
@@ -74,6 +75,18 @@ function login(){
     }
 }
 
+function prikaziFormuKupac(){
+	$("#dodajKupca").show();
+	$("#dodajProdavca").hide();
+	$("#registracija").hide();
+}
+
+function prikaziFormuPordavac(){
+	$("#dodajProdavca").show();	
+	$("#dodajKupca").hide();
+	$("#registracija").hide();
+}
+
 function odrediPrikaz(id){
     prikaziArtikle = false;
     dodavanjeArtikla = false;
@@ -86,6 +99,9 @@ function odrediPrikaz(id){
     
     prikaziKupce = false;
     dodavanjeKupca = false;
+    
+    prikaziArtikleProdavca = false;
+    dodavanjeArtiklaProdavca = false;
     
     if(id === "sviArtikli"){
         prikaziArtikle = true;
@@ -103,6 +119,10 @@ function odrediPrikaz(id){
     	prikaziKupce = true;
     }else if(id === "dodajKupca"){
     	dodavanjeKupca = true;
+    }else if(id === "artikliProdavca"){
+    	prikaziArtikleProdavca = true;
+    }else if(id === "dodajArtikal"){
+    	dodavanjeArtiklaProdavca();
     }
 
     prikazi();
@@ -121,6 +141,9 @@ function prikazi(){
     
     var kupciTable = $("#kupciTable");
     var dodajKupca = $("#dodajKupca");
+    
+    var artikliTableProdavac = $("#artikliTableProdavac");
+    var dodajArtikalProdavac = $("#dodajArtikal");
 
     artikliTable.hide();
     dodajArtikal.hide();
@@ -133,11 +156,14 @@ function prikazi(){
     
     kupciTable.hide();
     dodajKupca.hide();
+    
+    artikliTableProdavac.hide();
 
     if(prikaziArtikle){   
         PrikazSvihArtikala();
     }else if(dodavanjeArtikla){
         $('#izmeniArtikal').hide();
+        $('#btnDodajArtikalProdavca').hide();
         $('#btnDodajArtikal').show();
         dajProdavce();
     	dodajArtikal.show();
@@ -159,5 +185,12 @@ function prikazi(){
     	$("#izmeniKupca").hide();
     	$("#btnDodajKupca").show();
     	dodajKupca.show();
+    }else if(prikaziArtikleProdavca){
+    	PrikazSvihArtikalaProdavaca();
+    }else if(dodavanjeArtiklaProdavca){
+        $('#izmeniArtikalProdavca').hide();
+        $('#btnDodajArtikalProdavca').show();
+        dajProdavce();
+    	dodajArtikal.show();
     }
 }

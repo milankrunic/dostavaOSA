@@ -56,8 +56,8 @@
 	             <div>
 	               <input class="btn btn-primary" onclick="login()" type="submit" id="Login" value="Prijava"/>
 	             </div>
-	             <div id="registracija">
-	   <!--              <a href="/Knjizara/Korisnici/Registracija">Registruj se</a>      -->
+	             <div>
+	                 <a href="registracija.html">Registruj se</a>     
 	             </div>
 	           </div>
 	         </form>
@@ -113,6 +113,9 @@
 
             <button id="btnDodajArtikal" onclick="submitArtikal()" type="submit" class="btn btn-secondary">Dodaj</button>
             <button id="izmeniArtikal" type="submit" class="btn btn-warning" style="display: none;" onclick="submitUpdateArtikal()">Izmeni</button> 
+            
+            <button id="btnDodajArtikalProdavca" onclick="submitArtikalProdavac()"  type="submit" class="btn btn-secondary">Dodaj bre</button>
+            <button id="izmeniArtikalProdavca" type="submit" class="btn btn-warning" style="display: none;" onclick="submitUpdateArtikalProdavac()">Izmeni</button> 
             <button id="nazad" class="btn btn-primary" onclick="vratiSaDodavanjaIizmene()">Vrati</button>
         </div>
 <!-- ------------------------------------------------------------------------------------------------------------------------------ -->  
@@ -129,6 +132,7 @@
 	                <th style="text-align: center;">Ime</th>
 	                <th style="text-align: center;">Prezime</th>
 	                <th style="text-align: center;">Korisnicko ime</th>
+	                <th style="text-align: center;">Blokiran</th>
 	                <th></th>
 	              </tr>
 	            </thead>
@@ -185,6 +189,7 @@
 	                <th style="text-align: center;">Email</th>
 	                <th style="text-align: center;">Adresa</th>
 	                <th style="text-align: center;">Posluje od</th>
+	                <th style="text-align: center;">Blokiran</th>
 	                <th></th>
 	              </tr>
 	            </thead>
@@ -254,6 +259,7 @@
 	                <th style="text-align: center;">Prezime</th>
 	                <th style="text-align: center;">Korisnicko ime</th>
 	                <th style="text-align: center;">Adresa</th>
+	                <th style="text-align: center;">Blokiran</th>
 	                <th></th>
 	              </tr>
 	            </thead>
@@ -304,6 +310,33 @@
 	    <button class="btn btn-primary" onclick="odrediPrikaz('sviProdavci')" id="DugmePrikazProdavaca">Prodavci</button>
 	    <button class="btn btn-primary" onclick="odrediPrikaz('sviKupci')" id="DugmePrikazKupaca">Kupci</button>
     </div>
+    
+<!-- ARTIKLI PRODAVCA -------------------------------------------------------------------------------------------------------------- -->		
+        
+<!-- Prikaz svih artikala prodavca-->
+
+		<div id="artikliTableProdavac" style="display: none;">
+	        <table class="table">
+	            <thead>
+	              <tr>
+	                <th style="text-align: center;">ID</th>
+	                <th style="text-align: center;">Naziv</th>
+	                <th style="text-align: center;">Opis</th>
+	                <th style="text-align: center;">Cena</th>
+	                <th style="text-align: center;">Prodavnica</th>
+	                <th></th>
+	              </tr>
+	            </thead>
+	            <tbody id="tbodyArtiklaProdavca">
+	  
+	            </tbody>
+	        </table>
+ 	        <button id="dodavanje" class="btn btn-success" onclick="odrediPrikaz('dodajArtikal')">Dodaj artikal</button>
+	        <button id="nazad" class="btn btn-primary" onclick="vratiNaPocetnu()">Vrati</button>     
+		</div>
+
+<!-- ------------------------------------------------------------------------------------------------------------------------------ --> 
+    
     </main>
     
 </body>

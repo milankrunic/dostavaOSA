@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ftn.dostavaOSA2021.DostavaOSA2021.dto.ArtikalDTO;
 import ftn.dostavaOSA2021.DostavaOSA2021.dto.ProdavacDTO;
+import ftn.dostavaOSA2021.DostavaOSA2021.model.Artikal;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Prodavac;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.TipKorisnika;
+import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.ArtikalServiceInterface;
 import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.ProdavacServiceInterface;
 
 @RestController
@@ -26,6 +29,9 @@ public class ProdavacController {
 	
 	@Autowired
 	ProdavacServiceInterface prodavacServiceInterface;
+	
+	@Autowired
+	ArtikalServiceInterface artikalServiceInterface;
 	
 	@GetMapping
 	public ResponseEntity<List<ProdavacDTO>> getProdavci(){
@@ -47,6 +53,24 @@ public class ProdavacController {
 			return new ResponseEntity<ProdavacDTO>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<ProdavacDTO>(new ProdavacDTO(prodavac), HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/{id}/artikli")
+	public ResponseEntity<List<ArtikalDTO>> getArtikleProdavca(@PathVariable("id") Long id){
+		
+		Prodavac prodavac = prodavacServiceInterface.findOne(id);
+		
+		if(prodavac == null) {
+			return new ResponseEntity<List<ArtikalDTO>>(HttpStatus.NOT_FOUND);
+		}else {
+			List<Artikal> artikli = artikalServiceInterface.findAllByProdavac(prodavac);
+			List<ArtikalDTO> artikalDTO = new ArrayList<ArtikalDTO>();
+			for (Artikal artikal : artikli) {
+				ArtikalDTO dto = new ArtikalDTO(artikal);
+				artikalDTO.add(dto);
+			}
+			return new ResponseEntity<List<ArtikalDTO>>(artikalDTO, HttpStatus.OK);
+		}
 	}
 	
 	@PostMapping
@@ -99,6 +123,21 @@ public class ProdavacController {
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		}
 		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+	}
+	
+	@PostMapping(value = "/{id}/blokiranje")
+	public ResponseEntity<ProdavacDTO> blok(@PathVariable("id") Long id){
+
+		Prodavac prodavac = prodavacServiceInterface.findById(id);
+		
+		if(prodavac.isBlokiran() == false) {
+			prodavac.setBlokiran(true);
+		}else {
+			prodavac.setBlokiran(false);
+		}
+		
+		prodavac = prodavacServiceInterface.save(prodavac);
+		return new ResponseEntity<ProdavacDTO>(new ProdavacDTO(prodavac), HttpStatus.CREATED);
 	}
 	
 }

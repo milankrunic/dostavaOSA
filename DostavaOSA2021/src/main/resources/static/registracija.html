@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registracija</title>
+        <!-- Ukljucivanje JQuery biblioteke -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Ukljucivanje bootstrap biblioteke -->
+    <link rel="stylesheet" 
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
+    crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
+    crossorigin="anonymous"></script>
+
+    <!-- Ukljucivanje js fajlova -->
+    <script src="js/app.js"></script>
+    <script src="js/prodavci.js"></script>
+    <script src="js/kupci.js"></script>
+    
+    <!-- Ukljucivanje css-a -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+	<main id="reg">
+    	<div id="registracija">
+	      	<h5>Registruj se kao:</h2>
+	      	<button class="btn btn-primary" onclick="prikaziFormuKupac()" style="margin-right: 3%;">Kupac</button>
+	      	<button class="btn btn-primary" onclick="prikaziFormuPordavac()">Prodavac</button>
+     	</div> 
+     	
+<!-- Forma za registraciju kupca -->
+
+        <div id="dodajKupca" style="display: none;">
+        
+        	<h1>KUPAC</h1>
+        
+            <div class="form-group">
+                <label>Ime:</label> 
+                <input type="text"
+                class="form-control col-sm-5" id="imeKupca" placeholder="Unesite ime kupca">
+                 <input type="hidden" id="idKupac">
+
+                 <label>Prezime:</label>
+                 <input type="text"
+                 class="form-control col-sm-5" id="prezimeKupca" placeholder="Unesite prezime kupca">
+
+                <label>Korisnicko Ime:</label> 
+                <input type="text"
+                class="form-control col-sm-5" id="korImeKupca" placeholder="Unesite korisnicko ime kupca">
+                 
+                <label>Lozinka:</label> 
+                <input type="text"
+                class="form-control col-sm-5" id="lozinkaKupca" placeholder="Unesite lozinku kupca">
+                 
+                <label>Adresa:</label> 
+                <input type="text"
+                class="form-control col-sm-5" id="adresaKupca" placeholder="Unesite adresu kupca">
+                 
+            </div>
+          
+
+            <button id="btnDodajKupca" onclick="submitKupac()" type="submit" class="btn btn-secondary">Registruj se</button>
+
+        </div>
+        
+<!-- Forma za registraciju prodavca -->
+
+        <div id="dodajProdavca" style="display: none;">
+        
+        	<h1>PRODAVAC</h1>
+        	
+            <div class="form-group">
+                <label>Ime:</label> 
+                <input type="text"
+                class="form-control col-sm-5" id="ime" placeholder="Unesite ime prodavca">
+                 <input type="hidden" id="idProdavac">
+
+                 <label>Prezime:</label>
+                 <input type="text"
+                 class="form-control col-sm-5" id="prezime" placeholder="Unesite prezime prodavca">
+
+                <label>Korisnicko Ime:</label> 
+                <input type="text"
+                class="form-control col-sm-5" id="korIme" placeholder="Unesite korisnicko ime prodavca">
+                 
+                <label>Lozinka:</label> 
+                <input type="text"
+                class="form-control col-sm-5" id="lozinka" placeholder="Unesite lozinku prodavca">
+                 
+                <label>Naziv prodavnice:</label> 
+                <input type="text"
+                class="form-control col-sm-5" id="nazivProdavca" placeholder="Unesite naziv prodavnice u kojoj prodavac radi">
+                 
+                <label>Email:</label> 
+                <input type="text"
+                class="form-control col-sm-5" id="email" placeholder="Unesite email prodavca">
+                 
+                <label>Adresa:</label> 
+                <input type="text"
+                class="form-control col-sm-5" id="adresa" placeholder="Unesite adresu prodavca">
+                 
+                <label>Posluje od:</label> 
+                <input type="date"
+                class="form-control col-sm-5" id="poslujeOd" placeholder="">
+                 
+            </div>
+          
+
+            <button id="btnDodajProdavca" onclick="submitProdavac()" type="submit" class="btn btn-secondary">Registruj se</button>
+
+        </div>
+    </main>
+</body>
+</html>

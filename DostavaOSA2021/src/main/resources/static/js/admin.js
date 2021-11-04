@@ -21,8 +21,10 @@ function PrikazSvihAdministratora(){
                         +'<td align="center">'+result[admin].imeAdmina+'</td>'
                         +'<td align="center">'+result[admin].prezimeAdmina+'</a>'+'</td>'
                         +'<td align="center">'+result[admin].korImeAdmina+'</td>'
-
+                        +'<td align="center">'+result[admin].blokiran+'</td>'
+                        
                         +'<td>'
+                        	+'<button type="submit" class="btn btn-dark" style="margin-right: 5%;" onclick="blokiraj('+result[admin].idAdministrator+')">BLOK</button>'
 	                        +'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="editAdmin('+result[admin].idAdministrator+')">IZMENI</button>'
 	                        +'<button type="submit" class="btn btn-danger" onclick="deleteAdmin('+result[admin].idAdministrator+')">OBRIŠI</button>'
                         +'</td>'
@@ -192,6 +194,27 @@ function deleteAdmin(id){
         }
     });
 }
+
+function blokiraj(id){
+    $.ajax({
+        url:'http://localhost:8080/api/admin/' + id + '/blokiranje',
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        success: function(result){
+        	if(result.blokiran){
+        		alert("Administrator je blokiran!");
+        	}else{
+        		alert("Administrator je odblokiran!");
+        	}
+            odrediPrikaz('sviAdministratori');
+        },
+        error : function(e){
+            alert('Doslo je do neke greške!')
+            console.log("ERROR: ", e);
+        }
+    });
+}
+
 
 function vratiNaPocetnuAdmin(){
 	$('#adminTable').hide();
