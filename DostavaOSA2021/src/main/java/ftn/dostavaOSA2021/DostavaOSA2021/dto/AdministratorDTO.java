@@ -5,7 +5,7 @@ import ftn.dostavaOSA2021.DostavaOSA2021.model.TipKorisnika;
 
 public class AdministratorDTO {
 	
-	private Long idAdministrator;
+	private Long idAdmin;
 	private String imeAdmina;
 	private String prezimeAdmina;
 	private String korImeAdmina; 
@@ -17,10 +17,10 @@ public class AdministratorDTO {
 		super();
 	}
 
-	public AdministratorDTO(Long idAdministrator, String imeAdmina, String prezimeAdmina, String korImeAdmina, String lozinkaAdmina,
+	public AdministratorDTO(Long idAdmin, String imeAdmina, String prezimeAdmina, String korImeAdmina, String lozinkaAdmina,
 			boolean blokiran, TipKorisnika tipKorisnika) {
 		super();
-		this.idAdministrator = idAdministrator;
+		this.idAdmin = idAdmin;
 		this.imeAdmina = imeAdmina;
 		this.prezimeAdmina = prezimeAdmina;
 		this.korImeAdmina = korImeAdmina;
@@ -33,12 +33,12 @@ public class AdministratorDTO {
 		this(a.getIdKorisnik(), a.getIme(), a.getPrezime(), a.getKorisnickoIme(), a.getLozinka(), a.isBlokiran(), a.getTipKorisnika());
 	}
 
-	public Long getIdAdministrator() {
-		return idAdministrator;
+	public Long getIdAdmin() {
+		return idAdmin;
 	}
 
-	public void setIdAdministrator(Long idAdministrator) {
-		this.idAdministrator = idAdministrator;
+	public void setIdAdmin(Long idAdmin) {
+		this.idAdmin = idAdmin;
 	}
 
 	public String getImeAdmina() {

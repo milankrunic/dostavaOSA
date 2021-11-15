@@ -17,16 +17,16 @@ function PrikazSvihAdministratora(){
                 	tbodyAdmin.append(
                     '<tr>'
                 			
-                        +'<td align="center">'+result[admin].idAdministrator+'</td>'
+                        +'<td align="center">'+result[admin].idAdmin+'</td>'
                         +'<td align="center">'+result[admin].imeAdmina+'</td>'
                         +'<td align="center">'+result[admin].prezimeAdmina+'</a>'+'</td>'
                         +'<td align="center">'+result[admin].korImeAdmina+'</td>'
                         +'<td align="center">'+result[admin].blokiran+'</td>'
                         
                         +'<td>'
-                        	+'<button type="submit" class="btn btn-dark" style="margin-right: 5%;" onclick="blokiraj('+result[admin].idAdministrator+')">BLOK</button>'
-	                        +'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="editAdmin('+result[admin].idAdministrator+')">IZMENI</button>'
-	                        +'<button type="submit" class="btn btn-danger" onclick="deleteAdmin('+result[admin].idAdministrator+')">OBRIŠI</button>'
+                        	+'<button type="submit" class="btn btn-dark" style="margin-right: 5%;" onclick="blokiraj('+result[admin].idAdmin+')">BLOK</button>'
+	                        +'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="editAdmin('+result[admin].idAdmin+')">IZMENI</button>'
+	                        +'<button type="submit" class="btn btn-danger" onclick="deleteAdmin('+result[admin].idAdmin+')">OBRIŠI</button>'
                         +'</td>'
                     +'</tr>'
                     
@@ -123,13 +123,13 @@ function editAdmin(id){
 
             success: function(result){
             	
-                var idProdavac = $("#idProdavac");
+                var idAdmin = $("#idAdmin");
                 var ime = $("#imeAdmina");
                 var prezime = $("#prezimeAdmina");
                 var korisnickoIme = $("#korImeAdmina");
                 var lozinka = $("#lozinkaAdmina");
                                
-                idProdavac.val(result.idProdavac);
+                idAdmin.val(result.idAdmin);
                 ime.val(result.imeAdmina);
                 prezime.val(result.prezimeAdmina);
                 korisnickoIme.val(result.korImeAdmina);
@@ -148,12 +148,12 @@ function editAdmin(id){
 
 function submitUpdateAdmin(){
     
-    var id = $("#idAdministrator").val();
+    var id = $("#idAdmin").val();
     var ime = $("#imeAdmina").val();
     var prezime = $("#prezimeAdmina").val();
     var korisnickoIme = $("#korImeAdmina").val();
     var lozinka = $("#lozinkaAdmina").val();
-
+    
     var formData = {
         "imeAdmina" : ime,
         "prezimeAdmina" : prezime,
@@ -162,17 +162,17 @@ function submitUpdateAdmin(){
     }
 
     $.ajax({
-    	
-        url: "http://localhost:8080/api/admin/" + id,
+    
+    	url: "http://localhost:8080/api/admin/" + id,
         type: "PUT",
         contentType: 'application/json; charset=utf-8',
         data : JSON.stringify(formData),
         success: function(result){
-            alert('Administrator je uspesno izmenjen!');
+            alert('Administrator ' + result.korImeAdmina + ' je uspesno izmenjen!');
             odrediPrikaz('sviAdministratori');
         },
         error : function(e){
-            alert('Doslo je do neke greške!')
+            alert('Doslo je do neke greške!');
             console.log("ERROR: ", e);
         }
     });

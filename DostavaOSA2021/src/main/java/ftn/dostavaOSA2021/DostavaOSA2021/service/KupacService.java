@@ -41,4 +41,9 @@ public class KupacService implements KupacServiceInterface{
 		
 	}
 
+	@Override
+	public Kupac findByKorImeAndLozinka(String korIme, String loz) {
+		return kupacRepository.findByKorisnickoImeAndLozinka(korIme, loz);
+	}
+
 }

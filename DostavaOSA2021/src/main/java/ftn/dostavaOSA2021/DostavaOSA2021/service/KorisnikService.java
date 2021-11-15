@@ -40,5 +40,10 @@ public class KorisnikService implements KorisnikServiceInterface{
 		korisnikRepository.deleteById(id);
 		
 	}
+
+	@Override
+	public Korisnik findById(Long korisnikId) {
+		return korisnikRepository.findByIdKorisnik(korisnikId);
+	}
 	
 }

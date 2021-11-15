@@ -167,7 +167,7 @@ function submitUpdateKupac(){
     var korisnickoIme = $("#korImeKupca").val();
     var lozinka = $("#lozinkaKupca").val();
     var adresa = $("#adresaKupca").val();
-
+    
     var formData = {
         "imeKupca" : ime,
         "prezimeKupca" : prezime,

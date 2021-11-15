@@ -8,4 +8,6 @@ public interface ProdavacRepository extends JpaRepository<Prodavac, Long>{
 
 	Prodavac findByIdKorisnik(Long idKorisnik);
 	
+	Prodavac findByKorisnickoImeAndLozinka(String korisnickoIme, String lozinka);
+	
 }

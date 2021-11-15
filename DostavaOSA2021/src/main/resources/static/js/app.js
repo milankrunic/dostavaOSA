@@ -13,12 +13,10 @@ function pokaziDugmiceKorisnika(){
 }
 
 function login(){
-	
+		
     var greska = "";
     var korisnickoInput = "";
     var lozinkaInput = "";
-
-    console.log('Ovde dodje!');
     
     korisnickoInput = $("#inputKorisnickoIme").val();
     lozinkaInput = $("#inputSifru").val();
@@ -42,36 +40,25 @@ function login(){
         alert(greska);
     }
     else{
-//        var formData = {
-//                "korIme" : korisnickoInput,
-//                "lozinka" : lozinkaInput
-//        }
-
+        var formData = {
+                "korIme" : korisnickoInput,
+                "lozinka" : lozinkaInput
+        }
+        console.log("KORISNIK je : ")
         $.ajax({
+        	url: "http://localhost:8080/api/korisnik/login",
             type: "POST",
-            contentType: 'application/json; charset=utf-8',
-            url: "http://localhost:8080/api/login",  
-//            data : JSON.stringify(formData),
-            success: function(result){
-                for(korisnik in result){
-                    if(korisnickoInput === korisnik.korIme && lozinkaInput === korisnik.lozinka && korisnik.tipKorisnika === "KUPAC"){
-                        alert("KUPAC");
-                    }else if(korisnickoInput === korisnik.korIme && lozinkaInput === korisnik.lozinka && korisnik.tipKorisnika === "PRODAVAC"){
-                        alert("PRODAVAC");
-            		}else if(korisnickoInput === korisnik.korIme && lozinkaInput === korisnik.lozinka && korisnik.tipKorisnika === "ADMINISTRATOR"){
-                    	alert("ADMINISTRATOR");
-                    }else{
-                    	alert("Pogresni podaci");
-                    }
-                }
+            contentType: "application/json; charset=utf-8",  
+            data : JSON.stringify(formData),
+            success: function (response) {
+       
+                window.location.href = "../kupac.html";
             },
-            error : function(e){
-                alert('Doslo je do neke greške!');
-                console.log("ERROR: ", e);
+            error: function () {
+                alert("Uneli ste pogresne podatke!");
             }
 
         });
-        login();
     }
 }
 

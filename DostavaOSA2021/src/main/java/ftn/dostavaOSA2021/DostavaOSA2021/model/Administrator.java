@@ -9,8 +9,8 @@ public class Administrator extends Korisnik{
 		super();
 	}
 	
-	public Administrator(Long id, String ime, String prezime, String korisnickoIme, String lozinka, boolean blokiran, TipKorisnika tipKorisnika) {
-		super(id, ime, prezime, korisnickoIme, lozinka, blokiran, tipKorisnika);
+	public Administrator(Long idKorisnik, String ime, String prezime, String korisnickoIme, String lozinka, boolean blokiran, TipKorisnika tipKorisnika) {
+		super(idKorisnik, ime, prezime, korisnickoIme, lozinka, blokiran, tipKorisnika);
 	}
 	
 	

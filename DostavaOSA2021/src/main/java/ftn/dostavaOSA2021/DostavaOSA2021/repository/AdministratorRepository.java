@@ -8,4 +8,6 @@ public interface AdministratorRepository extends JpaRepository<Administrator, Lo
 
 	Administrator findByIdKorisnik(Long idKorisnik);
 	
+	Administrator findByKorisnickoImeAndLozinka(String korisnickoIme, String lozinka);
+	
 }

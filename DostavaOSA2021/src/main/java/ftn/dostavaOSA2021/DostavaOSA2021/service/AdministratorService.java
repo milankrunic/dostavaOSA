@@ -41,4 +41,9 @@ public class AdministratorService implements AdministratorServiceInterface{
 		
 	}
 
+	@Override
+	public Administrator findByKorImeAndLozinka(String korIme, String loz) {
+		return administratorRepository.findByKorisnickoImeAndLozinka(korIme, loz);
+	}
+
 }

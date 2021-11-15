@@ -8,6 +8,7 @@ public interface KorisnikServiceInterface {
 
 	public List<Korisnik> findAll();
 	public Korisnik findOne(Long id);
+	public Korisnik findById(Long korisnikId);
 	public Korisnik findByKorImeAndLozinka(String korIme, String loz);
 	public Korisnik save(Korisnik korisnik);
 	public void remove(Long id);

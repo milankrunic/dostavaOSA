@@ -41,4 +41,9 @@ public class ProdavacService implements ProdavacServiceInterface{
 		
 	}
 
+	@Override
+	public Prodavac findByKorImeAndLozinka(String korIme, String loz) {
+		return prodavacRepository.findByKorisnickoImeAndLozinka(korIme, loz);
+	}
+
 }
