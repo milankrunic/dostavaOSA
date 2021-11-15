@@ -14,7 +14,7 @@ INSERT INTO korisnik(dtype, ime, prezime, korisnicko_ime, lozinka, blokiran, tip
 INSERT INTO korisnik(dtype, ime, prezime, korisnicko_ime, lozinka, blokiran, tip_korisnika, adresa, naziv_prodavca, email, posluje_od)
 	VALUES('prodavac', 'Pera', 'Peric', 'perap', 'pera123', false, 'PRODAVAC', 'Vojvodjanska 50', 'STR Dane od sljive do banane', 'pera@gmail.com', '2020-05-03');
 INSERT INTO korisnik(dtype, ime, prezime, korisnicko_ime, lozinka, blokiran, tip_korisnika, adresa, naziv_prodavca, email, posluje_od)
-	VALUES('prodavac', 'Zika', 'Zikic', 'zikaz', 'zika123', false, 'PRODAVAC', 'Karadjordjeva 105', 'STR Zrmanja', 'zika@gmail.com', '2021-05-10');
+	VALUES('prodavac', 'Zika', 'Zikic', 'zikaz', 'zika123', true, 'PRODAVAC', 'Karadjordjeva 105', 'STR Zrmanja', 'zika@gmail.com', '2021-05-10');
 INSERT INTO korisnik(dtype, ime, prezime, korisnicko_ime, lozinka, blokiran, tip_korisnika, adresa, naziv_prodavca, email, posluje_od)
 	VALUES('prodavac', 'Jova', 'Jovic', 'jovaj', 'jova123', false, 'PRODAVAC', 'Zlatiborska 3', 'STR Silobad', 'jova@gmail.com', '2019-08-12');
 

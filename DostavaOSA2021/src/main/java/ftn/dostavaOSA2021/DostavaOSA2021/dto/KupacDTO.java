@@ -110,7 +110,6 @@ public class KupacDTO {
 	}
 
 
-
 	public boolean isBlokiran() {
 		return blokiran;
 	}

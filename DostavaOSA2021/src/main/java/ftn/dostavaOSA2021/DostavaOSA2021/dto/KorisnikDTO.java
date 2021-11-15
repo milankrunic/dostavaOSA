@@ -16,7 +16,7 @@ public class KorisnikDTO {
 //	private String nazivProdavca;
 //	private Date poslujeOd;
 	private TipKorisnika tipKorisnika;
-//	private boolean blokiran;
+	private boolean blokiran;
 	
 	public KorisnikDTO() {
 		super();
@@ -131,12 +131,12 @@ public class KorisnikDTO {
 		this.tipKorisnika = tipKorisnika;
 	}
 
-//	public boolean isBlokiran() {
-//		return blokiran;
-//	}
-//
-//	public void setBlokiran(boolean blokiran) {
-//		this.blokiran = blokiran;
-//	}
+	public boolean isBlokiran() {
+		return blokiran;
+	}
+
+	public void setBlokiran(boolean blokiran) {
+		this.blokiran = blokiran;
+	}
 
 }

@@ -51,8 +51,17 @@ function login(){
             contentType: "application/json; charset=utf-8",  
             data : JSON.stringify(formData),
             success: function (response) {
-       
-                window.location.href = "../kupac.html";
+
+            	if(response.blokiran === true){
+            		alert("Korisnik je blokiran!");
+            	}else if(response.tipKorisnika === "KUPAC"){
+        			window.location.href = "../kupac.html";
+        		}else if(response.tipKorisnika === "PRODAVAC"){
+        			window.location.href = "../prodavac.html";
+        		}else if(response.tipKorisnika === "ADMINISTRATOR"){
+        			window.location.href = "../admin.html";
+        		}           	
+        		              
             },
             error: function () {
                 alert("Uneli ste pogresne podatke!");

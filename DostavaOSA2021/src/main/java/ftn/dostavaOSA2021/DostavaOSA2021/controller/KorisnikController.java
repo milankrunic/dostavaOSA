@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ftn.dostavaOSA2021.DostavaOSA2021.dto.KorisnikDTO;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Korisnik;
-import ftn.dostavaOSA2021.DostavaOSA2021.model.TipKorisnika;
 import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.AdministratorServiceInterface;
 import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.KorisnikServiceInterface;
 import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.KupacServiceInterface;
@@ -71,6 +70,7 @@ public class KorisnikController {
 			korDTO.setKorIme(korisnik.getKorisnickoIme());
 			korDTO.setLozinka(korisnik.getLozinka());
 			korDTO.setTipKorisnika(korisnik.getTipKorisnika());
+			korDTO.setBlokiran(korisnik.isBlokiran());
 			
 			return new ResponseEntity<KorisnikDTO>(korDTO,HttpStatus.OK);
 		}
