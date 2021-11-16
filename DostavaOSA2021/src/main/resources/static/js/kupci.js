@@ -232,6 +232,7 @@ function blokirajKupca(id){
 
 function vratiNaPocetnuKupac(){
 	$('#kupciTable').hide();
+	$('#DugmeOdjava').show();
 	$('#DugmePrikazLogiina').show();
 	$('#DugmePrikazArtikala').show();
 	$('#DugmePrikazKorisnike').show();

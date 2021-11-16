@@ -274,6 +274,7 @@ function blokirajProdavca(id){
 function vratiNaPocetnuProdavci(){
 	$('#prodavciTable').hide();
 	$('#prijava').hide();
+	$('#DugmeOdjava').show();
 	$('#DugmePrikazLogiina').show();
 	$('#DugmePrikazArtikala').show();
 	$('#DugmePrikazKorisnike').show();

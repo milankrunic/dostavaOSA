@@ -215,11 +215,13 @@ function blokiraj(id){
     });
 }
 
+function odjava(){
+	window.location.href = "index.html";
+}
 
 function vratiNaPocetnuAdmin(){
 	$('#adminTable').hide();
-	$('#prijava').hide();
-	$('#DugmePrikazLogiina').show();
+	$('#DugmeOdjava').show();
 	$('#DugmePrikazArtikala').show();
 	$('#DugmePrikazKorisnike').show();
 }

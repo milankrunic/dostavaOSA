@@ -7,6 +7,7 @@ function pokaziLogin(){
 
 function pokaziDugmiceKorisnika(){
 	$('#prikazDugicaSvihKorisnika').show();
+	$('#DugmeOdjava').hide();
 	$('#DugmePrikazLogiina').hide();
 	$('#DugmePrikazArtikala').hide();
 	$('#DugmePrikazKorisnike').hide();
@@ -44,7 +45,7 @@ function login(){
                 "korIme" : korisnickoInput,
                 "lozinka" : lozinkaInput
         }
-        console.log("KORISNIK je : ")
+
         $.ajax({
         	url: "http://localhost:8080/api/korisnik/login",
             type: "POST",
@@ -55,11 +56,11 @@ function login(){
             	if(response.blokiran === true){
             		alert("Korisnik je blokiran!");
             	}else if(response.tipKorisnika === "KUPAC"){
-        			window.location.href = "../kupac.html";
+        			window.location.href = "kupac.html";
         		}else if(response.tipKorisnika === "PRODAVAC"){
-        			window.location.href = "../prodavac.html";
+        			window.location.href = "prodavac.html";
         		}else if(response.tipKorisnika === "ADMINISTRATOR"){
-        			window.location.href = "../admin.html";
+        			window.location.href = "admin.html";
         		}           	
         		              
             },

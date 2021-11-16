@@ -10,7 +10,7 @@ body{
 
 main{
     width: 90%;
-    height: 150vh;
+    height: 120vh;
     margin: 0 auto;
     background-color: rgba(219, 234, 235, 0.7);
     font-family: 'Heebo', sans-serif;
@@ -20,42 +20,12 @@ h1{
     color: black;
     font-family: 'Diplomata', cursive;
     text-align: center;
-    padding-top: 10%;
+    padding-top: 2%;
     padding-bottom: 5%;
-}
-
-h2{
-    color: rgb(13, 168, 189); 
-    text-transform: uppercase;
-    size: 20px;
-    font-family: 'Diplomata', cursive;
-    text-align: center;
-    padding-bottom: 3%;
 }
 
 form{
     color: white;
-}
-
-#prijava{
-    margin: 1% 0;
-}
-
-#dugmeLogin{
-    padding: 10px;
-    background-color: rgb(4, 105, 236);
-    color: white;
-}
-
-#dugmeRegistracija{
-    padding: 10px;
-    background-color: rgb(4, 105, 236);
-    color: white;
-}
-
-#dugmici{
-    margin-left: 1%;
-    padding: 10px;
 }
 
 #registracija{
@@ -69,4 +39,40 @@ form{
     margin: 0 auto;
     background-color: rgba(219, 234, 235, 0.7);
     font-family: 'Heebo', sans-serif;
+}
+
+#dugmiciAdmin{
+	margin-left: 37%;
+}
+
+#DugmePrikazArtikala{
+	margin-right: 2%;
+	padding: 20px;
+}
+
+#DugmePrikazKorisnike{
+	margin-right: 2%;
+	padding: 20px;
+}
+
+#DugmeOdjava{
+	padding: 20px;
+}
+
+#prikazDugicaSvihKorisnika{
+	margin-left: 37%;
+}
+
+#DugmePrikazAdmina{
+	padding: 10px;
+}
+
+#DugmePrikazProdavaca{
+	margin-left: 3%;
+	margin-right: 3%;
+	padding: 10px;
+}
+
+#DugmePrikazKupaca{
+	padding: 10px;
 }
