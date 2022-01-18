@@ -216,7 +216,7 @@ function blokiraj(id){
 }
 
 function odjava(){
-	window.location.href = "index.html";
+	window.location.href = "/";
 }
 
 function vratiNaPocetnuAdmin(){

@@ -1,5 +1,7 @@
 package ftn.dostavaOSA2021.DostavaOSA2021.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,7 +52,7 @@ public class KorisnikController {
 //	}
 	
 	@PostMapping(value = "/login")
-	public ResponseEntity<KorisnikDTO> login(@RequestBody KorisnikDTO korisnikDTO){
+	public ResponseEntity<KorisnikDTO> login(@RequestBody KorisnikDTO korisnikDTO, HttpSession session){
 
 		Korisnik korisnik =  kupacServiceInterface.findByKorImeAndLozinka(korisnikDTO.getKorIme(), korisnikDTO.getLozinka());
 		Korisnik admin = administratorServiceInterface.findByKorImeAndLozinka(korisnikDTO.getKorIme(), korisnikDTO.getLozinka());
@@ -67,11 +69,12 @@ public class KorisnikController {
 			return new ResponseEntity<KorisnikDTO>(HttpStatus.NOT_FOUND); 
 		}else{
 			KorisnikDTO korDTO = new KorisnikDTO();
+			korDTO.setIdKorisnik(korisnik.getIdKorisnik());
 			korDTO.setKorIme(korisnik.getKorisnickoIme());
 			korDTO.setLozinka(korisnik.getLozinka());
 			korDTO.setTipKorisnika(korisnik.getTipKorisnika());
 			korDTO.setBlokiran(korisnik.isBlokiran());
-			
+			session.setAttribute(ProdavacController.PRODAVAC_KEY, prodavac);
 			return new ResponseEntity<KorisnikDTO>(korDTO,HttpStatus.OK);
 		}
 

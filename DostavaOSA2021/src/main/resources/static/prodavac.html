@@ -1,12 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prodavac</title>
+    <!-- Ukljucivanje JQuery biblioteke -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Ukljucivanje bootstrap biblioteke -->
+    <link rel="stylesheet" 
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
+    crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
+    crossorigin="anonymous"></script>
+
+    <!-- Ukljucivanje js fajlova -->
+    <script src="js/app.js"></script>
+    <script src="js/admin.js"></script> <!-- ZBOG ODJAVE -->
+    <script src="js/prodavci.js"></script>
+    
+    <!-- Ukljucivanje css-a -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    PRODAVAC
+    <main>
+    
+    <h1>Dostava</h1>
+    
+    <div id="sesija" th:text="${session.prijavljeniProdavac.idKorisnik}"></div>
+    <div id="dugmiciAdmin">
+		<button class="btn btn-primary" onclick="PrikazSvihArtikalaProdavaca()" id="DugmeArtikal">Moji artikli</button>
+	    <button class="btn btn-primary" onclick="odjava()" id="DugmeOdjava">Odjava</button>
+	</div> 
+    
+<!-- Prikaz svih artikala prodavca-->
+
+		<div id="artikliTableProdavac" style="display: none;">
+	        <table class="table">
+	            <thead>
+	              <tr>
+	                <th style="text-align: center;">ID</th>
+	                <th style="text-align: center;">Naziv</th>
+	                <th style="text-align: center;">Opis</th>
+	                <th style="text-align: center;">Cena</th>
+	                <th style="text-align: center;">Prodavnica</th>
+	                <th></th>
+	              </tr>
+	            </thead>
+	            <tbody id="tbodyArtiklaProdavca">
+	  
+	            </tbody>
+	        </table>
+ 	        <button id="dodavanje" class="btn btn-success" onclick="odrediPrikaz('dodajArtikal')">Dodaj artikal</button>
+	        <button id="nazad" class="btn btn-primary" onclick="vratiNaPocetnu()">Vrati</button>     
+		</div>
+
+<!-- ------------------------------------------------------------------------------------------------------------------------------ --> 
+
+    </main>
 </body>
 </html>

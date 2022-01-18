@@ -3,6 +3,8 @@ package ftn.dostavaOSA2021.DostavaOSA2021.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,8 @@ import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.ProdavacServiceInterfa
 @RestController
 @RequestMapping(value = "api/prodavac")
 public class ProdavacController {
+	
+	public static final String PRODAVAC_KEY = "prijavljeniProdavac";
 	
 	@Autowired
 	ProdavacServiceInterface prodavacServiceInterface;
@@ -55,10 +59,10 @@ public class ProdavacController {
 		return new ResponseEntity<ProdavacDTO>(new ProdavacDTO(prodavac), HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "/{id}/artikli")
-	public ResponseEntity<List<ArtikalDTO>> getArtikleProdavca(@PathVariable("id") Long id){
-		
-		Prodavac prodavac = prodavacServiceInterface.findOne(id);
+	@GetMapping(value = "/artikli")
+	public ResponseEntity<List<ArtikalDTO>> getArtikleProdavca(HttpSession session){
+				
+		Prodavac prodavac = (Prodavac) session.getAttribute(PRODAVAC_KEY);
 		
 		if(prodavac == null) {
 			return new ResponseEntity<List<ArtikalDTO>>(HttpStatus.NOT_FOUND);
@@ -71,6 +75,7 @@ public class ProdavacController {
 			}
 			return new ResponseEntity<List<ArtikalDTO>>(artikalDTO, HttpStatus.OK);
 		}
+		
 	}
 	
 	@PostMapping

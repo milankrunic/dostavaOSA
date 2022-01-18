@@ -288,11 +288,13 @@ function vratiSaDodavanjaIizmeneProdavci(){
 
 // ----------------- CRUD OPERACIJE ZA NJEGOVE ARTIKLE --------------------------------------------------------------
 
-function PrikazSvihArtikalaProdavaca(id){
+function PrikazSvihArtikalaProdavaca(){
 
+	console.log($("session"))
+	
     var tabelaArtiklaProdavca = $("#artikliTableProdavac");
     var tbodyArtiklaProdavca = $("#tbodyArtiklaProdavca");
-
+    
     function prikaziArtikleProdavca(){
     	$('#dodavanje').show();
     	$('#prodavciTable').hide();
@@ -304,7 +306,7 @@ function PrikazSvihArtikalaProdavaca(id){
 
             type: "GET",
             contentType : 'application/json; charset=utf-8',
-            url : "http://localhost:8080/api/prodavac/" + id + "/artikli",
+            url : "http://localhost:8080/api/prodavac/artikli",
             success : function(result){
             	tabelaArtiklaProdavca.show();
             	tbodyArtiklaProdavca.empty();
@@ -384,7 +386,7 @@ function submitArtikalProdavac(){ //dodavanje artikala nalazi se u index.html ko
             contentType: 'application/json; charset=utf-8',
             data : JSON.stringify(formData),
             success: function(){
-                alert('Artikal je uspesno dodattt!');
+                alert('Artikal je uspesno dodat!');
                 odrediPrikaz('sviArtikli');
             },
             error : function(e){

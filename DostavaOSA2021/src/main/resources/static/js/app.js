@@ -59,6 +59,7 @@ function login(){
         			window.location.href = "kupac.html";
         		}else if(response.tipKorisnika === "PRODAVAC"){
         			window.location.href = "prodavac.html";
+        		    console.log("KORISNIK: " + response);
         		}else if(response.tipKorisnika === "ADMINISTRATOR"){
         			window.location.href = "admin.html";
         		}           	
@@ -100,6 +101,8 @@ function odrediPrikaz(id){
     prikaziArtikleProdavca = false;
     dodavanjeArtiklaProdavca = false;
     
+    prikaziProdavcee = false;
+    
     if(id === "sviArtikli"){
         prikaziArtikle = true;
     }else if(id === "dodajArtikal"){
@@ -120,6 +123,8 @@ function odrediPrikaz(id){
     	prikaziArtikleProdavca = true;
     }else if(id === "dodajArtikal"){
     	dodavanjeArtiklaProdavca();
+    }else if(id === "sviProdavciNarucivanje"){
+    	prikaziProdavcee = true;
     }
 
     prikazi();
@@ -141,6 +146,8 @@ function prikazi(){
     
     var artikliTableProdavac = $("#artikliTableProdavac");
     var dodajArtikalProdavac = $("#dodajArtikal");
+    
+    var prodavciTablee = $("#prodavciTablee");
 
     artikliTable.hide();
     dodajArtikal.hide();
@@ -155,6 +162,8 @@ function prikazi(){
     dodajKupca.hide();
     
     artikliTableProdavac.hide();
+    
+    prodavciTablee.hide();
 
     if(prikaziArtikle){   
         PrikazSvihArtikala();
@@ -189,5 +198,7 @@ function prikazi(){
         $('#btnDodajArtikalProdavca').show();
         dajProdavce();
     	dodajArtikal.show();
+    }else if(prikaziProdavcee){
+    	PrikazSvihProdavacaZaNarudzbinu();
     }
 }
