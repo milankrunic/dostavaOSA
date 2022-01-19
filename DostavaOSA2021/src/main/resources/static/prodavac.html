@@ -54,9 +54,37 @@
 	  
 	            </tbody>
 	        </table>
- 	        <button id="dodavanje" class="btn btn-success" onclick="odrediPrikaz('dodajArtikal')">Dodaj artikal</button>
-	        <button id="nazad" class="btn btn-primary" onclick="vratiNaPocetnu()">Vrati</button>     
+ 	        <button id="dodavanje" class="btn btn-success" onclick="odrediPrikaz('dodajArtikal')">Dodaj artikal</button>  
 		</div>
+		
+<!-- Forma za dodavanje artikla prodavca-->
+
+        <div id="dodajArtikal" style="display: none;">
+            <div class="form-group">
+                <label for="naziv">Naziv:</label> 
+                <input type="text"
+                    class="form-control col-sm-5" id="nazivArtikla" placeholder="Unesite naziv artikla">
+                 <input type="hidden" id="idArtikla">
+
+                 <label for="naziv">Opis:</label>
+                 <input type="text"
+                 class="form-control col-sm-5" id="opis" placeholder="Unesite opis artikla">
+
+                 <label for="naziv">Cena:</label>
+                 <input type="number"
+                 class="form-control col-sm-5" id="cena" placeholder="Unesite cenu artikla">
+
+            </div>
+            
+	        <div id="selectProdavce" class="form-group">
+	          
+	        </div>
+
+            <button id="btnDodajArtikal" onclick="submitArtikalProdavac()" type="submit" class="btn btn-secondary">Dodaj</button>
+            <button id="izmeniArtikal" type="submit" class="btn btn-warning" style="display: none;" onclick="submitUpdateArtikal()">Izmeni</button> 
+            
+            <button id="izmeniArtikalProdavca" type="submit" class="btn btn-warning" style="display: none;" onclick="submitUpdateArtikalProdavac()">Izmeni</button> 
+        </div>
 
 <!-- ------------------------------------------------------------------------------------------------------------------------------ --> 
 

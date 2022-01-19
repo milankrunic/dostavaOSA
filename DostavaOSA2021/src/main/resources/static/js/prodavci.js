@@ -290,8 +290,6 @@ function vratiSaDodavanjaIizmeneProdavci(){
 
 function PrikazSvihArtikalaProdavaca(){
 
-	console.log($("session"))
-	
     var tabelaArtiklaProdavca = $("#artikliTableProdavac");
     var tbodyArtiklaProdavca = $("#tbodyArtiklaProdavca");
     
@@ -302,6 +300,7 @@ function PrikazSvihArtikalaProdavaca(){
     	$('#btnLogin').hide();
     	$('#DugmePrikazKorisnike').hide();
     	$('#DugmePrikazLogiina').hide();
+    	$('#dodajArtikal').hide();
         $.ajax({
 
             type: "GET",
@@ -387,7 +386,8 @@ function submitArtikalProdavac(){ //dodavanje artikala nalazi se u index.html ko
             data : JSON.stringify(formData),
             success: function(){
                 alert('Artikal je uspesno dodat!');
-                odrediPrikaz('sviArtikli');
+                $('#dodajArtikal').hide();
+                PrikazSvihArtikalaProdavaca();
             },
             error : function(e){
                 alert('Doslo je do neke greške!');
@@ -460,8 +460,8 @@ function submitUpdateArtikalProdavac(id){ //pritiskom na izmenu se dobija ovo, n
         data : JSON.stringify(formData),
         success: function(result){
             alert('Artikal je uspesno izmenjen!');
-//            PrikazSvihArtikalaProdavaca(id);
-            location.reload();         //privremeno resenje
+            $('#dodajArtikal').hide();
+            PrikazSvihArtikalaProdavaca();
         },
         error : function(e){
             alert('Doslo je do neke greške!')
@@ -478,8 +478,7 @@ function deleteArtikalProdavac(id){ //brisanje
         contentType: 'application/json; charset=utf-8',
         success: function(result){
             alert("Artikal je obrisan!");
-//            PrikazSvihArtikalaProdavaca(id);
-            location.reload();       //privremeno resenje
+            PrikazSvihArtikalaProdavaca();
         },
         error : function(e){
             alert('Doslo je do neke greške!')
