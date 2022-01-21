@@ -21,9 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import ftn.dostavaOSA2021.DostavaOSA2021.dto.ArtikalDTO;
+import ftn.dostavaOSA2021.DostavaOSA2021.dto.KomentarDTO;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Artikal;
+import ftn.dostavaOSA2021.DostavaOSA2021.model.Komentar;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Prodavac;
 import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.ArtikalServiceInterface;
+import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.KomentarServiceInterface;
 import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.ProdavacServiceInterface;
 
 @RestController
@@ -37,6 +40,9 @@ public class ArtikalController {
 	
 	@Autowired
 	ProdavacServiceInterface prodavacServiceInterface;
+	
+	@Autowired
+	KomentarServiceInterface komentarServiceInterface;
 	
 	@GetMapping
 	public ResponseEntity<List<ArtikalDTO>> getArtikle(){
@@ -107,6 +113,24 @@ public class ArtikalController {
 		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 	}
 	
+	@GetMapping(value = "/{id}/komentari")
+	public ResponseEntity<List<KomentarDTO>> getKomentareArtikla(@PathVariable("id") Long id){
+				
+		Artikal artikal = artikalServiceInterface.findById(id);
+		
+		if(artikal == null) {
+			return new ResponseEntity<List<KomentarDTO>>(HttpStatus.NOT_FOUND);
+		}else {
+			List<Komentar> komentari = komentarServiceInterface.findAllByArtikal(artikal);
+			List<KomentarDTO> komentarDTO = new ArrayList<KomentarDTO>();
+			for (Komentar komentar : komentari) {
+				KomentarDTO dto = new KomentarDTO(komentar);
+				komentarDTO.add(dto);
+			}
+			return new ResponseEntity<List<KomentarDTO>>(komentarDTO, HttpStatus.OK);
+		}
+		
+	}
 
 //	@SuppressWarnings("unchecked")
 	@GetMapping(value = "/{id}/stavka")
