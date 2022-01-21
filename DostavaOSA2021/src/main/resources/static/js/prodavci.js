@@ -319,6 +319,7 @@ function PrikazSvihArtikalaProdavaca(){
                         +'<td align="center">'+result[artikal].cena+'</td>'
                         +'<td align="center">'+result[artikal].prodavac+'</td>'
                         +'<td>'
+                        	+'<button type="submit" class="btn btn-success" style="margin-right: 5%;" onclick="PrikazSvihKomentaraArtikla('+result[artikal].idArtikla+')">KOMENTARI</button>'
 	                        +'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="editArtikalProdavac('+result[artikal].idArtikla+')">IZMENI</button>'
 	                        +'<button type="submit" class="btn btn-danger" onclick="deleteArtikalProdavac('+result[artikal].idArtikla+')">OBRIŠI</button>'
                         +'</td>'

@@ -325,9 +325,8 @@ function PrikazSvihArtikalaProdavacaZaNarucivanje(id){
                         +'<td align="center">'+result[artikal].cena+'</td>'
                         +'<td align="center">'+result[artikal].prodavac+'</td>'
                         +'<td>'
-	                       
+                        	+'<button type="submit" class="btn btn-success" style="margin-right: 5%;" onclick="PrikazSvihKomentaraArtikla('+result[artikal].idArtikla+')">KOMENTARI</button>'
 	                        +'<button id="narucivanje" class="btn btn-success" onclick="PrikazPocetneKorpe('+result[artikal].idArtikla+')">Dodaj u korpu</button>'
-                    //    +'<a href="|api/artikal/pocetnaKorpa?id=${'+result[artikal].idArtikla+'}|" role="button">Dodaj u korpu</a>'
                         +'</td>'
                     +'</tr>'
                   

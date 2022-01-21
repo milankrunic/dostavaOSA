@@ -31,7 +31,9 @@ public class KomentarDTO {
 	}
 
 	public KomentarDTO(Komentar komentar) {
-		this(komentar.getIdKomentar(), komentar.getTekst(), komentar.getOcena(), komentar.isPrihvacen(), komentar.getArtikal().getIdArtikal(), komentar.getArtikal().getNaziv(), komentar.getKupac().getIdKorisnik(), komentar.getKupac().getKorisnickoIme());
+//		this(komentar.getIdKomentar(), komentar.getTekst(), komentar.getOcena(), komentar.isPrihvacen(), komentar.getArtikal().getIdArtikal(), komentar.getArtikal().getNaziv(), komentar.getKupac().getIdKorisnik(), komentar.getKupac().getKorisnickoIme());
+//		this(komentar.getIdKomentar(), komentar.getTekst(), komentar.getOcena(), komentar.isPrihvacen(), null, komentar.getArtikal().getNaziv(), null, komentar.getKupac().getKorisnickoIme());
+		this(komentar.getIdKomentar(), komentar.getTekst(), komentar.getOcena(), komentar.isPrihvacen(), null, null, null, null);
 	}
 
 	public Long getIdKomentar() {

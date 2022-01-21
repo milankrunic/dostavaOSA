@@ -3,6 +3,8 @@ package ftn.dostavaOSA2021.DostavaOSA2021.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,8 @@ import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.KupacServiceInterface;
 @RequestMapping(value = "api/kupac")
 public class KupacController {
 
+	public static final String KUPAC_KEY = "trenutniKupac";
+	
 	@Autowired
 	KupacServiceInterface kupacServiceInterface;
 	
@@ -40,8 +44,10 @@ public class KupacController {
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<KupacDTO> getKupac(@PathVariable("id") Long id){
+	public ResponseEntity<KupacDTO> getKupac(@PathVariable("id") Long id, HttpSession session){
 		Kupac kupac = kupacServiceInterface.findOne(id);
+		
+		session.setAttribute(KupacController.KUPAC_KEY, kupac);
 		
 		if(kupac == null) {
 			return new ResponseEntity<KupacDTO>(HttpStatus.NOT_FOUND);

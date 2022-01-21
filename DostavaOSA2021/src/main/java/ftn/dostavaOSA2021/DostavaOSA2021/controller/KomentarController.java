@@ -3,6 +3,8 @@ package ftn.dostavaOSA2021.DostavaOSA2021.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,10 +59,13 @@ public class KomentarController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<KomentarDTO> addKomentar(@RequestBody KomentarDTO komentarDTO){
+	public ResponseEntity<KomentarDTO> addKomentar(@RequestBody KomentarDTO komentarDTO, HttpSession session){
 
-		Artikal artikal = artikalServiceInterface.findById(komentarDTO.getIdArtikla());
-		Kupac kupac = kupacServiceInterface.findById(komentarDTO.getIdKupac());
+		Artikal artikal = (Artikal) session.getAttribute(ArtikalController.ODABRANI_ARTIKAL);
+		Kupac kupac = (Kupac) session.getAttribute(KupacController.KUPAC_KEY);
+		
+//		Artikal artikal = artikalServiceInterface.findById(komentarDTO.getIdArtikla());
+//		Kupac kupac = kupacServiceInterface.findById(komentarDTO.getIdKupac());
 		
 		Komentar kom = new Komentar();
 		kom.setTekst(komentarDTO.getTekst());

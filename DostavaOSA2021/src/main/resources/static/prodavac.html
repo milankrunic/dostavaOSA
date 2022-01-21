@@ -21,6 +21,7 @@
     <script src="js/app.js"></script>
     <script src="js/admin.js"></script> <!-- ZBOG ODJAVE -->
     <script src="js/prodavci.js"></script>
+    <script src="js/komentar.js"></script>
     
     <!-- Ukljucivanje css-a -->
     <link rel="stylesheet" href="css/style.css">
@@ -87,6 +88,31 @@
         </div>
 
 <!-- ------------------------------------------------------------------------------------------------------------------------------ --> 
+
+<!-- KOMENTARI--------------------------------------------------------------------------------------------------------------------- -->
+
+<!-- Prikaz svih komentara za odredjeni artikal-->
+
+		<div id="komentariTablee" style="display: none;">
+	        <table class="table">
+	            <thead>
+	              <tr>
+	                <th style="text-align: center;">ID</th>
+	                <th style="text-align: center;">Tekst</th>
+	                <th style="text-align: center;">Artikal</th>
+	                <th style="text-align: center;">Kupac</th>
+	                <th style="text-align: center;">Ocena</th>
+	                <th></th>
+	              </tr>
+	            </thead>
+	            <tbody id="tbodyKomentare">
+	  
+	            </tbody>
+	        </table>
+	         <button id="nazad" class="btn btn-primary" onclick="ZatvoriKomentare()">Vrati</button>     
+		</div>
+
+<!-- ------------------------------------------------------------------------------------------------------------------------------ -->
 
     </main>
 </body>

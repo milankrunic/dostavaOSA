@@ -80,7 +80,6 @@ function submitArtikal(){ //dodavanje artikala nalazi se u index.html kod forme 
 
     if(nazivGreska || opisGreska || cenaGreska){
         alert(greska);
-        console.log("do ovde dodje!!!");
     }
     else{
         var formData = {

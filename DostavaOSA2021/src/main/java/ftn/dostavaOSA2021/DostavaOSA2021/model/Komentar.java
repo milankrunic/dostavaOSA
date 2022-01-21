@@ -28,11 +28,11 @@ public class Komentar {
 	private boolean prihvacen;
 	
 	@ManyToOne
-	@JoinColumn(name = "artikal", referencedColumnName = "idArtikal", nullable = false)
+	@JoinColumn(name = "artikal", referencedColumnName = "idArtikal", nullable = true)
 	private Artikal artikal;
 	
 	@ManyToOne
-	@JoinColumn(name = "korisnik", referencedColumnName = "idKorisnik", nullable = false)
+	@JoinColumn(name = "korisnik", referencedColumnName = "idKorisnik", nullable = true)
 	private Kupac kupac;
 	
 	public Komentar() {
