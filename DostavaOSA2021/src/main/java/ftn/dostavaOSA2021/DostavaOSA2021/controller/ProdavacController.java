@@ -78,6 +78,25 @@ public class ProdavacController {
 		
 	}
 	
+	@GetMapping(value = "/{id}/artikli")
+	public ResponseEntity<List<ArtikalDTO>> getArtikleProdavcaKodAdmina(@PathVariable("id") Long id){
+				
+		Prodavac prodavac = prodavacServiceInterface.findOne(id);
+		
+		if(prodavac == null) {
+			return new ResponseEntity<List<ArtikalDTO>>(HttpStatus.NOT_FOUND);
+		}else {
+			List<Artikal> artikli = artikalServiceInterface.findAllByProdavac(prodavac);
+			List<ArtikalDTO> artikalDTO = new ArrayList<ArtikalDTO>();
+			for (Artikal artikal : artikli) {
+				ArtikalDTO dto = new ArtikalDTO(artikal);
+				artikalDTO.add(dto);
+			}
+			return new ResponseEntity<List<ArtikalDTO>>(artikalDTO, HttpStatus.OK);
+		}
+		
+	}
+	
 	@PostMapping
 	public ResponseEntity<ProdavacDTO> addProdavac(@RequestBody ProdavacDTO prodavacDTO){
 

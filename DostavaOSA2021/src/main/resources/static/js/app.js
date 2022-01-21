@@ -22,8 +22,6 @@ function login(){
     korisnickoInput = $("#inputKorisnickoIme").val();
     lozinkaInput = $("#inputSifru").val();
 
-    console.log(korisnickoInput);
-    console.log(lozinkaInput);
     var korImeGreska = false;
     var lozGreska = false;
 

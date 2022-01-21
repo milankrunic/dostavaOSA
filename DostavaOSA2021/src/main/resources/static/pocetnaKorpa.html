@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base th:href="@{/}">
+    <title>Korpa</title>
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Diplomata&family=Heebo&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>           
+    <h1>KnjizaraMK</h1>
+</header>
+
+<main>
+    <h2>Korpa</h2>
+
+	    <table class="table table-striped">
+	        <thead>
+	          <tr>
+                <th style="text-align: center;">ID</th>
+                <th style="text-align: center;">Naziv</th>
+                <th style="text-align: center;">Opis</th>
+                <th style="text-align: center;">Cena</th>
+                <th style="text-align: center;">Prodavnica</th>
+	          </tr>
+	        </thead>
+	        <tbody th:unless="${session.odabraniArtikal.empty}">
+	          <tr th:each="artikal : ${session.odabraniArtikal}">
+	          	<th scope="row"></th>
+	            <td  th:text="${artikal.idArtikla}"></td>
+	            <td  th:text="${artikal.naziv}"></td>
+	            <td  th:text="${artikal.opis}"></td>
+	            <td  th:text="${artikal.cena}"></td>
+	            <td  th:text="${artikal.prodavac}"></td>
+
+				
+				<td>
+				<th><a class="btn btn-primary" th:href="#" id="kupi">Kupi</a></th>
+				
+	          </tr>
+	          
+	        </tbody>
+	      </table>
+
+
+</main>
+
+</body>
+
+</html>

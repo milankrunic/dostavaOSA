@@ -8,23 +8,25 @@ public class StavkaDTO {
 	private int kolicina;
 	private Long idArtikal;
 	private String artikal;
-	private Long idPorudzbina;
+	private Long idKupca;
+	private String kupac;
 	
 	public StavkaDTO() {
 		super();
 	}
 
-	public StavkaDTO(Long idStavka, int kolicina, Long idArtikal, String artikal, Long idPorudzbina) {
+	public StavkaDTO(Long idStavka, int kolicina, Long idArtikal, String artikal, Long idKupca, String kupac) {
 		super();
 		this.idStavka = idStavka;
 		this.kolicina = kolicina;
 		this.idArtikal = idArtikal;
 		this.artikal = artikal;
-		this.idPorudzbina = idPorudzbina;
+		this.idKupca = idKupca;
+		this.kupac = kupac;
 	}
 	
 	public StavkaDTO(Stavka stavka) {
-		this(stavka.getIdStavka(), stavka.getKolicina(), stavka.getArtikal().getIdArtikal(), stavka.getArtikal().getNaziv(), stavka.getPorudzbina().getIdPorudzbina());
+		this(stavka.getIdStavka(), stavka.getKolicina(), stavka.getArtikal().getIdArtikal(), stavka.getArtikal().getNaziv(), stavka.getKupac().getIdKorisnik(), stavka.getKupac().getIme());
 	}
 
 	public Long getIdStavka() {
@@ -59,11 +61,20 @@ public class StavkaDTO {
 		this.artikal = artikal;
 	}
 
-	public Long getIdPorudzbina() {
-		return idPorudzbina;
+	public Long getIdKupca() {
+		return idKupca;
 	}
 
-	public void setIdPorudzbina(Long idPorudzbina) {
-		this.idPorudzbina = idPorudzbina;
+	public void setIdKupca(Long idKupca) {
+		this.idKupca = idKupca;
 	}
+
+	public String getKupac() {
+		return kupac;
+	}
+
+	public void setKupac(String kupac) {
+		this.kupac = kupac;
+	}
+
 }

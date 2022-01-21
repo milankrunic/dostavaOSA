@@ -18,7 +18,10 @@ public class Kupac extends Korisnik{
 	private String adresa;
 	
 	@OneToMany(cascade = {ALL}, fetch=LAZY, mappedBy="kupac")
-	private List<Porudzbina> porudzbine = new ArrayList<Porudzbina>();
+	private List<Stavka> stavke = new ArrayList<Stavka>();
+	
+	@OneToMany(cascade = {ALL}, fetch=LAZY, mappedBy="kupac")
+	private List<Komentar> komentari = new ArrayList<Komentar>();
 	
 	public Kupac() {
 		super();
@@ -26,10 +29,10 @@ public class Kupac extends Korisnik{
 
 
 	public Kupac(Long idKorisnik, String ime, String prezime, String korisnickoIme, String lozinka, boolean blokiran,
-			TipKorisnika tipKorisnika, String adresa, List<Porudzbina> porudzbine) {
+			TipKorisnika tipKorisnika, String adresa, List<Stavka> stavke) {
 		super(idKorisnik, ime, prezime, korisnickoIme, lozinka, blokiran, tipKorisnika);
 		this.adresa = adresa;
-		this.porudzbine = porudzbine;
+		this.stavke = stavke;
 	}
 
 	public String getAdresa() {
@@ -40,11 +43,14 @@ public class Kupac extends Korisnik{
 		this.adresa = adresa;
 	}
 
-	public List<Porudzbina> getPorudzbine() {
-		return porudzbine;
+
+	public List<Stavka> getStavke() {
+		return stavke;
 	}
 
-	public void setPorudzbine(List<Porudzbina> porudzbine) {
-		this.porudzbine = porudzbine;
+
+	public void setStavke(List<Stavka> stavke) {
+		this.stavke = stavke;
 	}
+
 }

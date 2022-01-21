@@ -26,19 +26,19 @@ public class Stavka {
 	private Artikal artikal;
 	
 	@ManyToOne
-	@JoinColumn(name = "porudzbina", referencedColumnName = "idPorudzbina", nullable = false)
-	private Porudzbina porudzbina;
+	@JoinColumn(name = "korisnik", referencedColumnName = "idKorisnik", nullable = false)
+	private Kupac kupac;
 
 	public Stavka() {
 		super();
 	}
 
-	public Stavka(Long idStavka, int kolicina, Artikal artikal, Porudzbina porudzbina) {
+	public Stavka(Long idStavka, int kolicina, Artikal artikal, Kupac kupac) {
 		super();
 		this.idStavka = idStavka;
 		this.kolicina = kolicina;
 		this.artikal = artikal;
-		this.porudzbina = porudzbina;
+		this.kupac = kupac;
 	}
 
 	public Long getIdStavka() {
@@ -65,11 +65,11 @@ public class Stavka {
 		this.artikal = artikal;
 	}
 
-	public Porudzbina getPorudzbina() {
-		return porudzbina;
+	public Kupac getKupac() {
+		return kupac;
 	}
 
-	public void setPorudzbina(Porudzbina porudzbina) {
-		this.porudzbina = porudzbina;
+	public void setKupac(Kupac kupac) {
+		this.kupac = kupac;
 	}
 }

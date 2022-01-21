@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ftn.dostavaOSA2021.DostavaOSA2021.dto.StavkaDTO;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Artikal;
-import ftn.dostavaOSA2021.DostavaOSA2021.model.Porudzbina;
+import ftn.dostavaOSA2021.DostavaOSA2021.model.Kupac;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Stavka;
 import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.ArtikalServiceInterface;
-import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.PorudzbinaServiceInterface;
+import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.KupacServiceInterface;
 import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.StavkaServiceInterface;
 
 @RestController
@@ -34,7 +34,7 @@ public class StavkaController {
 	ArtikalServiceInterface artikalServiceInterface;
 	
 	@Autowired
-	PorudzbinaServiceInterface porudzbinaServiceInterface;
+	KupacServiceInterface kupacServiceInterface;
 	
 	@GetMapping
 	public ResponseEntity<List<StavkaDTO>> getStavke(){
@@ -60,15 +60,15 @@ public class StavkaController {
 	
 	@PostMapping
 	public ResponseEntity<StavkaDTO> addArtikal(@RequestBody StavkaDTO stavkaDTO){
-		
+				
 		Stavka stavka = new Stavka();
 		
 		Artikal artikal = artikalServiceInterface.findById(stavkaDTO.getIdArtikal());
-		Porudzbina porudzbina = porudzbinaServiceInterface.findById(stavkaDTO.getIdPorudzbina());
+		Kupac kupac = kupacServiceInterface.findById(stavkaDTO.getIdKupca());
 		
 		stavka.setKolicina(stavkaDTO.getKolicina());
 		stavka.setArtikal(artikal);
-		stavka.setPorudzbina(porudzbina);
+		stavka.setKupac(kupac);
 		
 		stavka = stavkaServiceInterface.save(stavka);
 		return new ResponseEntity<StavkaDTO>(new StavkaDTO(stavka), HttpStatus.CREATED);
@@ -79,7 +79,7 @@ public class StavkaController {
 		
 		Stavka stavka = stavkaServiceInterface.findById(id);
 		Artikal artikal = artikalServiceInterface.findById(stavkaDTO.getIdArtikal());
-		Porudzbina porudzbina = porudzbinaServiceInterface.findById(stavkaDTO.getIdPorudzbina());
+		Kupac kupac = kupacServiceInterface.findById(stavkaDTO.getIdKupca());
 		
 		if(artikal == null) {
 			return new ResponseEntity<StavkaDTO>(HttpStatus.BAD_REQUEST);
@@ -87,7 +87,7 @@ public class StavkaController {
 		
 		stavka.setKolicina(stavkaDTO.getKolicina());
 		stavka.setArtikal(artikal);
-		stavka.setPorudzbina(porudzbina);
+		stavka.setKupac(kupac);
 
 		stavka = stavkaServiceInterface.save(stavka);
 		return new ResponseEntity<StavkaDTO>(new StavkaDTO(stavka), HttpStatus.OK);

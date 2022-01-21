@@ -31,7 +31,7 @@ function PrikazSvihProdavaca(){
                         +'<td align="center">'+result[prodavac].poslujeOd+'</td>'
                         +'<td align="center">'+result[prodavac].blokiran+'</td>'
                         +'<td>'
-                        	+'<button type="submit" class="btn btn-success" style="margin-right: 5%;" onclick="PrikazSvihArtikalaProdavaca('+result[prodavac].idProdavac+')">ARTIKLI</button>'
+                        	+'<button type="submit" class="btn btn-success" style="margin-right: 5%;" onclick="PrikazSvihArtikalaProdavacaKodAdmina('+result[prodavac].idProdavac+')">ARTIKLI</button>'
 	                        +'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="editProdavac('+result[prodavac].idProdavac+')">IZMENI</button>'
 	                        +'<button type="submit" class="btn btn-danger" onclick="deleteProdavac('+result[prodavac].idProdavac+')">OBRIŠI</button>'
 	                        +'<button type="submit" class="btn btn-dark" style="margin-right: 5%;" onclick="blokirajProdavca('+result[prodavac].idProdavac+')">BLOK</button>'
@@ -306,6 +306,55 @@ function PrikazSvihArtikalaProdavaca(){
             type: "GET",
             contentType : 'application/json; charset=utf-8',
             url : "http://localhost:8080/api/prodavac/artikli",
+            success : function(result){
+            	tabelaArtiklaProdavca.show();
+            	tbodyArtiklaProdavca.empty();
+                for(artikal in result){
+                	tbodyArtiklaProdavca.append(
+                    '<tr>'
+                			
+                        +'<td align="center">'+result[artikal].idArtikla+'</td>'
+                        +'<td align="center">'+result[artikal].naziv+'</td>'
+                        +'<td align="center">'+result[artikal].opis+'</a>'+'</td>'
+                        +'<td align="center">'+result[artikal].cena+'</td>'
+                        +'<td align="center">'+result[artikal].prodavac+'</td>'
+                        +'<td>'
+	                        +'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="editArtikalProdavac('+result[artikal].idArtikla+')">IZMENI</button>'
+	                        +'<button type="submit" class="btn btn-danger" onclick="deleteArtikalProdavac('+result[artikal].idArtikla+')">OBRIŠI</button>'
+                        +'</td>'
+                    +'</tr>'
+                  
+                    )};
+                    
+            },
+            error :function(e){
+                alert('Doslo je do neke greške!');
+            }
+
+        });
+    }
+    prikaziArtikleProdavca();
+    
+}
+
+function PrikazSvihArtikalaProdavacaKodAdmina(id){
+
+    var tabelaArtiklaProdavca = $("#artikliTableProdavac");
+    var tbodyArtiklaProdavca = $("#tbodyArtiklaProdavca");
+    
+    function prikaziArtikleProdavca(){
+    	$('#dodavanje').show();
+    	$('#prodavciTable').hide();
+    	$('#DugmePrikazArtikala').hide();
+    	$('#btnLogin').hide();
+    	$('#DugmePrikazKorisnike').hide();
+    	$('#DugmePrikazLogiina').hide();
+    	$('#dodajArtikal').hide();
+        $.ajax({
+
+            type: "GET",
+            contentType : 'application/json; charset=utf-8',
+            url : "http://localhost:8080/api/prodavac/" + id + "/artikli",
             success : function(result){
             	tabelaArtiklaProdavca.show();
             	tbodyArtiklaProdavca.empty();

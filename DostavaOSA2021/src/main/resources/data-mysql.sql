@@ -20,8 +20,8 @@ INSERT INTO korisnik(dtype, ime, prezime, korisnicko_ime, lozinka, blokiran, tip
 
 --ARTIKLI
 INSERT INTO artikal(naziv, opis, cena, putanja_slike, korisnik) VALUES('Hleb', 'Artikal za ishranu', 50, 'neka putanja', 5);
-INSERT INTO artikal(naziv, opis, cena, putanja_slike, korisnik) VALUES('Mleko', 'Artikal za ishranu', 100, 'neka putanja', 6);
 INSERT INTO artikal(naziv, opis, cena, putanja_slike, korisnik) VALUES('Banane', 'Voce', 120, 'neka putanja', 7);
+INSERT INTO artikal(naziv, opis, cena, putanja_slike, korisnik) VALUES('Mleko', 'Artikal za ishranu', 100, 'neka putanja', 6);
 
 --AKCIJE
 INSERT INTO akcija(tekst, procenat, od_kad, do_kad, korisnik) VALUES('Na akciji', 10, '2020-05-03', '2020-05-03', 5);
@@ -30,15 +30,20 @@ INSERT INTO akcija(tekst, procenat, od_kad, do_kad, korisnik) VALUES('Na akciji'
 
 --AKCIJE_ARTIKLI
 INSERT INTO artikal_akcija(akcija, artikal) VALUES(1, 1);
-INSERT INTO artikal_akcija(akcija, artikal) VALUES(2, 3);
 INSERT INTO artikal_akcija(akcija, artikal) VALUES(3, 2);
+INSERT INTO artikal_akcija(akcija, artikal) VALUES(2, 3);
 
 --PORUDZBINE
-INSERT INTO porudzbina(satnica, ocena, komentar, dostavljeno, anoniman_komentar, arhiviran_komentar, korisnik) VALUES('2020-05-03', 5, 'Zelim da mi dostavite hleb', true, true, true, 2);
-INSERT INTO porudzbina(satnica, ocena, komentar, dostavljeno, anoniman_komentar, arhiviran_komentar, korisnik) VALUES('2021-10-05', 5, 'Zelim da mi dostavite voce', true, true, true, 3);
-INSERT INTO porudzbina(satnica, ocena, komentar, dostavljeno, anoniman_komentar, arhiviran_komentar, korisnik) VALUES('2021-11-08', 5, 'Zelim da mi dostavite mleko', true, true, true, 4);
+INSERT INTO porudzbina(satnica, ocena, komentar, dostavljeno, anoniman_komentar, arhiviran_komentar) VALUES('2020-05-03', 5, 'Zelim da mi dostavite hleb', true, true, true);
+INSERT INTO porudzbina(satnica, ocena, komentar, dostavljeno, anoniman_komentar, arhiviran_komentar) VALUES('2021-10-05', 5, 'Zelim da mi dostavite voce', true, true, true);
+INSERT INTO porudzbina(satnica, ocena, komentar, dostavljeno, anoniman_komentar, arhiviran_komentar) VALUES('2021-11-08', 5, 'Zelim da mi dostavite mleko', true, true, true);
 
 --STAVKE
-INSERT INTO stavka(kolicina, artikal, porudzbina) VALUES(20, 1, 1);
-INSERT INTO stavka(kolicina, artikal, porudzbina) VALUES(50, 3, 2);
-INSERT INTO stavka(kolicina, artikal, porudzbina) VALUES(10, 2, 3);
+INSERT INTO stavka(kolicina, artikal, korisnik) VALUES(20, 1, 2);
+INSERT INTO stavka(kolicina, artikal, korisnik) VALUES(10, 2, 4);
+INSERT INTO stavka(kolicina, artikal, korisnik) VALUES(50, 3, 3);
+
+--KOMENTARI
+INSERT INTO komentar(tekst, ocena, prihvacen, artikal, korisnik) VALUES('Odlican artikal!', 5, true, 2, 3);
+INSERT INTO komentar(tekst, ocena, prihvacen, artikal, korisnik) VALUES('Nes vidja mi se artikal!', 2, true, 2, 2);
+INSERT INTO komentar(tekst, ocena, prihvacen, artikal, korisnik) VALUES('Nije los artikal!', 4, true, 3, 4);

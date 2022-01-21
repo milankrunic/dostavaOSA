@@ -1,7 +1,10 @@
 package ftn.dostavaOSA2021.DostavaOSA2021.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,7 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import ftn.dostavaOSA2021.DostavaOSA2021.dto.ArtikalDTO;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Artikal;
@@ -24,6 +29,8 @@ import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.ProdavacServiceInterfa
 @RestController
 @RequestMapping(value = "api/artikal")
 public class ArtikalController {
+	
+	public static final String ODABRANI_ARTIKAL = "odabraniArtikal";
 	
 	@Autowired
 	ArtikalServiceInterface artikalServiceInterface;
@@ -98,6 +105,64 @@ public class ArtikalController {
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		}
 		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+	}
+	
+
+	@SuppressWarnings("unchecked")
+	@GetMapping(value = "/{id}/stavka")
+	public ResponseEntity<ArtikalDTO> getPocetnaKorpa(@PathVariable("id") Long id, HttpSession session){
+				
+		Artikal artikal = artikalServiceInterface.findOne(id);
+		
+		if(artikal == null) {
+			return new ResponseEntity<ArtikalDTO>(HttpStatus.NOT_FOUND);
+		}else {
+			List<Artikal> artikli = (List<Artikal>) session.getAttribute(ArtikalController.ODABRANI_ARTIKAL);
+//			if (!artikli.contains(artikal)) {
+//				artikli.add(artikal);
+
+//			}
+		
+		}	
+		return new ResponseEntity<ArtikalDTO>(new ArtikalDTO(artikal), HttpStatus.OK);
+				
+	}
+	
+//	@GetMapping(value = "/{id}/artikli")
+//	public ResponseEntity<List<ArtikalDTO>> getArtikleProdavcaKodAdmina(@PathVariable("id") Long id){
+//				
+//		Prodavac prodavac = prodavacServiceInterface.findOne(id);
+//		
+//		if(prodavac == null) {
+//			return new ResponseEntity<List<ArtikalDTO>>(HttpStatus.NOT_FOUND);
+//		}else {
+//			List<Artikal> artikli = artikalServiceInterface.findAllByProdavac(prodavac);
+//			List<ArtikalDTO> artikalDTO = new ArrayList<ArtikalDTO>();
+//			for (Artikal artikal : artikli) {
+//				ArtikalDTO dto = new ArtikalDTO(artikal);
+//				artikalDTO.add(dto);
+//			}
+//			return new ResponseEntity<List<ArtikalDTO>>(artikalDTO, HttpStatus.OK);
+//		}
+//		
+//	}
+	
+	@SuppressWarnings("unchecked")
+	@GetMapping(value = "/pocetnaKorpa")
+	public ModelAndView pocetnaKorpa(@RequestParam Long id, HttpSession session ) throws IOException {
+				
+		Artikal artikal = artikalServiceInterface.findOne(id);
+		
+		List<Artikal> artikli = (List<Artikal>) session.getAttribute(ArtikalController.ODABRANI_ARTIKAL);
+		if (!artikli.contains(artikal)) {
+			artikli.add(artikal);
+
+		}
+
+		ModelAndView rezultat = new ModelAndView("pocetnaKorpa");
+		rezultat.addObject("pocetnaKorpa",artikal);
+
+		return rezultat;
 	}
 
 }

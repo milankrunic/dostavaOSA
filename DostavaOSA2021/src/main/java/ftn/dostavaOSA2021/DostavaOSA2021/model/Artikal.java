@@ -47,6 +47,9 @@ public class Artikal {
 	@OneToMany(cascade = {ALL}, fetch=LAZY, mappedBy="artikal")
 	private List<Stavka> stavke = new ArrayList<Stavka>();
 	
+	@OneToMany(cascade = {ALL}, fetch=LAZY, mappedBy="artikal")
+	private List<Komentar> komentari = new ArrayList<Komentar>();
+	
 	public Artikal() {
 		super();
 	}

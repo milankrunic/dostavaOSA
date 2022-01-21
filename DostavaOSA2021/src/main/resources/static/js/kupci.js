@@ -236,10 +236,12 @@ function narucivanje(){
 
 function vratiNaPocetnuKupac(){
 	$('#kupciTable').hide();
+	$('#prodavciTablee').hide();
 	$('#DugmeOdjava').show();
 	$('#DugmePrikazLogiina').show();
 	$('#DugmePrikazArtikala').show();
 	$('#DugmePrikazKorisnike').show();
+	$('#DugmeArtikal').show();
 }
 
 function vratiSaDodavanjaIizmeneKupac(){
@@ -324,7 +326,8 @@ function PrikazSvihArtikalaProdavacaZaNarucivanje(id){
                         +'<td align="center">'+result[artikal].prodavac+'</td>'
                         +'<td>'
 	                       
-	                        +'<button id="narucivanje" class="btn btn-success" onclick="">Naruci</button>'
+	                        +'<button id="narucivanje" class="btn btn-success" onclick="PrikazPocetneKorpe('+result[artikal].idArtikla+')">Dodaj u korpu</button>'
+                    //    +'<a href="|api/artikal/pocetnaKorpa?id=${'+result[artikal].idArtikla+'}|" role="button">Dodaj u korpu</a>'
                         +'</td>'
                     +'</tr>'
                   
@@ -338,5 +341,51 @@ function PrikazSvihArtikalaProdavacaZaNarucivanje(id){
         });
     }
     prikaziArtikleProdavcaa();
+    
+}
+
+function PrikazPocetneKorpe(id){
+
+    var pocetnaKorpaTable = $("#pocetnaKorpaTable");
+    var tbodyPocetnaKorpa = $("#tbodyPocetnaKorpa");
+
+    function prikaziPocetnuKorpu(){
+    	$('#prodavciTablee').hide();
+    	$('#DugmeArtikal').hide();
+    	$('#DugmeOdjava').hide();
+    	
+        $.ajax({
+
+            type: "GET",
+            contentType : 'application/json; charset=utf-8',
+            url : "http://localhost:8080/api/artikal/" + id + "/stavka",
+            success : function(result){
+            	pocetnaKorpaTable.show();
+            	tbodyPocetnaKorpa.empty();
+                for(artikal in result){
+                	tbodyPocetnaKorpa.append(
+                    '<tr>'
+                			
+                        +'<td align="center">'+result[artikal].idArtikla+'</td>'
+                        +'<td align="center">'+result[artikal].naziv+'</td>'
+                        +'<td align="center">'+result[artikal].opis+'</a>'+'</td>'
+                        +'<td align="center">'+result[artikal].cena+'</td>'
+                        +'<td align="center">'+result[artikal].prodavac+'</td>'
+                        +'<td>'
+	                       
+                        	+'<button id="narucivanje" class="btn btn-success" onclick="">Kupi</button>'
+                        +'</td>'
+                    +'</tr>'
+                  
+                    )};
+                    
+            },
+            error :function(e){
+                alert('Doslo je do neke greške!');
+            }
+
+        });
+    }
+    prikaziPocetnuKorpu();
     
 }

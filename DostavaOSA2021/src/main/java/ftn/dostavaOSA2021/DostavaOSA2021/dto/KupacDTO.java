@@ -18,8 +18,6 @@ public class KupacDTO {
 		super();
 	}
 
-	
-	
 	public KupacDTO(Long idKupac, String adresaKupca, String imeKupca, String prezimeKupca, String korImeKupca,
 			String lozinkaKupca, boolean blokiran, TipKorisnika tipKorisnika) {
 		super();
