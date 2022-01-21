@@ -6,10 +6,10 @@ function PrikazSvihArtikala(){ //prikaz svih artikala na pocetnoj strani
     function prikaziArtikle(){
     	$('#dodavanje').show();
     	$('#prijava').hide();
-    	$('#DugmePrikazArtikala').hide();
     	$('#btnLogin').hide();
-    	$('#DugmePrikazKorisnike').hide();
     	$('#DugmePrikazLogiina').hide();
+
+
         $.ajax({
 
             type: "GET",
@@ -28,6 +28,7 @@ function PrikazSvihArtikala(){ //prikaz svih artikala na pocetnoj strani
                         +'<td align="center">'+result[artikal].cena+'</td>'
                         +'<td align="center">'+result[artikal].prodavac+'</td>'
                         +'<td>'
+                        	+'<button type="submit" class="btn btn-success" style="margin-right: 5%;" onclick="">KOMENTARI</button>'
 	                        +'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="editArtikal('+result[artikal].idArtikla+')">IZMENI</button>'
 	                        +'<button type="submit" class="btn btn-danger" onclick="deleteArtikal('+result[artikal].idArtikla+')">OBRIŠI</button>'
                         +'</td>'

@@ -23,6 +23,7 @@
     <script src="js/admin.js"></script>
     <script src="js/prodavci.js"></script>
     <script src="js/kupci.js"></script>
+    <script src="js/komentar.js"></script>
     
     <!-- Ukljucivanje css-a -->
     <link rel="stylesheet" href="css/style.css">
@@ -36,6 +37,7 @@
 	<div id="dugmiciAdmin">
 	    <button class="btn btn-primary" onclick="odrediPrikaz('sviArtikli')" id="DugmePrikazArtikala">Svi Artikli</button>
 	    <button class="btn btn-primary" onclick="pokaziDugmiceKorisnika()" id="DugmePrikazKorisnike">Korisnici</button>
+	    <button class="btn btn-primary" onclick="PrikazSvihKomentara()" id="DugmePrikazKomentare">Komentari</button>
 	    <button class="btn btn-primary" onclick="odjava()" id="DugmeOdjava">Odjava</button>
 	 </div> 
 	   
@@ -279,13 +281,6 @@
             <button id="nazad" class="btn btn-primary" onclick="vratiSaDodavanjaIizmeneKupac()">Vrati</button>
         </div>
 <!-- ------------------------------------------------------------------------------------------------------------------------------ --> 
-    	<button class="btn btn-primary" onclick="pokaziDugmiceKorisnika()" id="DugmePrikazKorisnike" style="display: none;">Korisnici</button>
-    
-    <div id="prikazDugicaSvihKorisnika" style="display: none;">
-	    <button class="btn btn-primary" onclick="odrediPrikaz('sviAdministratori')" id="DugmePrikazAdmina">Administratori</button>
-	    <button class="btn btn-primary" onclick="odrediPrikaz('sviProdavci')" id="DugmePrikazProdavaca">Prodavci</button>
-	    <button class="btn btn-primary" onclick="odrediPrikaz('sviKupci')" id="DugmePrikazKupaca">Kupci</button>
-    </div>
     
 <!-- ARTIKLI PRODAVCA -------------------------------------------------------------------------------------------------------------- -->		
         
@@ -311,7 +306,40 @@
 	        <button id="nazad" class="btn btn-primary" onclick="vratiNaPocetnu()">Vrati</button>     
 		</div>
 
-<!-- ------------------------------------------------------------------------------------------------------------------------------ --> 
+<!-- ------------------------------------------------------------------------------------------------------------------------------ -->
+<!-- KOMENTARI -------------------------------------------------------------------------------------------------------------------- --> 
+
+<!-- Prikaz svih komentara-->
+
+		<div id="komentariTable" style="display: none;">
+	        <table class="table">
+	            <thead>
+	              <tr>
+	                <th style="text-align: center;">ID</th>
+	                <th style="text-align: center;">Tekst</th>
+	                <th style="text-align: center;">Artikal</th>
+	                <th style="text-align: center;">Kupac</th>
+	                <th style="text-align: center;">Ocena</th>
+	                <th></th>
+	              </tr>
+	            </thead>
+	            <tbody id="tbodyKomentar">
+	  
+	            </tbody>
+	        </table>
+	        <button id="nazad" class="btn btn-primary" onclick="vratiNaPocetnuAdmin()">Vrati</button>     
+		</div>
+
+<!-- ------------------------------------------------------------------------------------------------------------------------------ -->
+	    
+     	<button class="btn btn-primary" onclick="pokaziDugmiceKorisnika()" id="DugmePrikazKorisnike" style="display: none;">Korisnici</button>
+   
+	    <div id="prikazDugicaSvihKorisnika" style="display: none;">
+		    <button class="btn btn-primary" onclick="odrediPrikaz('sviAdministratori')" id="DugmePrikazAdmina">Administratori</button>
+		    <button class="btn btn-primary" onclick="odrediPrikaz('sviProdavci')" id="DugmePrikazProdavaca">Prodavci</button>
+		    <button class="btn btn-primary" onclick="odrediPrikaz('sviKupci')" id="DugmePrikazKupaca">Kupci</button>
+		    
+	    </div>
 	    
     </main>
 </body>

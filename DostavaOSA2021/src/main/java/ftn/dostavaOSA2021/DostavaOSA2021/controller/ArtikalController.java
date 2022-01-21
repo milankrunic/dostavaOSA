@@ -108,7 +108,7 @@ public class ArtikalController {
 	}
 	
 
-	@SuppressWarnings("unchecked")
+//	@SuppressWarnings("unchecked")
 	@GetMapping(value = "/{id}/stavka")
 	public ResponseEntity<ArtikalDTO> getPocetnaKorpa(@PathVariable("id") Long id, HttpSession session){
 				
@@ -117,7 +117,7 @@ public class ArtikalController {
 		if(artikal == null) {
 			return new ResponseEntity<ArtikalDTO>(HttpStatus.NOT_FOUND);
 		}else {
-			List<Artikal> artikli = (List<Artikal>) session.getAttribute(ArtikalController.ODABRANI_ARTIKAL);
+//			List<Artikal> artikli = (List<Artikal>) session.getAttribute(ArtikalController.ODABRANI_ARTIKAL);
 //			if (!artikli.contains(artikal)) {
 //				artikli.add(artikal);
 

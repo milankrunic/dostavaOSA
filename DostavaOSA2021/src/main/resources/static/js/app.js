@@ -8,9 +8,9 @@ function pokaziLogin(){
 function pokaziDugmiceKorisnika(){
 	$('#prikazDugicaSvihKorisnika').show();
 	$('#DugmeOdjava').hide();
-	$('#DugmePrikazLogiina').hide();
 	$('#DugmePrikazArtikala').hide();
 	$('#DugmePrikazKorisnike').hide();
+	$('#DugmePrikazKomentare').hide();
 }
 
 function login(){

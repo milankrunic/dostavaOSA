@@ -221,6 +221,7 @@ function odjava(){
 
 function vratiNaPocetnuAdmin(){
 	$('#adminTable').hide();
+	$('#komentariTable').hide();
 	$('#DugmeOdjava').show();
 	$('#DugmePrikazArtikala').show();
 	$('#DugmePrikazKorisnike').show();

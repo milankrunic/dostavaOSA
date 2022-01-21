@@ -42,7 +42,7 @@ form{
 }
 
 #dugmiciAdmin{
-	margin-left: 37%;
+	margin-left: 32%;
 }
 
 #DugmePrikazArtikala{
@@ -51,6 +51,11 @@ form{
 }
 
 #DugmePrikazKorisnike{
+	margin-right: 2%;
+	padding: 20px;
+}
+
+#DugmePrikazKomentare{
 	margin-right: 2%;
 	padding: 20px;
 }
