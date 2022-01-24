@@ -47,7 +47,10 @@ public class KupacController {
 	public ResponseEntity<KupacDTO> getKupac(@PathVariable("id") Long id, HttpSession session){
 		Kupac kupac = kupacServiceInterface.findOne(id);
 		
-		session.setAttribute(KupacController.KUPAC_KEY, kupac);
+		session.setAttribute(KupacController.KUPAC_KEY, kupac);		
+		Kupac k = (Kupac) session.getAttribute(KupacController.KUPAC_KEY);
+		
+		System.out.println("KUPAC JE: "+k.getKorisnickoIme());
 		
 		if(kupac == null) {
 			return new ResponseEntity<KupacDTO>(HttpStatus.NOT_FOUND);

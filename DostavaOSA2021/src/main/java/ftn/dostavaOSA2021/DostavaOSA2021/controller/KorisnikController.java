@@ -21,6 +21,8 @@ import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.ProdavacServiceInterfa
 @RequestMapping(value = "api/korisnik")
 public class KorisnikController {
 	
+	public static final String KORISNIK_KEY = "prijavljeniKorisnik";
+	
 	@Autowired
 	KorisnikServiceInterface korisnikServiceInterface;
 	
@@ -54,26 +56,34 @@ public class KorisnikController {
 	@PostMapping(value = "/login")
 	public ResponseEntity<KorisnikDTO> login(@RequestBody KorisnikDTO korisnikDTO, HttpSession session){
 
-		Korisnik korisnik =  kupacServiceInterface.findByKorImeAndLozinka(korisnikDTO.getKorIme(), korisnikDTO.getLozinka());
+		Korisnik kupac =  kupacServiceInterface.findByKorImeAndLozinka(korisnikDTO.getKorIme(), korisnikDTO.getLozinka());
 		Korisnik admin = administratorServiceInterface.findByKorImeAndLozinka(korisnikDTO.getKorIme(), korisnikDTO.getLozinka());
 		Korisnik prodavac = prodavacServiceInterface.findByKorImeAndLozinka(korisnikDTO.getKorIme(), korisnikDTO.getLozinka());
 		
-		if(korisnik==null) {
-			korisnik = prodavac;
+		session.setAttribute(KorisnikController.KORISNIK_KEY, kupac);
+//		session.setAttribute(KorisnikController.KORISNIK_KEY, admin);
+//		session.setAttribute(KorisnikController.KORISNIK_KEY, prodavac);
+		
+//		Korisnik k = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
+		
+//		System.out.println("ULOGOVAN KORISNIK JE: "+k.getKorisnickoIme());
+		
+		if(kupac==null) {
+			kupac = prodavac;
 		}
-		if(korisnik==null) {
-			korisnik = admin;
+		if(kupac==null) {
+			kupac = admin;
 		}
 				
-		if (korisnik==null) {
+		if (kupac==null) {
 			return new ResponseEntity<KorisnikDTO>(HttpStatus.NOT_FOUND); 
 		}else{
 			KorisnikDTO korDTO = new KorisnikDTO();
-			korDTO.setIdKorisnik(korisnik.getIdKorisnik());
-			korDTO.setKorIme(korisnik.getKorisnickoIme());
-			korDTO.setLozinka(korisnik.getLozinka());
-			korDTO.setTipKorisnika(korisnik.getTipKorisnika());
-			korDTO.setBlokiran(korisnik.isBlokiran());
+			korDTO.setIdKorisnik(kupac.getIdKorisnik());
+			korDTO.setKorIme(kupac.getKorisnickoIme());
+			korDTO.setLozinka(kupac.getLozinka());
+			korDTO.setTipKorisnika(kupac.getTipKorisnika());
+			korDTO.setBlokiran(kupac.isBlokiran());
 			session.setAttribute(ProdavacController.PRODAVAC_KEY, prodavac);
 			return new ResponseEntity<KorisnikDTO>(korDTO,HttpStatus.OK);
 		}

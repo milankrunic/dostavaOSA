@@ -14,21 +14,33 @@ function PrikazSvihKomentara(){ //prikaz svih komentara kod admina
             	tabelaKomentar.show();
             	tbodyKomentar.empty();
                 for(komentar in result){
-                	tbodyKomentar.append(
-                    '<tr>'
-                			
-                        +'<td align="center">'+result[komentar].idKomentar+'</td>'
-                        +'<td align="center">'+result[komentar].tekst+'</td>'
-                        +'<td align="center">'+result[komentar].artikal+'</a>'+'</td>'
-                        +'<td align="center">'+result[komentar].kupac+'</td>'
-                        +'<td align="center">'+result[komentar].ocena+'</td>'
-                        +'<td>'
-	                        +'<button type="submit" class="btn btn-success" style="margin-right: 5%;" onclick="">DOZVOLI</button>'
-	                        +'<button type="submit" class="btn btn-danger" onclick="">ZABRANI</button>'
-                        +'</td>'
-                    +'</tr>'
+            	tbodyKomentar.append(
+                '<tr>'
+            			
+                    +'<td align="center">'+result[komentar].idKomentar+'</td>'
+                    +'<td align="center">'+result[komentar].tekst+'</td>'
+                    +'<td align="center">'+result[komentar].artikal+'</a>'+'</td>'
+                    +'<td align="center">'+result[komentar].kupac+'</td>'
+                    +'<td align="center">'+result[komentar].ocena+'</td>'
+                    +'<td align="center">'+result[komentar].prihvacen+'</td>'
                     
-                    )};
+    				+'<td align="center">' 
+    			        +'<form method="post" action="/api/komentar/odobrenje">'
+	    			        +'<input type="hidden" name="id" value="'+result[komentar].idKomentar+'"/>'
+	    			        +'<input class="btn btn-success" type="submit" value="DOZVOLI">'
+    			        +'</form>'
+    			    +'</td>'
+
+    			    +'<td>'
+    			        +'<form method="post" action="/api/komentar/zabrani">'
+	    			        +'<input type="hidden" name="id" value="'+result[komentar].idKomentar+'"/>'
+	    			        +'<input class="btn btn-danger" type="submit" value="ZABRANI">'
+    			        +'</form>'
+			        +'</td>'
+
+                +'</tr>'
+                
+                )};
                     
             },
             error :function(e){
@@ -58,6 +70,7 @@ function PrikazSvihKomentaraArtikla(id){
             	tabelaKomentar.show();
             	tbodyKomentar.empty();
                 for(komentar in result){
+                	if(result[komentar].prihvacen === true)
                 	tbodyKomentar.append(
                     '<tr>'
         			
@@ -67,8 +80,7 @@ function PrikazSvihKomentaraArtikla(id){
 	                    +'<td align="center">'+result[komentar].kupac+'</td>'
 	                    +'<td align="center">'+result[komentar].ocena+'</td>'
 	                    +'<td>'
-//	                        +'<button type="submit" class="btn btn-success" style="margin-right: 5%;" onclick="">DOZVOLI</button>'
-//	                        +'<button type="submit" class="btn btn-danger" onclick="">ZABRANI</button>'
+
 	                    +'</td>'
                     +'</tr>'
                   
@@ -102,9 +114,8 @@ function DodajKomentar(){
     
     tekstInput = $("#tekst").val();
     ocenaInput = $("#ocena").val();
-//    kupacInput = $("#kupac").val();
-//    artikalInput = $("#artikal").val();
-//    artikalNazivInput = $("#artikalNaziv").val();
+    artikalInput = $("#artikal").val();
+    kupacInput = $("#kupac").val();
     
     var tekstGreska;
     var ocenaGreska;
@@ -125,9 +136,9 @@ function DodajKomentar(){
         var formData = {
             "tekst" : tekstInput,
             "ocena" : ocenaInput,
-//            "kupac" : kupacInput,
-//            "idArtikla" : artikalInput,
-//            "artikal" : artikalNazivInput,
+            "idArtikla" : artikalInput,
+            "idKupac" : kupacInput,
+
         }
 
         $.ajax({

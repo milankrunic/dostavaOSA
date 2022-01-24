@@ -79,7 +79,7 @@ public class ProdavacController {
 	}
 	
 	@GetMapping(value = "/{id}/artikli")
-	public ResponseEntity<List<ArtikalDTO>> getArtikleProdavcaKodAdmina(@PathVariable("id") Long id){
+	public ResponseEntity<List<ArtikalDTO>> getArtikleProdavcaKodAdmina(@PathVariable("id") Long id, HttpSession session){
 				
 		Prodavac prodavac = prodavacServiceInterface.findOne(id);
 		
@@ -89,6 +89,9 @@ public class ProdavacController {
 			List<Artikal> artikli = artikalServiceInterface.findAllByProdavac(prodavac);
 			List<ArtikalDTO> artikalDTO = new ArrayList<ArtikalDTO>();
 			for (Artikal artikal : artikli) {
+				session.setAttribute(ArtikalController.ODABRANI_ARTIKAL, artikal);
+				Artikal ar = (Artikal) session.getAttribute(ArtikalController.ODABRANI_ARTIKAL);
+				System.out.println("Artikal je: "+ar.getNaziv());
 				ArtikalDTO dto = new ArtikalDTO(artikal);
 				artikalDTO.add(dto);
 			}

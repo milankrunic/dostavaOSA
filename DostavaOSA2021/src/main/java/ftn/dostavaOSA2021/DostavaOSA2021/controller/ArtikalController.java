@@ -59,8 +59,11 @@ public class ArtikalController {
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<ArtikalDTO> getArtikal(@PathVariable("id") Long id, HttpSession session){
 		Artikal artikal = artikalServiceInterface.findOne(id);
-		
+
 		session.setAttribute(ArtikalController.ODABRANI_ARTIKAL, artikal);
+//		Artikal a = (Artikal) session.getAttribute(ArtikalController.ODABRANI_ARTIKAL);
+//		
+//		System.out.println("ARTIKAL JE: "+a.getNaziv());
 		
 		if(artikal == null) {
 			return new ResponseEntity<ArtikalDTO>(HttpStatus.NOT_FOUND);

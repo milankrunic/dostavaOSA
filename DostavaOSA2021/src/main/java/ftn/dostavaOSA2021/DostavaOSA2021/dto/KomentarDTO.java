@@ -8,17 +8,17 @@ public class KomentarDTO {
 	private String tekst;
 	private Integer ocena;
 	private boolean prihvacen;
-	private Long idArtikla;
+	private String idArtikla;
 	private String artikal;
-	private Long idKupac;
+	private String idKupac;
 	private String kupac;
 	
 	public KomentarDTO() {
 		super();
 	}
 	
-	public KomentarDTO(Long idKomentar, String tekst, Integer ocena, boolean prihvacen, Long idArtikla, String artikal,
-			Long idKupac, String kupac) {
+	public KomentarDTO(Long idKomentar, String tekst, Integer ocena, boolean prihvacen, String idArtikla, String artikal,
+			String idKupac, String kupac) {
 		super();
 		this.idKomentar = idKomentar;
 		this.tekst = tekst;
@@ -31,9 +31,7 @@ public class KomentarDTO {
 	}
 
 	public KomentarDTO(Komentar komentar) {
-//		this(komentar.getIdKomentar(), komentar.getTekst(), komentar.getOcena(), komentar.isPrihvacen(), komentar.getArtikal().getIdArtikal(), komentar.getArtikal().getNaziv(), komentar.getKupac().getIdKorisnik(), komentar.getKupac().getKorisnickoIme());
-//		this(komentar.getIdKomentar(), komentar.getTekst(), komentar.getOcena(), komentar.isPrihvacen(), null, komentar.getArtikal().getNaziv(), null, komentar.getKupac().getKorisnickoIme());
-		this(komentar.getIdKomentar(), komentar.getTekst(), komentar.getOcena(), komentar.isPrihvacen(), null, null, null, null);
+		this(komentar.getIdKomentar(), komentar.getTekst(), komentar.getOcena(), komentar.isPrihvacen(), komentar.getArtikal().getIdArtikal().toString(), komentar.getArtikal().getNaziv(), komentar.getKupac().getIdKorisnik().toString(), komentar.getKupac().getKorisnickoIme());
 	}
 
 	public Long getIdKomentar() {
@@ -68,11 +66,11 @@ public class KomentarDTO {
 		this.prihvacen = prihvacen;
 	}
 
-	public Long getIdArtikla() {
+	public String getIdArtikla() {
 		return idArtikla;
 	}
 
-	public void setIdArtikla(Long idArtikla) {
+	public void setIdArtikla(String idArtikla) {
 		this.idArtikla = idArtikla;
 	}
 
@@ -84,11 +82,11 @@ public class KomentarDTO {
 		this.artikal = artikal;
 	}
 
-	public Long getIdKupac() {
+	public String getIdKupac() {
 		return idKupac;
 	}
 
-	public void setIdKupac(Long idKupac) {
+	public void setIdKupac(String idKupac) {
 		this.idKupac = idKupac;
 	}
 

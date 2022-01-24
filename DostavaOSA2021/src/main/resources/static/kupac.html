@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -143,10 +143,10 @@
                  class="form-control col-sm-5" min="1" max="5" id="ocena" placeholder="">
 
                  <input type="hidden"
-                 class="form-control col-sm-5" id="kupac" value="${session.trenutniKupac.korImeKupca}" placeholder="">
-                 
+                 class="form-control col-sm-5" id="artikal" value=session.odabraniKomentar.idArtikla placeholder=""> 
+ 
                  <input type="hidden"
-                 class="form-control col-sm-5" id="artikalNaziv" value="${session.odabraniArtikal.naziv}" placeholder="">   
+                 class="form-control col-sm-5" id="kupac" value=session.odabraniKomentar.idKupac placeholder="">
 			 
             </div>
           
