@@ -44,6 +44,6 @@ INSERT INTO stavka(kolicina, artikal, korisnik) VALUES(10, 2, 4);
 INSERT INTO stavka(kolicina, artikal, korisnik) VALUES(50, 3, 3);
 
 --KOMENTARI
-INSERT INTO komentar(tekst, ocena, prihvacen, artikal, korisnik) VALUES('Odlican artikal!', 5, true, 2, 3);
-INSERT INTO komentar(tekst, ocena, prihvacen, artikal, korisnik) VALUES('Ne svidja mi se artikal!', 2, true, 2, 2);
-INSERT INTO komentar(tekst, ocena, prihvacen, artikal, korisnik) VALUES('Nije los artikal!', 4, true, 3, 4);
+INSERT INTO komentar(tekst, ocena, prihvacen, arhiviran, artikal, korisnik) VALUES('Odlican artikal!', 5, true, false, 2, 3);
+INSERT INTO komentar(tekst, ocena, prihvacen, arhiviran, artikal, korisnik) VALUES('Ne svidja mi se artikal!', 2, true, false, 2, 2);
+INSERT INTO komentar(tekst, ocena, prihvacen, arhiviran, artikal, korisnik) VALUES('Nije los artikal!', 4, true, false, 3, 4);

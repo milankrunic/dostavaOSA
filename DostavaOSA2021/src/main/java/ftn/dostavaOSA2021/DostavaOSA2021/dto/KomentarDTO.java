@@ -8,6 +8,7 @@ public class KomentarDTO {
 	private String tekst;
 	private Integer ocena;
 	private boolean prihvacen;
+	private boolean arhiviran;
 	private String idArtikla;
 	private String artikal;
 	private String idKupac;
@@ -17,13 +18,14 @@ public class KomentarDTO {
 		super();
 	}
 	
-	public KomentarDTO(Long idKomentar, String tekst, Integer ocena, boolean prihvacen, String idArtikla, String artikal,
+	public KomentarDTO(Long idKomentar, String tekst, Integer ocena, boolean prihvacen, boolean arhiviran, String idArtikla, String artikal,
 			String idKupac, String kupac) {
 		super();
 		this.idKomentar = idKomentar;
 		this.tekst = tekst;
 		this.ocena = ocena;
 		this.prihvacen = prihvacen;
+		this.arhiviran = arhiviran;
 		this.idArtikla = idArtikla;
 		this.artikal = artikal;
 		this.idKupac = idKupac;
@@ -31,7 +33,7 @@ public class KomentarDTO {
 	}
 
 	public KomentarDTO(Komentar komentar) {
-		this(komentar.getIdKomentar(), komentar.getTekst(), komentar.getOcena(), komentar.isPrihvacen(), komentar.getArtikal().getIdArtikal().toString(), komentar.getArtikal().getNaziv(), komentar.getKupac().getIdKorisnik().toString(), komentar.getKupac().getKorisnickoIme());
+		this(komentar.getIdKomentar(), komentar.getTekst(), komentar.getOcena(), komentar.isPrihvacen(), komentar.isArhiviran(), komentar.getArtikal().getIdArtikal().toString(), komentar.getArtikal().getNaziv(), komentar.getKupac().getIdKorisnik().toString(), komentar.getKupac().getKorisnickoIme());
 	}
 
 	public Long getIdKomentar() {
@@ -64,6 +66,14 @@ public class KomentarDTO {
 
 	public void setPrihvacen(boolean prihvacen) {
 		this.prihvacen = prihvacen;
+	}
+
+	public boolean isArhiviran() {
+		return arhiviran;
+	}
+
+	public void setArhiviran(boolean arhiviran) {
+		this.arhiviran = arhiviran;
 	}
 
 	public String getIdArtikla() {

@@ -210,6 +210,86 @@ function deleteKupac(id){
     });
 }
 
+// IZMENA SAMOG SEBE -----------------------------------------------------------------------------------------------------
+
+function prikazKupca(){
+
+	$('#kupciTable').hide();
+	$('#dodajKupca').show();
+	$('#izmeniKupca').show();
+	$('#btnDodajKupca').hide();
+	
+    function prikaziKupca(){
+        $.ajax({
+            type: "GET",
+            contentType : 'application/json; charset=utf-8',
+            url : "http://localhost:8080/api/kupac/podaci",
+
+            success: function(result){
+            	
+                var idKupac = $("#idKupac");
+                var ime = $("#imeKupca");
+                var prezime = $("#prezimeKupca");
+                var korisnickoIme = $("#korImeKupca");
+                var lozinka = $("#lozinkaKupca");
+                var adresa = $("#adresaKupca");
+                               
+                idKupac.val(result.idKupac);
+                ime.val(result.imeKupca);
+                prezime.val(result.prezimeKupca);
+                korisnickoIme.val(result.korImeKupca);
+                lozinka.val(result.lozinkaKupca);
+                adresa.val(result.adresaKupca);
+
+            },
+            error : function(e){
+                alert('Doslo je do neke greške!')
+                console.log("ERROR: ", e);
+            }
+        });
+    }
+    prikaziKupca();
+
+}
+
+function IzmenaKupca(){
+    
+    var id = $("#idKupac").val();
+    var ime = $("#imeKupca").val();
+    var prezime = $("#prezimeKupca").val();
+    var korisnickoIme = $("#korImeKupca").val();
+    var lozinka = $("#lozinkaKupca").val();
+    var adresa = $("#adresaKupca").val();
+    
+    var lozinkaGreska;
+    
+    var formData = {
+        "imeKupca" : ime,
+        "prezimeKupca" : prezime,
+        "korImeKupca" : korisnickoIme,
+        "lozinkaKupca" : lozinka,
+        "adresaKupca" : adresa
+    }
+
+    $.ajax({
+
+        url: "http://localhost:8080/api/kupac/" + id,
+        type: "PUT",
+        contentType: 'application/json; charset=utf-8',
+        data : JSON.stringify(formData),
+        success: function(result){
+            alert('Kupac ' + result.korImeKupca + ' je uspesno izmenjen!');
+        },
+        error : function(e){
+            alert('Doslo je do neke greške!')
+            console.log("ERROR: ", e);
+        }
+    });
+
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------
+
 function blokirajKupca(id){
     $.ajax({
         url:'http://localhost:8080/api/kupac/' + id + '/blokiranje',
@@ -256,9 +336,6 @@ function PrikazSvihProdavacaZaNarudzbinu(){
     var tbodyProdavac = $("#tbodyProdavac");
 
     function prikaziProdavcee(){
-    	$('#dodavanje').hide();
-    	$('#DugmeArtikal').hide();
-    	$('#DugmeOdjava').hide();
     	
         $.ajax({
 

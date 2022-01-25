@@ -32,9 +32,42 @@
     <h1>Dostava</h1>
     
     <div id="dugmiciKupac">
-		<button class="btn btn-primary" onclick="odrediPrikaz('sviProdavciNarucivanje')" id="DugmeArtikal">Narucivanje</button>
-	    <button class="btn btn-primary" onclick="odjava()" id="DugmeOdjava">Odjava</button>
+		<button class="btn btn-primary" onclick="odrediPrikaz('sviProdavciNarucivanje')" id="DugmeNarucivanje">Narucivanje</button>
+		<button class="btn btn-primary" onclick="prikazKupca('session.prijavljeniKorisnik.idKorisnik')" id="DugmeIzmena">Izmeni svoje podatka</button>
+	    <button class="btn btn-primary" onclick="odjava()" id="DugmeOdjavaKupac">Odjava</button>
 	</div> 
+	
+<!-- Forma za izmenu kupca -->
+
+        <div id="dodajKupca" style="display: none;">
+            <div class="form-group">
+                <label>Ime:</label> 
+                <input type="text"
+                class="form-control col-sm-5" id="imeKupca" placeholder="Unesite ime kupca">
+                 <input type="hidden" id="idKupac">
+
+                 <label>Prezime:</label>
+                 <input type="text"
+                 class="form-control col-sm-5" id="prezimeKupca" placeholder="Unesite prezime kupca">
+
+                <label>Korisnicko Ime:</label> 
+                <input type="text"
+                class="form-control col-sm-5" id="korImeKupca" placeholder="Unesite korisnicko ime kupca">
+                 
+                <label>Stara Lozinka:</label> 
+                <input type="text"
+                class="form-control col-sm-5" id="lozinkaKupca" placeholder="Unesite lozinku kupca">
+                 
+                <label>Adresa:</label> 
+                <input type="text"
+                class="form-control col-sm-5" id="adresaKupca" placeholder="Unesite adresu kupca">
+                 
+            </div>
+          
+            <button id="izmeniKupca" type="submit" class="btn btn-warning" onclick="IzmenaKupca()">Izmeni</button> 
+            <button id="nazad" class="btn btn-primary" onclick="vratiSaDodavanjaIizmeneKupac()">Vrati</button>
+        </div>
+<!-- ------------------------------------------------------------------------------------------------------------------------------ --> 
     
     <!-- Prikaz svih prodavaca -->
 

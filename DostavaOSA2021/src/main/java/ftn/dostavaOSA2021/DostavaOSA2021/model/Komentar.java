@@ -27,6 +27,9 @@ public class Komentar {
 	@Column(name = "prihvacen", nullable = false)
 	private boolean prihvacen;
 	
+	@Column(name = "arhiviran", nullable = false)
+	private boolean arhiviran;
+	
 	@ManyToOne
 	@JoinColumn(name = "artikal", referencedColumnName = "idArtikal", nullable = true)
 	private Artikal artikal;
@@ -39,12 +42,13 @@ public class Komentar {
 		super();
 	}
 
-	public Komentar(Long idKomentar, String tekst, Integer ocena, boolean prihvacen, Artikal artikal, Kupac kupac) {
+	public Komentar(Long idKomentar, String tekst, Integer ocena, boolean prihvacen, boolean arhiviran, Artikal artikal, Kupac kupac) {
 		super();
 		this.idKomentar = idKomentar;
 		this.tekst = tekst;
 		this.ocena = ocena;
 		this.prihvacen = prihvacen;
+		this.arhiviran = arhiviran;
 		this.artikal = artikal;
 		this.kupac = kupac;
 	}
@@ -79,6 +83,14 @@ public class Komentar {
 
 	public void setPrihvacen(boolean prihvacen) {
 		this.prihvacen = prihvacen;
+	}
+
+	public boolean isArhiviran() {
+		return arhiviran;
+	}
+
+	public void setArhiviran(boolean arhiviran) {
+		this.arhiviran = arhiviran;
 	}
 
 	public Artikal getArtikal() {

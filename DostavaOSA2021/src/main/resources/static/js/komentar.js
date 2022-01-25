@@ -101,6 +101,10 @@ function ZatvoriKomentare(){
 	$('#komentariTablee').hide();
 }
 
+function ZatvoriKomentareKodProdavca(){
+	$('#komentariTableProdavac').hide();
+}
+
 function prikaziFormuZaDodavanjeKomentara(){
 	var dodajKomentar = $("#dodajKomentar").slideDown();
 	dodajKomentar.show();
@@ -175,7 +179,7 @@ function PrikazSvihKomentaraArtiklaKodPordavca(id){
             	tabelaKomentar.show();
             	tbodyKomentar.empty();
                 for(komentar in result){
- 
+                	if(result[komentar].arhiviran === false)   //AKO HOCEMO DA PRODAVAC SVIMA ZABRANI KOMENTAR STAVIMO PRIHVACEN UMESTO ARHIVIRAN
                 	tbodyKomentar.append(
                     '<tr>'
         			
@@ -184,7 +188,7 @@ function PrikazSvihKomentaraArtiklaKodPordavca(id){
 	                    +'<td align="center">'+result[komentar].artikal+'</a>'+'</td>'
 	                    +'<td align="center">'+result[komentar].kupac+'</td>'
 	                    +'<td align="center">'+result[komentar].ocena+'</td>'
-	                    +'<td align="center">'+result[komentar].prihvacen+'</td>'
+	                    +'<td align="center">'+result[komentar].arhiviran+'</td>'
 	                    +'<td>'
 	                    
 	    			        +'<form method="post" action="/api/komentar/arhivirajProdavac">'

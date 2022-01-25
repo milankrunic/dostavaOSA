@@ -129,10 +129,10 @@ public class KomentarController {
 
 		Komentar komentar = komentarServiceInterface.findOne(id);
 		
-		if(komentar.isPrihvacen() == true) {
-			komentar.setPrihvacen(false);;
+		if(komentar.isArhiviran() == false) {
+			komentar.setArhiviran(true);;
 		}else {
-			komentar.setPrihvacen(false);;
+			komentar.setArhiviran(true);;
 		}
 		
 		komentarServiceInterface.save(komentar);

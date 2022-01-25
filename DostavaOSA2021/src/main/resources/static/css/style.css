@@ -46,7 +46,7 @@ form{
 }
 
 #dugmiciKupac{
-	margin-left: 37%;
+	margin-left: 30%;
 }
 
 #DugmePrikazArtikala{
@@ -90,4 +90,20 @@ form{
 	margin-left: 3%;
 	margin-right: 3%;
 	padding: 20px;
+}
+
+#DugmeNarucivanje{
+	margin-left: 3%;
+	margin-right: 3%;
+	padding: 15px;
+}
+
+#DugmeIzmena{
+	margin-right: 3%;
+	padding: 15px;
+}
+
+#DugmeOdjavaKupac{
+	margin-right: 3%;
+	padding: 15px;
 }
