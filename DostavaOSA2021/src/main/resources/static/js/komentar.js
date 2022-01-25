@@ -158,3 +158,52 @@ function DodajKomentar(){
     }
 
 }
+
+function PrikazSvihKomentaraArtiklaKodPordavca(id){
+
+    var tabelaKomentar = $("#komentariTableProdavac").slideDown();;
+    var tbodyKomentar = $("#tbodyKomentareProdavac");
+    
+    function prikaziKomentareArtikla(){
+
+        $.ajax({
+
+            type: "GET",
+            contentType : 'application/json; charset=utf-8',
+            url : "http://localhost:8080/api/artikal/" + id + "/komentari",
+            success : function(result){
+            	tabelaKomentar.show();
+            	tbodyKomentar.empty();
+                for(komentar in result){
+ 
+                	tbodyKomentar.append(
+                    '<tr>'
+        			
+	                    +'<td align="center">'+result[komentar].idKomentar+'</td>'
+	                    +'<td align="center">'+result[komentar].tekst+'</td>'
+	                    +'<td align="center">'+result[komentar].artikal+'</a>'+'</td>'
+	                    +'<td align="center">'+result[komentar].kupac+'</td>'
+	                    +'<td align="center">'+result[komentar].ocena+'</td>'
+	                    +'<td align="center">'+result[komentar].prihvacen+'</td>'
+	                    +'<td>'
+	                    
+	    			        +'<form method="post" action="/api/komentar/arhivirajProdavac">'
+		    			        +'<input type="hidden" name="id" value="'+result[komentar].idKomentar+'"/>'
+		    			        +'<input class="btn btn-danger" type="submit" value="ARHIVIRAJ">'
+	    			        +'</form>'
+
+	                    +'</td>'
+                    +'</tr>'
+                  
+                    )};
+                    
+            },
+            error :function(e){
+                alert('Doslo je do neke greške!');
+            }
+
+        });
+    }
+    prikaziKomentareArtikla();
+    
+}

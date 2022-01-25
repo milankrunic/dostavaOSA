@@ -124,4 +124,20 @@ public class KomentarController {
 		response.sendRedirect(baseURL + "admin.html");
 	}
 	
+	@PostMapping(value = "/arhivirajProdavac")
+	public void arhiviraj(@RequestParam Long id, HttpServletResponse response) throws IOException {
+
+		Komentar komentar = komentarServiceInterface.findOne(id);
+		
+		if(komentar.isPrihvacen() == true) {
+			komentar.setPrihvacen(false);;
+		}else {
+			komentar.setPrihvacen(false);;
+		}
+		
+		komentarServiceInterface.save(komentar);
+
+		response.sendRedirect(baseURL + "prodavac.html");
+	}
+	
 }
