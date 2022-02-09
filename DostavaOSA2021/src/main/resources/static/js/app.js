@@ -71,6 +71,8 @@ function login(){
     }
 }
 
+//----------------- ZA REGISTRACIJU --------------------------------------------------------------
+
 function prikaziFormuKupac(){
 	$("#dodajKupca").show();
 	$("#dodajProdavca").hide();
@@ -82,6 +84,8 @@ function prikaziFormuPordavac(){
 	$("#dodajKupca").hide();
 	$("#registracija").hide();
 }
+
+//------------------------------------------------------------------------------------------------
 
 function odrediPrikaz(id){
     prikaziArtikle = false;

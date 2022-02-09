@@ -1,4 +1,4 @@
-function PrikazSvihArtikala(){ //prikaz svih artikala na pocetnoj strani
+function PrikazSvihArtikala(){ 
 
     var tabelaArtikla = $("#artikliTable");
     var tbodyArtikla = $("#tbodyArtikla");
@@ -48,7 +48,7 @@ function PrikazSvihArtikala(){ //prikaz svih artikala na pocetnoj strani
 
 }
 
-function submitArtikal(){ //dodavanje artikala nalazi se u index.html kod forme za dodavanje
+function submitArtikal(){
 
     var greska = "";
     var nazivInput = "";
@@ -107,7 +107,7 @@ function submitArtikal(){ //dodavanje artikala nalazi se u index.html kod forme 
 
 }
 
-function editArtikal(id){ //samo prikaz stranice kod izmene (editArtikal je u PrikazSvihArtikala gore)
+function editArtikal(id){
 
 	$('#artikliTable').hide();
 	$('#dodajArtikal').show();
@@ -144,7 +144,7 @@ function editArtikal(id){ //samo prikaz stranice kod izmene (editArtikal je u Pr
     prikaziArtikal();
 }
 
-function submitUpdateArtikal(){ //pritiskom na izmenu se dobija ovo, nalazi se u index.html kod forme za dodavanje
+function submitUpdateArtikal(){
 
     var id = $("#idArtikla").val();
     var naziv = $("#nazivArtikla").val();
@@ -177,7 +177,7 @@ function submitUpdateArtikal(){ //pritiskom na izmenu se dobija ovo, nalazi se u
 
 }
 
-function deleteArtikal(id){ //brisanje
+function deleteArtikal(id){ 
     $.ajax({
         url:'http://localhost:8080/api/artikal/' + id,
         type: 'DELETE',
@@ -193,7 +193,7 @@ function deleteArtikal(id){ //brisanje
     });
 }
 
-function dajProdavce(id){ //ubacivanje prodavca u listu za izmenu i dodavanje
+function dajProdavce(id){
     var prodavac1 = "";
     var prodavac2 = "";
     var selectProdavce = $("#selectProdavce");

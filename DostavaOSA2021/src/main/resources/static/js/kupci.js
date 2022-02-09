@@ -210,6 +210,42 @@ function deleteKupac(id){
     });
 }
 
+function blokirajKupca(id){
+    $.ajax({
+        url:'http://localhost:8080/api/kupac/' + id + '/blokiranje',
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        success: function(result){
+        	if(result.blokiran){
+        		alert("Kupac je blokiran!");
+        	}else{
+        		alert("Kupac je odblokiran!");
+        	}
+            odrediPrikaz('sviKupci');
+        },
+        error : function(e){
+            alert('Doslo je do neke greške!')
+            console.log("ERROR: ", e);
+        }
+    });
+}
+
+function vratiNaPocetnuKupac(){
+	$('#kupciTable').hide();
+	$('#prodavciTablee').hide();
+	$('#DugmeOdjava').show();
+	$('#DugmePrikazLogiina').show();
+	$('#DugmePrikazArtikala').show();
+	$('#DugmePrikazKorisnike').show();
+	$('#DugmeArtikal').show();
+}
+
+function vratiSaDodavanjaIizmeneKupac(){
+	$('#kupciTable').show();
+	$('#dodajKupca').hide();
+	$('#dodavanjeKupca').show();
+}
+
 // IZMENA SAMOG SEBE -----------------------------------------------------------------------------------------------------
 
 function prikazKupca(){
@@ -290,46 +326,6 @@ function IzmenaKupca(){
 
 //-------------------------------------------------------------------------------------------------------------------------------
 
-function blokirajKupca(id){
-    $.ajax({
-        url:'http://localhost:8080/api/kupac/' + id + '/blokiranje',
-        type: 'POST',
-        contentType: 'application/json; charset=utf-8',
-        success: function(result){
-        	if(result.blokiran){
-        		alert("Kupac je blokiran!");
-        	}else{
-        		alert("Kupac je odblokiran!");
-        	}
-            odrediPrikaz('sviKupci');
-        },
-        error : function(e){
-            alert('Doslo je do neke greške!')
-            console.log("ERROR: ", e);
-        }
-    });
-}
-
-function narucivanje(){
-	
-}
-
-function vratiNaPocetnuKupac(){
-	$('#kupciTable').hide();
-	$('#prodavciTablee').hide();
-	$('#DugmeOdjava').show();
-	$('#DugmePrikazLogiina').show();
-	$('#DugmePrikazArtikala').show();
-	$('#DugmePrikazKorisnike').show();
-	$('#DugmeArtikal').show();
-}
-
-function vratiSaDodavanjaIizmeneKupac(){
-	$('#kupciTable').show();
-	$('#dodajKupca').hide();
-	$('#dodavanjeKupca').show();
-}
-
 function PrikazSvihProdavacaZaNarudzbinu(){
 
     var tabelaProdavaca = $("#prodavciTablee");
@@ -404,6 +400,7 @@ function PrikazSvihArtikalaProdavacaZaNarucivanje(id){
                         +'<td>'
                         	+'<button type="submit" class="btn btn-success" style="margin-right: 5%;" onclick="PrikazSvihKomentaraArtikla('+result[artikal].idArtikla+')">KOMENTARI</button>'
 	                        +'<button id="narucivanje" class="btn btn-success" onclick="PrikazPocetneKorpe('+result[artikal].idArtikla+')">Dodaj u korpu</button>'
+//	                        +'<a th:href="|pocetnaKorpa?id=${'+result[artikal].idArtikla+'}|" class="btn btn-primary" id="kupi">Dodaj u listu zelja</a>'
                         +'</td>'
                     +'</tr>'
                   
@@ -429,12 +426,13 @@ function PrikazPocetneKorpe(id){
     	$('#prodavciTablee').hide();
     	$('#DugmeArtikal').hide();
     	$('#DugmeOdjava').hide();
+    	$('#artikliTableProdavac').hide();
     	
         $.ajax({
 
             type: "GET",
             contentType : 'application/json; charset=utf-8',
-            url : "http://localhost:8080/api/artikal/" + id + "/stavka",
+            url : "http://localhost:8080/api/artikal/" + id + "/korpaSesija",
             success : function(result){
             	pocetnaKorpaTable.show();
             	tbodyPocetnaKorpa.empty();

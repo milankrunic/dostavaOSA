@@ -387,7 +387,7 @@ function PrikazSvihArtikalaProdavacaKodAdmina(id){
     
 }
 
-function submitArtikalProdavac(){ //dodavanje artikala nalazi se u index.html kod forme za dodavanje
+function submitArtikalProdavac(){
 
     var greska = "";
     var nazivInput = "";
@@ -487,7 +487,7 @@ function editArtikalProdavac(id){
 
 }
 
-function submitUpdateArtikalProdavac(id){ //pritiskom na izmenu se dobija ovo, nalazi se u index.html kod forme za dodavanje
+function submitUpdateArtikalProdavac(id){
 
     var id = $("#idArtikla").val();
     var naziv = $("#nazivArtikla").val();
@@ -521,7 +521,7 @@ function submitUpdateArtikalProdavac(id){ //pritiskom na izmenu se dobija ovo, n
 
 }
 
-function deleteArtikalProdavac(id){ //brisanje
+function deleteArtikalProdavac(id){ 
     $.ajax({
         url:'http://localhost:8080/api/artikal/' + id,
         type: 'DELETE',
@@ -537,7 +537,7 @@ function deleteArtikalProdavac(id){ //brisanje
     });
 }
 
-function dajProdavce(id){ //ubacivanje prodavca u listu za izmenu i dodavanje
+function dajProdavce(id){
     var prodavac1 = "";
     var prodavac2 = "";
     var selectProdavce = $("#selectProdavce");

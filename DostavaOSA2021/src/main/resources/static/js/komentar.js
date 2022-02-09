@@ -1,4 +1,4 @@
-function PrikazSvihKomentara(){ //prikaz svih komentara kod admina
+function PrikazSvihKomentara(){
 
     var tabelaKomentar = $("#komentariTable");
     var tbodyKomentar = $("#tbodyKomentar");
@@ -46,7 +46,6 @@ function PrikazSvihKomentara(){ //prikaz svih komentara kod admina
             error :function(e){
                 alert('Doslo je do neke greške!');
             }
-
 
         });
     }

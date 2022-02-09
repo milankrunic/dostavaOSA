@@ -35,24 +35,6 @@ public class KorisnikController {
 	@Autowired
 	KupacServiceInterface kupacServiceInterface;
 	
-//	@GetMapping
-//	public ResponseEntity<List<KorisnikDTO>> getKorisnici(){
-//		List<Administrator> admini = administratorServiceInterface.findAll();
-//		List<Prodavac> prodavci = prodavacServiceInterface.findAll();
-//		List<Kupac> kupci = kupacServiceInterface.findAll();
-//		List<KorisnikDTO> korisniciDTO = new ArrayList<KorisnikDTO>();
-//		for (Administrator adm : admini) {
-//			korisniciDTO.add(new KorisnikDTO(adm));
-//		}
-//		for (Prodavac pro : prodavci) {
-//			korisniciDTO.add(new KorisnikDTO(pro));
-//		}
-//		for (Kupac kup : kupci) {
-//			korisniciDTO.add(new KorisnikDTO(kup));
-//		}
-//		return new ResponseEntity<List<KorisnikDTO>>(korisniciDTO, HttpStatus.OK);
-//	}
-	
 	@PostMapping(value = "/login")
 	public ResponseEntity<KorisnikDTO> login(@RequestBody KorisnikDTO korisnikDTO, HttpSession session){
 
@@ -61,12 +43,6 @@ public class KorisnikController {
 		Korisnik prodavac = prodavacServiceInterface.findByKorImeAndLozinka(korisnikDTO.getKorIme(), korisnikDTO.getLozinka());
 		
 		session.setAttribute(KorisnikController.KORISNIK_KEY, kupac);
-//		session.setAttribute(KorisnikController.KORISNIK_KEY, admin);
-//		session.setAttribute(KorisnikController.KORISNIK_KEY, prodavac);
-		
-//		Korisnik k = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
-		
-//		System.out.println("ULOGOVAN KORISNIK JE: "+k.getKorisnickoIme());
 		
 		if(kupac==null) {
 			kupac = prodavac;

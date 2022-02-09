@@ -1,6 +1,7 @@
 package ftn.dostavaOSA2021.DostavaOSA2021.controller;
 
 import java.io.IOException;
+//import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+//import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+//import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.ModelAndView;
 
 import ftn.dostavaOSA2021.DostavaOSA2021.dto.ArtikalDTO;
@@ -133,44 +136,24 @@ public class ArtikalController {
 		}
 		
 	}
-
-//	@SuppressWarnings("unchecked")
-	@GetMapping(value = "/{id}/stavka")
-	public ResponseEntity<ArtikalDTO> getPocetnaKorpa(@PathVariable("id") Long id, HttpSession session){
-				
-		Artikal artikal = artikalServiceInterface.findOne(id);
-		
-		if(artikal == null) {
-			return new ResponseEntity<ArtikalDTO>(HttpStatus.NOT_FOUND);
-		}else {
-//			List<Artikal> artikli = (List<Artikal>) session.getAttribute(ArtikalController.ODABRANI_ARTIKAL);
-//			if (!artikli.contains(artikal)) {
-//				artikli.add(artikal);
-
-//			}
-		
-		}	
-		return new ResponseEntity<ArtikalDTO>(new ArtikalDTO(artikal), HttpStatus.OK);
-				
-	}
 	
-//	@GetMapping(value = "/{id}/artikli")
-//	public ResponseEntity<List<ArtikalDTO>> getArtikleProdavcaKodAdmina(@PathVariable("id") Long id){
+//	@GetMapping(value = "/{id}/korpaSesija")
+//	public ResponseEntity<List<ArtikalDTO>> getPocetnaKorpa(@PathVariable("id") Long id, HttpSession session) {
 //				
-//		Prodavac prodavac = prodavacServiceInterface.findOne(id);
+//		Artikal artikal = artikalServiceInterface.findOne(id);
 //		
-//		if(prodavac == null) {
-//			return new ResponseEntity<List<ArtikalDTO>>(HttpStatus.NOT_FOUND);
-//		}else {
-//			List<Artikal> artikli = artikalServiceInterface.findAllByProdavac(prodavac);
-//			List<ArtikalDTO> artikalDTO = new ArrayList<ArtikalDTO>();
-//			for (Artikal artikal : artikli) {
+//		List<ArtikalDTO> artikli = (List<ArtikalDTO>) session.getAttribute(ArtikalController.ODABRANI_ARTIKAL);
+//
+//		if (!artikli.contains(artikal)) {
+//			for (Artikal ar : artikli) {
 //				ArtikalDTO dto = new ArtikalDTO(artikal);
 //				artikalDTO.add(dto);
 //			}
-//			return new ResponseEntity<List<ArtikalDTO>>(artikalDTO, HttpStatus.OK);
+//			artikli.add(artikal);
+//			System.out.println("ARTIKAL KOJI TREBA JE: " + artikal.getNaziv());
 //		}
-//		
+//
+//		return new ResponseEntity<List<ArtikalDTO>>(artikli, HttpStatus.OK);
 //	}
 	
 	@SuppressWarnings("unchecked")
@@ -190,5 +173,44 @@ public class ArtikalController {
 
 		return rezultat;
 	}
+	
+//	@GetMapping(value = "/{id}/korpaSesija")
+//	public ResponseEntity<ArtikalDTO> getPocetnaKorpa(@PathVariable("id") Long id, HttpSession session){
+//				
+//		Artikal artikal = artikalServiceInterface.findOne(id);
+//		
+//		if(artikal == null) {
+//			return new ResponseEntity<ArtikalDTO>(HttpStatus.NOT_FOUND);
+//		}else {
+//			
+//			Artikal a = (Artikal) session.getAttribute(ArtikalController.ODABRANI_ARTIKAL);
+//			List<ArtikalDTO> artikalDTO = new ArrayList<ArtikalDTO>();
+//
+//			ArtikalDTO dto = new ArtikalDTO(a);
+//			artikalDTO.add(dto);
+//
+//			return new ResponseEntity<ArtikalDTO>(new ArtikalDTO(artikal), HttpStatus.OK);
+//		}
+//				
+//	}
+	
+//	@GetMapping(value = "/{id}/artikli")
+//	public ResponseEntity<List<ArtikalDTO>> getArtikleProdavcaKodAdmina(@PathVariable("id") Long id){
+//				
+//		Prodavac prodavac = prodavacServiceInterface.findOne(id);
+//		
+//		if(prodavac == null) {
+//			return new ResponseEntity<List<ArtikalDTO>>(HttpStatus.NOT_FOUND);
+//		}else {
+//			List<Artikal> artikli = artikalServiceInterface.findAllByProdavac(prodavac);
+//			List<ArtikalDTO> artikalDTO = new ArrayList<ArtikalDTO>();
+//			for (Artikal artikal : artikli) {
+//				ArtikalDTO dto = new ArtikalDTO(artikal);
+//				artikalDTO.add(dto);
+//			}
+//			return new ResponseEntity<List<ArtikalDTO>>(artikalDTO, HttpStatus.OK);
+//		}
+//		
+//	}
 
 }
