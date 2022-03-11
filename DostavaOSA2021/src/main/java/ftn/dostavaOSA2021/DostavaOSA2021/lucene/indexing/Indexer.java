@@ -14,8 +14,10 @@ import org.apache.lucene.store.SimpleFSDirectory;
 import org.springframework.stereotype.Service;
 
 import ftn.dostavaOSA2021.DostavaOSA2021.lucene.indexing.analysers.SerbianAnalyzer;
+import ftn.dostavaOSA2021.DostavaOSA2021.lucene.indexing.handlers.DocumentHandler;
+import ftn.dostavaOSA2021.DostavaOSA2021.lucene.indexing.handlers.PDFHandler;
 
-//@Service
+//@Service //verovatno treba da pise service mozda i ne
 public class Indexer {
 	
 	private File indexDirPath;
@@ -64,5 +66,52 @@ public class Indexer {
 	
 	public File getIndexDirPath(){
 		return indexDirPath;
+	}
+	
+	public int index(File file){		
+		DocumentHandler handler = null;
+		String fileName = null;
+		try {
+			File[] files;
+			if(file.isDirectory()){
+				files = file.listFiles();
+			}else{
+				files = new File[1];
+				files[0] = file;
+			}
+			for(File newFile : files){
+				if(newFile.isFile()){
+					fileName = newFile.getName();
+					handler = getHandler(fileName);
+					if(handler == null){
+						System.out.println("Nije moguce indeksirati dokument sa nazivom: " + fileName);
+						continue;
+					}
+					this.indexWriter.addDocument(handler.getIndexUnit(newFile).getLuceneDocument());
+				} else if (newFile.isDirectory()){
+					index(newFile);
+				}
+			}
+			this.indexWriter.commit();
+			System.out.println("indexing done");
+		} catch (IOException e) {
+			System.out.println("indexing NOT done");
+		}
+		return this.indexWriter.numDocs();
+	}
+	
+	public DocumentHandler getHandler(String fileName){
+		if(fileName.endsWith(".txt")){
+//			return new TextDocHandler();
+		}else if(fileName.endsWith(".pdf")){
+			return new PDFHandler();
+//		}else if(fileName.endsWith(".doc")){
+//			return new WordHandler();
+//		}else if(fileName.endsWith(".docx")){
+//			return new Word2007Handler();
+		}else{
+			return null;
+		}
+		return null; //verovatno nije dobro
 	}
 }

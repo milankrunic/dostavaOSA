@@ -24,6 +24,7 @@
     <script src="js/prodavci.js"></script>
     <script src="js/kupci.js"></script>
     <script src="js/komentar.js"></script>
+    <script src="js/search.js"></script>
     
     <!-- Ukljucivanje css-a -->
     <link rel="stylesheet" href="css/style.css">
@@ -358,7 +359,21 @@
 		    <button class="btn btn-primary" onclick="odrediPrikaz('sviProdavci')" id="DugmePrikazProdavaca">Prodavci</button>
 		    <button class="btn btn-primary" onclick="odrediPrikaz('sviKupci')" id="DugmePrikazKupaca">Kupci</button>		    
 	    </div>
-	    
+
+<!-- PRETRAGA ---------------------------------------------------------------------------------------------------------------------- -->
+	   	    
+	    <h7>Search using Lucene query language</h7>
+		
+		<form id="luceneQueryLanguage">
+		    <input type="text" name="value" placeholder="query"/><br/><br/>
+		    <input type="submit" value="Submit" id="btnSubmitLuceneQueryLanguage"/>
+		</form>
+		
+		<h1>Result</h1>
+		<pre>
+		    <span id="result"></span>
+		</pre>
+<!-- -------------------------------------------------------------------------------------------------------------------------------- -->
     </main>
 </body>
 </html>

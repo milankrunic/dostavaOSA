@@ -1,5 +1,6 @@
 package ftn.dostavaOSA2021.DostavaOSA2021.lucene.search;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,10 @@ import org.apache.lucene.search.highlight.InvalidTokenOffsetsException;
 
 import ftn.dostavaOSA2021.DostavaOSA2021.dto.ArtikalDTO;
 import ftn.dostavaOSA2021.DostavaOSA2021.lucene.indexing.analysers.SerbianAnalyzer;
+import ftn.dostavaOSA2021.DostavaOSA2021.lucene.indexing.handlers.DocumentHandler;
+import ftn.dostavaOSA2021.DostavaOSA2021.lucene.indexing.handlers.PDFHandler;
 import ftn.dostavaOSA2021.DostavaOSA2021.lucene.model.RequiredHighlight;
+import ftn.dostavaOSA2021.DostavaOSA2021.lucene.model.ResultData;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Artikal;
 
 public class ResultRetriever {
@@ -35,25 +39,23 @@ public class ResultRetriever {
 		return ResultRetriever.maxHits;
 	}
 	
-	public static List<ArtikalDTO> getResultsArtikal(Query query,
+	public static List<ResultData> getResultsArtikal(Query query,
 			List<RequiredHighlight> requiredHighlights) {
 		if (query == null) {
 			return null;
 		}
 		try {
-			Directory indexDir = new SimpleFSDirectory(FileSystems.getDefault().getPath(ResourceBundle
-					.getBundle("application").getString("index")));
+			Directory indexDir = new SimpleFSDirectory(FileSystems.getDefault().getPath(ResourceBundle.getBundle("application").getString("index")));
 			DirectoryReader reader = DirectoryReader.open(indexDir);
 			IndexSearcher is = new IndexSearcher(reader);
-			TopScoreDocCollector collector = TopScoreDocCollector.create(
-					maxHits);
+			TopScoreDocCollector collector = TopScoreDocCollector.create(maxHits);
 
-			List<ArtikalDTO> results = new ArrayList<ArtikalDTO>();
+			List<ResultData> results = new ArrayList<ResultData>();
 
 			is.search(query, collector);
 			ScoreDoc[] hits = collector.topDocs().scoreDocs;
 
-			Artikal ar;
+			ResultData rd;
 			Document doc;
 			Highlighter hl;
 			SerbianAnalyzer sa = new SerbianAnalyzer();
@@ -74,13 +76,16 @@ public class ResultRetriever {
 					hl = new Highlighter(new QueryScorer(query, reader, rh.getFieldName()));
 					try{
 						highlight += hl.getBestFragment(sa, rh.getFieldName(),
-								""/* + getDocumentText(location)*/);
+								"" + getDocumentText(location));
 					}catch (InvalidTokenOffsetsException e) {
 						//throw new IllegalArgumentException("Unable to make highlight"); //kod profesora zakomentarisano
 					}
 				}
 //				ar = new Artikal(idArtikal, naziv, opis, cena, putanjaSlike, artikalAkcija, prodavac, stavke);
 //				results.add(ar);
+				rd = new ResultData(title, keywords, location,
+						highlight);
+				results.add(rd);
 			}
 			reader.close();
 			return results;
@@ -89,6 +94,23 @@ public class ResultRetriever {
 			throw new IllegalArgumentException(
 					"U prosledjenom direktorijumu ne postoje indeksi ili je direktorijum zakljucan");
 		} 
+	}
+	
+	private static String getDocumentText(String location){
+		File file = new File(location);
+		DocumentHandler handler = getHandler(location);
+		return handler.getText(file);
+	}
+	
+	// ne znam dal treba
+	
+	protected static DocumentHandler getHandler(String fileName){
+		if(fileName.endsWith(".txt")){
+//			return new TextDocHandler();
+		}else if(fileName.endsWith(".pdf")){
+			return new PDFHandler();
+		}
+		return null;
 	}
 
 }
