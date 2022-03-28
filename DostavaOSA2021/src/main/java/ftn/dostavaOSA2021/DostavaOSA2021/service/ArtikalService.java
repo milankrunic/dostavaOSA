@@ -50,7 +50,9 @@ public class ArtikalService implements ArtikalServiceInterface{
 
 //	@Override
 //	public List<ArtikalDTO> findAllArtikalDTO() {
+//		ArtikalDTO artikal = artikalRepository.findAllArtikalDTO();
 //		return artikalRepository.findAllArtikalDTO();
 //	}
+	
 
 }

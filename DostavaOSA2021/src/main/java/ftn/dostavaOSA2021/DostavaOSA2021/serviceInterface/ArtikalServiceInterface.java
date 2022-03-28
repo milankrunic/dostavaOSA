@@ -14,6 +14,7 @@ public interface ArtikalServiceInterface {
 	public Artikal save(Artikal artikal);
 	public void remove(Long id);
 	public List<Artikal> findAllByProdavac(Prodavac prodavac);
+	
 //	public List<ArtikalDTO> findAllArtikalDTO();
 	
 }

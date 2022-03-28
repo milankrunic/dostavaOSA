@@ -9,8 +9,8 @@ import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field.Store;
 import org.apache.lucene.document.StringField;
 import org.apache.lucene.document.TextField;
-import org.elasticsearch.common.xcontent.XContentBuilder;
-import org.elasticsearch.common.xcontent.XContentFactory;
+//import org.elasticsearch.common.xcontent.XContentBuilder;
+//import org.elasticsearch.common.xcontent.XContentFactory;
 
 public class IndexUnit {
 
@@ -31,18 +31,6 @@ public class IndexUnit {
 		retVal.add(new TextField("filedate",fileDate,Store.YES));
 		return retVal;
 	}
-	
-    public XContentBuilder getXContentBuilder() throws IOException {
-        XContentBuilder builder = XContentFactory.jsonBuilder()
-                .startObject()
-                .field("text", text)
-                .field("title", title)
-                .field("fileName", fileName)
-                .field("fileDate", fileDate)
-                .field("keyword", Arrays.toString(keywords.toArray()))
-                .endObject();
-        return builder;
-    }
 	
 	public String getText() {
 		return text;
@@ -74,5 +62,21 @@ public class IndexUnit {
 	public void setFileDate(String fileDate) {
 		this.fileDate = fileDate;
 	}
+	
+//SA CASA (gore)
+//-----------------------------------------------------------------------------------------------------------
+//NIJE SA CASA (dole) uz sve ostalo od gore ide i ovo	
+	
+//    public XContentBuilder getXContentBuilder() throws IOException {
+//        XContentBuilder builder = XContentFactory.jsonBuilder()
+//                .startObject()
+//                .field("text", text)
+//                .field("title", title)
+//                .field("fileName", fileName)
+//                .field("fileDate", fileDate)
+//                .field("keyword", Arrays.toString(keywords.toArray()))
+//                .endObject();
+//        return builder;
+//    }
 	
 }

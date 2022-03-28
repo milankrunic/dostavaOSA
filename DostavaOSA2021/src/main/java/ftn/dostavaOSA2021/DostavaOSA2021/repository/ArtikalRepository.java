@@ -14,6 +14,6 @@ public interface ArtikalRepository extends JpaRepository<Artikal, Long>{
 	
 	List<Artikal> findByProdavac(Prodavac prodavac);
 	
-//	List<ArtikalDTO> findAllArtikalDTO();
+//	List<Artikal> findAllArtikalDTO();
 	
 }
