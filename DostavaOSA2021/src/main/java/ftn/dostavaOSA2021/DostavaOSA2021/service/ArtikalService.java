@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ftn.dostavaOSA2021.DostavaOSA2021.dto.ArtikalDTO;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Artikal;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Prodavac;
 import ftn.dostavaOSA2021.DostavaOSA2021.repository.ArtikalRepository;
@@ -47,12 +46,4 @@ public class ArtikalService implements ArtikalServiceInterface{
 	public List<Artikal> findAllByProdavac(Prodavac prodavac) {
 		return artikalRepository.findByProdavac(prodavac);
 	}
-
-//	@Override
-//	public List<ArtikalDTO> findAllArtikalDTO() {
-//		ArtikalDTO artikal = artikalRepository.findAllArtikalDTO();
-//		return artikalRepository.findAllArtikalDTO();
-//	}
-	
-
 }

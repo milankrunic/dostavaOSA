@@ -1,18 +1,18 @@
 package ftn.dostavaOSA2021.DostavaOSA2021.lucene.indexing.filters;
 
-import java.io.IOException;
-
 import org.apache.lucene.analysis.TokenFilter;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 
-public class CyrilicToLatinFilter extends TokenFilter{
+import java.io.IOException;
 
-	private CharTermAttribute termAttribute;
+public class CyrilicToLatinFilter extends TokenFilter {
+
+	private final CharTermAttribute termAttribute;
 
 	public CyrilicToLatinFilter(TokenStream input) {
 		super(input);
-		termAttribute=(CharTermAttribute)input.addAttribute(CharTermAttribute.class); 
+		termAttribute = input.addAttribute(CharTermAttribute.class);
 	}
 	
 	public boolean incrementToken()throws IOException {
@@ -26,3 +26,4 @@ public class CyrilicToLatinFilter extends TokenFilter{
     }
 	
 }
+
