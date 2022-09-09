@@ -19,13 +19,13 @@ import org.springframework.data.elasticsearch.annotations.Setting;
 @AllArgsConstructor
 @Builder
 @Document(indexName = "artikli")
-@Setting(settingPath = "/analyzers/serbianAnalyzer.json")
+@Setting(settingPath = "/analyzer/serbianAnalyzer.json")
 public class ArtikalES {
 
     @Id
     private String id;
 
-    @Field(type = FieldType.Keyword)
+    @Field(type = FieldType.Text)
     private String naziv;
 
     @Field(type = FieldType.Text)
