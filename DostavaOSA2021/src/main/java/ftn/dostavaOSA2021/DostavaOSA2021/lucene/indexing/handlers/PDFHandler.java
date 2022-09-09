@@ -2,47 +2,45 @@ package ftn.dostavaOSA2021.DostavaOSA2021.lucene.indexing.handlers;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 
-import org.apache.lucene.document.DateTools;
 import org.apache.pdfbox.io.RandomAccessFile;
 import org.apache.pdfbox.pdfparser.PDFParser;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentInformation;
 import org.apache.pdfbox.text.PDFTextStripper;
 
+import ftn.dostavaOSA2021.DostavaOSA2021.elastic.model.ArtikalES;
+
 public class PDFHandler extends DocumentHandler {
 
-//	@Override
-//	public Book getIndexUnit(File file) {
-//		Book retVal = new Book();
-//		try {
-//			PDFParser parser = new PDFParser(new RandomAccessFile(file, "r"));
-//			parser.parse();
-//			String text = getText(parser);
-//			retVal.setText(text);
-//
-//			// metadata extraction
-//			PDDocument pdf = parser.getPDDocument();
-//			PDDocumentInformation info = pdf.getDocumentInformation();
-//
-//			String title = ""+info.getTitle();
-//			retVal.setTitle(title);
-//
+	@Override
+	public ArtikalES getIndexUnit(File file) {
+		ArtikalES retVal = new ArtikalES();
+		try {
+			PDFParser parser = new PDFParser(new RandomAccessFile(file, "r"));
+			parser.parse();
+			String opis = getText(parser);
+			retVal.setOpis(opis);;
+
+			// metadata extraction
+			PDDocument pdf = parser.getPDDocument();
+			PDDocumentInformation info = pdf.getDocumentInformation();
+
+			String naziv = ""+info.getTitle();
+			retVal.setNaziv(naziv);
+
 //			String keywords = ""+info.getKeywords();
 //			retVal.setKeywords(keywords);
-//
-//			retVal.setFilename(file.getCanonicalPath());
-//			
+		
 //			String nodificationDate= DateTools.dateToString(new Date(file.lastModified()), DateTools.Resolution.DAY);
-//			
-//			pdf.close();
-//		} catch (IOException e) {
-//			System.out.println("Greksa pri konvertovanju dokumenta u pdf");
-//		}
-//
-//		return retVal;
-//	}
+			
+			pdf.close();
+		} catch (IOException e) {
+			System.out.println("Greksa pri konvertovanju dokumenta u pdf");
+		}
+
+		return retVal;
+	}
 
 	@Override
 	public String getText(File file) {

@@ -1,46 +1,43 @@
 $(document).ready(function () {
     
-    $("#btnSubmitLuceneQueryLanguage").click(function (event) {
-
-        //stop submit the form, we will post it manually.
+    $("#btnNazivArtikla").click(function (event) {
         event.preventDefault();
-
-        searchLuceneQueryLanguage();
-
+        pretragaPoNazivuArtikla();
     });
 
 });
 
-function searchLuceneQueryLanguage() {
+function pretragaPoNazivuArtikla(){
+	
+    var nazivInput = "";
+    
+    nazivInput = $("#naziv").val();
 
-    var value = $('#luceneQueryLanguage input[name=value]').val();
-    var data = JSON.stringify({"value":value});
-    $("#btnSubmitLuceneQueryLanguage").prop("disabled", true);
+    var formData = {
+        "text" : nazivInput
+    }
 
     $.ajax({
-        type: "POST",
-        url: "api/search/queryParser",
-        data: data,
-        contentType: 'application/json',
-        success: function (data) {
-        	$('#result').empty();
-            for(index = 0; index < data.length; index++){
-                var result = data[index]
-                $.each(result, function(key, value) {
-                  $('#result').append('<li>' + key + ': ' + value + '</li>');
-                });
-            }
-            console.log("SUCCESS : ", data);
-            $("#btnSubmitLuceneQueryLanguage").prop("disabled", false);
-
+        url : "http://localhost:8080/search/artikalNaziv",
+        type : "POST",
+        contentType: 'application/json; charset=utf-8',
+        data : JSON.stringify(formData),
+        success: function(data){
+	          $('#result').empty();
+	          for(i = 0; i < data.length; i++){
+	              var result = data[i]
+	              $.each(result, function(key, value) {
+	                $('#result').append('<li>' + key + ': ' + value + '</li>');
+	              });
+	          }
+	          console.log("SUCCESS : ", data);
+	          $("#btnNazivArtikla").prop("disabled", false);
         },
-        error: function (e) {
-        	$('#result').empty();
-            $("#result").text(e.responseText);
-            console.log("ERROR : ", e);
-            $("#btnSubmitLuceneQueryLanguage").prop("disabled", false);
-
+        error : function(e){
+            alert('Doslo je do neke greške!');
+            console.log("ERROR: ", e);
         }
     });
+  
 
 }

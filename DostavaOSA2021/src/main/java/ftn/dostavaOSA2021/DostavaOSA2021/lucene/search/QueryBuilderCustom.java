@@ -6,7 +6,7 @@ import org.elasticsearch.common.unit.Fuzziness;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 
-//import com.example.proba.util.SearchType;
+import ftn.dostavaOSA2021.DostavaOSA2021.util.SearchType;
 
 @Getter
 @Setter
@@ -14,25 +14,25 @@ public class QueryBuilderCustom {
 	
 	private static int maxEdits = 1;
 	
-//	public static QueryBuilder buildQuery(SearchType queryType, String field, String value) throws IllegalArgumentException {
-//		validateQueryFields(field, value);
-//		if(queryType.equals(SearchType.TERM)){
-//			return QueryBuilders.termQuery(field, value);
-//		} else if(queryType.equals(SearchType.MATCH)){
-//			return QueryBuilders.matchQuery(field, value);
-//		} else if(queryType.equals(SearchType.PHRASE)){
-//			return QueryBuilders.matchPhraseQuery(field, value);
-//		} else if(queryType.equals(SearchType.FUZZY)){
-//			return QueryBuilders.fuzzyQuery(field, value).fuzziness(Fuzziness.fromEdits(maxEdits));
-//		} else if(queryType.equals(SearchType.PREFIX)){
-//			return QueryBuilders.prefixQuery(field, value);
-//		} else if(queryType.equals(SearchType.RANGE)){
-//			String[] values = value.split("-");
-//			return QueryBuilders.rangeQuery(field).from(values[0]).to(values[1]);
-//		} else{
-//			return QueryBuilders.matchPhraseQuery(field, value);
-//		}
-//	}
+	public static QueryBuilder buildQuery(SearchType queryType, String field, String value) throws IllegalArgumentException {
+		validateQueryFields(field, value);
+		if(queryType.equals(SearchType.TERM)){
+			return QueryBuilders.termQuery(field, value);
+		} else if(queryType.equals(SearchType.MATCH)){
+			return QueryBuilders.matchQuery(field, value);
+		} else if(queryType.equals(SearchType.PHRASE)){
+			return QueryBuilders.matchPhraseQuery(field, value);
+		} else if(queryType.equals(SearchType.FUZZY)){
+			return QueryBuilders.fuzzyQuery(field, value).fuzziness(Fuzziness.fromEdits(maxEdits));
+		} else if(queryType.equals(SearchType.PREFIX)){
+			return QueryBuilders.prefixQuery(field, value);
+		} else if(queryType.equals(SearchType.RANGE)){
+			String[] values = value.split("-");
+			return QueryBuilders.rangeQuery(field).from(values[0]).to(values[1]);
+		} else{
+			return QueryBuilders.matchPhraseQuery(field, value);
+		}
+	}
 
 	private static void validateQueryFields(String field, String value) {
 		String errorMessage = "";
@@ -49,4 +49,6 @@ public class QueryBuilderCustom {
 	}
 
 }
+
+
 
