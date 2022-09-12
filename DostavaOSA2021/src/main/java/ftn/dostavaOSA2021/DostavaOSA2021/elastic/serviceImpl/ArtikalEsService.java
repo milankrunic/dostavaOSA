@@ -5,8 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ftn.dostavaOSA2021.DostavaOSA2021.elastic.dto.ArtikalEsDTO;
-import ftn.dostavaOSA2021.DostavaOSA2021.elastic.mapper.ArtikalEsMapper;
 import ftn.dostavaOSA2021.DostavaOSA2021.elastic.model.ArtikalES;
 import ftn.dostavaOSA2021.DostavaOSA2021.elastic.repository.ArtikalEsRepository;
 import ftn.dostavaOSA2021.DostavaOSA2021.elastic.serviceInterface.ArtikalEsServiceInterface;
@@ -18,8 +16,8 @@ public class ArtikalEsService implements ArtikalEsServiceInterface{
 	ArtikalEsRepository artikalEsRepository;
 	
 	@Override
-	public void index(ArtikalEsDTO artikalEsDTO) {
-		artikalEsRepository.save(ArtikalEsMapper.mapModel(artikalEsDTO));
+	public void index(ArtikalES artikalEs) {
+		artikalEsRepository.save(artikalEs);
 		
 	}
 	

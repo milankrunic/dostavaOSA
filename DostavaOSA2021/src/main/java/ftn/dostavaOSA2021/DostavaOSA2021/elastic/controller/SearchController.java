@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ftn.dostavaOSA2021.DostavaOSA2021.elastic.dto.ArtikalEsDTO;
 import ftn.dostavaOSA2021.DostavaOSA2021.elastic.dto.TextRequestDTO;
 import ftn.dostavaOSA2021.DostavaOSA2021.elastic.model.ArtikalES;
 import ftn.dostavaOSA2021.DostavaOSA2021.elastic.serviceInterface.ArtikalEsServiceInterface;
@@ -21,8 +20,8 @@ public class SearchController {
 	ArtikalEsServiceInterface artikalEsServiceInterface;
 	
 	@PostMapping("/artikal")
-	public void index(@RequestBody ArtikalEsDTO artikalEsDTO) {
-		artikalEsServiceInterface.index(artikalEsDTO);
+	public void index(@RequestBody ArtikalES artikalEs) {
+		artikalEsServiceInterface.index(artikalEs);
 	}
 	
 	@PostMapping("/artikalNaziv")

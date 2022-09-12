@@ -1,21 +1,26 @@
 package ftn.dostavaOSA2021.DostavaOSA2021.elastic.dto;
 
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
+import ftn.dostavaOSA2021.DostavaOSA2021.elastic.model.ArtikalES;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import lombok.Builder;
-import lombok.Data;
-
-@Data
-@Builder
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ArtikalEsDTO {
 
     private String naziv;
 
-    @Field(type = FieldType.Text)
     private String opis;
 
-    @Field(type = FieldType.Double)
     private Double cena;
+    
+    //mapper
+    public ArtikalEsDTO(ArtikalES artikalEs) {
+    	this(artikalEs.getNaziv(), artikalEs.getOpis(), artikalEs.getCena());
+    }
 	
 }
