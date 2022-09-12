@@ -1,7 +1,6 @@
 package ftn.dostavaOSA2021.DostavaOSA2021.controller;
 
 import java.io.IOException;
-//import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ftn.dostavaOSA2021.DostavaOSA2021.dto.ArtikalDTO;
 import ftn.dostavaOSA2021.DostavaOSA2021.dto.KomentarDTO;
+import ftn.dostavaOSA2021.DostavaOSA2021.elastic.model.ArtikalES;
+import ftn.dostavaOSA2021.DostavaOSA2021.elastic.serviceInterface.ArtikalEsServiceInterface;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Artikal;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Komentar;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Prodavac;
@@ -44,6 +45,9 @@ public class ArtikalController {
 	
 	@Autowired
 	KomentarServiceInterface komentarServiceInterface;
+	
+	@Autowired
+	ArtikalEsServiceInterface artikalEsServiceInterface;
 	
 	@GetMapping
 	public ResponseEntity<List<ArtikalDTO>> getArtikle(){
@@ -82,6 +86,7 @@ public class ArtikalController {
 		a.setProdavac(prodavac);
 		
 		a = artikalServiceInterface.save(a);
+		artikalEsServiceInterface.index(new ArtikalES(a));
 		return new ResponseEntity<ArtikalDTO>(new ArtikalDTO(a), HttpStatus.CREATED);
 	}
 
