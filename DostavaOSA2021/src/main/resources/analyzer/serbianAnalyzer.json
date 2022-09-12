@@ -1,9 +1,9 @@
 {
-  "analysis":{
-    "analyzer":{
-      "default":{
-        "type":"serbian"
-      }
-    }
-  }
+	"analysis":{
+		"analyzer":{
+			"default":{
+				"type":"serbian"
+			}
+		}
+	}
 }
