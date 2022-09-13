@@ -10,7 +10,7 @@ import org.apache.lucene.analysis.standard.StandardTokenizer;
 
 import ftn.dostavaOSA2021.DostavaOSA2021.lucene.indexing.filters.CyrilicToLatinFilter;
 
-@SuppressWarnings("SpellCheckingInspection")
+//@SuppressWarnings("SpellCheckingInspection")
 @NoArgsConstructor
 public class SerbianAnalyzer extends Analyzer {
 
