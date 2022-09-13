@@ -13,8 +13,12 @@ public interface ArtikalEsServiceInterface {
 	
 	List<ArtikalES> getArtikalByNaziv(String naziv);
 	
+	List<ArtikalES> getArtikalByOpis(String opis);
+	
 	void reindex();
 	
 	void indexUploadFile(ArtikalEsDTO artikalEsDTO) throws IOException;
+	
+	List<ArtikalEsDTO> findByNaziv(String naziv);
 	
 }

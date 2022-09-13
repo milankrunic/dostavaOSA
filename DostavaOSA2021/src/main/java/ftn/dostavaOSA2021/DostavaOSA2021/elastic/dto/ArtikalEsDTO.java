@@ -4,6 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import ftn.dostavaOSA2021.DostavaOSA2021.elastic.model.ArtikalES;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class ArtikalEsDTO {
 
     private String naziv;

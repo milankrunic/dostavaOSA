@@ -10,13 +10,22 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
+import org.springframework.data.elasticsearch.core.SearchHits;
+import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import ftn.dostavaOSA2021.DostavaOSA2021.elastic.dto.ArtikalEsDTO;
+import ftn.dostavaOSA2021.DostavaOSA2021.elastic.dto.SimpleQueryES;
+import ftn.dostavaOSA2021.DostavaOSA2021.elastic.mapper.ArtikalMapper;
 import ftn.dostavaOSA2021.DostavaOSA2021.elastic.model.ArtikalES;
 import ftn.dostavaOSA2021.DostavaOSA2021.elastic.repository.ArtikalEsRepository;
 import ftn.dostavaOSA2021.DostavaOSA2021.elastic.serviceInterface.ArtikalEsServiceInterface;
@@ -33,8 +42,15 @@ public class ArtikalEsService implements ArtikalEsServiceInterface{
 	@Value("${app.upload.dir:${user.home}}")
 	public String uploadDir;
 	
-	@Autowired
-	ArtikalEsRepository artikalEsRepository;
+//	iz nekaog razloga ne radi @Autowired pa mora ovako
+	
+	private final ArtikalEsRepository artikalEsRepository;
+	private final ElasticsearchRestTemplate elasticsearchRestTemplate;
+	
+    public ArtikalEsService(ArtikalEsRepository artikalEsRepository, ElasticsearchRestTemplate elasticsearchRestTemplate) {
+    	this.artikalEsRepository = artikalEsRepository;
+        this.elasticsearchRestTemplate = elasticsearchRestTemplate;
+    }
 	
 	@Override
 	public void index(ArtikalES artikalEs) {
@@ -46,6 +62,11 @@ public class ArtikalEsService implements ArtikalEsServiceInterface{
     public List<ArtikalES> getArtikalByNaziv(String naziv) {
         return artikalEsRepository.findAllByNaziv(naziv);
     }
+	
+	@Override
+	public List<ArtikalES> getArtikalByOpis(String opis) {
+		return artikalEsRepository.findAllByOpis(opis);
+	}
 
 	@Override
 	public void reindex() {
@@ -146,4 +167,21 @@ public class ArtikalEsService implements ArtikalEsServiceInterface{
 		return retVal;
 	}
 
+	@Override
+	public List<ArtikalEsDTO> findByNaziv(String naziv) {
+		QueryBuilder nazivQuery = SearchQueryGenerator.createMatchQueryBuilder(new SimpleQueryES("naziv", naziv));
+		
+		BoolQueryBuilder boolQuery = QueryBuilders.boolQuery()
+				.must(nazivQuery);
+		
+		return ArtikalMapper.mapDtos(searchByBoolQuery(boolQuery));
+	}
+	
+    private SearchHits<ArtikalES> searchByBoolQuery(BoolQueryBuilder boolQuery) {
+        NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
+                .withQuery(boolQuery)
+                .build();
+
+        return elasticsearchRestTemplate.search(searchQuery, ArtikalES.class,  IndexCoordinates.of("artikli"));
+    }
 }

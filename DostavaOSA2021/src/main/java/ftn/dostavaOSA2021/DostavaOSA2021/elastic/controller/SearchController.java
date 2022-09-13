@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ftn.dostavaOSA2021.DostavaOSA2021.elastic.dto.ArtikalEsDTO;
@@ -33,6 +34,11 @@ public class SearchController {
 		return artikalEsServiceInterface.getArtikalByNaziv(textRequestDTO.getText());
 	}
 	
+	@PostMapping("/artikalOpis")
+	public List<ArtikalES> getByOpis(@RequestBody TextRequestDTO textRequestDTO){
+		return artikalEsServiceInterface.getArtikalByOpis(textRequestDTO.getText());
+	}
+	
 	//reindexira fajlove
 	@GetMapping("/reindex")
 	public void reindex() {
@@ -42,6 +48,11 @@ public class SearchController {
 	@PostMapping(path = "/pdf", consumes = "multipart/form-data")
 	public void uploadPdf(@ModelAttribute ArtikalEsDTO uploadModel) throws IOException{
 		artikalEsServiceInterface.indexUploadFile(uploadModel);
+	}
+	
+	@PostMapping("/nazivQuery")
+	public List<ArtikalEsDTO> getByNaziv(@RequestParam(name = "naziv") String naziv){
+		return artikalEsServiceInterface.findByNaziv(naziv);
 	}
 
 }

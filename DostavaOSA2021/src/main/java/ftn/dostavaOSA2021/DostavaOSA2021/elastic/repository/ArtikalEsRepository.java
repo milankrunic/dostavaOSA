@@ -12,4 +12,6 @@ public interface ArtikalEsRepository extends ElasticsearchRepository<ArtikalES, 
 
 	List<ArtikalES> findAllByNaziv(String naziv);
 	
+	List<ArtikalES> findAllByOpis(String opis);
+	
 }

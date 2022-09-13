@@ -32,7 +32,7 @@ public class Loader {
     @Transactional
     public void loadAll(){
 
-        artikalEsRepository.deleteAll();
+//        artikalEsRepository.deleteAll();
 
         List<ArtikalES> artikli = new ArrayList<>();
         for(Artikal artikal: artikalRepository.findAll()){
