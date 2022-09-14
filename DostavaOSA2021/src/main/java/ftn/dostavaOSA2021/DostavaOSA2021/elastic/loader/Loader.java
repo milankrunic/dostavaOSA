@@ -28,18 +28,37 @@ public class Loader {
     @Autowired
     ArtikalEsService artikalESService;
 
-    @PostConstruct
+	@PostConstruct
     @Transactional
     public void loadAll(){
-
-//        artikalEsRepository.deleteAll();
-
+		
         List<ArtikalES> artikli = new ArrayList<>();
         for(Artikal artikal: artikalRepository.findAll()){
-            artikli.add(new ArtikalES(artikal));
+        	
+        	//ovaj if da se ne bi stalno duplirale vrednosti u elasticsearchu
+        	if(artikal.getNaziv() != null) {
+        		continue;
+        	}else {
+        		artikli.add(new ArtikalES(artikal));
+        	}        	
         }
-
         artikalEsRepository.saveAll(artikli);
 
     }
+	
+//	@PostConstruct
+//    @Transactional
+//    public void loadAll(){
+//
+//		artikalEsRepository.deleteAll();
+//		
+//        List<ArtikalES> artikli = new ArrayList<>();
+//        for(Artikal artikal: artikalRepository.findAll()){
+//        	
+//        	artikli.add(new ArtikalES(artikal));
+//        	       	
+//        }
+//        artikalEsRepository.saveAll(artikli);
+//
+//    }
 }
