@@ -184,4 +184,9 @@ public class ArtikalEsService implements ArtikalEsServiceInterface{
 
         return elasticsearchRestTemplate.search(searchQuery, ArtikalES.class,  IndexCoordinates.of("artikli"));
     }
+
+	@Override
+	public ArtikalES save(ArtikalES artikalES) {
+		return artikalEsRepository.save(artikalES);
+	}
 }

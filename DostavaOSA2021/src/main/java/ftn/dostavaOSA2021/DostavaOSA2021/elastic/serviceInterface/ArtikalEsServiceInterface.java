@@ -21,4 +21,6 @@ public interface ArtikalEsServiceInterface {
 	
 	List<ArtikalEsDTO> findByNaziv(String naziv);
 	
+	public ArtikalES save(ArtikalES artikalES);
+	
 }

@@ -32,17 +32,17 @@ public class Loader {
     @Transactional
     public void loadAll(){
 		
-        List<ArtikalES> artikli = new ArrayList<>();
+        List<ArtikalES> artikliES = new ArrayList<>();
         for(Artikal artikal: artikalRepository.findAll()){
         	
         	//ovaj if da se ne bi stalno duplirale vrednosti u elasticsearchu
         	if(artikal.getNaziv() != null) {
         		continue;
         	}else {
-        		artikli.add(new ArtikalES(artikal));
+        		artikliES.add(new ArtikalES(artikal));
         	}        	
         }
-        artikalEsRepository.saveAll(artikli);
+        artikalEsRepository.saveAll(artikliES);
 
     }
 	

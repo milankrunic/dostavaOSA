@@ -75,13 +75,18 @@
                     class="form-control col-sm-5" id="nazivArtikla" placeholder="Unesite naziv artikla">
                  <input type="hidden" id="idArtikla">
 
-                 <label for="naziv">Opis:</label>
+                 <label for="naziv">Kratak Opis:</label>
                  <input type="text"
                  class="form-control col-sm-5" id="opis" placeholder="Unesite opis artikla">
 
                  <label for="naziv">Cena:</label>
                  <input type="number"
                  class="form-control col-sm-5" id="cena" placeholder="Unesite cenu artikla">
+                 
+             <!-- ZA ODABIR FILE-A -->
+            <label for="naziv">Dodajte file sa opisom artikla:</label>
+
+ 			<input type="file" id="opisFile" accept=".pdf" style="margin-top:30px">
 
             </div>
             
@@ -361,24 +366,32 @@
 	    </div>
 
 <!-- PRETRAGA ---------------------------------------------------------------------------------------------------------------------- -->
-	   	    
-	    <h5>Pretrazite artikle po nazivu</h5>
+			
+			
+		<div id="pretragaArtikla">	
 		
-		<form>
-		    <input type="text" id="naziv" placeholder="Unesite naziv artikla"/><br/><br/>
-  		    <input type="submit" value="Pretrazi" class="btn btn-success" id="btnNazivArtikla"/>  
-		</form>
+	      	<div style="margin-top: 3%;">
+	   			<label id="labela" style="margin-right: 4.3%; font-size: 23px;">Pretrazite artikle po nazivu</label>
+	   			<label id="labela" style="margin-right: 10%; font-size: 23px;">Pretrazite artikle po opisu</label>
+	   		</div>
 		
-		<h1>Rezultat pretrage</h1>
-		<pre>
-		    <span id="result"></span>
-		</pre>
+	        <div class="d-flex">             		
+	    	    <input type="text" id="naziv" style="margin-right: 10%;" placeholder="Unesite naziv artikla"/><br/><br/>	 		    
+			    <input type="text" id="opisPretraga" style="margin-right: 10%;" placeholder="Unesite opis artikla"/><br/><br/>		    
+	        </div>
+	              
+	        <div style="margin-top: 1%;">
+	           <input type="submit" value="Pretrazi" style="margin-right: 18.2%;" class="btn btn-success" id="btnNazivArtikla"/>  
+	           <input type="submit" style="margin-right: 1%;" value="Pretrazi" class="btn btn-success" id="btnOpisArtikla"/> 
+	        </div>
+	        
+	        <h1>Rezultat pretrage</h1>
+			<pre>
+		    	<span id="result"></span>
+			</pre>
+        
+        </div>
 		
-		
-		<!-- ZA ODABIR FILE-A TO CE MI TREBATI -->
-		<form name="foo" method="post" enctype="multipart/form-data">
-    		<input type="file" value="c:/passwords.txt">
-		</form>
 <!-- -------------------------------------------------------------------------------------------------------------------------------- -->
     </main>
 </body>

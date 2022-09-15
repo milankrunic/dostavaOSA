@@ -8,7 +8,7 @@ function PrikazSvihArtikala(){
     	$('#prijava').hide();
     	$('#btnLogin').hide();
     	$('#DugmePrikazLogiina').hide();
-
+    	$('#pretragaArtikla').hide();
 
         $.ajax({
 
@@ -99,7 +99,7 @@ function submitArtikal(){
                 odrediPrikaz('sviArtikli');
             },
             error : function(e){
-                alert('Doslo je do neke greške!');
+//                alert('Doslo je do neke greške!');
                 console.log("ERROR: ", e);
             }
         });
@@ -113,6 +113,7 @@ function editArtikal(id){
 	$('#dodajArtikal').show();
 	$('#izmeniArtikal').show();
 	$('#btnDodajArtikal').hide();
+	$('#pretragaArtikla').hide();
 	
     function prikaziArtikal(){
         $.ajax({

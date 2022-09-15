@@ -47,6 +47,12 @@ public class SearchController {
 
 	@PostMapping(path = "/pdf", consumes = "multipart/form-data")
 	public void uploadPdf(@ModelAttribute ArtikalEsDTO uploadModel) throws IOException{
+		ArtikalES a = new ArtikalES();
+		a.setNaziv(uploadModel.getNaziv());
+		a.setCena(uploadModel.getCena());
+		
+		a = artikalEsServiceInterface.save(a);
+		artikalEsServiceInterface.index(a);
 		artikalEsServiceInterface.indexUploadFile(uploadModel);
 	}
 	
