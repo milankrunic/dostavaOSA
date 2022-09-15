@@ -39,6 +39,11 @@ public class SearchController {
 		return artikalEsServiceInterface.getArtikalByOpis(textRequestDTO.getText());
 	}
 	
+	@PostMapping("/artikalCena")
+	public List<ArtikalEsDTO> getByCena(@RequestParam(name = "from") double from, @RequestParam(name = "to") double to){
+		return artikalEsServiceInterface.findByCena(from, to);
+	}
+	
 	//reindexira fajlove
 	@GetMapping("/reindex")
 	public void reindex() {
@@ -60,5 +65,4 @@ public class SearchController {
 	public List<ArtikalEsDTO> getByNaziv(@RequestParam(name = "naziv") String naziv){
 		return artikalEsServiceInterface.findByNaziv(naziv);
 	}
-
 }

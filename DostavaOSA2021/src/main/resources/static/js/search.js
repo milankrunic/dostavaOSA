@@ -14,6 +14,11 @@ $(document).ready(function () {
         event.preventDefault();
         pretragaPoOpisuArtikla();
     });
+    
+    $("#btnCenaArtikla").click(function (event) {
+        event.preventDefault();
+        pretragaPoCeniArtikla();
+    });
 
 });
 
@@ -110,6 +115,43 @@ function pretragaPoOpisuArtikla(){
 	          }
 	          console.log("SUCCESS : ", data);
 	          $("#btnOpisArtikla").prop("disabled", false);
+        },
+        error : function(e){
+            alert('Doslo je do neke greške!');
+            console.log("ERROR: ", e);
+        }
+    });
+	
+}
+
+function pretragaPoCeniArtikla(){
+	
+    var fromInput = "";
+    var toInput = "";
+    
+    fromInput = $("#cenaFrom").val();
+    toInput = $("#cenaTo").val();
+
+    var formData = {
+        "from" : fromInput,
+        "to" : toInput
+    }
+
+    $.ajax({
+        url : "http://localhost:8080/search/artikalCena?from="+fromInput+"&to="+toInput,
+        type : "POST",
+        contentType: 'application/json; charset=utf-8',
+        data : JSON.stringify(formData),
+        success: function(data){
+	          $('#result').empty();
+	          for(i = 0; i < data.length; i++){
+	              var result = data[i]
+	              $.each(result, function(key, value) {
+	                $('#result').append('<li>' + key + ': ' + value + '</li>');
+	              });
+	          }
+	          console.log("SUCCESS : ", data);
+	          $("#btnCenaArtikla").prop("disabled", false);
         },
         error : function(e){
             alert('Doslo je do neke greške!');

@@ -23,4 +23,6 @@ public interface ArtikalEsServiceInterface {
 	
 	public ArtikalES save(ArtikalES artikalES);
 	
+	List<ArtikalEsDTO> findByCena(double from, double to);
+	
 }

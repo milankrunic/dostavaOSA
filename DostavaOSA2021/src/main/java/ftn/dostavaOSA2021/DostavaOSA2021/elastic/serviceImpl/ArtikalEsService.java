@@ -189,4 +189,17 @@ public class ArtikalEsService implements ArtikalEsServiceInterface{
 	public ArtikalES save(ArtikalES artikalES) {
 		return artikalEsRepository.save(artikalES);
 	}
+
+	@Override
+	public List<ArtikalEsDTO> findByCena(double from, double to) {
+		String range = from + "-" + to;
+		
+		QueryBuilder priceQuery = SearchQueryGenerator.createRangeQueryBuilder(new SimpleQueryES("cena", range));
+		
+		BoolQueryBuilder boolQuery = QueryBuilders.boolQuery()
+				.must(priceQuery);
+
+		
+		return ArtikalMapper.mapDtos(searchByBoolQuery(boolQuery));
+	}
 }
