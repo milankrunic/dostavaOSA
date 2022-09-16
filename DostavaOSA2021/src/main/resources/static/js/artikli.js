@@ -9,6 +9,7 @@ function PrikazSvihArtikala(){
     	$('#btnLogin').hide();
     	$('#DugmePrikazLogiina').hide();
     	$('#pretragaArtikla').hide();
+    	$('#pretragaArtiklaDole').hide();
 
         $.ajax({
 
@@ -114,6 +115,7 @@ function editArtikal(id){
 	$('#izmeniArtikal').show();
 	$('#btnDodajArtikal').hide();
 	$('#pretragaArtikla').hide();
+	$('#pretragaArtiklaDole').hide();
 	
     function prikaziArtikal(){
         $.ajax({

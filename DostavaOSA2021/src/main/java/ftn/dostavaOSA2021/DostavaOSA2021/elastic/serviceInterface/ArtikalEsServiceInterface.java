@@ -25,4 +25,8 @@ public interface ArtikalEsServiceInterface {
 	
 	List<ArtikalEsDTO> findByCena(double from, double to);
 	
+	List<ArtikalEsDTO> findByNazivAndCena(String naziv, double from, double to);
+	
+	List<ArtikalEsDTO> findByNazivOrCena(String naziv, double from, double to);
+	
 }

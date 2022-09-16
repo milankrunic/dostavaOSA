@@ -176,14 +176,6 @@ public class ArtikalEsService implements ArtikalEsServiceInterface{
 		
 		return ArtikalMapper.mapDtos(searchByBoolQuery(boolQuery));
 	}
-	
-    private SearchHits<ArtikalES> searchByBoolQuery(BoolQueryBuilder boolQuery) {
-        NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
-                .withQuery(boolQuery)
-                .build();
-
-        return elasticsearchRestTemplate.search(searchQuery, ArtikalES.class,  IndexCoordinates.of("artikli"));
-    }
 
 	@Override
 	public ArtikalES save(ArtikalES artikalES) {
@@ -198,8 +190,45 @@ public class ArtikalEsService implements ArtikalEsServiceInterface{
 		
 		BoolQueryBuilder boolQuery = QueryBuilders.boolQuery()
 				.must(priceQuery);
-
 		
 		return ArtikalMapper.mapDtos(searchByBoolQuery(boolQuery));
+	}
+	
+    private SearchHits<ArtikalES> searchByBoolQuery(BoolQueryBuilder boolQuery) {
+        NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
+                .withQuery(boolQuery)
+                .build();
+
+        return elasticsearchRestTemplate.search(searchQuery, ArtikalES.class,  IndexCoordinates.of("artikli"));
+    }
+
+	@Override
+	public List<ArtikalEsDTO> findByNazivAndCena(String naziv, double from, double to) {
+		
+		String cena = from + "-" + to;
+		QueryBuilder nazivQuery = SearchQueryGenerator.createMatchQueryBuilder(new SimpleQueryES("naziv", naziv));
+		QueryBuilder cenaQuery = SearchQueryGenerator.createRangeQueryBuilder(new SimpleQueryES("cena", cena));
+		
+		BoolQueryBuilder boolQuery = QueryBuilders.boolQuery()
+				.must(nazivQuery)
+				.must(cenaQuery);
+		
+		return ArtikalMapper.mapDtos(searchByBoolQuery(boolQuery));
+		
+	}
+
+	@Override
+	public List<ArtikalEsDTO> findByNazivOrCena(String naziv, double from, double to) {
+
+		String cena = from + "-" + to;
+		QueryBuilder nazivQuery = SearchQueryGenerator.createMatchQueryBuilder(new SimpleQueryES("naziv", naziv));
+		QueryBuilder cenaQuery = SearchQueryGenerator.createRangeQueryBuilder(new SimpleQueryES("cena", cena));
+		
+		BoolQueryBuilder boolQuery = QueryBuilders.boolQuery()
+				.should(nazivQuery)
+				.should(cenaQuery);
+		
+		return ArtikalMapper.mapDtos(searchByBoolQuery(boolQuery));
+		
 	}
 }

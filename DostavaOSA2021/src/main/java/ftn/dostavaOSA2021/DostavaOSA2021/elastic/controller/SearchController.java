@@ -65,4 +65,14 @@ public class SearchController {
 	public List<ArtikalEsDTO> getByNaziv(@RequestParam(name = "naziv") String naziv){
 		return artikalEsServiceInterface.findByNaziv(naziv);
 	}
+	
+	@PostMapping("/artikalNazivAndCena")
+	public List<ArtikalEsDTO> getByNazivAndCena(@RequestParam(name = "naziv") String naziv, @RequestParam(name = "from") double from, @RequestParam(name = "to") double to){
+		return artikalEsServiceInterface.findByNazivAndCena(naziv, from, to);
+	}
+	
+	@PostMapping("/artikalNazivOrCena")
+	public List<ArtikalEsDTO> getByNazivOrCena(@RequestParam(name = "naziv") String naziv, @RequestParam(name = "from") double from, @RequestParam(name = "to") double to){
+		return artikalEsServiceInterface.findByNazivOrCena(naziv, from, to);
+	}
 }
