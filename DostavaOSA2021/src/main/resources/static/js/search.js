@@ -1,5 +1,10 @@
 $(document).ready(function () {
     
+    $("#DugmePrikazPretrageArtikla").click(function (event) {
+        event.preventDefault();
+        PretragaArtikla();
+    });
+	
     $("#btnNazivArtikla").click(function (event) {
         event.preventDefault();
         pretragaPoNazivuArtikla();
@@ -31,6 +36,12 @@ $(document).ready(function () {
     });
 
 });
+
+function PretragaArtikla(){
+	
+	var tabelaKomentar = $("#pretragaZaArtikal").slideDown('slow');
+	
+}
 
 function pretragaPoNazivuArtikla(){
 	

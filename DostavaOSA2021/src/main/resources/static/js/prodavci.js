@@ -9,6 +9,8 @@ function PrikazSvihProdavaca(){
     	$('#DugmePrikazArtikala').hide();
     	$('#btnLogin').hide();
     	$('#prikazDugicaSvihKorisnika').hide();
+    	$('#pretragaArtikla').hide();
+    	$('#pretragaArtiklaDole').hide();
         $.ajax({
 
             type: "GET",
@@ -154,6 +156,8 @@ function editProdavac(id){
 	$('#dodajProdavca').show();
 	$('#izmeniProdavca').show();
 	$('#btnDodajProdavca').hide();
+	$('#pretragaArtikla').hide();
+	$('#pretragaArtiklaDole').hide();
 	
     function prikaziProdavca(){
         $.ajax({
@@ -301,6 +305,8 @@ function PrikazSvihArtikalaProdavaca(){
     	$('#DugmePrikazKorisnike').hide();
     	$('#DugmePrikazLogiina').hide();
     	$('#dodajArtikal').hide();
+    	$('#pretragaArtikla').hide();
+    	$('#pretragaArtiklaDole').hide();
         $.ajax({
 
             type: "GET",
@@ -351,6 +357,8 @@ function PrikazSvihArtikalaProdavacaKodAdmina(id){
     	$('#DugmePrikazKorisnike').hide();
     	$('#DugmePrikazLogiina').hide();
     	$('#dodajArtikal').hide();
+    	$('#pretragaArtikla').hide();
+    	$('#pretragaArtiklaDole').hide();
         $.ajax({
 
             type: "GET",
@@ -455,6 +463,8 @@ function editArtikalProdavac(id){
 	$('#izmeniArtikalProdavca').show();
 	$('#btnDodajArtikalProdavca').hide();
 	$('#btnDodajArtikal').hide();
+	$('#pretragaArtikla').hide();
+	$('#pretragaArtiklaDole').hide();
 	
     function prikaziArtikalProdavca(){
         $.ajax({

@@ -8,6 +8,8 @@ function PrikazSvihKupaca(){
     	$('#prijava').hide();
     	$('#btnLogin').hide();
     	$('#prikazDugicaSvihKorisnika').hide();
+    	$('#pretragaArtikla').hide();
+    	$('#pretragaArtiklaDole').hide();
         $.ajax({
 
             type: "GET",
@@ -125,6 +127,8 @@ function editKupac(id){
 	$('#dodajKupca').show();
 	$('#izmeniKupca').show();
 	$('#btnDodajKupca').hide();
+	$('#pretragaArtikla').hide();
+	$('#pretragaArtiklaDole').hide();
 	
     function prikaziKupca(){
         $.ajax({
@@ -238,12 +242,16 @@ function vratiNaPocetnuKupac(){
 	$('#DugmePrikazArtikala').show();
 	$('#DugmePrikazKorisnike').show();
 	$('#DugmeArtikal').show();
+	$('#pretragaArtikla').show();
+	$('#pretragaArtiklaDole').show();
 }
 
 function vratiSaDodavanjaIizmeneKupac(){
 	$('#kupciTable').show();
 	$('#dodajKupca').hide();
 	$('#dodavanjeKupca').show();
+	$('#pretragaArtikla').show();
+	$('#pretragaArtiklaDole').show();
 }
 
 // IZMENA SAMOG SEBE -----------------------------------------------------------------------------------------------------
@@ -254,6 +262,8 @@ function prikazKupca(){
 	$('#dodajKupca').show();
 	$('#izmeniKupca').show();
 	$('#btnDodajKupca').hide();
+	$('#pretragaArtikla').hide();
+	$('#pretragaArtiklaDole').hide();
 	
     function prikaziKupca(){
         $.ajax({
@@ -333,6 +343,9 @@ function PrikazSvihProdavacaZaNarudzbinu(){
 
     function prikaziProdavcee(){
     	
+    	$('#pretragaArtikla').hide();
+    	$('#pretragaArtiklaDole').hide();
+    	
         $.ajax({
 
             type: "GET",
@@ -379,6 +392,8 @@ function PrikazSvihArtikalaProdavacaZaNarucivanje(id){
     	$('#prodavciTablee').hide();
     	$('#DugmeArtikal').hide();
     	$('#DugmeOdjava').hide();
+    	$('#pretragaArtikla').hide();
+    	$('#pretragaArtiklaDole').hide();
     	
         $.ajax({
 
@@ -427,6 +442,8 @@ function PrikazPocetneKorpe(id){
     	$('#DugmeArtikal').hide();
     	$('#DugmeOdjava').hide();
     	$('#artikliTableProdavac').hide();
+    	$('#pretragaArtikla').hide();
+    	$('#pretragaArtiklaDole').hide();
     	
         $.ajax({
 

@@ -11,6 +11,9 @@ function pokaziDugmiceKorisnika(){
 	$('#DugmePrikazArtikala').hide();
 	$('#DugmePrikazKorisnike').hide();
 	$('#DugmePrikazKomentare').hide();
+	$('#pretragaArtikla').hide();
+	$('#pretragaArtiklaDole').hide();
+	$('#DugmePrikazPretrageArtikla').hide();
 }
 
 function login(){

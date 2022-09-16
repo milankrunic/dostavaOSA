@@ -5,6 +5,8 @@ function PrikazSvihAdministratora(){
 
     function prikaziAdministratore(){
     	$('#prikazDugicaSvihKorisnika').hide();
+    	$('#pretragaArtikla').hide();
+    	$('#pretragaArtiklaDole').hide();
         $.ajax({
 
             type: "GET",
@@ -114,6 +116,8 @@ function editAdmin(id){
 	$('#dodajAdmina').show();
 	$('#izmeniAdmina').show();
 	$('#btnDodajAdmina').hide();
+	$('#pretragaArtikla').hide();
+	$('#pretragaArtiklaDole').hide();
 	
     function prikaziAdmina(){
         $.ajax({

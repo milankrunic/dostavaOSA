@@ -5,6 +5,9 @@ function PrikazSvihKomentara(){
 
     function prikaziKomentare(){
 
+    	$('#pretragaArtikla').hide();
+    	$('#pretragaArtiklaDole').hide();
+    	
         $.ajax({
 
             type: "GET",
@@ -55,7 +58,7 @@ function PrikazSvihKomentara(){
 
 function PrikazSvihKomentaraArtikla(id){
 
-    var tabelaKomentar = $("#komentariTablee").slideDown();;
+    var tabelaKomentar = $("#komentariTablee").slideDown();
     var tbodyKomentar = $("#tbodyKomentare");
     
     function prikaziKomentareArtikla(){

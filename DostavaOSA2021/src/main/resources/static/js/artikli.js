@@ -240,6 +240,8 @@ function vratiNaPocetnu(){
 	$('#DugmePrikazLogiina').show();
 	$('#DugmePrikazArtikala').show();
 	$('#DugmePrikazKorisnike').show();
+	$('#pretragaArtikla').show();
+	$('#pretragaArtiklaDole').show();
 }
 
 function vratiSaDodavanjaIizmene(){

@@ -48,11 +48,11 @@ form{
 }
 
 #dugmiciAdmin{
-	margin-left: 32%;
+	margin-left: 25%;
 }
 
 #dugmiciKupac{
-	margin-left: 30%;
+	margin-left: 25%;
 }
 
 #DugmePrikazArtikala{
@@ -71,6 +71,11 @@ form{
 }
 
 #DugmeOdjava{
+	padding: 20px;
+}
+
+#DugmePrikazPretrageArtikla{
+	margin-right: 2%;
 	padding: 20px;
 }
 
@@ -93,23 +98,23 @@ form{
 }
 
 #DugmeArtikal{
-	margin-left: 3%;
-	margin-right: 3%;
+	margin-left: 2%;
+	margin-right: 2%;
 	padding: 20px;
 }
 
 #DugmeNarucivanje{
-	margin-left: 3%;
-	margin-right: 3%;
-	padding: 15px;
+	margin-left: 2%;
+	margin-right: 2%;
+	padding: 20px;
 }
 
 #DugmeIzmena{
-	margin-right: 3%;
-	padding: 15px;
+	margin-right: 2%;
+	padding: 20px;
 }
 
 #DugmeOdjavaKupac{
 	margin-right: 3%;
-	padding: 15px;
+	padding: 20px;
 }
