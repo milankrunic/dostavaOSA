@@ -1,6 +1,5 @@
 package ftn.dostavaOSA2021.DostavaOSA2021.model;
 
-
 import java.util.Date;
 import java.util.List;
 

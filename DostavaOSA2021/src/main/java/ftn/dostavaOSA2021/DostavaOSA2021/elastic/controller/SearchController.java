@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import ftn.dostavaOSA2021.DostavaOSA2021.elastic.dto.ArtikalEsDTO;
 import ftn.dostavaOSA2021.DostavaOSA2021.elastic.dto.TextRequestDTO;
 import ftn.dostavaOSA2021.DostavaOSA2021.elastic.model.ArtikalES;
+import ftn.dostavaOSA2021.DostavaOSA2021.elastic.model.PorudzbinaES;
 import ftn.dostavaOSA2021.DostavaOSA2021.elastic.serviceInterface.ArtikalEsServiceInterface;
+import ftn.dostavaOSA2021.DostavaOSA2021.elastic.serviceInterface.PorudzbinaEsServiceInterface;
 
 @RestController
 @RequestMapping(value = "/search")
@@ -23,6 +25,9 @@ public class SearchController {
 	
 	@Autowired
 	ArtikalEsServiceInterface artikalEsServiceInterface;
+	
+	@Autowired
+	PorudzbinaEsServiceInterface porudzbinaEsServiceInterface;
 	
 	@PostMapping("/artikal")
 	public void index(@RequestBody ArtikalES artikalEs) {
@@ -74,5 +79,17 @@ public class SearchController {
 	@PostMapping("/artikalNazivOrCena")
 	public List<ArtikalEsDTO> getByNazivOrCena(@RequestParam(name = "naziv") String naziv, @RequestParam(name = "from") double from, @RequestParam(name = "to") double to){
 		return artikalEsServiceInterface.findByNazivOrCena(naziv, from, to);
+	}
+	
+// PORUDZBINA --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	@PostMapping("/porudzbina")
+	public void index(@RequestBody PorudzbinaES porudzbinaES) {
+		porudzbinaEsServiceInterface.index(porudzbinaES);
+	}
+	
+	@PostMapping("/porudzbinaKomentar")
+	public List<PorudzbinaES> getAllPorudzbinaKomentar(@RequestBody TextRequestDTO textRequestDTO){
+		return porudzbinaEsServiceInterface.getPorudzbinaByKomentar(textRequestDTO.getText());
 	}
 }

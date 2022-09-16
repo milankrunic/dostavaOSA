@@ -4,10 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import ftn.dostavaOSA2021.DostavaOSA2021.elastic.model.ArtikalES;
+import ftn.dostavaOSA2021.DostavaOSA2021.elastic.model.PorudzbinaES;
 import ftn.dostavaOSA2021.DostavaOSA2021.elastic.repository.ArtikalEsRepository;
+import ftn.dostavaOSA2021.DostavaOSA2021.elastic.repository.PorudzbinaEsRepository;
 import ftn.dostavaOSA2021.DostavaOSA2021.elastic.serviceImpl.ArtikalEsService;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Artikal;
+import ftn.dostavaOSA2021.DostavaOSA2021.model.Porudzbina;
 import ftn.dostavaOSA2021.DostavaOSA2021.repository.ArtikalRepository;
+import ftn.dostavaOSA2021.DostavaOSA2021.repository.PorudzbinaRepository;
 
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
@@ -27,6 +31,12 @@ public class Loader {
 
     @Autowired
     ArtikalEsService artikalESService;
+    
+    @Autowired
+    PorudzbinaRepository porudzbinaRepository;
+    
+    @Autowired
+    PorudzbinaEsRepository porudzbinaEsRepository;
 
 	@PostConstruct
     @Transactional
@@ -43,6 +53,18 @@ public class Loader {
         	}        	
         }
         artikalEsRepository.saveAll(artikliES);
+        
+        List<PorudzbinaES> porudzbinaES = new ArrayList<>();
+        for(Porudzbina porudzbina: porudzbinaRepository.findAll()){
+        	
+        	//ovaj if da se ne bi stalno duplirale vrednosti u elasticsearchu
+        	if(porudzbina.getKomentar() != null) {
+        		continue;
+        	}else {
+        		porudzbinaES.add(new PorudzbinaES(porudzbina));
+        	} 	
+        }
+        porudzbinaEsRepository.saveAll(porudzbinaES);
 
     }
 	
@@ -51,6 +73,7 @@ public class Loader {
 //    public void loadAll(){
 //
 //		artikalEsRepository.deleteAll();
+//		porudzbinaEsRepository.deleteAll();
 //		
 //        List<ArtikalES> artikli = new ArrayList<>();
 //        for(Artikal artikal: artikalRepository.findAll()){
@@ -59,6 +82,13 @@ public class Loader {
 //        	       	
 //        }
 //        artikalEsRepository.saveAll(artikli);
+//        
+//        List<PorudzbinaES> porudzbinaES = new ArrayList<>();
+//        for(Porudzbina porudzbina: porudzbinaRepository.findAll()){
+//            porudzbinaES.add(new PorudzbinaES(porudzbina));
+//        }
+//
+//        porudzbinaEsRepository.saveAll(porudzbinaES);
 //
 //    }
 }
