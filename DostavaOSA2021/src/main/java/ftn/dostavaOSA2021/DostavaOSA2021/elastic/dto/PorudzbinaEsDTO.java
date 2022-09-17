@@ -15,7 +15,7 @@ import lombok.Setter;
 @Builder
 public class PorudzbinaEsDTO {
 
-	private Date satnica;
+	private Date datum;
 	
 	private int ocena;
 	

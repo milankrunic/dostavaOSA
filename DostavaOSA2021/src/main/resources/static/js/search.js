@@ -34,6 +34,18 @@ $(document).ready(function () {
         event.preventDefault();
         pretragaPoNazivuOrCeniArtikla();
     });
+    
+ // ZA PORUDZBINU ----------------------------------------------------------------------------------------------------------------------------------
+    
+    $("#btnKomentarPorudzbine").click(function (event) {
+        event.preventDefault();
+        pretragaPoKomentaruPorudzbine();
+    });
+    
+    $("#btnOcenaPorudzbine").click(function (event) {
+        event.preventDefault();
+        pretragaPorudzbinePoOceni();
+    });
 
 });
 
@@ -253,6 +265,95 @@ function pretragaPoNazivuOrCeniArtikla(){
 	          }
 	          console.log("SUCCESS : ", data);
 	          $("#btnNazivOrCenaArtikla").prop("disabled", false);
+        },
+        error : function(e){
+            alert('Doslo je do neke greške!');
+            console.log("ERROR: ", e);
+        }
+    });
+ 
+}
+// ZA PORUDZBINU ----------------------------------------------------------------------------------------------------------------------------------
+	
+function pretragaPoKomentaruPorudzbine(){
+	
+    var komentarInput = "";
+    
+    komentarInput = $("#komentarPorudzbine").val();
+
+    var formData = {
+        "text" : komentarInput
+    }
+
+    $.ajax({
+        url : "http://localhost:8080/search/porudzbinaKomentar",
+        type : "POST",
+        contentType: 'application/json; charset=utf-8',
+        data : JSON.stringify(formData),
+        success: function(data){
+	          $('#resultPorudzbina').empty();
+	          for(i = 0; i < data.length; i++){
+	              var result = data[i]
+	              $.each(result, function(key, value) {
+	            	  if(result.anonimanKomentar===true){
+	            		  result.anonimanKomentar="Komentar je anoniman"
+	            	  }
+	            	  if(result.anonimanKomentar===false){
+	            		  result.anonimanKomentar="Komentar nije anoniman"
+	            	  }
+
+	                  $('#resultPorudzbina').append('<li>' + key + ': ' + value + '</li>');
+	                
+	              });
+	          }
+	          console.log("SUCCESS : ", data);
+	          $("#btnKomentarPorudzbine").prop("disabled", false);
+        },
+        error : function(e){
+            alert('Doslo je do neke greške!');
+            console.log("ERROR: ", e);
+        }
+    });
+	
+}
+
+function pretragaPorudzbinePoOceni(){
+	
+    var fromInput = "";
+    var toInput = "";
+    
+    fromInput = $("#ocenaFrom").val();
+    toInput = $("#ocenaTo").val();
+
+    var formData = {
+        "from" : fromInput,
+        "to" : toInput
+    }
+
+    $.ajax({
+        url : "http://localhost:8080/search/porudzbinaOcena?from="+fromInput+"&to="+toInput,
+        type : "POST",
+        contentType: 'application/json; charset=utf-8',
+        data : JSON.stringify(formData),
+        success: function(data){
+	          $('#resultPorudzbina').empty();
+	          for(i = 0; i < data.length; i++){
+	              var result = data[i]
+	              $.each(result, function(key, value) {
+	            	  
+	            	  if(result.anonimanKomentar===true){
+	            		  result.anonimanKomentar="Komentar je anoniman"
+	            	  }
+	            	  if(result.anonimanKomentar===false){
+	            		  result.anonimanKomentar="Komentar nije anoniman"
+	            	  }
+	            	  
+	            	  $('#resultPorudzbina').append('<li>' + key + ': ' + value + '</li>');
+	            	  
+	              });
+	          }
+	          console.log("SUCCESS : ", data);
+	          $("#btnOcenaPorudzbine").prop("disabled", false);
         },
         error : function(e){
             alert('Doslo je do neke greške!');

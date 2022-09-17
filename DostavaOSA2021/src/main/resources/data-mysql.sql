@@ -35,8 +35,8 @@ INSERT INTO artikal_akcija(akcija, artikal) VALUES(2, 3);
 
 --PORUDZBINE
 INSERT INTO porudzbina(satnica, ocena, komentar, dostavljeno, anoniman_komentar, arhiviran_komentar) VALUES('2020-05-03', 5, 'Zelim da mi dostavite hleb', true, true, true);
-INSERT INTO porudzbina(satnica, ocena, komentar, dostavljeno, anoniman_komentar, arhiviran_komentar) VALUES('2021-10-05', 5, 'Zelim da mi dostavite voce', true, true, true);
-INSERT INTO porudzbina(satnica, ocena, komentar, dostavljeno, anoniman_komentar, arhiviran_komentar) VALUES('2021-11-08', 5, 'Zelim da mi dostavite mleko', true, true, true);
+INSERT INTO porudzbina(satnica, ocena, komentar, dostavljeno, anoniman_komentar, arhiviran_komentar) VALUES('2021-10-05', 2, 'Zelim da mi dostavite voce', true, true, true);
+INSERT INTO porudzbina(satnica, ocena, komentar, dostavljeno, anoniman_komentar, arhiviran_komentar) VALUES('2021-11-08', 4, 'Zelim da mi dostavite mleko', true, false, true);
 
 --STAVKE
 INSERT INTO stavka(kolicina, artikal, korisnik) VALUES(20, 1, 2);

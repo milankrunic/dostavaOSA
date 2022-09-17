@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ftn.dostavaOSA2021.DostavaOSA2021.elastic.dto.ArtikalEsDTO;
+import ftn.dostavaOSA2021.DostavaOSA2021.elastic.dto.PorudzbinaEsDTO;
 import ftn.dostavaOSA2021.DostavaOSA2021.elastic.dto.TextRequestDTO;
 import ftn.dostavaOSA2021.DostavaOSA2021.elastic.model.ArtikalES;
 import ftn.dostavaOSA2021.DostavaOSA2021.elastic.model.PorudzbinaES;
@@ -91,5 +92,10 @@ public class SearchController {
 	@PostMapping("/porudzbinaKomentar")
 	public List<PorudzbinaES> getAllPorudzbinaKomentar(@RequestBody TextRequestDTO textRequestDTO){
 		return porudzbinaEsServiceInterface.getPorudzbinaByKomentar(textRequestDTO.getText());
+	}
+	
+	@PostMapping("/porudzbinaOcena")
+	public List<PorudzbinaEsDTO> getByOcena(@RequestParam(name = "from") double from, @RequestParam(name = "to") double to){
+		return porudzbinaEsServiceInterface.findByOcena(from, to);
 	}
 }
