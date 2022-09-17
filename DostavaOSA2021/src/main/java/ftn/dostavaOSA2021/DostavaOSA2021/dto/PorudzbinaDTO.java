@@ -14,13 +14,15 @@ public class PorudzbinaDTO {
 	private boolean dostavljeno;
 	private boolean anonimanKomentar;
 	private boolean arhiviranKomentar;
+	private Long idKupac;
+	private String kupac;
 	
 	public PorudzbinaDTO() {
 		super();
 	}
 
 	public PorudzbinaDTO(Long idPorudzbina, Date satnica, int ocena, String komentar, double cena, boolean dostavljeno,
-			boolean anonimanKomentar, boolean arhiviranKomentar) {
+			boolean anonimanKomentar, boolean arhiviranKomentar, Long idKupac, String kupac) {
 		super();
 		this.idPorudzbina = idPorudzbina;
 		this.satnica = satnica;
@@ -30,10 +32,12 @@ public class PorudzbinaDTO {
 		this.dostavljeno = dostavljeno;
 		this.anonimanKomentar = anonimanKomentar;
 		this.arhiviranKomentar = arhiviranKomentar;
+		this.idKupac = idKupac;
+		this.kupac = kupac;
 	}
 
 	public PorudzbinaDTO(Porudzbina p) {
-		this(p.getIdPorudzbina(), p.getSatnica(), p.getOcena(), p.getKomentar(), p.getCena(), p.isDostavljeno(), p.isAnonimanKomentar(), p.isArhiviranKomentar());
+		this(p.getIdPorudzbina(), p.getSatnica(), p.getOcena(), p.getKomentar(), p.getCena(), p.isDostavljeno(), p.isAnonimanKomentar(), p.isArhiviranKomentar(), p.getKupac().getIdKorisnik(), p.getKupac().getKorisnickoIme());
 	}
 
 	public Long getIdPorudzbina() {
@@ -98,6 +102,22 @@ public class PorudzbinaDTO {
 
 	public void setArhiviranKomentar(boolean arhiviranKomentar) {
 		this.arhiviranKomentar = arhiviranKomentar;
+	}
+
+	public Long getIdKupac() {
+		return idKupac;
+	}
+
+	public void setIdKupac(Long idKupac) {
+		this.idKupac = idKupac;
+	}
+
+	public String getKupac() {
+		return kupac;
+	}
+
+	public void setKupac(String kupac) {
+		this.kupac = kupac;
 	}
 
 }

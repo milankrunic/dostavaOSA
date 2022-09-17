@@ -1,6 +1,7 @@
 package ftn.dostavaOSA2021.DostavaOSA2021.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +10,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ftn.dostavaOSA2021.DostavaOSA2021.dto.PorudzbinaDTO;
+import ftn.dostavaOSA2021.DostavaOSA2021.elastic.model.PorudzbinaES;
+import ftn.dostavaOSA2021.DostavaOSA2021.elastic.serviceInterface.PorudzbinaEsServiceInterface;
+import ftn.dostavaOSA2021.DostavaOSA2021.model.Kupac;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Porudzbina;
 import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.KupacServiceInterface;
 import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.PorudzbinaServiceInterface;
@@ -26,6 +32,9 @@ public class PorudzbinaController {
 	
 	@Autowired
 	KupacServiceInterface kupacServiceInterface;
+	
+	@Autowired
+	PorudzbinaEsServiceInterface porudzbinaEsServiceInterface;
 	
 	@GetMapping
 	public ResponseEntity<List<PorudzbinaDTO>> getPorudzbine(){
@@ -49,23 +58,25 @@ public class PorudzbinaController {
 		return new ResponseEntity<PorudzbinaDTO>(new PorudzbinaDTO(porudzbina), HttpStatus.OK);
 	}
 	
-//	@PostMapping
-//	public ResponseEntity<PorudzbinaDTO> addPorudzbina(@RequestBody PorudzbinaDTO porudzbinaDTO){
-//
-//		Kupac kupac = kupacServiceInterface.findById(porudzbinaDTO.getIdKupca());
-//		
-//		Porudzbina por = new Porudzbina();
-//		por.setSatnica(new Date());
-//		por.setOcena(porudzbinaDTO.getOcena());
-//		por.setKomentar(porudzbinaDTO.getKomentar());
-//		por.setDostavljeno(porudzbinaDTO.isDostavljeno()); //?
-//		por.setAnonimanKomentar(porudzbinaDTO.isAnonimanKomentar()); //?
-//		por.setArhiviranKomentar(porudzbinaDTO.isArhiviranKomentar()); //?
-//		por.setKupac(kupac);
-//		
-//		por = porudzbinaServiceInterface.save(por);
-//		return new ResponseEntity<PorudzbinaDTO>(new PorudzbinaDTO(por), HttpStatus.CREATED);
-//	}
+	@PostMapping
+	public ResponseEntity<PorudzbinaDTO> addPorudzbina(@RequestBody PorudzbinaDTO porudzbinaDTO){
+
+		Kupac kupac = kupacServiceInterface.findById(porudzbinaDTO.getIdKupac());
+		
+		Porudzbina por = new Porudzbina();
+		por.setSatnica(new Date());
+		por.setOcena(porudzbinaDTO.getOcena());
+		por.setKomentar(porudzbinaDTO.getKomentar());
+		por.setCena(porudzbinaDTO.getCena());
+		por.setDostavljeno(porudzbinaDTO.isDostavljeno()); 
+		por.setAnonimanKomentar(porudzbinaDTO.isAnonimanKomentar()); 
+		por.setArhiviranKomentar(porudzbinaDTO.isArhiviranKomentar()); 
+		por.setKupac(kupac);
+		
+		por = porudzbinaServiceInterface.save(por);
+		porudzbinaEsServiceInterface.index(new PorudzbinaES(por));
+		return new ResponseEntity<PorudzbinaDTO>(new PorudzbinaDTO(por), HttpStatus.CREATED);
+	}
 
 //	@PutMapping(value = "/{id}", consumes = "application/json")
 //	public ResponseEntity<PorudzbinaDTO> updatePorudzbina(@RequestBody PorudzbinaDTO porudzbinaDTO, @PathVariable("id") Long id){

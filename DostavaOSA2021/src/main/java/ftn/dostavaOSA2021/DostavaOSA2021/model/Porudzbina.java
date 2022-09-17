@@ -1,13 +1,14 @@
 package ftn.dostavaOSA2021.DostavaOSA2021.model;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -40,12 +41,16 @@ public class Porudzbina {
 	@Column(name = "arhiviranKomentar", nullable = false)
 	private boolean arhiviranKomentar;
 	
+	@ManyToOne
+	@JoinColumn(name = "korisnik", referencedColumnName = "idKorisnik", nullable = false)
+	private Kupac kupac;
+	
 	public Porudzbina() {
 		super();
 	}
 
 	public Porudzbina(Long idPorudzbina, Date satnica, int ocena, String komentar, double cena, boolean dostavljeno,
-			boolean anonimanKomentar, boolean arhiviranKomentar, List<Stavka> stavke) {
+			boolean anonimanKomentar, boolean arhiviranKomentar, Kupac kupac) {
 		super();
 		this.idPorudzbina = idPorudzbina;
 		this.satnica = satnica;
@@ -55,6 +60,7 @@ public class Porudzbina {
 		this.dostavljeno = dostavljeno;
 		this.anonimanKomentar = anonimanKomentar;
 		this.arhiviranKomentar = arhiviranKomentar;
+		this.kupac = kupac;
 	}
 
 	public Long getIdPorudzbina() {
@@ -119,6 +125,14 @@ public class Porudzbina {
 
 	public void setArhiviranKomentar(boolean arhiviranKomentar) {
 		this.arhiviranKomentar = arhiviranKomentar;
+	}
+
+	public Kupac getKupac() {
+		return kupac;
+	}
+
+	public void setKupac(Kupac kupac) {
+		this.kupac = kupac;
 	}
 
 }

@@ -23,6 +23,9 @@ public class Kupac extends Korisnik{
 	@OneToMany(cascade = {ALL}, fetch=LAZY, mappedBy="kupac")
 	private List<Komentar> komentari = new ArrayList<Komentar>();
 	
+	@OneToMany(cascade = {ALL}, fetch=LAZY, mappedBy="kupac")
+	private List<Porudzbina> porudzbine = new ArrayList<Porudzbina>();
+	
 	public Kupac() {
 		super();
 	}

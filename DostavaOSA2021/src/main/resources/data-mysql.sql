@@ -34,9 +34,9 @@ INSERT INTO artikal_akcija(akcija, artikal) VALUES(3, 2);
 INSERT INTO artikal_akcija(akcija, artikal) VALUES(2, 3);
 
 --PORUDZBINE
-INSERT INTO porudzbina(satnica, ocena, komentar, cena, dostavljeno, anoniman_komentar, arhiviran_komentar) VALUES('2020-05-03', 5, 'Zelim da mi dostavite hleb', 200, true, true, true);
-INSERT INTO porudzbina(satnica, ocena, komentar, cena, dostavljeno, anoniman_komentar, arhiviran_komentar) VALUES('2021-10-05', 2, 'Zelim da mi dostavite voce', 150, true, true, true);
-INSERT INTO porudzbina(satnica, ocena, komentar, cena, dostavljeno, anoniman_komentar, arhiviran_komentar) VALUES('2021-11-08', 4, 'Zelim da mi dostavite mleko', 120, true, false, true);
+INSERT INTO porudzbina(satnica, ocena, komentar, cena, dostavljeno, anoniman_komentar, arhiviran_komentar, korisnik) VALUES('2020-05-03', 4, 'Nije los artikal, bio sam gladan hleb mi je prijao, brzo je i dostavljeno!', 200, true, true, true, 3);
+INSERT INTO porudzbina(satnica, ocena, komentar, cena, dostavljeno, anoniman_komentar, arhiviran_komentar, korisnik) VALUES('2021-10-05', 5, 'Odlican artikal i zaista brza dostava kada zelite banane!', 150, true, true, true, 4);
+INSERT INTO porudzbina(satnica, ocena, komentar, cena, dostavljeno, anoniman_komentar, arhiviran_komentar, korisnik) VALUES('2021-11-08', 2, 'Ne svidja mi se artikal, cini mi se da mu je istekao rok, ovo mleko treba baciti!', 120, true, false, true, 2);
 
 --STAVKE
 INSERT INTO stavka(kolicina, artikal, korisnik) VALUES(20, 1, 2);
@@ -44,6 +44,6 @@ INSERT INTO stavka(kolicina, artikal, korisnik) VALUES(10, 2, 4);
 INSERT INTO stavka(kolicina, artikal, korisnik) VALUES(50, 3, 3);
 
 --KOMENTARI
-INSERT INTO komentar(tekst, ocena, prihvacen, arhiviran, artikal, korisnik) VALUES('Odlican artikal!', 5, true, false, 2, 3);
-INSERT INTO komentar(tekst, ocena, prihvacen, arhiviran, artikal, korisnik) VALUES('Ne svidja mi se artikal!', 2, true, false, 2, 2);
-INSERT INTO komentar(tekst, ocena, prihvacen, arhiviran, artikal, korisnik) VALUES('Nije los artikal!', 4, true, false, 3, 4);
+INSERT INTO komentar(tekst, ocena, prihvacen, arhiviran, artikal, korisnik) VALUES('Odlican artikal i zaista brza dostava kada zelite banane!', 5, true, false, 2, 3);
+INSERT INTO komentar(tekst, ocena, prihvacen, arhiviran, artikal, korisnik) VALUES('Ne svidja mi se artikal, cini mi se da mu je istekao rok, ovo mleko treba baciti!', 2, true, false, 3, 2);
+INSERT INTO komentar(tekst, ocena, prihvacen, arhiviran, artikal, korisnik) VALUES('Nije los artikal, bio sam gladan hleb mi je prijao, brzo je i dostavljeno!', 4, true, false, 1, 4);
