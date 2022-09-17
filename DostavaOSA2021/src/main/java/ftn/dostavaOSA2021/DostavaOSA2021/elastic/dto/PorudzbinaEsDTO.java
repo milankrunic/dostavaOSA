@@ -23,4 +23,6 @@ public class PorudzbinaEsDTO {
 	
 	private boolean anonimanKomentar;
 	
+	private double cena;
+	
 }

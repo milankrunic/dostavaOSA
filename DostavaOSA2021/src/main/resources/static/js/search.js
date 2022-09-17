@@ -4,6 +4,11 @@ $(document).ready(function () {
         event.preventDefault();
         PretragaArtikla();
     });
+    
+    $("#DugmePrikazPretragePorudzbine").click(function (event) {
+        event.preventDefault();
+        PretragaPorudzbine();
+    });
 	
     $("#btnNazivArtikla").click(function (event) {
         event.preventDefault();
@@ -56,12 +61,23 @@ $(document).ready(function () {
         event.preventDefault();
         pretragaPoKomentaruOrOceniPorudzbine();
     });
+    
+    $("#btnCenaPorudzbine").click(function (event) {
+        event.preventDefault();
+        pretragaPorudzbinePoCeni();
+    });
 
 });
 
 function PretragaArtikla(){
 	
-	var tabelaKomentar = $("#pretragaZaArtikal").slideDown('slow');
+	var tabelaArtikal = $("#pretragaZaArtikal").slideDown('slow');
+	
+}
+
+function PretragaPorudzbine(){
+	
+	var tabelaPorudzbina = $("#pretragaZaPorudzbinu").slideDown('slow');
 	
 }
 
@@ -462,6 +478,52 @@ function pretragaPoKomentaruOrOceniPorudzbine(){
 	          }
 	          console.log("SUCCESS : ", data);
 	          $("#btnKomentarOrOcenaPorudzbine").prop("disabled", false);
+        },
+        error : function(e){
+            alert('Doslo je do neke greške!');
+            console.log("ERROR: ", e);
+        }
+    });
+	
+}
+
+function pretragaPorudzbinePoCeni(){
+	
+    var fromInput = "";
+    var toInput = "";
+    
+    fromInput = $("#cenaPFrom").val();
+    toInput = $("#cenaPTo").val();
+
+    var formData = {
+        "from" : fromInput,
+        "to" : toInput
+    }
+
+    $.ajax({
+        url : "http://localhost:8080/search/porudzbinaCena?from="+fromInput+"&to="+toInput,
+        type : "POST",
+        contentType: 'application/json; charset=utf-8',
+        data : JSON.stringify(formData),
+        success: function(data){
+	          $('#resultPorudzbina').empty();
+	          for(i = 0; i < data.length; i++){
+	              var result = data[i]
+	              $.each(result, function(key, value) {
+	            	  
+	            	  if(result.anonimanKomentar===true){
+	            		  result.anonimanKomentar="Komentar je anoniman"
+	            	  }
+	            	  if(result.anonimanKomentar===false){
+	            		  result.anonimanKomentar="Komentar nije anoniman"
+	            	  }
+	            	  
+	            	  $('#resultPorudzbina').append('<li>' + key + ': ' + value + '</li>');
+	            	  
+	              });
+	          }
+	          console.log("SUCCESS : ", data);
+	          $("#btnCenaPorudzbine").prop("disabled", false);
         },
         error : function(e){
             alert('Doslo je do neke greške!');

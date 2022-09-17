@@ -28,6 +28,9 @@ public class Porudzbina {
 	@Column(name = "komentar", nullable = false)
 	private String komentar;
 	
+	@Column(name = "cena", nullable = false)
+	private double cena;
+	
 	@Column(name = "dostavljeno", nullable = false)
 	private boolean dostavljeno;
 	
@@ -41,13 +44,14 @@ public class Porudzbina {
 		super();
 	}
 
-	public Porudzbina(Long idPorudzbina, Date satnica, int ocena, String komentar, boolean dostavljeno,
+	public Porudzbina(Long idPorudzbina, Date satnica, int ocena, String komentar, double cena, boolean dostavljeno,
 			boolean anonimanKomentar, boolean arhiviranKomentar, List<Stavka> stavke) {
 		super();
 		this.idPorudzbina = idPorudzbina;
 		this.satnica = satnica;
 		this.ocena = ocena;
 		this.komentar = komentar;
+		this.cena = cena;
 		this.dostavljeno = dostavljeno;
 		this.anonimanKomentar = anonimanKomentar;
 		this.arhiviranKomentar = arhiviranKomentar;
@@ -83,6 +87,14 @@ public class Porudzbina {
 
 	public void setKomentar(String komentar) {
 		this.komentar = komentar;
+	}
+
+	public double getCena() {
+		return cena;
+	}
+
+	public void setCena(double cena) {
+		this.cena = cena;
 	}
 
 	public boolean isDostavljeno() {

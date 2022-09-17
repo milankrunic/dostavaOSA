@@ -3,6 +3,7 @@ package ftn.dostavaOSA2021.DostavaOSA2021.elastic.mapper;
 import java.util.List;
 
 import org.springframework.data.elasticsearch.core.SearchHits;
+
 import ftn.dostavaOSA2021.DostavaOSA2021.elastic.dto.PorudzbinaEsDTO;
 import ftn.dostavaOSA2021.DostavaOSA2021.elastic.model.PorudzbinaES;
 
@@ -20,6 +21,7 @@ public class PorudzbinaMapper {
 				.ocena(porudzbinaES.getOcena())
 				.komentar(porudzbinaES.getKomentar())
 				.anonimanKomentar(porudzbinaES.isAnonimanKomentar())
+				.cena(porudzbinaES.getCena())
 				.build();
 	}
 	

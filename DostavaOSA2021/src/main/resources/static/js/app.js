@@ -14,6 +14,7 @@ function pokaziDugmiceKorisnika(){
 	$('#pretragaArtikla').hide();
 	$('#pretragaArtiklaDole').hide();
 	$('#DugmePrikazPretrageArtikla').hide();
+	$('#DugmePrikazPretragePorudzbine').hide();
 }
 
 function login(){

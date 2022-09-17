@@ -11,10 +11,12 @@ public interface PorudzbinaEsServiceInterface {
 	
 	List<PorudzbinaES> getPorudzbinaByKomentar(String komentar);
 	
-	List<PorudzbinaEsDTO> findByOcena(double from, double to);
+	List<PorudzbinaEsDTO> findByOcena(int from, int to);
 	
-	List<PorudzbinaEsDTO> findByKomentarAndOcena(String komentar, double from, double to);
+	List<PorudzbinaEsDTO> findByKomentarAndOcena(String komentar, int from, int to);
 	
-	List<PorudzbinaEsDTO> findByKomentarOrOcena(String komentar, double from, double to);
+	List<PorudzbinaEsDTO> findByKomentarOrOcena(String komentar, int from, int to);
+	
+	List<PorudzbinaEsDTO> findByCenaPorudzbine(double from, double to);
 	
 }

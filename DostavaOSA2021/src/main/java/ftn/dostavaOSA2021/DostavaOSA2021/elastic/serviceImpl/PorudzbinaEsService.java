@@ -41,14 +41,14 @@ public class PorudzbinaEsService implements PorudzbinaEsServiceInterface{
 	}
 
 	@Override
-	public List<PorudzbinaEsDTO> findByOcena(double from, double to) {
+	public List<PorudzbinaEsDTO> findByOcena(int from, int to) {
 
 		String range = from + "-" + to;
 		
-		QueryBuilder priceQuery = SearchQueryGenerator.createRangeQueryBuilder(new SimpleQueryES("ocena", range));
+		QueryBuilder ocenaQuery = SearchQueryGenerator.createRangeQueryBuilder(new SimpleQueryES("ocena", range));
 		
 		BoolQueryBuilder boolQuery = QueryBuilders.boolQuery()
-				.must(priceQuery);
+				.must(ocenaQuery);
 		
 		return PorudzbinaMapper.mapDtos(searchByBoolQuery(boolQuery));
 		
@@ -63,7 +63,7 @@ public class PorudzbinaEsService implements PorudzbinaEsServiceInterface{
     }
 
 	@Override
-	public List<PorudzbinaEsDTO> findByKomentarAndOcena(String komentar, double from, double to) {
+	public List<PorudzbinaEsDTO> findByKomentarAndOcena(String komentar, int from, int to) {
 
 		String ocena = from + "-" + to;
 		QueryBuilder komentarQuery = SearchQueryGenerator.createMatchQueryBuilder(new SimpleQueryES("komentar", komentar));
@@ -78,7 +78,7 @@ public class PorudzbinaEsService implements PorudzbinaEsServiceInterface{
 	}
 
 	@Override
-	public List<PorudzbinaEsDTO> findByKomentarOrOcena(String komentar, double from, double to) {
+	public List<PorudzbinaEsDTO> findByKomentarOrOcena(String komentar, int from, int to) {
 
 		String ocena = from + "-" + to;
 		QueryBuilder komentarQuery = SearchQueryGenerator.createMatchQueryBuilder(new SimpleQueryES("komentar", komentar));
@@ -87,6 +87,20 @@ public class PorudzbinaEsService implements PorudzbinaEsServiceInterface{
 		BoolQueryBuilder boolQuery = QueryBuilders.boolQuery()
 				.should(komentarQuery)
 				.should(ocenaQuery);
+		
+		return PorudzbinaMapper.mapDtos(searchByBoolQuery(boolQuery));
+		
+	}
+
+	@Override
+	public List<PorudzbinaEsDTO> findByCenaPorudzbine(double from, double to) {
+
+		String range = from + "-" + to;
+		
+		QueryBuilder priceQuery = SearchQueryGenerator.createRangeQueryBuilder(new SimpleQueryES("cena", range));
+		
+		BoolQueryBuilder boolQuery = QueryBuilders.boolQuery()
+				.must(priceQuery);
 		
 		return PorudzbinaMapper.mapDtos(searchByBoolQuery(boolQuery));
 		

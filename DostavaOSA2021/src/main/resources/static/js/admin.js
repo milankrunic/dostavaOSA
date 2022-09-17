@@ -7,6 +7,7 @@ function PrikazSvihAdministratora(){
     	$('#prikazDugicaSvihKorisnika').hide();
     	$('#pretragaArtikla').hide();
     	$('#pretragaArtiklaDole').hide();
+    	$('#DugmePrikazPretragePorudzbine').hide();
         $.ajax({
 
             type: "GET",

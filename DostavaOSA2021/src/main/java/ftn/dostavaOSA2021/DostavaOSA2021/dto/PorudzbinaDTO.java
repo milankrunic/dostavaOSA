@@ -10,6 +10,7 @@ public class PorudzbinaDTO {
 	private Date satnica;
 	private int ocena;
 	private String komentar;
+	private double cena;
 	private boolean dostavljeno;
 	private boolean anonimanKomentar;
 	private boolean arhiviranKomentar;
@@ -18,20 +19,21 @@ public class PorudzbinaDTO {
 		super();
 	}
 
-	public PorudzbinaDTO(Long idPorudzbina, Date satnica, int ocena, String komentar, boolean dostavljeno,
+	public PorudzbinaDTO(Long idPorudzbina, Date satnica, int ocena, String komentar, double cena, boolean dostavljeno,
 			boolean anonimanKomentar, boolean arhiviranKomentar) {
 		super();
 		this.idPorudzbina = idPorudzbina;
 		this.satnica = satnica;
 		this.ocena = ocena;
 		this.komentar = komentar;
+		this.cena = cena;
 		this.dostavljeno = dostavljeno;
 		this.anonimanKomentar = anonimanKomentar;
 		this.arhiviranKomentar = arhiviranKomentar;
 	}
 
 	public PorudzbinaDTO(Porudzbina p) {
-		this(p.getIdPorudzbina(), p.getSatnica(), p.getOcena(), p.getKomentar(), p.isDostavljeno(), p.isAnonimanKomentar(), p.isArhiviranKomentar());
+		this(p.getIdPorudzbina(), p.getSatnica(), p.getOcena(), p.getKomentar(), p.getCena(), p.isDostavljeno(), p.isAnonimanKomentar(), p.isArhiviranKomentar());
 	}
 
 	public Long getIdPorudzbina() {
@@ -64,6 +66,14 @@ public class PorudzbinaDTO {
 
 	public void setKomentar(String komentar) {
 		this.komentar = komentar;
+	}
+	
+	public double getCena() {
+		return cena;
+	}
+
+	public void setCena(double cena) {
+		this.cena = cena;
 	}
 
 	public boolean isDostavljeno() {

@@ -40,6 +40,7 @@
 	    <button class="btn btn-primary" onclick="pokaziDugmiceKorisnika()" id="DugmePrikazKorisnike">Korisnici</button>
 	    <button class="btn btn-primary" onclick="PrikazSvihKomentara()" id="DugmePrikazKomentare">Komentari</button>
 	    <button class="btn btn-primary" onclick="PretragaArtikla()" id="DugmePrikazPretrageArtikla">Pretraga artikla</button>
+	    <button class="btn btn-primary" onclick="PretragaPorudzbine()" id="DugmePrikazPretragePorudzbine">Pretraga porudzbine</button>
 	    <button class="btn btn-primary" onclick="odjava()" id="DugmeOdjava">Odjava</button>
 	 </div> 
 	   
@@ -437,26 +438,30 @@
 
 <!-- PRETRAGA PORUDZBINE---------------------------------------------------------------------------------------------------------------------- -->
 			
-		<div id="pretragaZaPorudzbinu">
+		<div id="pretragaZaPorudzbinu" style="display: none;">
 						
 			<div id="pretragaPorudzbinaGore">	
 			
 		      	<div style="margin-top: 3%;">
-		   			<label id="labela" style="margin-right: 4.3%; font-size: 23px;">Pretrazite porudzbinu po komentaru</label>
-		   			
-		   			<label id="labela" style="margin-right: 10%; font-size: 23px;">Pretrazite porudzbinu po oceni od-do:</label>
+		   			<label id="labela" style="margin-right: 4.3%; font-size: 23px;">Pretrazite porudzbinu po komentaru</label>		   			
+		   			<label id="labela" style="margin-right: 8%; font-size: 23px;">Pretrazite porudzbinu po oceni od-do:</label>
+		   			<label id="labela" style="margin-right: 0%; font-size: 23px;">Pretrazite porudzbinu po ceni od-do:</label>
 		   		</div>
 			
 		        <div class="d-flex">             		
 		    	    <input type="text" id="komentarPorudzbine" style="margin-right: 16.8%;" placeholder="Unesite komentar"/><br/><br/>	 		    		
 				    
 				    <input type="text" id="ocenaFrom" style="margin-right: 1%;" placeholder="OD:"/><br/><br/>	
-				    <input type="text" id="ocenaTo" style="margin-right: 10%;" placeholder="DO:"/><br/><br/>	    
+				    <input type="text" id="ocenaTo" style="margin-right: 6.4%;" placeholder="DO:"/><br/><br/>	
+				    
+				    <input type="text" id="cenaPFrom" style="margin-right: 1%;" placeholder="OD:"/><br/><br/>	
+				    <input type="text" id="cenaPTo" style="margin-right: 10%;" placeholder="DO:"/><br/><br/>    
 		        </div>
 		              
 		        <div style="margin-top: 1%;">
 		           <input type="submit" value="Pretrazi" style="margin-right: 25%;" class="btn btn-success" id="btnKomentarPorudzbine"/>  		           
-		           <input type="submit" style="margin-right: 1%;" value="Pretrazi" class="btn btn-success" id="btnOcenaPorudzbine"/>
+		           <input type="submit" style="margin-right: 30.3%;" value="Pretrazi" class="btn btn-success" id="btnOcenaPorudzbine"/>
+		           <input type="submit" style="margin-right: 1%;" value="Pretrazi" class="btn btn-success" id="btnCenaPorudzbine"/>
 		        </div>
 	        
 	        </div>

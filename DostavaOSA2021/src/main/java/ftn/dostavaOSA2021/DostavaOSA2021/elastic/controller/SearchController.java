@@ -95,17 +95,22 @@ public class SearchController {
 	}
 	
 	@PostMapping("/porudzbinaOcena")
-	public List<PorudzbinaEsDTO> getByOcena(@RequestParam(name = "from") double from, @RequestParam(name = "to") double to){
+	public List<PorudzbinaEsDTO> getByOcena(@RequestParam(name = "from") int from, @RequestParam(name = "to") int to){
 		return porudzbinaEsServiceInterface.findByOcena(from, to);
 	}
 	
 	@PostMapping("/porudzbinaKomentarAndOcena")
-	public List<PorudzbinaEsDTO> getByKomentarAndOcena(@RequestParam(name = "komentar") String komentar, @RequestParam(name = "from") double from, @RequestParam(name = "to") double to){
+	public List<PorudzbinaEsDTO> getByKomentarAndOcena(@RequestParam(name = "komentar") String komentar, @RequestParam(name = "from") int from, @RequestParam(name = "to") int to){
 		return porudzbinaEsServiceInterface.findByKomentarAndOcena(komentar, from, to);
 	}
 	
 	@PostMapping("/porudzbinaKomentarOrOcena")
-	public List<PorudzbinaEsDTO> getByKomentarOrOcena(@RequestParam(name = "komentar") String komentar, @RequestParam(name = "from") double from, @RequestParam(name = "to") double to){
+	public List<PorudzbinaEsDTO> getByKomentarOrOcena(@RequestParam(name = "komentar") String komentar, @RequestParam(name = "from") int from, @RequestParam(name = "to") int to){
 		return porudzbinaEsServiceInterface.findByKomentarOrOcena(komentar, from, to);
+	}
+	
+	@PostMapping("/porudzbinaCena")
+	public List<PorudzbinaEsDTO> getByCenaPorudzbine(@RequestParam(name = "from") double from, @RequestParam(name = "to") double to){
+		return porudzbinaEsServiceInterface.findByCenaPorudzbine(from, to);
 	}
 }
