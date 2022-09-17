@@ -46,6 +46,16 @@ $(document).ready(function () {
         event.preventDefault();
         pretragaPorudzbinePoOceni();
     });
+    
+    $("#btnKomentarAndOcenaPorudzbine").click(function (event) {
+        event.preventDefault();
+        pretragaPoKomentaruAndOceniPorudzbine();
+    });
+    
+    $("#btnKomentarOrOcenaPorudzbine").click(function (event) {
+        event.preventDefault();
+        pretragaPoKomentaruOrOceniPorudzbine();
+    });
 
 });
 
@@ -354,6 +364,104 @@ function pretragaPorudzbinePoOceni(){
 	          }
 	          console.log("SUCCESS : ", data);
 	          $("#btnOcenaPorudzbine").prop("disabled", false);
+        },
+        error : function(e){
+            alert('Doslo je do neke greške!');
+            console.log("ERROR: ", e);
+        }
+    });
+	
+}
+
+function pretragaPoKomentaruAndOceniPorudzbine(){
+	
+	var komentarInput = "";
+    var fromInput = "";
+    var toInput = "";
+    
+    komentarInput = $("#komentarAnd").val();
+    fromInput = $("#ocenaFromAnd").val();
+    toInput = $("#ocenaToAnd").val();
+
+    var formData = {
+    	"komentar" : komentarInput,
+        "from" : fromInput,
+        "to" : toInput
+    }
+
+    $.ajax({
+        url : "http://localhost:8080/search/porudzbinaKomentarAndOcena?komentar="+komentarInput+"&from="+fromInput+"&to="+toInput,
+        type : "POST",
+        contentType: 'application/json; charset=utf-8',
+        data : JSON.stringify(formData),
+        success: function(data){
+	          $('#resultPorudzbina').empty();
+	          for(i = 0; i < data.length; i++){
+	              var result = data[i]
+	              $.each(result, function(key, value) {
+	            	  
+	            	  if(result.anonimanKomentar===true){
+	            		  result.anonimanKomentar="Komentar je anoniman"
+	            	  }
+	            	  if(result.anonimanKomentar===false){
+	            		  result.anonimanKomentar="Komentar nije anoniman"
+	            	  }
+	            	  
+	                  $('#resultPorudzbina').append('<li>' + key + ': ' + value + '</li>');
+	                  
+	              });
+	          }
+	          console.log("SUCCESS : ", data);
+	          $("#btnKomentarAndOcenaPorudzbine").prop("disabled", false);
+        },
+        error : function(e){
+            alert('Doslo je do neke greške!');
+            console.log("ERROR: ", e);
+        }
+    });
+	
+}
+
+function pretragaPoKomentaruOrOceniPorudzbine(){
+	
+	var komentarInput = "";
+    var fromInput = "";
+    var toInput = "";
+    
+    komentarInput = $("#komentarOr").val();
+    fromInput = $("#ocenaFromOr").val();
+    toInput = $("#ocenaToOr").val();
+
+    var formData = {
+    	"komentar" : komentarInput,
+        "from" : fromInput,
+        "to" : toInput
+    }
+
+    $.ajax({
+        url : "http://localhost:8080/search/porudzbinaKomentarOrOcena?komentar="+komentarInput+"&from="+fromInput+"&to="+toInput,
+        type : "POST",
+        contentType: 'application/json; charset=utf-8',
+        data : JSON.stringify(formData),
+        success: function(data){
+	          $('#resultPorudzbina').empty();
+	          for(i = 0; i < data.length; i++){
+	              var result = data[i]
+	              $.each(result, function(key, value) {
+	            	  
+	            	  if(result.anonimanKomentar===true){
+	            		  result.anonimanKomentar="Komentar je anoniman"
+	            	  }
+	            	  if(result.anonimanKomentar===false){
+	            		  result.anonimanKomentar="Komentar nije anoniman"
+	            	  }
+	            	  
+	                  $('#resultPorudzbina').append('<li>' + key + ': ' + value + '</li>');
+	                  
+	              });
+	          }
+	          console.log("SUCCESS : ", data);
+	          $("#btnKomentarOrOcenaPorudzbine").prop("disabled", false);
         },
         error : function(e){
             alert('Doslo je do neke greške!');

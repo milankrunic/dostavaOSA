@@ -98,4 +98,14 @@ public class SearchController {
 	public List<PorudzbinaEsDTO> getByOcena(@RequestParam(name = "from") double from, @RequestParam(name = "to") double to){
 		return porudzbinaEsServiceInterface.findByOcena(from, to);
 	}
+	
+	@PostMapping("/porudzbinaKomentarAndOcena")
+	public List<PorudzbinaEsDTO> getByKomentarAndOcena(@RequestParam(name = "komentar") String komentar, @RequestParam(name = "from") double from, @RequestParam(name = "to") double to){
+		return porudzbinaEsServiceInterface.findByKomentarAndOcena(komentar, from, to);
+	}
+	
+	@PostMapping("/porudzbinaKomentarOrOcena")
+	public List<PorudzbinaEsDTO> getByKomentarOrOcena(@RequestParam(name = "komentar") String komentar, @RequestParam(name = "from") double from, @RequestParam(name = "to") double to){
+		return porudzbinaEsServiceInterface.findByKomentarOrOcena(komentar, from, to);
+	}
 }

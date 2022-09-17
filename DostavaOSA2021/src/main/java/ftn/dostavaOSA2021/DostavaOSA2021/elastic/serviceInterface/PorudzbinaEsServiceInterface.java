@@ -13,4 +13,8 @@ public interface PorudzbinaEsServiceInterface {
 	
 	List<PorudzbinaEsDTO> findByOcena(double from, double to);
 	
+	List<PorudzbinaEsDTO> findByKomentarAndOcena(String komentar, double from, double to);
+	
+	List<PorudzbinaEsDTO> findByKomentarOrOcena(String komentar, double from, double to);
+	
 }

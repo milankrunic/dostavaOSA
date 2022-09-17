@@ -62,4 +62,34 @@ public class PorudzbinaEsService implements PorudzbinaEsServiceInterface{
         return elasticsearchRestTemplate.search(searchQuery, PorudzbinaES.class,  IndexCoordinates.of("porudzbine"));
     }
 
+	@Override
+	public List<PorudzbinaEsDTO> findByKomentarAndOcena(String komentar, double from, double to) {
+
+		String ocena = from + "-" + to;
+		QueryBuilder komentarQuery = SearchQueryGenerator.createMatchQueryBuilder(new SimpleQueryES("komentar", komentar));
+		QueryBuilder ocenaQuery = SearchQueryGenerator.createRangeQueryBuilder(new SimpleQueryES("ocena", ocena));
+		
+		BoolQueryBuilder boolQuery = QueryBuilders.boolQuery()
+				.must(komentarQuery)
+				.must(ocenaQuery);
+		
+		return PorudzbinaMapper.mapDtos(searchByBoolQuery(boolQuery));
+		
+	}
+
+	@Override
+	public List<PorudzbinaEsDTO> findByKomentarOrOcena(String komentar, double from, double to) {
+
+		String ocena = from + "-" + to;
+		QueryBuilder komentarQuery = SearchQueryGenerator.createMatchQueryBuilder(new SimpleQueryES("komentar", komentar));
+		QueryBuilder ocenaQuery = SearchQueryGenerator.createRangeQueryBuilder(new SimpleQueryES("ocena", ocena));
+		
+		BoolQueryBuilder boolQuery = QueryBuilders.boolQuery()
+				.should(komentarQuery)
+				.should(ocenaQuery);
+		
+		return PorudzbinaMapper.mapDtos(searchByBoolQuery(boolQuery));
+		
+	}
+
 }
