@@ -16,6 +16,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "artikal")
 public class Artikal {
@@ -37,98 +46,11 @@ public class Artikal {
 	@Column(name = "putanja_slike", nullable = true)
 	private String putanjaSlike;
 	
-	@OneToMany(cascade = {ALL}, fetch=LAZY, mappedBy="artikal")
-	private List<ArtikalAkcija> artikalAkcija = new ArrayList<ArtikalAkcija>();
-	
 	@ManyToOne
-	@JoinColumn(name = "korisnik", referencedColumnName = "idKorisnik", nullable = false)
+	@JoinColumn(name = "prodavac", referencedColumnName = "idProdavac", nullable = false)
 	private Prodavac prodavac;
 	
 	@OneToMany(cascade = {ALL}, fetch=LAZY, mappedBy="artikal")
-	private List<Stavka> stavke = new ArrayList<Stavka>();
-	
-	@OneToMany(cascade = {ALL}, fetch=LAZY, mappedBy="artikal")
 	private List<Komentar> komentari = new ArrayList<Komentar>();
-	
-	public Artikal() {
-		super();
-	}
-
-	public Artikal(Long idArtikal, String naziv, String opis, Double cena, String putanjaSlike, List<ArtikalAkcija> artikalAkcija,
-			Prodavac prodavac, List<Stavka> stavke) {
-		super();
-		this.idArtikal = idArtikal;
-		this.naziv = naziv;
-		this.opis = opis;
-		this.cena = cena;
-		this.putanjaSlike = putanjaSlike;
-		this.artikalAkcija = artikalAkcija;
-		this.prodavac = prodavac;
-		this.stavke = stavke;
-	}
-
-	public Long getIdArtikal() {
-		return idArtikal;
-	}
-
-	public void setIdArtikal(Long idArtikal) {
-		this.idArtikal = idArtikal;
-	}
-
-	public String getNaziv() {
-		return naziv;
-	}
-
-	public void setNaziv(String naziv) {
-		this.naziv = naziv;
-	}
-
-	public String getOpis() {
-		return opis;
-	}
-
-	public void setOpis(String opis) {
-		this.opis = opis;
-	}
-
-	public Double getCena() {
-		return cena;
-	}
-
-	public void setCena(Double cena) {
-		this.cena = cena;
-	}
-
-	public String getPutanjaSlike() {
-		return putanjaSlike;
-	}
-
-	public void setPutanjaSlike(String putanjaSlike) {
-		this.putanjaSlike = putanjaSlike;
-	}
-
-	public List<ArtikalAkcija> getArtikalAkcija() {
-		return artikalAkcija;
-	}
-
-	public void setArtikalAkcija(List<ArtikalAkcija> artikalAkcija) {
-		this.artikalAkcija = artikalAkcija;
-	}
-
-	public Prodavac getProdavac() {
-		return prodavac;
-	}
-
-	public void setProdavac(Prodavac prodavac) {
-		this.prodavac = prodavac;
-	}
-
-	public List<Stavka> getStavke() {
-		return stavke;
-	}
-
-	public void setStavke(List<Stavka> stavke) {
-		this.stavke = stavke;
-	}
 
 }

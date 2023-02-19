@@ -33,11 +33,11 @@
     <h1>Dostava</h1>
     
     <div id="dugmiciKupac">
-		<button class="btn btn-primary" onclick="odrediPrikaz('sviProdavciNarucivanje')" id="DugmeNarucivanje">Narucivanje</button>
-		<button class="btn btn-primary" onclick="prikazKupca('session.prijavljeniKorisnik.idKorisnik')" id="DugmeIzmena">Izmeni svoje podatka</button>
+		<button class="btn btn-primary" onclick="PrikazSvihProdavacaZaNarudzbinu()" id="DugmeNarucivanje">Narucivanje</button>
+		<button class="btn btn-primary" onclick="PrikazKupca()" id="DugmeIzmena">Izmeni svoje podatka</button>
 		<button class="btn btn-primary" onclick="PretragaArtikla()" id="DugmePrikazPretrageArtikla">Pretraga artikla</button>
 		<button class="btn btn-primary" onclick="PretragaPorudzbine()" id="DugmePrikazPretragePorudzbine">Pretraga porudzbine</button>
-	    <button class="btn btn-primary" onclick="odjava()" id="DugmeOdjavaKupac">Odjava</button>
+	    <button class="btn btn-primary" onclick="Odjava()" id="DugmeOdjavaKupac">Odjava</button>
 	</div> 
 	
 <!-- Forma za izmenu kupca -->
@@ -68,7 +68,7 @@
             </div>
           
             <button id="izmeniKupca" type="submit" class="btn btn-warning" onclick="IzmenaKupca()">Izmeni</button> 
-            <button id="nazad" class="btn btn-primary" onclick="vratiSaDodavanjaIizmeneKupac()">Vrati</button>
+            <button id="nazad" class="btn btn-primary" onclick="VratiSaDodavanjaIizmeneKupac()">Vrati</button>
         </div>
 <!-- ------------------------------------------------------------------------------------------------------------------------------ --> 
     
@@ -91,7 +91,7 @@
 	  
 	            </tbody>
 	        </table>
-	        <button id="nazad" class="btn btn-primary" onclick="vratiNaPocetnuKupac()">Vrati</button>
+	        <button id="nazad" class="btn btn-primary" onclick="VratiNaPocetnuKupac()">Vrati</button>
 		</div>
 <!-- ------------------------------------------------------------------------------------------------------------------------------ --> 	
 	
@@ -161,7 +161,7 @@
 	  
 	            </tbody>
 	        </table>
-	        <button type="submit" class="btn btn-success" onclick="prikaziFormuZaDodavanjeKomentara()">Dodaj komentar</button>
+	        <button type="submit" class="btn btn-success" onclick="PrikaziFormuZaDodavanjeKomentara()">Dodaj komentar</button>
 	        <button id="nazad" class="btn btn-primary" onclick="ZatvoriKomentare()">Vrati</button>     
 		</div>
 		

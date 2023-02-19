@@ -4,6 +4,7 @@ function PrikazSvihProdavaca(){
     var tbodyProdavac = $("#tbodyProdavac");
 
     function prikaziProdavce(){
+    	$('#dodajProdavca').hide();
     	$('#dodavanje').hide();
     	$('#prijava').hide();
     	$('#DugmePrikazArtikala').hide();
@@ -20,41 +21,59 @@ function PrikazSvihProdavaca(){
             	tabelaProdavaca.show();
             	tbodyProdavac.empty();
                 for(prodavac in result){
-                	tbodyProdavac.append(
-                    '<tr>'
-                			
-                        +'<td align="center">'+result[prodavac].idProdavac+'</td>'
-                        +'<td align="center">'+result[prodavac].ime+'</td>'
-                        +'<td align="center">'+result[prodavac].prezime+'</a>'+'</td>'
-                        +'<td align="center">'+result[prodavac].korIme+'</td>'
-                        +'<td align="center">'+result[prodavac].nazivProdavca+'</td>'
-                        +'<td align="center">'+result[prodavac].email+'</td>'
-                        +'<td align="center">'+result[prodavac].adresa+'</td>'
-                        +'<td align="center">'+result[prodavac].poslujeOd+'</td>'
-                        +'<td align="center">'+result[prodavac].blokiran+'</td>'
-                        +'<td>'
-                        	+'<button type="submit" class="btn btn-success" style="margin-right: 5%;" onclick="PrikazSvihArtikalaProdavacaKodAdmina('+result[prodavac].idProdavac+')">ARTIKLI</button>'
-	                        +'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="editProdavac('+result[prodavac].idProdavac+')">IZMENI</button>'
-	                        +'<button type="submit" class="btn btn-danger" onclick="deleteProdavac('+result[prodavac].idProdavac+')">OBRIŠI</button>'
-	                        +'<button type="submit" class="btn btn-dark" style="margin-right: 5%;" onclick="blokirajProdavca('+result[prodavac].idProdavac+')">BLOK</button>'
-                        +'</td>'
-                    +'</tr>'
-                    
-                    )};
-                    
+                	if(result[prodavac].blokiran){
+                    	tbodyProdavac.append(
+                            '<tr>'
+                        			
+                                +'<td align="center">'+result[prodavac].idProdavac+'</td>'
+                                +'<td align="center">'+result[prodavac].ime+'</td>'
+                                +'<td align="center">'+result[prodavac].prezime+'</a>'+'</td>'
+                                +'<td align="center">'+result[prodavac].korIme+'</td>'
+                                +'<td align="center">'+result[prodavac].nazivProdavca+'</td>'
+                                +'<td align="center">'+result[prodavac].email+'</td>'
+                                +'<td align="center">'+result[prodavac].adresa+'</td>'
+                                +'<td align="center">'+result[prodavac].poslujeOd+'</td>'
+                                +'<td align="center">'+'JESTE'+'</td>'
+                                +'<td>'
+                                	+'<button type="submit" class="btn btn-success" style="margin-right: 5%;" onclick="PrikazSvihArtikalaProdavacaKodAdmina('+result[prodavac].idProdavac+')">ARTIKLI</button>'
+        	                        +'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="EditProdavac('+result[prodavac].idProdavac+')">IZMENI</button>'
+        	                        +'<button type="submit" class="btn btn-danger" onclick="DeleteProdavac('+result[prodavac].idProdavac+')">OBRIŠI</button>'
+        	                        +'<button type="submit" class="btn btn-dark" style="margin-right: 5%;" onclick="BlokirajProdavca('+result[prodavac].idProdavac+')">BLOK</button>'
+                                +'</td>'
+                            +'</tr>'
+                            
+                            )
+                	}else{
+                    	tbodyProdavac.append(
+                            '<tr>'
+                        			
+                                +'<td align="center">'+result[prodavac].idProdavac+'</td>'
+                                +'<td align="center">'+result[prodavac].ime+'</td>'
+                                +'<td align="center">'+result[prodavac].prezime+'</a>'+'</td>'
+                                +'<td align="center">'+result[prodavac].korIme+'</td>'
+                                +'<td align="center">'+result[prodavac].nazivProdavca+'</td>'
+                                +'<td align="center">'+result[prodavac].email+'</td>'
+                                +'<td align="center">'+result[prodavac].adresa+'</td>'
+                                +'<td align="center">'+result[prodavac].poslujeOd+'</td>'
+                                +'<td align="center">'+'NIJE'+'</td>'
+                                +'<td>'
+                                	+'<button type="submit" class="btn btn-success" style="margin-right: 5%;" onclick="PrikazSvihArtikalaProdavacaKodAdmina('+result[prodavac].idProdavac+')">ARTIKLI</button>'
+        	                        +'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="EditProdavac('+result[prodavac].idProdavac+')">IZMENI</button>'
+        	                        +'<button type="submit" class="btn btn-danger" onclick="DeleteProdavac('+result[prodavac].idProdavac+')">OBRIŠI</button>'
+        	                        +'<button type="submit" class="btn btn-dark" style="margin-right: 5%;" onclick="BlokirajProdavca('+result[prodavac].idProdavac+')">BLOK</button>'
+                                +'</td>'
+                            +'</tr>')
+                	}};           
             },
             error :function(e){
                 alert('Doslo je do neke greške!');
             }
-
-
         });
     }
     prikaziProdavce();
-
 }
 
-function submitProdavac(){
+function SubmitProdavac(){
 
     var greska = "";
     var imeInput = "";
@@ -139,7 +158,7 @@ function submitProdavac(){
             data : JSON.stringify(formData),
             success: function(){
                 alert('Prodavac je uspesno dodat!');
-                odrediPrikaz('sviProdavci');
+                PrikazSvihProdavaca();
             },
             error : function(e){
                 alert('Doslo je do neke greške!');
@@ -150,7 +169,7 @@ function submitProdavac(){
 
 }
 
-function editProdavac(id){
+function EditProdavac(id){
 
 	$('#prodavciTable').hide();
 	$('#dodajProdavca').show();
@@ -198,7 +217,7 @@ function editProdavac(id){
 
 }
 
-function submitUpdateProdavac(){
+function SubmitUpdateProdavac(){
     
     var id = $("#idProdavac").val();
     var ime = $("#ime").val();
@@ -229,7 +248,7 @@ function submitUpdateProdavac(){
         data : JSON.stringify(formData),
         success: function(result){
             alert('Prodavac ' + result.korIme + ' je uspesno izmenjen!');
-            odrediPrikaz('sviProdavci');
+            PrikazSvihProdavaca();
         },
         error : function(e){
             alert('Doslo je do neke greške!')
@@ -239,14 +258,14 @@ function submitUpdateProdavac(){
 
 }
 
-function deleteProdavac(id){
+function DeleteProdavac(id){
     $.ajax({
-        url:'http://localhost:8080/api/prodavac/' + id,
+        url:'http://localhost:8080/api/korisnik/' + id,
         type: 'DELETE',
         contentType: 'application/json; charset=utf-8',
         success: function(result){
             alert("Prodavac je obrisan!");
-            odrediPrikaz('sviProdavci');
+            PrikazSvihProdavaca();
         },
         error : function(e){
             alert('Doslo je do neke greške!')
@@ -255,9 +274,9 @@ function deleteProdavac(id){
     });
 }
 
-function blokirajProdavca(id){
+function BlokirajProdavca(id){
     $.ajax({
-        url:'http://localhost:8080/api/prodavac/' + id + '/blokiranje',
+        url:'http://localhost:8080/api/korisnik/' + id + '/blokiranje',
         type: 'POST',
         contentType: 'application/json; charset=utf-8',
         success: function(result){
@@ -266,7 +285,7 @@ function blokirajProdavca(id){
         	}else{
         		alert("Prodavac je odblokiran!");
         	}
-            odrediPrikaz('sviProdavci');
+        	PrikazSvihProdavaca();
         },
         error : function(e){
             alert('Doslo je do neke greške!')
@@ -275,16 +294,26 @@ function blokirajProdavca(id){
     });
 }
 
-function vratiNaPocetnuProdavci(){
+function VratiNaPocetnuProdavci(){
 	$('#prodavciTable').hide();
 	$('#prijava').hide();
 	$('#DugmeOdjava').show();
 	$('#DugmePrikazLogiina').show();
 	$('#DugmePrikazArtikala').show();
 	$('#DugmePrikazKorisnike').show();
+	$('#DugmePrikazKomentare').show();
+	$('#DugmePrikazPretrageArtikla').show();
+	$('#DugmePrikazPretragePorudzbine').show();
 }
 
-function vratiSaDodavanjaIizmeneProdavci(){
+function DodavanjeProdavca(){
+	$("#prodavciTable").hide();
+	$("#izmeniProdavca").hide();
+	$("#btnDodajProdavca").show();
+	$("#dodajProdavca").show();
+}
+
+function VratiSaDodavanjaIizmeneProdavci(){
 	$('#prodavciTable').show();
 	$('#dodajProdavca').hide();
 	$('#dodavanjeProdavca').show();
@@ -326,8 +355,8 @@ function PrikazSvihArtikalaProdavaca(){
                         +'<td align="center">'+result[artikal].prodavac+'</td>'
                         +'<td>'
                         	+'<button type="submit" class="btn btn-success" style="margin-right: 5%;" onclick="PrikazSvihKomentaraArtiklaKodPordavca('+result[artikal].idArtikla+')">KOMENTARI</button>'
-	                        +'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="editArtikalProdavac('+result[artikal].idArtikla+')">IZMENI</button>'
-	                        +'<button type="submit" class="btn btn-danger" onclick="deleteArtikalProdavac('+result[artikal].idArtikla+')">OBRIŠI</button>'
+	                        +'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="EditArtikalProdavac('+result[artikal].idArtikla+')">IZMENI</button>'
+	                        +'<button type="submit" class="btn btn-danger" onclick="DeleteArtikalProdavac('+result[artikal].idArtikla+')">OBRIŠI</button>'
                         +'</td>'
                     +'</tr>'
                   
@@ -377,8 +406,8 @@ function PrikazSvihArtikalaProdavacaKodAdmina(id){
                         +'<td align="center">'+result[artikal].cena+'</td>'
                         +'<td align="center">'+result[artikal].prodavac+'</td>'
                         +'<td>'
-	                        +'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="editArtikalProdavac('+result[artikal].idArtikla+')">IZMENI</button>'
-	                        +'<button type="submit" class="btn btn-danger" onclick="deleteArtikalProdavac('+result[artikal].idArtikla+')">OBRIŠI</button>'
+	                        +'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="EditArtikalProdavac('+result[artikal].idArtikla+')">IZMENI</button>'
+	                        +'<button type="submit" class="btn btn-danger" onclick="DeleteArtikalProdavac('+result[artikal].idArtikla+')">OBRIŠI</button>'
                         +'</td>'
                     +'</tr>'
                   
@@ -395,7 +424,7 @@ function PrikazSvihArtikalaProdavacaKodAdmina(id){
     
 }
 
-function submitArtikalProdavac(){
+function SubmitArtikalProdavac(){
 
     var greska = "";
     var nazivInput = "";
@@ -456,7 +485,7 @@ function submitArtikalProdavac(){
 
 }
 
-function editArtikalProdavac(id){ 
+function EditArtikalProdavac(id){ 
 
 	$('#artikliTableProdavac').hide();
 	$('#dodajArtikal').show();
@@ -474,7 +503,7 @@ function editArtikalProdavac(id){
 
             success: function(result){
             	
-            	dajProdavce(result.idProdavac);
+            	DajProdavce(result.idProdavac);
             	
                 var idArtikla = $("#idArtikla");
                 var nazivArtikla = $("#nazivArtikla");
@@ -497,7 +526,7 @@ function editArtikalProdavac(id){
 
 }
 
-function submitUpdateArtikalProdavac(id){
+function SubmitUpdateArtikalProdavac(id){
 
     var id = $("#idArtikla").val();
     var naziv = $("#nazivArtikla").val();
@@ -531,7 +560,7 @@ function submitUpdateArtikalProdavac(id){
 
 }
 
-function deleteArtikalProdavac(id){ 
+function DeleteArtikalProdavac(id){ 
     $.ajax({
         url:'http://localhost:8080/api/artikal/' + id,
         type: 'DELETE',
@@ -547,7 +576,7 @@ function deleteArtikalProdavac(id){
     });
 }
 
-function dajProdavce(id){
+function DajProdavce(id){
     var prodavac1 = "";
     var prodavac2 = "";
     var selectProdavce = $("#selectProdavce");

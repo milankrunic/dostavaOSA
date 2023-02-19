@@ -4,6 +4,7 @@ function PrikazSvihKupaca(){
     var tbodyKupac = $("#tbodyKupac");
 
     function prikaziKupce(){
+    	$('#dodajKupca').hide();
     	$('#dodavanje').hide();
     	$('#prijava').hide();
     	$('#btnLogin').hide();
@@ -19,37 +20,49 @@ function PrikazSvihKupaca(){
             	tabelaKupca.show();
             	tbodyKupac.empty();
                 for(kupac in result){
-                	tbodyKupac.append(
-                    '<tr>'
-                			
-                        +'<td align="center">'+result[kupac].idKupac+'</td>'
-                        +'<td align="center">'+result[kupac].imeKupca+'</td>'
-                        +'<td align="center">'+result[kupac].prezimeKupca+'</a>'+'</td>'
-                        +'<td align="center">'+result[kupac].korImeKupca+'</td>'
-                        +'<td align="center">'+result[kupac].adresaKupca+'</td>'
-                        +'<td align="center">'+result[kupac].blokiran+'</td>'
-                        +'<td>'
-                        	+'<button type="submit" class="btn btn-dark" style="margin-right: 5%;" onclick="blokirajKupca('+result[kupac].idKupac+')">BLOK</button>'
-	                        +'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="editKupac('+result[kupac].idKupac+')">IZMENI</button>'
-	                        +'<button type="submit" class="btn btn-danger" onclick="deleteKupac('+result[kupac].idKupac+')">OBRIŠI</button>'
-                        +'</td>'
-                    +'</tr>'
-                    
-                    )};
-                    
+                	if(result[kupac].blokiran){
+                    	tbodyKupac.append(
+	                        '<tr>'
+	                    			
+	                            +'<td align="center">'+result[kupac].idKupac+'</td>'
+	                            +'<td align="center">'+result[kupac].ime+'</td>'
+	                            +'<td align="center">'+result[kupac].prezime+'</a>'+'</td>'
+	                            +'<td align="center">'+result[kupac].korIme+'</td>'
+	                            +'<td align="center">'+result[kupac].adresaKupca+'</td>'
+	                            +'<td align="center">'+'JESTE'+'</td>'
+	                            +'<td>'
+	                            	+'<button type="submit" class="btn btn-dark" style="margin-right: 5%;" onclick="BlokirajKupca('+result[kupac].idKupac+')">BLOK</button>'
+	    	                        +'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="EditKupac('+result[kupac].idKupac+')">IZMENI</button>'
+	    	                        +'<button type="submit" class="btn btn-danger" onclick="DeleteKupac('+result[kupac].idKupac+')">OBRIŠI</button>'
+	                            +'</td>'
+	                        +'</tr>')
+                	}else{
+                    	tbodyKupac.append(
+                            '<tr>'
+                        			
+                                +'<td align="center">'+result[kupac].idKupac+'</td>'
+                                +'<td align="center">'+result[kupac].ime+'</td>'
+                                +'<td align="center">'+result[kupac].prezime+'</a>'+'</td>'
+                                +'<td align="center">'+result[kupac].korIme+'</td>'
+                                +'<td align="center">'+result[kupac].adresaKupca+'</td>'
+                                +'<td align="center">'+'NIJE'+'</td>'
+                                +'<td>'
+                                	+'<button type="submit" class="btn btn-dark" style="margin-right: 5%;" onclick="BlokirajKupca('+result[kupac].idKupac+')">BLOK</button>'
+        	                        +'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="EditKupac('+result[kupac].idKupac+')">IZMENI</button>'
+        	                        +'<button type="submit" class="btn btn-danger" onclick="DeleteKupac('+result[kupac].idKupac+')">OBRIŠI</button>'
+                                +'</td>'
+                            +'</tr>')
+                	}};        
             },
             error :function(e){
                 alert('Doslo je do neke greške!');
             }
-
-
         });
     }
     prikaziKupce();
-
 }
 
-function submitKupac(){
+function SubmitKupac(){
 
     var greska = "";
     var imeInput = "";
@@ -96,10 +109,10 @@ function submitKupac(){
     }
     else{
         var formData = {
-            "imeKupca" : imeInput,
-            "prezimeKupca" : prezimeInput,
-            "korImeKupca" : korisnickoImeInput,
-            "lozinkaKupca" : lozinkaInput,
+            "ime" : imeInput,
+            "prezime" : prezimeInput,
+            "korIme" : korisnickoImeInput,
+            "lozinka" : lozinkaInput,
             "adresaKupca" : adresaInput
         }
 
@@ -110,7 +123,7 @@ function submitKupac(){
             data : JSON.stringify(formData),
             success: function(){
                 alert('Kupac je uspesno dodat!');
-                odrediPrikaz('sviKupci');
+                PrikazSvihKupaca();
             },
             error : function(e){
                 alert('Doslo je do neke greške!');
@@ -121,7 +134,7 @@ function submitKupac(){
 
 }
 
-function editKupac(id){
+function EditKupac(id){
 
 	$('#kupciTable').hide();
 	$('#dodajKupca').show();
@@ -146,10 +159,10 @@ function editKupac(id){
                 var adresa = $("#adresaKupca");
                                
                 idKupac.val(result.idKupac);
-                ime.val(result.imeKupca);
-                prezime.val(result.prezimeKupca);
-                korisnickoIme.val(result.korImeKupca);
-                lozinka.val(result.lozinkaKupca);
+                ime.val(result.ime);
+                prezime.val(result.prezime);
+                korisnickoIme.val(result.korIme);
+                lozinka.val(result.lozinka);
                 adresa.val(result.adresaKupca);
 
             },
@@ -163,7 +176,7 @@ function editKupac(id){
 
 }
 
-function submitUpdateKupac(){
+function SubmitUpdateKupac(){
     
     var id = $("#idKupac").val();
     var ime = $("#imeKupca").val();
@@ -173,10 +186,10 @@ function submitUpdateKupac(){
     var adresa = $("#adresaKupca").val();
     
     var formData = {
-        "imeKupca" : ime,
-        "prezimeKupca" : prezime,
-        "korImeKupca" : korisnickoIme,
-        "lozinkaKupca" : lozinka,
+        "ime" : ime,
+        "prezime" : prezime,
+        "korIme" : korisnickoIme,
+        "lozinka" : lozinka,
         "adresaKupca" : adresa
     }
 
@@ -187,8 +200,8 @@ function submitUpdateKupac(){
         contentType: 'application/json; charset=utf-8',
         data : JSON.stringify(formData),
         success: function(result){
-            alert('Kupac ' + result.korImeKupca + ' je uspesno izmenjen!');
-            odrediPrikaz('sviKupci');
+            alert('Kupac je uspesno izmenjen!');
+            PrikazSvihKupaca();
         },
         error : function(e){
             alert('Doslo je do neke greške!')
@@ -198,14 +211,14 @@ function submitUpdateKupac(){
 
 }
 
-function deleteKupac(id){
+function DeleteKupac(id){
     $.ajax({
-        url:'http://localhost:8080/api/kupac/' + id,
+        url:'http://localhost:8080/api/korisnik/' + id,
         type: 'DELETE',
         contentType: 'application/json; charset=utf-8',
         success: function(result){
             alert("Kupac je obrisan!");
-            odrediPrikaz('sviKupci');
+            PrikazSvihKupaca();
         },
         error : function(e){
             alert('Doslo je do neke greške!')
@@ -214,9 +227,9 @@ function deleteKupac(id){
     });
 }
 
-function blokirajKupca(id){
+function BlokirajKupca(id){
     $.ajax({
-        url:'http://localhost:8080/api/kupac/' + id + '/blokiranje',
+        url:'http://localhost:8080/api/korisnik/' + id + '/blokiranje',
         type: 'POST',
         contentType: 'application/json; charset=utf-8',
         success: function(result){
@@ -225,7 +238,7 @@ function blokirajKupca(id){
         	}else{
         		alert("Kupac je odblokiran!");
         	}
-            odrediPrikaz('sviKupci');
+        	PrikazSvihKupaca();
         },
         error : function(e){
             alert('Doslo je do neke greške!')
@@ -234,7 +247,7 @@ function blokirajKupca(id){
     });
 }
 
-function vratiNaPocetnuKupac(){
+function VratiNaPocetnuKupac(){
 	$('#kupciTable').hide();
 	$('#prodavciTablee').hide();
 	$('#DugmeOdjava').show();
@@ -244,9 +257,19 @@ function vratiNaPocetnuKupac(){
 	$('#DugmeArtikal').show();
 	$('#pretragaArtikla').show();
 	$('#pretragaArtiklaDole').show();
+	$('#DugmePrikazKomentare').show();
+	$('#DugmePrikazPretrageArtikla').show();
+	$('#DugmePrikazPretragePorudzbine').show();
 }
 
-function vratiSaDodavanjaIizmeneKupac(){
+function DodavanjeKupca(){
+	$("#kupciTable").hide();
+	$("#izmeniKupca").hide();
+	$("#btnDodajKupca").show();
+	$("#dodajKupca").show();
+}
+
+function VratiSaDodavanjaIizmeneKupac(){
 	$('#kupciTable').show();
 	$('#dodajKupca').hide();
 	$('#dodavanjeKupca').show();
@@ -256,7 +279,7 @@ function vratiSaDodavanjaIizmeneKupac(){
 
 // IZMENA SAMOG SEBE -----------------------------------------------------------------------------------------------------
 
-function prikazKupca(){
+function PrikazKupca(){
 
 	$('#kupciTable').hide();
 	$('#dodajKupca').show();
@@ -281,10 +304,10 @@ function prikazKupca(){
                 var adresa = $("#adresaKupca");
                                
                 idKupac.val(result.idKupac);
-                ime.val(result.imeKupca);
-                prezime.val(result.prezimeKupca);
-                korisnickoIme.val(result.korImeKupca);
-                lozinka.val(result.lozinkaKupca);
+                ime.val(result.ime);
+                prezime.val(result.prezime);
+                korisnickoIme.val(result.korIme);
+                lozinka.val(result.lozinka);
                 adresa.val(result.adresaKupca);
 
             },
@@ -310,10 +333,10 @@ function IzmenaKupca(){
     var lozinkaGreska;
     
     var formData = {
-        "imeKupca" : ime,
-        "prezimeKupca" : prezime,
-        "korImeKupca" : korisnickoIme,
-        "lozinkaKupca" : lozinka,
+        "ime" : ime,
+        "prezime" : prezime,
+        "korIme" : korisnickoIme,
+        "lozinka" : lozinka,
         "adresaKupca" : adresa
     }
 
@@ -324,7 +347,8 @@ function IzmenaKupca(){
         contentType: 'application/json; charset=utf-8',
         data : JSON.stringify(formData),
         success: function(result){
-            alert('Kupac ' + result.korImeKupca + ' je uspesno izmenjen!');
+            alert('Kupac je uspesno izmenjen!');
+            window.location.href = "/kupac.html";
         },
         error : function(e){
             alert('Doslo je do neke greške!')

@@ -6,8 +6,6 @@ import ftn.dostavaOSA2021.DostavaOSA2021.model.Prodavac;
 
 public interface ProdavacRepository extends JpaRepository<Prodavac, Long>{
 
-	Prodavac findByIdKorisnik(Long idKorisnik);
-	
-	Prodavac findByKorisnickoImeAndLozinka(String korisnickoIme, String lozinka);
+	Prodavac findByKorisnik_korisnickoIme(String korisnickoIme);
 	
 }

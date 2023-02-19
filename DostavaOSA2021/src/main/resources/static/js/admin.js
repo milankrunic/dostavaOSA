@@ -6,6 +6,7 @@ function PrikazSvihAdministratora(){
     function prikaziAdministratore(){
     	$('#prikazDugicaSvihKorisnika').hide();
     	$('#pretragaArtikla').hide();
+    	$('#dodajAdmina').hide();
     	$('#pretragaArtiklaDole').hide();
     	$('#DugmePrikazPretragePorudzbine').hide();
         $.ajax({
@@ -17,23 +18,41 @@ function PrikazSvihAdministratora(){
             	tabelaAdmin.show();
             	tbodyAdmin.empty();
                 for(admin in result){
-                	tbodyAdmin.append(
-                    '<tr>'
-                			
-                        +'<td align="center">'+result[admin].idAdmin+'</td>'
-                        +'<td align="center">'+result[admin].imeAdmina+'</td>'
-                        +'<td align="center">'+result[admin].prezimeAdmina+'</a>'+'</td>'
-                        +'<td align="center">'+result[admin].korImeAdmina+'</td>'
-                        +'<td align="center">'+result[admin].blokiran+'</td>'
-                        
-                        +'<td>'
-                        	+'<button type="submit" class="btn btn-dark" style="margin-right: 5%;" onclick="blokiraj('+result[admin].idAdmin+')">BLOK</button>'
-	                        +'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="editAdmin('+result[admin].idAdmin+')">IZMENI</button>'
-	                        +'<button type="submit" class="btn btn-danger" onclick="deleteAdmin('+result[admin].idAdmin+')">OBRIŠI</button>'
-                        +'</td>'
-                    +'</tr>'
-                    
-                    )};
+                	if(result[admin].blokiran){
+                    	tbodyAdmin.append(
+                            '<tr>'
+                        			
+                                +'<td align="center">'+result[admin].idAdmin+'</td>'
+                                +'<td align="center">'+result[admin].ime+'</td>'
+                                +'<td align="center">'+result[admin].prezime+'</a>'+'</td>'
+                                +'<td align="center">'+result[admin].korIme+'</td>'
+                                +'<td align="center">'+'JESTE'+'</td>'
+                                
+                                +'<td>'
+                                	+'<button type="submit" class="btn btn-dark" style="margin-right: 5%;" onclick="Blokiraj('+result[admin].idAdmin+')">BLOK</button>'
+        	                        +'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="EditAdmin('+result[admin].idAdmin+')">IZMENI</button>'
+        	                        +'<button type="submit" class="btn btn-danger" onclick="DeleteAdmin('+result[admin].idAdmin+')">OBRIŠI</button>'
+                                +'</td>'
+                            +'</tr>'
+                            
+                            )
+                	}else{
+                    	tbodyAdmin.append(
+                            '<tr>'
+                        			
+                                +'<td align="center">'+result[admin].idAdmin+'</td>'
+                                +'<td align="center">'+result[admin].ime+'</td>'
+                                +'<td align="center">'+result[admin].prezime+'</a>'+'</td>'
+                                +'<td align="center">'+result[admin].korIme+'</td>'
+                                +'<td align="center">'+'NIJE'+'</td>'
+                                
+                                +'<td>'
+                                	+'<button type="submit" class="btn btn-dark" style="margin-right: 5%;" onclick="Blokiraj('+result[admin].idAdmin+')">BLOK</button>'
+        	                        +'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="EditAdmin('+result[admin].idAdmin+')">IZMENI</button>'
+        	                        +'<button type="submit" class="btn btn-danger" onclick="DeleteAdmin('+result[admin].idAdmin+')">OBRIŠI</button>'
+                                +'</td>'
+                            +'</tr>')
+                	}};
                     
             },
             error :function(e){
@@ -44,10 +63,9 @@ function PrikazSvihAdministratora(){
         });
     }
     prikaziAdministratore();
-
 }
 
-function submitAdmin(){
+function SubmitAdmin(){
 	
     var greska = "";
     var imeInput = "";
@@ -87,10 +105,10 @@ function submitAdmin(){
     }
     else{
         var formData = {
-            "imeAdmina" : imeInput,
-            "prezimeAdmina" : prezimeInput,
-            "korImeAdmina" : korisnickoImeInput,
-            "lozinkaAdmina" : lozinkaInput,
+            "ime" : imeInput,
+            "prezime" : prezimeInput,
+            "korIme" : korisnickoImeInput,
+            "lozinka" : lozinkaInput,
         }
 
         $.ajax({
@@ -100,7 +118,7 @@ function submitAdmin(){
             data : JSON.stringify(formData),
             success: function(){
                 alert('Administrator je uspesno dodat!');
-                odrediPrikaz('sviAdministratori');
+                PrikazSvihAdministratora();
             },
             error : function(e){
                 alert('Doslo je do neke greške!');
@@ -108,10 +126,9 @@ function submitAdmin(){
             }
         });
     }
-
 }
 
-function editAdmin(id){
+function EditAdmin(id){
 
 	$('#adminTable').hide();
 	$('#dodajAdmina').show();
@@ -135,10 +152,10 @@ function editAdmin(id){
                 var lozinka = $("#lozinkaAdmina");
                                
                 idAdmin.val(result.idAdmin);
-                ime.val(result.imeAdmina);
-                prezime.val(result.prezimeAdmina);
-                korisnickoIme.val(result.korImeAdmina);
-                lozinka.val(result.lozinkaAdmina);
+                ime.val(result.ime);
+                prezime.val(result.prezime);
+                korisnickoIme.val(result.korIme);
+                lozinka.val(result.lozinka);
 
             },
             error : function(e){
@@ -151,7 +168,7 @@ function editAdmin(id){
 
 }
 
-function submitUpdateAdmin(){
+function SubmitUpdateAdmin(){
     
     var id = $("#idAdmin").val();
     var ime = $("#imeAdmina").val();
@@ -160,10 +177,10 @@ function submitUpdateAdmin(){
     var lozinka = $("#lozinkaAdmina").val();
     
     var formData = {
-        "imeAdmina" : ime,
-        "prezimeAdmina" : prezime,
-        "korImeAdmina" : korisnickoIme,
-        "lozinkaAdmina" : lozinka
+        "ime" : ime,
+        "prezime" : prezime,
+        "korIme" : korisnickoIme,
+        "lozinka" : lozinka
     }
 
     $.ajax({
@@ -174,7 +191,7 @@ function submitUpdateAdmin(){
         data : JSON.stringify(formData),
         success: function(result){
             alert('Administrator ' + result.korImeAdmina + ' je uspesno izmenjen!');
-            odrediPrikaz('sviAdministratori');
+            PrikazSvihAdministratora();
         },
         error : function(e){
             alert('Doslo je do neke greške!');
@@ -184,14 +201,14 @@ function submitUpdateAdmin(){
 
 }
 
-function deleteAdmin(id){
+function DeleteAdmin(id){
     $.ajax({
-        url:'http://localhost:8080/api/admin/' + id,
+        url:'http://localhost:8080/api/korisnik/' + id,
         type: 'DELETE',
         contentType: 'application/json; charset=utf-8',
         success: function(result){
             alert("Administrator je obrisan!");
-            odrediPrikaz('sviAdministratori');
+            PrikazSvihAdministratora();
         },
         error : function(e){
             alert('Doslo je do neke greške!')
@@ -200,9 +217,9 @@ function deleteAdmin(id){
     });
 }
 
-function blokiraj(id){
+function Blokiraj(id){
     $.ajax({
-        url:'http://localhost:8080/api/admin/' + id + '/blokiranje',
+        url:'http://localhost:8080/api/korisnik/' + id + '/blokiranje',
         type: 'POST',
         contentType: 'application/json; charset=utf-8',
         success: function(result){
@@ -211,7 +228,7 @@ function blokiraj(id){
         	}else{
         		alert("Administrator je odblokiran!");
         	}
-            odrediPrikaz('sviAdministratori');
+        	PrikazSvihAdministratora();
         },
         error : function(e){
             alert('Doslo je do neke greške!')
@@ -220,19 +237,29 @@ function blokiraj(id){
     });
 }
 
-function odjava(){
+function Odjava(){
 	window.location.href = "/";
 }
 
-function vratiNaPocetnuAdmin(){
+function DodavanjeAdmina(){
+	$("#adminTable").hide();
+	$("#izmeniAdmina").hide();
+	$("#btnDodajAdmina").show();
+	$("#dodajAdmina").show();
+}
+
+function VratiNaPocetnuAdmin(){
 	$('#adminTable').hide();
 	$('#komentariTable').hide();
 	$('#DugmeOdjava').show();
 	$('#DugmePrikazArtikala').show();
 	$('#DugmePrikazKorisnike').show();
+	$('#DugmePrikazKomentare').show();
+	$('#DugmePrikazPretrageArtikla').show();
+	$('#DugmePrikazPretragePorudzbine').show();
 }
 
-function vratiSaDodavanjaIizmeneAdmin(){
+function VratiSaDodavanjaIizmeneAdmin(){
 	$('#adminTable').show();
 	$('#dodajAdmina').hide();
 }

@@ -36,16 +36,15 @@
 	<h1>Dostava</h1>
 	
 	<div id="dugmiciAdmin">
-	    <button class="btn btn-primary" onclick="odrediPrikaz('sviArtikli')" id="DugmePrikazArtikala">Svi Artikli</button>
-	    <button class="btn btn-primary" onclick="pokaziDugmiceKorisnika()" id="DugmePrikazKorisnike">Korisnici</button>
+	    <button class="btn btn-primary" onclick="PrikazSvihArtikala()" id="DugmePrikazArtikala">Svi Artikli</button>
+	    <button class="btn btn-primary" onclick="PokaziDugmiceKorisnika()" id="DugmePrikazKorisnike">Korisnici</button>
 	    <button class="btn btn-primary" onclick="PrikazSvihKomentara()" id="DugmePrikazKomentare">Komentari</button>
 	    <button class="btn btn-primary" onclick="PretragaArtikla()" id="DugmePrikazPretrageArtikla">Pretraga artikla</button>
 	    <button class="btn btn-primary" onclick="PretragaPorudzbine()" id="DugmePrikazPretragePorudzbine">Pretraga porudzbine</button>
-	    <button class="btn btn-primary" onclick="odjava()" id="DugmeOdjava">Odjava</button>
+	    <button class="btn btn-primary" onclick="Odjava()" id="DugmeOdjava">Odjava</button>
 	 </div> 
 	   
 <!-- ARTIKLI ----------------------------------------------------------------------------------------------------------------- -->		
-   <button class="btn btn-primary" onclick="odrediPrikaz('sviArtikli')" id="DugmePrikazArtikala" style="display: none;">Svi Artikli</button>
         
 <!-- Prikaz svih artikala -->
 
@@ -65,8 +64,8 @@
 	  
 	            </tbody>
 	        </table>
-	        <button id="dodavanje" class="btn btn-success" onclick="odrediPrikaz('dodajArtikal')">Dodaj artikal</button>
-	        <button id="nazad" class="btn btn-primary" onclick="vratiNaPocetnu()">Vrati</button>
+	        <button id="dodavanje" class="btn btn-success" onclick="DodavanjeArtikla()">Dodaj artikal</button>
+	        <button id="nazad" class="btn btn-primary" onclick="VratiNaPocetnu()">Vrati</button>
 		</div>
 <!-- Forma za dodavanje artikla -->
 
@@ -96,11 +95,11 @@
 	          
 	        </div>
 
-            <button id="btnDodajArtikal" onclick="submitArtikal()" type="submit" class="btn btn-secondary">Dodaj</button>
-            <button id="izmeniArtikal" type="submit" class="btn btn-warning" style="display: none;" onclick="submitUpdateArtikal()">Izmeni</button> 
+            <button id="btnDodajArtikal" onclick="SubmitArtikal()" type="submit" class="btn btn-secondary">Dodaj</button>
+            <button id="izmeniArtikal" type="submit" class="btn btn-warning" style="display: none;" onclick="SubmitUpdateArtikal()">Izmeni</button> 
             
-            <button id="izmeniArtikalProdavca" type="submit" class="btn btn-warning" style="display: none;" onclick="submitUpdateArtikalProdavac()">Izmeni</button> 
-            <button id="nazad" class="btn btn-primary" onclick="vratiSaDodavanjaIizmene()">Vrati</button>
+            <button id="izmeniArtikalProdavca" type="submit" class="btn btn-warning" style="display: none;" onclick="SubmitUpdateArtikalProdavac()">Izmeni</button> 
+            <button id="nazad" class="btn btn-primary" onclick="VratiSaDodavanjaIizmene()">Vrati</button>
         </div>
 <!-- ------------------------------------------------------------------------------------------------------------------------------ -->  
 
@@ -124,9 +123,10 @@
 	  
 	            </tbody>
 	        </table>
-	        <button id="dodavanjeAdmina" class="btn btn-success" onclick="odrediPrikaz('dodajAdmina')">Dodaj administratora</button>
-	        <button id="nazad" class="btn btn-primary" onclick="vratiNaPocetnuAdmin()">Vrati</button>
+	        <button id="dodavanjeAdmina" class="btn btn-success" onclick="DodavanjeAdmina()">Dodaj administratora</button>
+	        <button id="nazad" class="btn btn-primary" onclick="VratiNaPocetnuAdmin()">Vrati</button>
 		</div>
+		
 <!-- Forma za dodavanje administratora -->
 
         <div id="dodajAdmina" style="display: none;">
@@ -150,9 +150,9 @@
                                 
             </div>
           
-            <button id="btnDodajAdmina" onclick="submitAdmin()" type="submit" class="btn btn-secondary" style="display: none;">Dodaj</button>
-            <button id="izmeniAdmina" type="submit" class="btn btn-warning" style="display: none;" onclick="submitUpdateAdmin()">Izmeni</button> 
-            <button id="nazad" class="btn btn-primary" onclick="vratiSaDodavanjaIizmeneAdmin()">Vrati</button>
+            <button id="btnDodajAdmina" onclick="SubmitAdmin()" type="submit" class="btn btn-secondary" style="display: none;">Dodaj</button>
+            <button id="izmeniAdmina" type="submit" class="btn btn-warning" style="display: none;" onclick="SubmitUpdateAdmin()">Izmeni</button> 
+            <button id="nazad" class="btn btn-primary" onclick="VratiSaDodavanjaIizmeneAdmin()">Vrati</button>
         </div>
 <!-- ------------------------------------------------------------------------------------------------------------------------------ -->
    
@@ -180,8 +180,8 @@
 	  
 	            </tbody>
 	        </table>
-	        <button id="dodavanjeProdavca" class="btn btn-success" onclick="odrediPrikaz('dodajProdavca')">Dodaj prodavca</button>
-	        <button id="nazad" class="btn btn-primary" onclick="vratiNaPocetnuProdavci()">Vrati</button>
+	        <button id="dodavanjeProdavca" class="btn btn-success" onclick="DodavanjeProdavca()">Dodaj prodavca</button>
+	        <button id="nazad" class="btn btn-primary" onclick="VratiNaPocetnuProdavci()">Vrati</button>
 		</div>
 <!-- Forma za dodavanje prodavca -->
 
@@ -222,9 +222,9 @@
                  
             </div>
           
-            <button id="btnDodajProdavca" onclick="submitProdavac()" type="submit" class="btn btn-secondary" style="display: none;">Dodaj</button>
-            <button id="izmeniProdavca" type="submit" class="btn btn-warning" style="display: none;" onclick="submitUpdateProdavac()">Izmeni</button> 
-            <button id="nazad" class="btn btn-primary" onclick="vratiSaDodavanjaIizmeneProdavci()">Vrati</button>
+            <button id="btnDodajProdavca" onclick="SubmitProdavac()" type="submit" class="btn btn-secondary" style="display: none;">Dodaj</button>
+            <button id="izmeniProdavca" type="submit" class="btn btn-warning" style="display: none;" onclick="SubmitUpdateProdavac()">Izmeni</button> 
+            <button id="nazad" class="btn btn-primary" onclick="VratiSaDodavanjaIizmeneProdavci()">Vrati</button>
         </div>
 <!-- ------------------------------------------------------------------------------------------------------------------------------ -->    
 
@@ -249,8 +249,8 @@
 	  
 	            </tbody>
 	        </table>
-	        <button id="dodavanjeKupca" class="btn btn-success" onclick="odrediPrikaz('dodajKupca')">Dodaj kupca</button>
-	        <button id="nazad" class="btn btn-primary" onclick="vratiNaPocetnuKupac()">Vrati</button>
+	        <button id="dodavanjeKupca" class="btn btn-success" onclick="DodavanjeKupca()">Dodaj kupca</button>
+	        <button id="nazad" class="btn btn-primary" onclick="VratiNaPocetnuKupac()">Vrati</button>
 		</div>
 <!-- Forma za dodavanje kupca -->
 
@@ -279,9 +279,9 @@
                  
             </div>
           
-            <button id="btnDodajKupca" onclick="submitKupac()" type="submit" class="btn btn-secondary" style="display: none;">Dodaj</button>
-            <button id="izmeniKupca" type="submit" class="btn btn-warning" style="display: none;" onclick="submitUpdateKupac()">Izmeni</button> 
-            <button id="nazad" class="btn btn-primary" onclick="vratiSaDodavanjaIizmeneKupac()">Vrati</button>
+            <button id="btnDodajKupca" onclick="SubmitKupac()" type="submit" class="btn btn-secondary" style="display: none;">Dodaj</button>
+            <button id="izmeniKupca" type="submit" class="btn btn-warning" style="display: none;" onclick="SubmitUpdateKupac()">Izmeni</button> 
+            <button id="nazad" class="btn btn-primary" onclick="VratiSaDodavanjaIizmeneKupac()">Vrati</button>
         </div>
 <!-- ------------------------------------------------------------------------------------------------------------------------------ --> 
     
@@ -305,8 +305,8 @@
 	  
 	            </tbody>
 	        </table>
- 	        <button id="dodavanje" class="btn btn-success" onclick="odrediPrikaz('dodajArtikal')">Dodaj artikal</button>
-	        <button id="nazad" class="btn btn-primary" onclick="vratiNaPocetnu()">Vrati</button>     
+ 	        <button id="dodavanje" class="btn btn-success" onclick="DodavanjeArtikla()">Dodaj artikal</button>
+	        <button id="nazad" class="btn btn-primary" onclick="VratiNaPocetnu()">Vrati</button>     
 		</div>
 
 <!-- ------------------------------------------------------------------------------------------------------------------------------ -->
@@ -332,7 +332,7 @@
 	  
 	            </tbody>
 	        </table>
-	        <button id="nazad" class="btn btn-primary" onclick="vratiNaPocetnuAdmin()">Vrati</button>     
+	        <button id="nazad" class="btn btn-primary" onclick="VratiNaPocetnuAdmin()">Vrati</button>     
 		</div>
 		
 <!-- Prikaz svih komentara za odredjeni artikal-->
@@ -353,18 +353,15 @@
 	  
 	            </tbody>
 	        </table>
-	         <button type="submit" class="btn btn-success" onclick="">Dodaj komentar</button>
 	         <button id="nazad" class="btn btn-primary" onclick="ZatvoriKomentare()">Vrati</button>     
 		</div>
 
 <!-- ------------------------------------------------------------------------------------------------------------------------------ -->
-	    
-     	<button class="btn btn-primary" onclick="pokaziDugmiceKorisnika()" id="DugmePrikazKorisnike" style="display: none;">Korisnici</button>
    
 	    <div id="prikazDugicaSvihKorisnika" style="display: none;">
-		    <button class="btn btn-primary" onclick="odrediPrikaz('sviAdministratori')" id="DugmePrikazAdmina">Administratori</button>
-		    <button class="btn btn-primary" onclick="odrediPrikaz('sviProdavci')" id="DugmePrikazProdavaca">Prodavci</button>
-		    <button class="btn btn-primary" onclick="odrediPrikaz('sviKupci')" id="DugmePrikazKupaca">Kupci</button>		    
+		    <button class="btn btn-primary" onclick="PrikazSvihAdministratora()" id="DugmePrikazAdmina">Administratori</button>
+		    <button class="btn btn-primary" onclick="PrikazSvihProdavaca()" id="DugmePrikazProdavaca">Prodavci</button>
+		    <button class="btn btn-primary" onclick="PrikazSvihKupaca()" id="DugmePrikazKupaca">Kupci</button>		    
 	    </div>
 
 <!-- PRETRAGA ARTIKLA ---------------------------------------------------------------------------------------------------------------------- -->

@@ -26,9 +26,11 @@ import ftn.dostavaOSA2021.DostavaOSA2021.elastic.model.ArtikalES;
 import ftn.dostavaOSA2021.DostavaOSA2021.elastic.serviceInterface.ArtikalEsServiceInterface;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Artikal;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Komentar;
+import ftn.dostavaOSA2021.DostavaOSA2021.model.Korisnik;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Prodavac;
 import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.ArtikalServiceInterface;
 import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.KomentarServiceInterface;
+import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.KorisnikServiceInterface;
 import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.ProdavacServiceInterface;
 
 @RestController
@@ -48,6 +50,9 @@ public class ArtikalController {
 	
 	@Autowired
 	ArtikalEsServiceInterface artikalEsServiceInterface;
+	
+	@Autowired
+	KorisnikServiceInterface korisnikServiceInterface;
 	
 	@GetMapping
 	public ResponseEntity<List<ArtikalDTO>> getArtikle(){
@@ -76,7 +81,8 @@ public class ArtikalController {
 	@PostMapping
 	public ResponseEntity<ArtikalDTO> addArtikal(@RequestBody ArtikalDTO artikalDTO){
 
-		Prodavac prodavac = prodavacServiceInterface.findById(artikalDTO.getIdProdavac());
+		Korisnik korisnik = korisnikServiceInterface.findOne(artikalDTO.getIdProdavac());
+		Prodavac prodavac = prodavacServiceInterface.findByKorisnickoIme(korisnik.getKorisnickoIme());
 		
 		Artikal a = new Artikal();
 		a.setNaziv(artikalDTO.getNaziv());
@@ -94,7 +100,8 @@ public class ArtikalController {
 	public ResponseEntity<ArtikalDTO> updateArtikal(@RequestBody ArtikalDTO artikalDTO, @PathVariable("id") Long id){
 		
 		Artikal artikal = artikalServiceInterface.findById(id);
-		Prodavac prodavac = prodavacServiceInterface.findById(artikalDTO.getIdProdavac());
+		Korisnik korisnik = korisnikServiceInterface.findOne(artikalDTO.getIdProdavac());
+		Prodavac prodavac = prodavacServiceInterface.findByKorisnickoIme(korisnik.getKorisnickoIme());
 		
 		if(artikal == null) {
 			return new ResponseEntity<ArtikalDTO>(HttpStatus.BAD_REQUEST);
@@ -103,7 +110,6 @@ public class ArtikalController {
 		artikal.setNaziv(artikalDTO.getNaziv());
 		artikal.setOpis(artikalDTO.getOpis());
 		artikal.setCena(artikalDTO.getCena());
-//		artikal.setPutanjaSlike(artikalDTO.getPutanjaSlike());
 		artikal.setProdavac(prodavac);
 
 		artikal = artikalServiceInterface.save(artikal);
@@ -140,25 +146,6 @@ public class ArtikalController {
 		
 	}
 	
-//	@GetMapping(value = "/{id}/korpaSesija")
-//	public ResponseEntity<List<ArtikalDTO>> getPocetnaKorpa(@PathVariable("id") Long id, HttpSession session) {
-//				
-//		Artikal artikal = artikalServiceInterface.findOne(id);
-//		
-//		List<ArtikalDTO> artikli = (List<ArtikalDTO>) session.getAttribute(ArtikalController.ODABRANI_ARTIKAL);
-//
-//		if (!artikli.contains(artikal)) {
-//			for (Artikal ar : artikli) {
-//				ArtikalDTO dto = new ArtikalDTO(artikal);
-//				artikalDTO.add(dto);
-//			}
-//			artikli.add(artikal);
-//			System.out.println("ARTIKAL KOJI TREBA JE: " + artikal.getNaziv());
-//		}
-//
-//		return new ResponseEntity<List<ArtikalDTO>>(artikli, HttpStatus.OK);
-//	}
-	
 	@SuppressWarnings("unchecked")
 	@GetMapping(value = "/pocetnaKorpa")
 	public ModelAndView pocetnaKorpa(@RequestParam Long id, HttpSession session ) throws IOException {
@@ -176,44 +163,5 @@ public class ArtikalController {
 
 		return rezultat;
 	}
-	
-//	@GetMapping(value = "/{id}/korpaSesija")
-//	public ResponseEntity<ArtikalDTO> getPocetnaKorpa(@PathVariable("id") Long id, HttpSession session){
-//				
-//		Artikal artikal = artikalServiceInterface.findOne(id);
-//		
-//		if(artikal == null) {
-//			return new ResponseEntity<ArtikalDTO>(HttpStatus.NOT_FOUND);
-//		}else {
-//			
-//			Artikal a = (Artikal) session.getAttribute(ArtikalController.ODABRANI_ARTIKAL);
-//			List<ArtikalDTO> artikalDTO = new ArrayList<ArtikalDTO>();
-//
-//			ArtikalDTO dto = new ArtikalDTO(a);
-//			artikalDTO.add(dto);
-//
-//			return new ResponseEntity<ArtikalDTO>(new ArtikalDTO(artikal), HttpStatus.OK);
-//		}
-//				
-//	}
-	
-//	@GetMapping(value = "/{id}/artikli")
-//	public ResponseEntity<List<ArtikalDTO>> getArtikleProdavcaKodAdmina(@PathVariable("id") Long id){
-//				
-//		Prodavac prodavac = prodavacServiceInterface.findOne(id);
-//		
-//		if(prodavac == null) {
-//			return new ResponseEntity<List<ArtikalDTO>>(HttpStatus.NOT_FOUND);
-//		}else {
-//			List<Artikal> artikli = artikalServiceInterface.findAllByProdavac(prodavac);
-//			List<ArtikalDTO> artikalDTO = new ArrayList<ArtikalDTO>();
-//			for (Artikal artikal : artikli) {
-//				ArtikalDTO dto = new ArtikalDTO(artikal);
-//				artikalDTO.add(dto);
-//			}
-//			return new ResponseEntity<List<ArtikalDTO>>(artikalDTO, HttpStatus.OK);
-//		}
-//		
-//	}
 
 }

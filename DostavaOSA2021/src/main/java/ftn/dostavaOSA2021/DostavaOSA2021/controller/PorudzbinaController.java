@@ -61,7 +61,7 @@ public class PorudzbinaController {
 	@PostMapping
 	public ResponseEntity<PorudzbinaDTO> addPorudzbina(@RequestBody PorudzbinaDTO porudzbinaDTO){
 
-		Kupac kupac = kupacServiceInterface.findById(porudzbinaDTO.getIdKupac());
+		Kupac kupac = kupacServiceInterface.findOne(porudzbinaDTO.getIdKupac());
 		
 		Porudzbina por = new Porudzbina();
 		por.setSatnica(new Date());
@@ -77,28 +77,6 @@ public class PorudzbinaController {
 		porudzbinaEsServiceInterface.index(new PorudzbinaES(por));
 		return new ResponseEntity<PorudzbinaDTO>(new PorudzbinaDTO(por), HttpStatus.CREATED);
 	}
-
-//	@PutMapping(value = "/{id}", consumes = "application/json")
-//	public ResponseEntity<PorudzbinaDTO> updatePorudzbina(@RequestBody PorudzbinaDTO porudzbinaDTO, @PathVariable("id") Long id){
-//		
-//		Porudzbina porudzbina = porudzbinaServiceInterface.findById(id);
-//		Kupac kupac = kupacServiceInterface.findById(porudzbinaDTO.getIdKupca());
-//		
-//		if(porudzbina == null) {
-//			return new ResponseEntity<PorudzbinaDTO>(HttpStatus.BAD_REQUEST);
-//		}
-//		
-//		porudzbina.setSatnica(porudzbinaDTO.getSatnica());
-//		porudzbina.setOcena(porudzbinaDTO.getOcena());
-//		porudzbina.setKomentar(porudzbinaDTO.getKomentar());
-//		porudzbina.setDostavljeno(porudzbinaDTO.isDostavljeno()); //?
-//		porudzbina.setAnonimanKomentar(porudzbinaDTO.isAnonimanKomentar()); //?
-//		porudzbina.setArhiviranKomentar(porudzbinaDTO.isArhiviranKomentar()); //?
-//		porudzbina.setKupac(kupac);
-//
-//		porudzbina = porudzbinaServiceInterface.save(porudzbina);
-//		return new ResponseEntity<PorudzbinaDTO>(new PorudzbinaDTO(porudzbina), HttpStatus.OK);
-//	}
 	
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> deletePorudzbina(@PathVariable("id") Long id){

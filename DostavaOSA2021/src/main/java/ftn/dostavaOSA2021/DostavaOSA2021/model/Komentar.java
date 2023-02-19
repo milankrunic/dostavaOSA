@@ -9,6 +9,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "komentar")
 public class Komentar {
@@ -35,77 +44,7 @@ public class Komentar {
 	private Artikal artikal;
 	
 	@ManyToOne
-	@JoinColumn(name = "korisnik", referencedColumnName = "idKorisnik", nullable = true)
+	@JoinColumn(name = "kupac", referencedColumnName = "idKupac", nullable = true)
 	private Kupac kupac;
 	
-	public Komentar() {
-		super();
-	}
-
-	public Komentar(Long idKomentar, String tekst, Integer ocena, boolean prihvacen, boolean arhiviran, Artikal artikal, Kupac kupac) {
-		super();
-		this.idKomentar = idKomentar;
-		this.tekst = tekst;
-		this.ocena = ocena;
-		this.prihvacen = prihvacen;
-		this.arhiviran = arhiviran;
-		this.artikal = artikal;
-		this.kupac = kupac;
-	}
-
-	public Long getIdKomentar() {
-		return idKomentar;
-	}
-
-	public void setIdKomentar(Long idKomentar) {
-		this.idKomentar = idKomentar;
-	}
-
-	public String getTekst() {
-		return tekst;
-	}
-
-	public void setTekst(String tekst) {
-		this.tekst = tekst;
-	}
-
-	public Integer getOcena() {
-		return ocena;
-	}
-
-	public void setOcena(Integer ocena) {
-		this.ocena = ocena;
-	}
-
-	public boolean isPrihvacen() {
-		return prihvacen;
-	}
-
-	public void setPrihvacen(boolean prihvacen) {
-		this.prihvacen = prihvacen;
-	}
-
-	public boolean isArhiviran() {
-		return arhiviran;
-	}
-
-	public void setArhiviran(boolean arhiviran) {
-		this.arhiviran = arhiviran;
-	}
-
-	public Artikal getArtikal() {
-		return artikal;
-	}
-
-	public void setArtikal(Artikal artikal) {
-		this.artikal = artikal;
-	}
-
-	public Kupac getKupac() {
-		return kupac;
-	}
-
-	public void setKupac(Kupac kupac) {
-		this.kupac = kupac;
-	}
 }

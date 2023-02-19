@@ -26,11 +26,6 @@ public class AdministratorService implements AdministratorServiceInterface{
 	}
 
 	@Override
-	public Administrator findById(Long korisnikId) {
-		return administratorRepository.findByIdKorisnik(korisnikId);
-	}
-
-	@Override
 	public Administrator save(Administrator administrator) {
 		return administratorRepository.save(administrator);
 	}
@@ -42,8 +37,8 @@ public class AdministratorService implements AdministratorServiceInterface{
 	}
 
 	@Override
-	public Administrator findByKorImeAndLozinka(String korIme, String loz) {
-		return administratorRepository.findByKorisnickoImeAndLozinka(korIme, loz);
+	public Administrator findByKorisnickoIme(String korIme) {
+		return administratorRepository.findByKorisnik_korisnickoIme(korIme);
 	}
 
 }

@@ -49,6 +49,13 @@ function PrikazSvihArtikala(){
 
 }
 
+function DodavanjeArtikla(){
+	$('#artikliTableProdavac').hide();
+    $('#artikliTable').hide();
+    $('#dodajArtikal').show();
+    dajProdavce();
+}
+
 function submitArtikal(){
 
     var greska = "";
@@ -100,7 +107,7 @@ function submitArtikal(){
                 odrediPrikaz('sviArtikli');
             },
             error : function(e){
-//                alert('Doslo je do neke greške!');
+                alert('Doslo je do neke greške!');
                 console.log("ERROR: ", e);
             }
         });
@@ -234,17 +241,22 @@ function dajProdavce(id){
     });
 }
 
-function vratiNaPocetnu(){
+function VratiNaPocetnu(){
+	$('#artikliTableProdavac').hide();
 	$('#artikliTable').hide();
 	$('#prijava').hide();
+	$('#DugmeOdjava').show();
 	$('#DugmePrikazLogiina').show();
 	$('#DugmePrikazArtikala').show();
 	$('#DugmePrikazKorisnike').show();
 	$('#pretragaArtikla').show();
 	$('#pretragaArtiklaDole').show();
+	$('#DugmePrikazKomentare').show();
+	$('#DugmePrikazPretrageArtikla').show();
+	$('#DugmePrikazPretragePorudzbine').show();
 }
 
-function vratiSaDodavanjaIizmene(){
+function VratiSaDodavanjaIizmene(){
 	$('#artikliTable').show();
 	$('#dodajArtikal').hide();
 	$('#dodavanje').show();

@@ -5,6 +5,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,33 +39,50 @@ public class KorisnikController {
 	
 	@PostMapping(value = "/login")
 	public ResponseEntity<KorisnikDTO> login(@RequestBody KorisnikDTO korisnikDTO, HttpSession session){
-
-		Korisnik kupac =  kupacServiceInterface.findByKorImeAndLozinka(korisnikDTO.getKorIme(), korisnikDTO.getLozinka());
-		Korisnik admin = administratorServiceInterface.findByKorImeAndLozinka(korisnikDTO.getKorIme(), korisnikDTO.getLozinka());
-		Korisnik prodavac = prodavacServiceInterface.findByKorImeAndLozinka(korisnikDTO.getKorIme(), korisnikDTO.getLozinka());
 		
-		session.setAttribute(KorisnikController.KORISNIK_KEY, kupac);
+		Korisnik korisnik =  korisnikServiceInterface.findByKorImeAndLozinka(korisnikDTO.getKorIme(), korisnikDTO.getLozinka());
 		
-		if(kupac==null) {
-			kupac = prodavac;
-		}
-		if(kupac==null) {
-			kupac = admin;
-		}
+		session.setAttribute(KorisnikController.KORISNIK_KEY, korisnik);
 				
-		if (kupac==null) {
+		if (korisnik==null) {
 			return new ResponseEntity<KorisnikDTO>(HttpStatus.NOT_FOUND); 
 		}else{
 			KorisnikDTO korDTO = new KorisnikDTO();
-			korDTO.setIdKorisnik(kupac.getIdKorisnik());
-			korDTO.setKorIme(kupac.getKorisnickoIme());
-			korDTO.setLozinka(kupac.getLozinka());
-			korDTO.setTipKorisnika(kupac.getTipKorisnika());
-			korDTO.setBlokiran(kupac.isBlokiran());
-			session.setAttribute(ProdavacController.PRODAVAC_KEY, prodavac);
+			korDTO.setIdKorisnik(korisnik.getIdKorisnik());
+			korDTO.setKorIme(korisnik.getKorisnickoIme());
+			korDTO.setLozinka(korisnik.getLozinka());
+			korDTO.setTipKorisnika(korisnik.getTipKorisnika());
+			korDTO.setBlokiran(korisnik.isBlokiran());
+
 			return new ResponseEntity<KorisnikDTO>(korDTO,HttpStatus.OK);
 		}
 
+	}
+	
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<Void> delete(@PathVariable("id") Long id){
+		Korisnik korisnik = korisnikServiceInterface.findOne(id);
+		if(korisnik != null) {
+			korisnikServiceInterface.remove(id);
+			
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		}
+		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+	}
+	
+	@PostMapping(value = "/{id}/blokiranje")
+	public ResponseEntity<KorisnikDTO> blok(@PathVariable("id") Long id){
+
+		Korisnik korisnik = korisnikServiceInterface.findOne(id);
+		
+		if(korisnik.isBlokiran() == false) {
+			korisnik.setBlokiran(true);
+		}else {
+			korisnik.setBlokiran(false);
+		}
+		
+		korisnik = korisnikServiceInterface.save(korisnik);
+		return new ResponseEntity<KorisnikDTO>(new KorisnikDTO(korisnik), HttpStatus.CREATED);
 	}
 
 }

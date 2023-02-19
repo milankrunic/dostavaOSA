@@ -5,7 +5,7 @@ function pokaziLogin(){
 	$('#DugmePrikazArtikala').hide();
 }
 
-function pokaziDugmiceKorisnika(){
+function PokaziDugmiceKorisnika(){
 	$('#prikazDugicaSvihKorisnika').show();
 	$('#DugmeOdjava').hide();
 	$('#DugmePrikazArtikala').hide();
@@ -77,134 +77,184 @@ function login(){
 
 //----------------- ZA REGISTRACIJU --------------------------------------------------------------
 
-function prikaziFormuKupac(){
+function PrikaziFormuKupac(){
 	$("#dodajKupca").show();
 	$("#dodajProdavca").hide();
 	$("#registracija").hide();
 }
 
-function prikaziFormuPordavac(){
+function RegisterKupac(){
+
+    var greska = "";
+    var imeInput = "";
+    var prezimeInput = "";
+    var korisnickoImeInput = "";
+    var lozinkaInput = "";
+    var adresaInput = "";
+    
+    imeInput = $("#imeKupca").val();
+    prezimeInput = $("#prezimeKupca").val();
+    korisnickoImeInput = $("#korImeKupca").val();
+    lozinkaInput = $("#lozinkaKupca").val();
+    adresaInput = $("#adresaKupca").val();
+
+    var imeGreska;
+    var prezimeGreska;
+    var korImeGreska;
+    var lozinkaGreska;
+    var adresaGreska;
+
+    if(imeInput === ""){
+    	imeGreska = true;
+        greska += "\nMorate uneti ime kupca!";
+    }
+    if(prezimeInput === ""){
+    	prezimeGreska = true;
+        greska += "\nMorate uneti prezime kupca!";
+    }
+    if(korisnickoImeInput === ""){
+    	korImeGreska = true;
+        greska += "\nMorate uneti korisnicko ime kupca!";
+    }
+    if(lozinkaInput === ""){
+    	lozinkaGreska = true;
+        greska += "\nMorate uneti lozinku kupca!";
+    }
+    if(adresaInput === ""){
+    	adresaGreska = true;
+        greska += "\nMorate uneti adresu kupca!";
+    }
+
+    if(imeGreska || prezimeGreska || korImeGreska || lozinkaGreska || adresaGreska){
+        alert(greska);
+    }
+    else{
+        var formData = {
+            "ime" : imeInput,
+            "prezime" : prezimeInput,
+            "korIme" : korisnickoImeInput,
+            "lozinka" : lozinkaInput,
+            "adresaKupca" : adresaInput
+        }
+
+        $.ajax({
+            url : "http://localhost:8080/api/kupac",
+            type : "POST",
+            contentType: 'application/json; charset=utf-8',
+            data : JSON.stringify(formData),
+            success: function(){
+                alert('Kupac je uspesno dodat!');
+                window.location.href = "/";
+            },
+            error : function(e){
+                alert('Doslo je do neke greške!');
+                console.log("ERROR: ", e);
+            }
+        });
+    }
+
+}
+
+function PrikaziFormuPordavac(){
 	$("#dodajProdavca").show();	
 	$("#dodajKupca").hide();
 	$("#registracija").hide();
 }
 
+function RegisterProdavac(){
+
+    var greska = "";
+    var imeInput = "";
+    var prezimeInput = "";
+    var korisnickoImeInput = "";
+    var lozinkaInput = "";
+    var nazivProdavcaInput = "";
+    var emailInput = "";
+    var adresaInput = "";
+    var poslujeOdInput = "";
+    
+    imeInput = $("#ime").val();
+    prezimeInput = $("#prezime").val();
+    korisnickoImeInput = $("#korIme").val();
+    lozinkaInput = $("#lozinka").val();
+    nazivProdavcaInput = $("#nazivProdavca").val();
+    emailInput = $("#email").val();
+    adresaInput = $("#adresa").val();
+    poslujeOdInput = $("#poslujeOd").val();
+
+    var imeGreska;
+    var prezimeGreska;
+    var korImeGreska;
+    var lozinkaGreska;
+    var nazivProdavcaGreska;
+    var emailGreska;
+    var adresaGreska;
+    var poslujeOdGreska;
+    
+    if(imeInput === ""){
+    	imeGreska = true;
+        greska += "\nMorate uneti ime prodavca!";
+    }
+    if(prezimeInput === ""){
+    	prezimeGreska = true;
+        greska += "\nMorate uneti prezime prodavca!";
+    }
+    if(korisnickoImeInput === ""){
+    	korImeGreska = true;
+        greska += "\nMorate uneti korisnicko ime prodavca!";
+    }
+    if(lozinkaInput === ""){
+    	lozinkaGreska = true;
+        greska += "\nMorate uneti lozinku prodavca!";
+    }
+    if(nazivProdavcaInput === ""){
+    	nazivProdavcaGreska = true;
+        greska += "\nMorate uneti naziv prodavnice u kojoj radi prodavac!";
+    }
+    if(emailInput === ""){
+    	emailGreska = true;
+        greska += "\nMorate uneti email prodavca!";
+    }
+    if(adresaInput === ""){
+    	adresaGreska = true;
+        greska += "\nMorate uneti adresu prodavca!";
+    }
+    if(poslujeOdInput === ""){
+    	poslujeOdGreska = true;
+        greska += "\nMorate uneti kad je prodavac poceo da radi!";
+    }
+
+    if(imeGreska || prezimeGreska || korImeGreska || lozinkaGreska || nazivProdavcaGreska || emailGreska || adresaGreska || poslujeOdGreska){
+        alert(greska);
+    }
+    else{
+        var formData = {
+            "ime" : imeInput,
+            "prezime" : prezimeInput,
+            "korIme" : korisnickoImeInput,
+            "lozinka" : lozinkaInput,
+            "nazivProdavca" : nazivProdavcaInput,
+            "email" : emailInput,
+            "adresa" : adresaInput,
+            "poslujeOd" : poslujeOdInput
+        }
+
+        $.ajax({
+            url : "http://localhost:8080/api/prodavac",
+            type : "POST",
+            contentType: 'application/json; charset=utf-8',
+            data : JSON.stringify(formData),
+            success: function(){
+                alert('Prodavac je uspesno dodat!');
+                window.location.href = "/";
+            },
+            error : function(e){
+                alert('Doslo je do neke greške!');
+                console.log("ERROR: ", e);
+            }
+        });
+    }
+
+}
+
 //------------------------------------------------------------------------------------------------
-
-function odrediPrikaz(id){
-    prikaziArtikle = false;
-    dodavanjeArtikla = false;
-    
-    prikaziAdmine = false;
-    dodavanjeAdmina = false;
-    
-    prikaziProdavce = false;
-    dodavanjeProdavca = false;
-    
-    prikaziKupce = false;
-    dodavanjeKupca = false;
-    
-    prikaziArtikleProdavca = false;
-    dodavanjeArtiklaProdavca = false;
-    
-    prikaziProdavcee = false;
-    
-    if(id === "sviArtikli"){
-        prikaziArtikle = true;
-    }else if(id === "dodajArtikal"){
-    	dodavanjeArtikla = true;
-    }else if(id === "sviAdministratori"){
-    	prikaziAdmine = true;
-    }else if(id === "dodajAdmina"){
-    	dodavanjeAdmina = true;
-    }else if(id === "sviProdavci"){
-    	prikaziProdavce = true;
-    }else if(id === "dodajProdavca"){
-    	dodavanjeProdavca = true;
-    }else if(id === "sviKupci"){
-    	prikaziKupce = true;
-    }else if(id === "dodajKupca"){
-    	dodavanjeKupca = true;
-    }else if(id === "artikliProdavca"){
-    	prikaziArtikleProdavca = true;
-    }else if(id === "dodajArtikal"){
-    	dodavanjeArtiklaProdavca();
-    }else if(id === "sviProdavciNarucivanje"){
-    	prikaziProdavcee = true;
-    }
-
-    prikazi();
-}
-
-function prikazi(){
-    
-    var artikliTable = $("#artikliTable");
-    var dodajArtikal = $("#dodajArtikal");
-    
-    var adminTable = $("#adminTable");
-    var dodajAdmina = $("#dodajAdmina");
-    
-    var prodavciTable = $("#prodavciTable");
-    var dodajProdavca = $("#dodajProdavca");
-    
-    var kupciTable = $("#kupciTable");
-    var dodajKupca = $("#dodajKupca");
-    
-    var artikliTableProdavac = $("#artikliTableProdavac");
-    var dodajArtikalProdavac = $("#dodajArtikal");
-    
-    var prodavciTablee = $("#prodavciTablee");
-
-    artikliTable.hide();
-    dodajArtikal.hide();
-    
-    adminTable.hide();
-    dodajAdmina.hide();
-    
-    prodavciTable.hide();
-    dodajProdavca.hide();
-    
-    kupciTable.hide();
-    dodajKupca.hide();
-    
-    artikliTableProdavac.hide();
-    
-    prodavciTablee.hide();
-
-    if(prikaziArtikle){   
-        PrikazSvihArtikala();
-    }else if(dodavanjeArtikla){
-        $('#izmeniArtikal').hide();
-        $('#btnDodajArtikalProdavca').hide();
-        $('#btnDodajArtikal').show();
-        dajProdavce();
-    	dodajArtikal.show();
-    }else if(prikaziAdmine){
-    	PrikazSvihAdministratora()
-    }else if(dodavanjeAdmina){
-    	$("#izmeniAdmina").hide();
-    	$("#btnDodajAdmina").show();
-    	dodajAdmina.show();
-    }else if(prikaziProdavce){
-    	PrikazSvihProdavaca();
-    }else if(dodavanjeProdavca){
-    	$("#izmeniProdavca").hide();
-    	$("#btnDodajProdavca").show();
-        dodajProdavca.show();
-    }else if(prikaziKupce){
-    	PrikazSvihKupaca();
-    }else if(dodavanjeKupca){
-    	$("#izmeniKupca").hide();
-    	$("#btnDodajKupca").show();
-    	dodajKupca.show();
-    }else if(prikaziArtikleProdavca){
-    	PrikazSvihArtikalaProdavaca();
-    }else if(dodavanjeArtiklaProdavca){
-        $('#izmeniArtikalProdavca').hide();
-        $('#btnDodajArtikalProdavca').show();
-        dajProdavce();
-    	dodajArtikal.show();
-    }else if(prikaziProdavcee){
-    	PrikazSvihProdavacaZaNarudzbinu();
-    }
-}

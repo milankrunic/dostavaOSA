@@ -1,7 +1,7 @@
 package ftn.dostavaOSA2021.DostavaOSA2021.model;
 
-import static javax.persistence.CascadeType.ALL;
-import static javax.persistence.FetchType.LAZY;
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,93 +9,49 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-public class Prodavac extends Korisnik{
+@Table(name = "prodavac")
+public class Prodavac{
 	
-	@Column(name = "naziv_prodavca", nullable = true)
-	private String nazivProdavca;
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idProdavac", nullable = false, unique = true)
+	private Long idProdavac;
 	
-	@Column(name = "email", nullable = true)
-	private String email;
-	
-	@Column(name = "adresa", nullable = true)
+	@Column(name = "adresa", nullable = false)
 	private String adresa;
 	
-	@Column(name = "poslujeOd", nullable = true)
+	@Column(name = "naziv_prodavca", nullable = false)
+	private String nazivProdavca;
+	
+	@Column(name = "email", nullable = false)
+	private String email;
+	
+	@Column(name = "poslujeOd", nullable = false)
 	private Date poslujeOd;
 	 
+	@ManyToOne
+	@JoinColumn(name = "korisnik_id", referencedColumnName = "idKorisnik", nullable = false)
+	private Korisnik korisnik;
 	
-	@OneToMany(mappedBy="prodavac", cascade = {ALL}, fetch=LAZY)
+	@OneToMany(mappedBy="prodavac", cascade = {CascadeType.ALL}, fetch=FetchType.LAZY)
 	private List<Artikal> artikli = new ArrayList<Artikal>();
-	
-	@OneToMany(mappedBy="prodavac", cascade = {ALL}, fetch=LAZY)
-	private List<Akcija> akcije = new ArrayList<Akcija>();
-	
-	public Prodavac() {
-		super();
-	}
-
-	public Prodavac(Long idKorisnik, String ime, String prezime, String korisnickoIme, String lozinka, boolean blokiran,
-			TipKorisnika tipKorisnika, String nazivProdavca, String email, String adresa, Date poslujeOd,
-			List<Artikal> artikli, List<Akcija> akcije) {
-		super(idKorisnik, ime, prezime, korisnickoIme, lozinka, blokiran, tipKorisnika);
-		this.nazivProdavca = nazivProdavca;
-		this.email = email;
-		this.adresa = adresa;
-		this.poslujeOd = poslujeOd;
-		this.artikli = artikli;
-		this.akcije = akcije;
-	}
-
-	public String getNazivProdavca() {
-		return nazivProdavca;
-	}
-
-	public void setNazivProdavca(String nazivProdavca) {
-		this.nazivProdavca = nazivProdavca;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getAdresa() {
-		return adresa;
-	}
-
-	public void setAdresa(String adresa) {
-		this.adresa = adresa;
-	}
-
-	public Date getPoslujeOd() {
-		return poslujeOd;
-	}
-
-	public void setPoslujeOd(Date poslujeOd) {
-		this.poslujeOd = poslujeOd;
-	}
-
-	public List<Artikal> getArtikli() {
-		return artikli;
-	}
-
-	public void setArtikli(List<Artikal> artikli) {
-		this.artikli = artikli;
-	}
-
-	public List<Akcija> getAkcije() {
-		return akcije;
-	}
-
-	public void setAkcije(List<Akcija> akcije) {
-		this.akcije = akcije;
-	}
 
 }

@@ -26,24 +26,18 @@ public class KupacService implements KupacServiceInterface{
 	}
 
 	@Override
-	public Kupac findById(Long korisnikId) {
-		return kupacRepository.findByIdKorisnik(korisnikId);
-	}
-
-	@Override
 	public Kupac save(Kupac kupac) {
 		return kupacRepository.save(kupac);
 	}
 
 	@Override
 	public void remove(Long id) {
-		kupacRepository.deleteById(id);
-		
+		kupacRepository.deleteById(id);		
 	}
 
 	@Override
-	public Kupac findByKorImeAndLozinka(String korIme, String loz) {
-		return kupacRepository.findByKorisnickoImeAndLozinka(korIme, loz);
+	public Kupac findByKorisnickoIme(String korIme) {
+		return kupacRepository.findByKorisnik_korisnickoIme(korIme);
 	}
 
 }

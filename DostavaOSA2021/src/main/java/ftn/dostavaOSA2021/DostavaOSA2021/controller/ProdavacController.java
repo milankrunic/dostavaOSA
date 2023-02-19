@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,19 +19,22 @@ import org.springframework.web.bind.annotation.RestController;
 import ftn.dostavaOSA2021.DostavaOSA2021.dto.ArtikalDTO;
 import ftn.dostavaOSA2021.DostavaOSA2021.dto.ProdavacDTO;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Artikal;
+import ftn.dostavaOSA2021.DostavaOSA2021.model.Korisnik;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Prodavac;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.TipKorisnika;
 import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.ArtikalServiceInterface;
+import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.KorisnikServiceInterface;
 import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.ProdavacServiceInterface;
 
 @RestController
 @RequestMapping(value = "api/prodavac")
 public class ProdavacController {
 	
-	public static final String PRODAVAC_KEY = "prijavljeniProdavac";
-	
 	@Autowired
 	ProdavacServiceInterface prodavacServiceInterface;
+	
+	@Autowired
+	KorisnikServiceInterface korisnikServiceInterface;
 	
 	@Autowired
 	ArtikalServiceInterface artikalServiceInterface;
@@ -51,7 +53,8 @@ public class ProdavacController {
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<ProdavacDTO> getProdavac(@PathVariable("id") Long id){
-		Prodavac prodavac = prodavacServiceInterface.findOne(id);
+		Korisnik korisnik = korisnikServiceInterface.findOne(id);
+		Prodavac prodavac = prodavacServiceInterface.findByKorisnickoIme(korisnik.getKorisnickoIme());
 		
 		if(prodavac == null) {
 			return new ResponseEntity<ProdavacDTO>(HttpStatus.NOT_FOUND);
@@ -62,7 +65,8 @@ public class ProdavacController {
 	@GetMapping(value = "/artikli")
 	public ResponseEntity<List<ArtikalDTO>> getArtikleProdavca(HttpSession session){
 				
-		Prodavac prodavac = (Prodavac) session.getAttribute(PRODAVAC_KEY);
+		Korisnik korisnik = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
+		Prodavac prodavac = prodavacServiceInterface.findByKorisnickoIme(korisnik.getKorisnickoIme());
 		
 		if(prodavac == null) {
 			return new ResponseEntity<List<ArtikalDTO>>(HttpStatus.NOT_FOUND);
@@ -80,8 +84,9 @@ public class ProdavacController {
 	
 	@GetMapping(value = "/{id}/artikli")
 	public ResponseEntity<List<ArtikalDTO>> getArtikleProdavcaKodAdmina(@PathVariable("id") Long id, HttpSession session){
-				
-		Prodavac prodavac = prodavacServiceInterface.findOne(id);
+		
+		Korisnik korisnik = korisnikServiceInterface.findOne(id);
+		Prodavac prodavac = prodavacServiceInterface.findByKorisnickoIme(korisnik.getKorisnickoIme());
 		
 		if(prodavac == null) {
 			return new ResponseEntity<List<ArtikalDTO>>(HttpStatus.NOT_FOUND);
@@ -96,24 +101,28 @@ public class ProdavacController {
 				artikalDTO.add(dto);
 			}
 			return new ResponseEntity<List<ArtikalDTO>>(artikalDTO, HttpStatus.OK);
-		}
-		
+		}	
 	}
 	
 	@PostMapping
 	public ResponseEntity<ProdavacDTO> addProdavac(@RequestBody ProdavacDTO prodavacDTO){
 
-		Prodavac prodavac = new Prodavac();
-		prodavac.setIme(prodavacDTO.getIme());
-		prodavac.setPrezime(prodavacDTO.getPrezime());
-		prodavac.setKorisnickoIme(prodavacDTO.getKorIme());
-		prodavac.setLozinka(prodavacDTO.getLozinka());
-		prodavac.setBlokiran(prodavacDTO.isBlokiran()); //?
+		Korisnik korisnik = new Korisnik();
+		korisnik.setIme(prodavacDTO.getIme());
+		korisnik.setPrezime(prodavacDTO.getPrezime());
+		korisnik.setKorisnickoIme(prodavacDTO.getKorIme());
+		korisnik.setLozinka(prodavacDTO.getLozinka());
+		korisnik.setBlokiran(prodavacDTO.isBlokiran());
+		korisnik.setTipKorisnika(TipKorisnika.PRODAVAC);
+		
+		korisnik = korisnikServiceInterface.save(korisnik);
+		
+		Prodavac prodavac = new Prodavac(); 
+		prodavac.setAdresa(prodavacDTO.getAdresa());
 		prodavac.setNazivProdavca(prodavacDTO.getNazivProdavca());
 		prodavac.setEmail(prodavacDTO.getEmail());
-		prodavac.setAdresa(prodavacDTO.getAdresa());
 		prodavac.setPoslujeOd(prodavacDTO.getPoslujeOd());
-		prodavac.setTipKorisnika(TipKorisnika.PRODAVAC);
+		prodavac.setKorisnik(korisnik);
 		
 		prodavac = prodavacServiceInterface.save(prodavac);
 		return new ResponseEntity<ProdavacDTO>(new ProdavacDTO(prodavac), HttpStatus.CREATED);
@@ -122,49 +131,28 @@ public class ProdavacController {
 	@PutMapping(value = "/{id}", consumes = "application/json")
 	public ResponseEntity<ProdavacDTO> updateProdavac(@RequestBody ProdavacDTO prodavacDTO, @PathVariable("id") Long id){
 
-		Prodavac prodavac = prodavacServiceInterface.findById(id);
+		Korisnik korisnik = korisnikServiceInterface.findOne(id);
+		Prodavac prodavac = prodavacServiceInterface.findByKorisnickoIme(korisnik.getKorisnickoIme());
 		
 		if(prodavac == null) {
 			return new ResponseEntity<ProdavacDTO>(HttpStatus.BAD_REQUEST);
 		}
-		prodavac.setIme(prodavacDTO.getIme());
-		prodavac.setPrezime(prodavacDTO.getPrezime());
-		prodavac.setKorisnickoIme(prodavacDTO.getKorIme());
-		prodavac.setLozinka(prodavacDTO.getLozinka());
-		prodavac.setBlokiran(prodavacDTO.isBlokiran()); //?
+		
+		korisnik.setIme(prodavacDTO.getIme());
+		korisnik.setPrezime(prodavacDTO.getPrezime());
+		korisnik.setKorisnickoIme(prodavacDTO.getKorIme());
+		korisnik.setLozinka(prodavacDTO.getLozinka());
+		
+		korisnik = korisnikServiceInterface.save(korisnik);
+		
+		prodavac.setAdresa(prodavacDTO.getAdresa());
 		prodavac.setNazivProdavca(prodavacDTO.getNazivProdavca());
 		prodavac.setEmail(prodavacDTO.getEmail());
-		prodavac.setAdresa(prodavacDTO.getAdresa());
 		prodavac.setPoslujeOd(prodavacDTO.getPoslujeOd());
+		prodavac.setKorisnik(korisnik);
 
 		prodavac = prodavacServiceInterface.save(prodavac);
 		return new ResponseEntity<ProdavacDTO>(new ProdavacDTO(prodavac), HttpStatus.OK);
-	}
-	
-	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> deleteProdavac(@PathVariable("id") Long id){
-		Prodavac prodavac = prodavacServiceInterface.findById(id);
-		if(prodavac != null) {
-			prodavacServiceInterface.remove(id);
-			
-			return new ResponseEntity<Void>(HttpStatus.OK);
-		}
-		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
-	}
-	
-	@PostMapping(value = "/{id}/blokiranje")
-	public ResponseEntity<ProdavacDTO> blok(@PathVariable("id") Long id){
-
-		Prodavac prodavac = prodavacServiceInterface.findById(id);
-		
-		if(prodavac.isBlokiran() == false) {
-			prodavac.setBlokiran(true);
-		}else {
-			prodavac.setBlokiran(false);
-		}
-		
-		prodavac = prodavacServiceInterface.save(prodavac);
-		return new ResponseEntity<ProdavacDTO>(new ProdavacDTO(prodavac), HttpStatus.CREATED);
 	}
 	
 }

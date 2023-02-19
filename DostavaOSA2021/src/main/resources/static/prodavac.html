@@ -23,6 +23,7 @@
     <script src="js/prodavci.js"></script>
     <script src="js/komentar.js"></script>
     <script src="js/search.js"></script>
+    <script src="js/artikli.js"></script>
     
     <!-- Ukljucivanje css-a -->
     <link rel="stylesheet" href="css/style.css">
@@ -37,7 +38,7 @@
 		<button class="btn btn-primary" onclick="PrikazSvihArtikalaProdavaca()" id="DugmeArtikal">Moji artikli</button>
 		<button class="btn btn-primary" onclick="PretragaArtikla()" id="DugmePrikazPretrageArtikla">Pretraga artikla</button>
 		<button class="btn btn-primary" onclick="PretragaPorudzbine()" id="DugmePrikazPretragePorudzbine">Pretraga porudzbine</button>
-	    <button class="btn btn-primary" onclick="odjava()" id="DugmeOdjava">Odjava</button>
+	    <button class="btn btn-primary" onclick="Odjava()" id="DugmeOdjava">Odjava</button>
 	</div> 
     
 <!-- Prikaz svih artikala prodavca-->
@@ -58,7 +59,7 @@
 	  
 	            </tbody>
 	        </table>
- 	        <button id="dodavanje" class="btn btn-success" onclick="odrediPrikaz('dodajArtikal')">Dodaj artikal</button>  
+ 	        <button id="dodavanje" class="btn btn-success" onclick="DodavanjeArtikla()">Dodaj artikal</button>  
 		</div>
 		
 <!-- Forma za dodavanje artikla prodavca-->
@@ -89,10 +90,10 @@
 	          
 	        </div>
 
-            <button id="btnDodajArtikal" onclick="submitArtikalProdavac()" type="submit" class="btn btn-secondary">Dodaj</button>
-            <button id="izmeniArtikal" type="submit" class="btn btn-warning" style="display: none;" onclick="submitUpdateArtikal()">Izmeni</button> 
+            <button id="btnDodajArtikal" onclick="SubmitArtikalProdavac()" type="submit" class="btn btn-secondary">Dodaj</button>
+            <button id="izmeniArtikal" type="submit" class="btn btn-warning" style="display: none;" onclick="SubmitUpdateArtikal()">Izmeni</button> 
             
-            <button id="izmeniArtikalProdavca" type="submit" class="btn btn-warning" style="display: none;" onclick="submitUpdateArtikalProdavac()">Izmeni</button> 
+            <button id="izmeniArtikalProdavca" type="submit" class="btn btn-warning" style="display: none;" onclick="SubmitUpdateArtikalProdavac()">Izmeni</button> 
         </div>
 
 <!-- ------------------------------------------------------------------------------------------------------------------------------ --> 

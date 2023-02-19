@@ -8,52 +8,43 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-public class Kupac extends Korisnik{
+@Table(name = "kupac")
+public class Kupac{
 
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idKupac", nullable = false, unique = true)
+	private Long idKupac;
 	
-	@Column(name = "adresa", nullable = true)
+	@Column(name = "adresa", nullable = false)
 	private String adresa;
 	
-	@OneToMany(cascade = {ALL}, fetch=LAZY, mappedBy="kupac")
-	private List<Stavka> stavke = new ArrayList<Stavka>();
+	@ManyToOne
+	@JoinColumn(name = "korisnik_id", referencedColumnName = "idKorisnik", nullable = false)
+	private Korisnik korisnik;
 	
 	@OneToMany(cascade = {ALL}, fetch=LAZY, mappedBy="kupac")
 	private List<Komentar> komentari = new ArrayList<Komentar>();
 	
 	@OneToMany(cascade = {ALL}, fetch=LAZY, mappedBy="kupac")
 	private List<Porudzbina> porudzbine = new ArrayList<Porudzbina>();
-	
-	public Kupac() {
-		super();
-	}
-
-
-	public Kupac(Long idKorisnik, String ime, String prezime, String korisnickoIme, String lozinka, boolean blokiran,
-			TipKorisnika tipKorisnika, String adresa, List<Stavka> stavke) {
-		super(idKorisnik, ime, prezime, korisnickoIme, lozinka, blokiran, tipKorisnika);
-		this.adresa = adresa;
-		this.stavke = stavke;
-	}
-
-	public String getAdresa() {
-		return adresa;
-	}
-
-	public void setAdresa(String adresa) {
-		this.adresa = adresa;
-	}
-
-
-	public List<Stavka> getStavke() {
-		return stavke;
-	}
-
-
-	public void setStavke(List<Stavka> stavke) {
-		this.stavke = stavke;
-	}
 
 }

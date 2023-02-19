@@ -6,8 +6,6 @@ import ftn.dostavaOSA2021.DostavaOSA2021.model.Kupac;
 
 public interface KupacRepository extends JpaRepository<Kupac, Long>{
 
-	Kupac findByIdKorisnik(Long idKorisnik);
-	
-	Kupac findByKorisnickoImeAndLozinka(String korisnickoIme, String lozinka);
+	Kupac findByKorisnik_korisnickoIme(String korisnickoIme);
 	
 }

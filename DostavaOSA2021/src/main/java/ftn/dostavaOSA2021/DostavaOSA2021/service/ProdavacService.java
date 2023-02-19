@@ -26,11 +26,6 @@ public class ProdavacService implements ProdavacServiceInterface{
 	}
 
 	@Override
-	public Prodavac findById(Long korisnikId) {
-		return prodavacRepository.findByIdKorisnik(korisnikId);
-	}
-
-	@Override
 	public Prodavac save(Prodavac prodavac) {
 		return prodavacRepository.save(prodavac);
 	}
@@ -42,8 +37,8 @@ public class ProdavacService implements ProdavacServiceInterface{
 	}
 
 	@Override
-	public Prodavac findByKorImeAndLozinka(String korIme, String loz) {
-		return prodavacRepository.findByKorisnickoImeAndLozinka(korIme, loz);
+	public Prodavac findByKorisnickoIme(String korIme) {
+		return prodavacRepository.findByKorisnik_korisnickoIme(korIme);
 	}
 
 }

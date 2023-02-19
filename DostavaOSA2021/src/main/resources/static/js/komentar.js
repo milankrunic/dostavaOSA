@@ -17,43 +17,66 @@ function PrikazSvihKomentara(){
             	tabelaKomentar.show();
             	tbodyKomentar.empty();
                 for(komentar in result){
-            	tbodyKomentar.append(
-                '<tr>'
-            			
-                    +'<td align="center">'+result[komentar].idKomentar+'</td>'
-                    +'<td align="center">'+result[komentar].tekst+'</td>'
-                    +'<td align="center">'+result[komentar].artikal+'</a>'+'</td>'
-                    +'<td align="center">'+result[komentar].kupac+'</td>'
-                    +'<td align="center">'+result[komentar].ocena+'</td>'
-                    +'<td align="center">'+result[komentar].prihvacen+'</td>'
-                    
-    				+'<td align="center">' 
-    			        +'<form method="post" action="/api/komentar/odobrenje">'
-	    			        +'<input type="hidden" name="id" value="'+result[komentar].idKomentar+'"/>'
-	    			        +'<input class="btn btn-success" type="submit" value="DOZVOLI">'
-    			        +'</form>'
-    			    +'</td>'
+                	if(result[komentar].prihvacen){
+                    	tbodyKomentar.append(
+                            '<tr>'
+                        			
+                                +'<td align="center">'+result[komentar].idKomentar+'</td>'
+                                +'<td align="center">'+result[komentar].tekst+'</td>'
+                                +'<td align="center">'+result[komentar].artikal+'</a>'+'</td>'
+                                +'<td align="center">'+result[komentar].kupac+'</td>'
+                                +'<td align="center">'+result[komentar].ocena+'</td>'
+                                +'<td align="center">'+'JESTE'+'</td>'
+                                
+                				+'<td align="center">' 
+                			        +'<form method="post" action="/api/komentar/odobrenje">'
+            	    			        +'<input type="hidden" name="id" value="'+result[komentar].idKomentar+'"/>'
+            	    			        +'<input class="btn btn-success" type="submit" value="DOZVOLI">'
+                			        +'</form>'
+                			    +'</td>'
 
-    			    +'<td>'
-    			        +'<form method="post" action="/api/komentar/zabrani">'
-	    			        +'<input type="hidden" name="id" value="'+result[komentar].idKomentar+'"/>'
-	    			        +'<input class="btn btn-danger" type="submit" value="ZABRANI">'
-    			        +'</form>'
-			        +'</td>'
+                			    +'<td>'
+                			        +'<form method="post" action="/api/komentar/zabrani">'
+            	    			        +'<input type="hidden" name="id" value="'+result[komentar].idKomentar+'"/>'
+            	    			        +'<input class="btn btn-danger" type="submit" value="ZABRANI">'
+                			        +'</form>'
+            			        +'</td>'
 
-                +'</tr>'
-                
-                )};
-                    
+                            +'</tr>')
+                	}else{
+                    	tbodyKomentar.append(
+                            '<tr>'
+                        			
+                                +'<td align="center">'+result[komentar].idKomentar+'</td>'
+                                +'<td align="center">'+result[komentar].tekst+'</td>'
+                                +'<td align="center">'+result[komentar].artikal+'</a>'+'</td>'
+                                +'<td align="center">'+result[komentar].kupac+'</td>'
+                                +'<td align="center">'+result[komentar].ocena+'</td>'
+                                +'<td align="center">'+'NIJE'+'</td>'
+                                
+                				+'<td align="center">' 
+                			        +'<form method="post" action="/api/komentar/odobrenje">'
+            	    			        +'<input type="hidden" name="id" value="'+result[komentar].idKomentar+'"/>'
+            	    			        +'<input class="btn btn-success" type="submit" value="DOZVOLI">'
+                			        +'</form>'
+                			    +'</td>'
+
+                			    +'<td>'
+                			        +'<form method="post" action="/api/komentar/zabrani">'
+            	    			        +'<input type="hidden" name="id" value="'+result[komentar].idKomentar+'"/>'
+            	    			        +'<input class="btn btn-danger" type="submit" value="ZABRANI">'
+                			        +'</form>'
+            			        +'</td>'
+
+                            +'</tr>')
+                	}};                   
             },
             error :function(e){
                 alert('Doslo je do neke greške!');
             }
-
         });
     }
     prikaziKomentare();
-
 }
 
 function PrikazSvihKomentaraArtikla(id){
@@ -107,7 +130,7 @@ function ZatvoriKomentareKodProdavca(){
 	$('#komentariTableProdavac').hide();
 }
 
-function prikaziFormuZaDodavanjeKomentara(){
+function PrikaziFormuZaDodavanjeKomentara(){
 	var dodajKomentar = $("#dodajKomentar").slideDown();
 	dodajKomentar.show();
 }
@@ -190,7 +213,7 @@ function PrikazSvihKomentaraArtiklaKodPordavca(id){
 	                    +'<td align="center">'+result[komentar].artikal+'</a>'+'</td>'
 	                    +'<td align="center">'+result[komentar].kupac+'</td>'
 	                    +'<td align="center">'+result[komentar].ocena+'</td>'
-	                    +'<td align="center">'+result[komentar].arhiviran+'</td>'
+	                    +'<td align="center">'+'NIJE'+'</td>'
 	                    +'<td>'
 	                    
 	    			        +'<form method="post" action="/api/komentar/arhivirajProdavac">'

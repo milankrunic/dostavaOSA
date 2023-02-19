@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ftn.dostavaOSA2021.DostavaOSA2021.dto.KomentarDTO;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Artikal;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Komentar;
+import ftn.dostavaOSA2021.DostavaOSA2021.model.Korisnik;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Kupac;
 import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.ArtikalServiceInterface;
 import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.KomentarServiceInterface;
@@ -31,8 +32,6 @@ import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.KupacServiceInterface;
 @RestController
 @RequestMapping(value = "api/komentar")
 public class KomentarController {
-	
-	public static final String KOMENTAR_KEY = "odabraniKomentar";
 	
 	@Autowired
 	KomentarServiceInterface komentarServiceInterface;
@@ -78,7 +77,8 @@ public class KomentarController {
 	public ResponseEntity<KomentarDTO> addKomentar(@RequestBody KomentarDTO komentarDTO, HttpSession session){
 
 		Artikal artikal = (Artikal) session.getAttribute(ArtikalController.ODABRANI_ARTIKAL);
-		Kupac kupac = (Kupac) session.getAttribute(KorisnikController.KORISNIK_KEY);
+		Korisnik korisnik = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
+		Kupac kupac = kupacServiceInterface.findByKorisnickoIme(korisnik.getKorisnickoIme());
 		
 		Komentar kom = new Komentar();
 		kom.setTekst(komentarDTO.getTekst());
