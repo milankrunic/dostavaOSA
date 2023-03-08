@@ -155,7 +155,7 @@ function editArtikal(id){
     prikaziArtikal();
 }
 
-function submitUpdateArtikal(){
+function SubmitUpdateArtikal(){
 
     var id = $("#idArtikla").val();
     var naziv = $("#nazivArtikla").val();
@@ -179,6 +179,7 @@ function submitUpdateArtikal(){
         success: function(result){
             alert('Artikal je uspesno izmenjen!');
             PrikazSvihArtikala();
+            $('#dodajArtikal').hide();
         },
         error : function(e){
             alert('Doslo je do neke greške!')

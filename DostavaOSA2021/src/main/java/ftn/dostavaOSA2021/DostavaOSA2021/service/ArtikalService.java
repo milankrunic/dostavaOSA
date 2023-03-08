@@ -1,6 +1,7 @@
 package ftn.dostavaOSA2021.DostavaOSA2021.service;
 
 import java.util.List;
+import java.io.File;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -54,12 +55,6 @@ public class ArtikalService implements ArtikalServiceInterface{
 	}
 
 	@Override
-	public void remove(Long id) {
-		artikalRepository.deleteById(id);
-		
-	}
-
-	@Override
 	public List<Artikal> findAllByProdavac(Prodavac prodavac) {
 		return artikalRepository.findByProdavac(prodavac);
 	}
@@ -78,6 +73,22 @@ public class ArtikalService implements ArtikalServiceInterface{
         } catch (MalformedURLException ex) {
             throw new Exception("File not found " + fileName, ex);
         }
+	}
+
+	@Override
+	public void remove(Long id) {
+		Artikal artikal = findOne(id);
+		String file = artikal.getNazivFajla();
+		try {
+			if (id != 0 && file != null) {
+				artikalRepository.deleteById(id);
+				String path = uploadDirectory+"/"+file;
+				File fileToDelete = new File(path);
+				fileToDelete.delete();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
 	}
 
 }

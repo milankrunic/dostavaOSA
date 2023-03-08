@@ -164,10 +164,10 @@ public class ArtikalController {
 	
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> deleteArtikal(@PathVariable("id") Long id){
+		
 		Artikal artikal = artikalServiceInterface.findById(id);
 		if(artikal != null) {
 			artikalServiceInterface.remove(id);
-//			artikalEsServiceInterface.remove(id);
 			
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		}
