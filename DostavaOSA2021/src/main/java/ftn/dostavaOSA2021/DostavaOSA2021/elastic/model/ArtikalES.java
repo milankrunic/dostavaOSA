@@ -22,10 +22,8 @@ import ftn.dostavaOSA2021.DostavaOSA2021.model.Artikal;
 @Document(indexName = "artikli")
 @Setting(settingPath = "/analyzer/serbianAnalyzer.json")
 public class ArtikalES {
-
-    @Id
-    private String id;
     
+	@Id
     private Long idArtikla;
 
     @Field(type = FieldType.Text)

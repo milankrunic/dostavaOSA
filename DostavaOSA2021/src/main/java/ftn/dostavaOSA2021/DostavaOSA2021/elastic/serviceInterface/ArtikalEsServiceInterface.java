@@ -28,4 +28,8 @@ public interface ArtikalEsServiceInterface {
 	
 	List<ArtikalEsDTO> findByNazivOrCena(String naziv, double from, double to);
 	
+	public void removeArtikalES(Long id);
+	
+	public ArtikalES findOne(Long id);
+	
 }

@@ -146,10 +146,11 @@ public class ArtikalController {
 	public ResponseEntity<ArtikalDTO> updateArtikal(@RequestBody ArtikalDTO artikalDTO, @PathVariable("id") Long id){
 		
 		Artikal artikal = artikalServiceInterface.findById(id);
+		ArtikalES artikalES = artikalEsServiceInterface.findOne(id);
 		Korisnik korisnik = korisnikServiceInterface.findOne(artikalDTO.getIdProdavac());
 		Prodavac prodavac = prodavacServiceInterface.findByKorisnickoIme(korisnik.getKorisnickoIme());
 		
-		if(artikal == null) {
+		if(artikal == null && artikalES == null) {
 			return new ResponseEntity<ArtikalDTO>(HttpStatus.BAD_REQUEST);
 		}
 		
@@ -157,8 +158,12 @@ public class ArtikalController {
 		artikal.setOpis(artikalDTO.getOpis());
 		artikal.setCena(artikalDTO.getCena());
 		artikal.setProdavac(prodavac);
+		artikalES.setNaziv(artikalDTO.getNaziv());
+		artikalES.setOpis(artikalDTO.getOpis());
+		artikalES.setCena(artikalDTO.getCena());
 
 		artikal = artikalServiceInterface.save(artikal);
+		artikalEsServiceInterface.save(artikalES);
 		return new ResponseEntity<ArtikalDTO>(new ArtikalDTO(artikal), HttpStatus.OK);
 	}
 	
@@ -168,6 +173,7 @@ public class ArtikalController {
 		Artikal artikal = artikalServiceInterface.findById(id);
 		if(artikal != null) {
 			artikalServiceInterface.remove(id);
+			artikalEsServiceInterface.removeArtikalES(id);
 			
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		}

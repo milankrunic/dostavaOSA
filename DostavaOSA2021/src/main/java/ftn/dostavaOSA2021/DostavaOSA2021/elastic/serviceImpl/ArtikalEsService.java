@@ -231,4 +231,14 @@ public class ArtikalEsService implements ArtikalEsServiceInterface{
 		
 	}
 
+	@Override
+	public void removeArtikalES(Long id) {
+		artikalEsRepository.deleteById(id);		
+	}
+
+	@Override
+	public ArtikalES findOne(Long id) {
+		return artikalEsRepository.findByIdArtikla(id);
+	}
+
 }
