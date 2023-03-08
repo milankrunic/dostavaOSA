@@ -62,7 +62,7 @@ public class SearchController {
 		a.setNaziv(uploadModel.getNaziv());
 		a.setCena(uploadModel.getCena());
 		
-		a = artikalEsServiceInterface.save(a);
+//		a = artikalEsServiceInterface.save(a);
 		artikalEsServiceInterface.index(a);
 		artikalEsServiceInterface.indexUploadFile(uploadModel);
 	}

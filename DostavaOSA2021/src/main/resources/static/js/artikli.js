@@ -4,7 +4,6 @@ function PrikazSvihArtikala(){
     var tbodyArtikla = $("#tbodyArtikla");
 
     function prikaziArtikle(){
-    	$('#dodavanje').show();
     	$('#prijava').hide();
     	$('#btnLogin').hide();
     	$('#DugmePrikazLogiina').hide();
@@ -28,6 +27,7 @@ function PrikazSvihArtikala(){
                         +'<td align="center">'+result[artikal].opis+'</a>'+'</td>'
                         +'<td align="center">'+result[artikal].cena+'</td>'
                         +'<td align="center">'+result[artikal].prodavac+'</td>'
+                        +'<td align="center"><a href="http://localhost:8080/api/artikal/downloadFile/'+result[artikal].nazivFajla+'">'+result[artikal].nazivFajla+'</a></td>'
                         +'<td>'
                         	+'<button type="submit" class="btn btn-success" style="margin-right: 5%;" onclick="PrikazSvihKomentaraArtikla('+result[artikal].idArtikla+')">KOMENTARI</button>'
 	                        +'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="editArtikal('+result[artikal].idArtikla+')">IZMENI</button>'
@@ -35,18 +35,14 @@ function PrikazSvihArtikala(){
                         +'</td>'
                     +'</tr>'
                     
-                    )};
-                    
+                    )};               
             },
             error :function(e){
                 alert('Doslo je do neke greške!');
             }
-
-
         });
     }
     prikaziArtikle();
-
 }
 
 function DodavanjeArtikla(){
@@ -56,18 +52,20 @@ function DodavanjeArtikla(){
     dajProdavce();
 }
 
-function submitArtikal(){
+function SubmitArtikal(){
 
     var greska = "";
     var nazivInput = "";
     var opisInput = "";
     var cenaInput = "";
     var prodavacInput = "";
+    var opisFileInput = "";
 
     nazivInput = $("#nazivArtikla").val();
     opisInput = $("#opis").val();
     cenaInput = $("#cena").val();
     prodavacInput = $("#inputProdavac").val();
+    opisFileInput = $("#opisFile").val();
 
     var nazivGreska;
     var opisGreska;
@@ -90,21 +88,25 @@ function submitArtikal(){
         alert(greska);
     }
     else{
-        var formData = {
-            "naziv" : nazivInput,
-            "opis" : opisInput,
-            "cena" : cenaInput,
-            "idProdavac" : prodavacInput
-        }
+        var formData = new FormData();    
+        formData.append( 'naziv', nazivInput );
+        formData.append( 'opis', opisInput );
+        formData.append( 'cena', cenaInput );
+        formData.append( 'file', $('#opisFile')[0].files[0] );
+        formData.append( 'idProdavac', prodavacInput );
 
         $.ajax({
-            url : "http://localhost:8080/api/artikal",
+        	url : "http://localhost:8080/api/artikal",
             type : "POST",
-            contentType: 'application/json; charset=utf-8',
-            data : JSON.stringify(formData),
-            success: function(){
+            data : formData,
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            cache: false, 
+            success: function(data){
                 alert('Artikal je uspesno dodat!');
-                odrediPrikaz('sviArtikli');
+                PrikazSvihArtikala();
+                $('#dodajArtikal').hide();
             },
             error : function(e){
                 alert('Doslo je do neke greške!');
@@ -112,7 +114,6 @@ function submitArtikal(){
             }
         });
     }
-
 }
 
 function editArtikal(id){
@@ -177,7 +178,7 @@ function submitUpdateArtikal(){
         data : JSON.stringify(formData),
         success: function(result){
             alert('Artikal je uspesno izmenjen!');
-            odrediPrikaz('sviArtikli');
+            PrikazSvihArtikala();
         },
         error : function(e){
             alert('Doslo je do neke greške!')
@@ -194,7 +195,7 @@ function deleteArtikal(id){
         contentType: 'application/json; charset=utf-8',
         success: function(result){
             alert("Artikal je obrisan!");
-            odrediPrikaz('sviArtikli');
+            PrikazSvihArtikala();
         },
         error : function(e){
             alert('Doslo je do neke greške!')

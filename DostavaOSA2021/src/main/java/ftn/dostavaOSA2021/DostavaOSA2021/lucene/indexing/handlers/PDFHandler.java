@@ -28,13 +28,6 @@ public class PDFHandler extends DocumentHandler {
 
 			String naziv = ""+info.getTitle();
 			retVal.setNaziv(naziv);
-
-//			String keywords = ""+info.getKeywords();
-//			retVal.setKeywords(keywords);
-//			
-//			retVal.setFilename(file.getCanonicalPath());
-//		
-//			String nodificationDate= DateTools.dateToString(new Date(file.lastModified()), DateTools.Resolution.DAY);
 			
 			pdf.close();
 		} catch (IOException e) {
@@ -68,5 +61,3 @@ public class PDFHandler extends DocumentHandler {
 	}
 
 }
-
-

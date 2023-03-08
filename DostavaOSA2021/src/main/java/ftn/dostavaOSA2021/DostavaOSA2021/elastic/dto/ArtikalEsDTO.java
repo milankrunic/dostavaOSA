@@ -16,21 +16,24 @@ import lombok.Setter;
 @Builder
 public class ArtikalEsDTO {
 
+	private Long id;
+	
     private String naziv;
 
     private Double cena;
     
     private MultipartFile[] opisFile;
     
-	public ArtikalEsDTO(String naziv, Double cena) {
+	public ArtikalEsDTO(Long id, String naziv, Double cena) {
 		super();
+		this.id = id;
 		this.naziv = naziv;
 		this.cena = cena;
 	}
     
     //mapper
     public ArtikalEsDTO(ArtikalES artikalEs) {
-    	this(artikalEs.getNaziv(), artikalEs.getCena());
+    	this(artikalEs.getIdArtikla(), artikalEs.getNaziv(), artikalEs.getCena());
     }
 	
 }

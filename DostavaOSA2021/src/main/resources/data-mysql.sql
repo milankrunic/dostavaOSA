@@ -35,9 +35,9 @@ INSERT INTO prodavac(adresa, naziv_prodavca, email, posluje_od, korisnik_id)
 	VALUES('Zlatiborska 3', 'STR Silobad', 'jova@gmail.com', '2019-08-12', 7);
 
 --ARTIKLI
-INSERT INTO artikal(naziv, opis, cena, putanja_slike, prodavac) VALUES('Hleb', 'Artikal za ishranu', 50, 'neka putanja', 1);
-INSERT INTO artikal(naziv, opis, cena, putanja_slike, prodavac) VALUES('Banane', 'Voce', 120, 'neka putanja', 3);
-INSERT INTO artikal(naziv, opis, cena, putanja_slike, prodavac) VALUES('Mleko', 'Artikal za ishranu', 100, 'neka putanja', 2);
+INSERT INTO artikli(naziv, opis, cena, naziv_fajla, putanja_fajla, prodavac) VALUES('Hleb', 'Artikal za ishranu', 50, 'Hleb.pdf', 'C:\Users\Milan Krunic\git\dostavaOSA\DostavaOSA2021\src\main\resources\files\Hleb.pdf', 1);
+INSERT INTO artikli(naziv, opis, cena, naziv_fajla, putanja_fajla, prodavac) VALUES('Banane', 'Voce', 120, 'Banane.pdf', 'C:\Users\Milan Krunic\git\dostavaOSA\DostavaOSA2021\src\main\resources\files\Banane.pdf', 3);
+INSERT INTO artikli(naziv, opis, cena, naziv_fajla, putanja_fajla, prodavac) VALUES('Mleko', 'Artikal za ishranu', 100, 'Mleko.pdf', 'C:\Users\Milan Krunic\git\dostavaOSA\DostavaOSA2021\src\main\resources\files\Mleko.pdf', 2);
 
 --PORUDZBINE
 INSERT INTO porudzbina(satnica, ocena, komentar, cena, dostavljeno, anoniman_komentar, arhiviran_komentar, kupac) VALUES('2020-05-03', 4, 'Nije los artikal, bio sam gladan hleb mi je prijao, brzo je i dostavljeno!', 200, true, true, true, 2);

@@ -26,7 +26,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "artikal")
+@Table(name = "artikli")
 public class Artikal {
 	
 	@Id
@@ -43,8 +43,11 @@ public class Artikal {
 	@Column(name = "cena", nullable = false)
 	private Double cena;
 	
-	@Column(name = "putanja_slike", nullable = true)
-	private String putanjaSlike;
+	@Column(name = "naziv_fajla")
+	private String nazivFajla;
+	
+	@Column(name = "putanja_fajla")
+	private String putanjaFajla;
 	
 	@ManyToOne
 	@JoinColumn(name = "prodavac", referencedColumnName = "idProdavac", nullable = false)

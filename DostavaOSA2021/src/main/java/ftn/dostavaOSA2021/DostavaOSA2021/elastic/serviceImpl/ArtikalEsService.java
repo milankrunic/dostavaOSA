@@ -148,7 +148,6 @@ public class ArtikalEsService implements ArtikalEsServiceInterface{
 				ArtikalES artikalEsIndexUnit = getHandler(fileName).getIndexUnit(new File(fileName));
 				artikalEsIndexUnit.setNaziv(artikalEsDTO.getNaziv());
 				artikalEsIndexUnit.setCena(artikalEsDTO.getCena());
-//				artikalEsIndexUnit.setOpis(artikalEsDTO.getOpisFile());
 				index(artikalEsIndexUnit);
 			}
 		}	
@@ -231,4 +230,5 @@ public class ArtikalEsService implements ArtikalEsServiceInterface{
 		return ArtikalMapper.mapDtos(searchByBoolQuery(boolQuery));
 		
 	}
+
 }

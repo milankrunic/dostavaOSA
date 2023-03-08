@@ -17,12 +17,13 @@ public class ArtikalDTO {
 	private String naziv;
 	private String opis;
 	private Double cena;
-	private String putanjaSlike;
+	private String nazivFajla;	
+	private String putanjaFajla;
 	private Long idProdavac;
 	private String prodavac;
 	
 	public ArtikalDTO(Artikal artikal) {
-		this(artikal.getIdArtikal(), artikal.getNaziv(), artikal.getOpis(), artikal.getCena(), artikal.getPutanjaSlike(),
+		this(artikal.getIdArtikal(), artikal.getNaziv(), artikal.getOpis(), artikal.getCena(),artikal.getNazivFajla(), artikal.getPutanjaFajla(),
 				artikal.getProdavac().getKorisnik().getIdKorisnik(), artikal.getProdavac().getNazivProdavca());
 	}
 

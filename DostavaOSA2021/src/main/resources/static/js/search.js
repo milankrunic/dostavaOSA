@@ -17,7 +17,7 @@ $(document).ready(function () {
     
     $("#btnDodajArtikal").click(function (event) {
         event.preventDefault();
-        submitFile();
+//        submitFile();
     });
     
     $("#btnOpisArtikla").click(function (event) {

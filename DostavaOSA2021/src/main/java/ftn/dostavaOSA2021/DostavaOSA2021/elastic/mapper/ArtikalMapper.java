@@ -17,6 +17,7 @@ public class ArtikalMapper {
 	
 	private static ArtikalEsDTO mapDto(ArtikalES artikalES) {
 		return ArtikalEsDTO.builder()
+				.id(artikalES.getIdArtikla())
 				.naziv(artikalES.getNaziv())
 				.cena(artikalES.getCena())
 				.build();
