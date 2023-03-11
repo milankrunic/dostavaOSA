@@ -135,10 +135,30 @@ public class ArtikalEsService implements ArtikalEsServiceInterface{
 		}
 		
 	}
+	
+//	@Override
+//	public void indexUploadFile(ArtikalES artikalES) throws IOException {
+//		for (MultipartFile file : artikalES.getFile()) {
+//			if(file.isEmpty()) {
+//				continue;
+//			}
+//			
+//			String fileName = saveUploadedFileInFolder(file);
+//			if(fileName != null) {
+//				ArtikalES artikalEsIndexUnit = getHandler(fileName).getIndexUnit(new File(fileName));
+////				artikalEsIndexUnit.setIdArtikla(artikalES.getIdArtikla());
+////				artikalEsIndexUnit.setNaziv(artikalES.getNaziv());
+////				artikalEsIndexUnit.setCena(artikalES.getCena());
+////				artikalEsIndexUnit.setOpis(artikalEsDTO.getOpis());
+//
+//				index(artikalEsIndexUnit);
+//			}
+//		}	
+//	}
 
 	@Override
 	public void indexUploadFile(ArtikalEsDTO artikalEsDTO) throws IOException {
-		for (MultipartFile file : artikalEsDTO.getOpisFile()) {
+		for (MultipartFile file : artikalEsDTO.getFile()) {
 			if(file.isEmpty()) {
 				continue;
 			}
@@ -148,6 +168,7 @@ public class ArtikalEsService implements ArtikalEsServiceInterface{
 				ArtikalES artikalEsIndexUnit = getHandler(fileName).getIndexUnit(new File(fileName));
 				artikalEsIndexUnit.setNaziv(artikalEsDTO.getNaziv());
 				artikalEsIndexUnit.setCena(artikalEsDTO.getCena());
+				artikalEsIndexUnit.setIdArtikla(artikalEsDTO.getId());
 				index(artikalEsIndexUnit);
 			}
 		}	
@@ -175,10 +196,15 @@ public class ArtikalEsService implements ArtikalEsServiceInterface{
 		
 		return ArtikalMapper.mapDtos(searchByBoolQuery(boolQuery));
 	}
-
+	
 	@Override
-	public ArtikalES save(ArtikalES artikalES) {
-		return artikalEsRepository.save(artikalES);
+	public List<ArtikalEsDTO> findByOpis(String opis) {
+		QueryBuilder opisQuery = SearchQueryGenerator.createMatchQueryBuilder(new SimpleQueryES("opis", opis));
+		
+		BoolQueryBuilder boolQuery = QueryBuilders.boolQuery()
+				.must(opisQuery);
+		
+		return ArtikalMapper.mapDtos(searchByBoolQuery(boolQuery));
 	}
 
 	@Override
@@ -232,13 +258,18 @@ public class ArtikalEsService implements ArtikalEsServiceInterface{
 	}
 
 	@Override
-	public void removeArtikalES(Long id) {
-		artikalEsRepository.deleteById(id);		
+	public ArtikalES findOne(Long id) {
+		return artikalEsRepository.findByIdArtikla(id);
 	}
 
 	@Override
-	public ArtikalES findOne(Long id) {
-		return artikalEsRepository.findByIdArtikla(id);
+	public ArtikalES getOneByNaziv(String naziv) {
+		return artikalEsRepository.findByNaziv(naziv);
+	}
+
+	@Override
+	public void removeArtikalES(ArtikalES artikalES) {
+		artikalEsRepository.delete(artikalES);		
 	}
 
 }

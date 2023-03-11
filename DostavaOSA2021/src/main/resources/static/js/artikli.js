@@ -38,7 +38,7 @@ function PrikazSvihArtikala(){
                     )};               
             },
             error :function(e){
-                alert('Doslo je do neke greške!');
+            	
             }
         });
     }

@@ -20,7 +20,7 @@ public interface ArtikalEsServiceInterface {
 	
 	List<ArtikalEsDTO> findByNaziv(String naziv);
 	
-	public ArtikalES save(ArtikalES artikalES);
+	List<ArtikalEsDTO> findByOpis(String opis);
 	
 	List<ArtikalEsDTO> findByCena(double from, double to);
 	
@@ -28,8 +28,10 @@ public interface ArtikalEsServiceInterface {
 	
 	List<ArtikalEsDTO> findByNazivOrCena(String naziv, double from, double to);
 	
-	public void removeArtikalES(Long id);
+	public void removeArtikalES(ArtikalES artikalES);
 	
 	public ArtikalES findOne(Long id);
+	
+	public ArtikalES getOneByNaziv(String naziv);
 	
 }

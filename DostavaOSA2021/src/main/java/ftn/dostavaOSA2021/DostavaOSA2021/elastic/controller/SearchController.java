@@ -55,21 +55,36 @@ public class SearchController {
 	public void reindex() {
 		artikalEsServiceInterface.reindex();
 	}
+	
+//	@PostMapping(path = "/pdf", consumes = "multipart/form-data")
+//	public void uploadPdf(@ModelAttribute ArtikalES uploadModel) throws IOException{
+////		ArtikalES a = new ArtikalES();
+////		a.setIdArtikla(uploadModel.getIdArtikla());
+////		a.setNaziv(uploadModel.getNaziv());
+////		a.setCena(uploadModel.getCena());
+////		a.setOpis(uploadModel.getOpis());
+//
+//		artikalEsServiceInterface.indexUploadFile(uploadModel);
+//	}
 
 	@PostMapping(path = "/pdf", consumes = "multipart/form-data")
-	public void uploadPdf(@ModelAttribute ArtikalEsDTO uploadModel) throws IOException{
+	public void uploadPdf(@ModelAttribute ArtikalEsDTO artikalEsDTO) throws IOException{
 		ArtikalES a = new ArtikalES();
-		a.setNaziv(uploadModel.getNaziv());
-		a.setCena(uploadModel.getCena());
-		
-//		a = artikalEsServiceInterface.save(a);
-		artikalEsServiceInterface.index(a);
-		artikalEsServiceInterface.indexUploadFile(uploadModel);
+		a.setIdArtikla(artikalEsDTO.getId());
+		a.setNaziv(artikalEsDTO.getNaziv());
+		a.setCena(artikalEsDTO.getCena());
+
+		artikalEsServiceInterface.indexUploadFile(artikalEsDTO);
 	}
 	
 	@PostMapping("/nazivQuery")
 	public List<ArtikalEsDTO> getByNaziv(@RequestParam(name = "naziv") String naziv){
 		return artikalEsServiceInterface.findByNaziv(naziv);
+	}
+	
+	@PostMapping("/opisQuery")
+	public List<ArtikalEsDTO> getByOpis(@RequestParam(name = "opis") String opis){
+		return artikalEsServiceInterface.findByOpis(opis);
 	}
 	
 	@PostMapping("/artikalNazivAndCena")

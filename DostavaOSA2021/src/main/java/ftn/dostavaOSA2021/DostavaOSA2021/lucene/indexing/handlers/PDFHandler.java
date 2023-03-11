@@ -6,7 +6,6 @@ import java.io.IOException;
 import org.apache.pdfbox.io.RandomAccessFile;
 import org.apache.pdfbox.pdfparser.PDFParser;
 import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDDocumentInformation;
 import org.apache.pdfbox.text.PDFTextStripper;
 
 import ftn.dostavaOSA2021.DostavaOSA2021.elastic.model.ArtikalES;
@@ -20,14 +19,10 @@ public class PDFHandler extends DocumentHandler {
 			PDFParser parser = new PDFParser(new RandomAccessFile(file, "r"));
 			parser.parse();
 			String opis = getText(parser);
-			retVal.setOpis(opis);;
+			retVal.setOpis(opis);
 
 			// metadata extraction
 			PDDocument pdf = parser.getPDDocument();
-			PDDocumentInformation info = pdf.getDocumentInformation();
-
-			String naziv = ""+info.getTitle();
-			retVal.setNaziv(naziv);
 			
 			pdf.close();
 		} catch (IOException e) {

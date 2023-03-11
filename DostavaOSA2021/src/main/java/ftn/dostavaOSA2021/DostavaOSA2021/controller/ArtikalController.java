@@ -109,9 +109,8 @@ public class ArtikalController {
 			a.setNazivFajla(fileName);
 			a.setPutanjaFajla(filePath);
 			a.setProdavac(prodavac);
-			
+
 			a = artikalServiceInterface.save(a);
-			artikalEsServiceInterface.index(new ArtikalES(a));
 			return new ResponseEntity<ArtikalDTO>(new ArtikalDTO(a), HttpStatus.CREATED);
 
 		} catch (Exception e) {
@@ -143,17 +142,17 @@ public class ArtikalController {
 	}
 
 	@PutMapping(value = "/{id}", consumes = "application/json")
-	public ResponseEntity<ArtikalDTO> updateArtikal(@RequestBody ArtikalDTO artikalDTO, @PathVariable("id") Long id){
+	public ResponseEntity<ArtikalDTO> updateArtikal(@RequestBody ArtikalDTO artikalDTO, @PathVariable("id") Long id) throws IOException{
 		
 		Artikal artikal = artikalServiceInterface.findById(id);
-		ArtikalES artikalES = artikalEsServiceInterface.findOne(id);
 		Korisnik korisnik = korisnikServiceInterface.findOne(artikalDTO.getIdProdavac());
 		Prodavac prodavac = prodavacServiceInterface.findByKorisnickoIme(korisnik.getKorisnickoIme());
 		
-		if(artikal == null && artikalES == null) {
+		if(artikal == null) {
 			return new ResponseEntity<ArtikalDTO>(HttpStatus.BAD_REQUEST);
 		}
 		
+		ArtikalES artikalES = artikalEsServiceInterface.getOneByNaziv(artikal.getNaziv());
 		artikal.setNaziv(artikalDTO.getNaziv());
 		artikal.setOpis(artikalDTO.getOpis());
 		artikal.setCena(artikalDTO.getCena());
@@ -163,7 +162,8 @@ public class ArtikalController {
 		artikalES.setCena(artikalDTO.getCena());
 
 		artikal = artikalServiceInterface.save(artikal);
-		artikalEsServiceInterface.save(artikalES);
+		artikalEsServiceInterface.index(artikalES);
+//		artikalEsServiceInterface.indexUploadFile(new ArtikalEsDTO(artikalES));
 		return new ResponseEntity<ArtikalDTO>(new ArtikalDTO(artikal), HttpStatus.OK);
 	}
 	
@@ -172,8 +172,9 @@ public class ArtikalController {
 		
 		Artikal artikal = artikalServiceInterface.findById(id);
 		if(artikal != null) {
+			ArtikalES artikalES = artikalEsServiceInterface.getOneByNaziv(artikal.getNaziv());
 			artikalServiceInterface.remove(id);
-			artikalEsServiceInterface.removeArtikalES(id);
+			artikalEsServiceInterface.removeArtikalES(artikalES);
 			
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		}

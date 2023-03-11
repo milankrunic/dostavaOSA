@@ -23,12 +23,20 @@ import ftn.dostavaOSA2021.DostavaOSA2021.model.Artikal;
 @Setting(settingPath = "/analyzer/serbianAnalyzer.json")
 public class ArtikalES {
     
+//	SA OVA DVA ISPOD NE RADI IZMENA I BRISANJE
 	@Id
+	private String id;
+	
+//	SA OVIM @Id NE RADI PRETRAGA
+//	@Id
     private Long idArtikla;
 
     @Field(type = FieldType.Text)
     private String naziv;
 
+//    @Field(type = FieldType.Text)
+//    private String pdfFile;
+    
     @Field(type = FieldType.Text)
     private String opis;
 

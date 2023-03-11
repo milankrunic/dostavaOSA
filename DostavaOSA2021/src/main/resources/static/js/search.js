@@ -17,7 +17,7 @@ $(document).ready(function () {
     
     $("#btnDodajArtikal").click(function (event) {
         event.preventDefault();
-//        submitFile();
+        submitFile();
     });
     
     $("#btnOpisArtikla").click(function (event) {
@@ -88,11 +88,11 @@ function pretragaPoNazivuArtikla(){
     nazivInput = $("#naziv").val();
 
     var formData = {
-        "text" : nazivInput
+        "naziv" : nazivInput
     }
 
     $.ajax({
-        url : "http://localhost:8080/search/artikalNaziv",
+        url : "http://localhost:8080/search/nazivQuery?naziv="+nazivInput,
         type : "POST",
         contentType: 'application/json; charset=utf-8',
         data : JSON.stringify(formData),
@@ -120,15 +120,18 @@ function submitFile(){
     var nazivInput = "";
     var cenaInput = "";
     var fileInput = "";
+//    var opisInput = "";
 
     nazivInput = $("#nazivArtikla").val();
     cenaInput = $("#cena").val();
     fileInput = $("#opisFile").val();
+//    opisInput = $("#opis").val();
 
     var formData = new FormData();    
     formData.append( 'naziv', nazivInput );
     formData.append( 'cena', cenaInput );
-    formData.append( 'opisFile', $('#opisFile')[0].files[0] );
+    formData.append( 'file', $('#opisFile')[0].files[0] );
+//    formData.append( 'opis', opisInput );
     
     $.ajax({
         url : "http://localhost:8080/search/pdf",
@@ -137,10 +140,10 @@ function submitFile(){
         processData: false,
         contentType: false,
         success: function(data){
-//            alert('File je uspesno dodat!');
+            PrikazSvihArtikala();
+            $('#dodajArtikal').hide();
         },
         error : function(e){
-//            alert('Doslo je do neke greške!');
             console.log("ERROR: ", e);
         }
     });
@@ -156,11 +159,11 @@ function pretragaPoOpisuArtikla(){
     console.log("OPIS JE : ", opisInput);
     
     var formData = {
-        "text" : opisInput
+        "opis" : opisInput
     }
 
     $.ajax({
-        url : "http://localhost:8080/search/artikalOpis",
+        url : "http://localhost:8080/search/opisQuery?opis="+opisInput,
         type : "POST",
         contentType: 'application/json; charset=utf-8',
         data : JSON.stringify(formData),

@@ -19,21 +19,27 @@ public class ArtikalEsDTO {
 	private Long id;
 	
     private String naziv;
+    
+    private String opis;
+    
+//    private String pdfFile;
 
     private Double cena;
     
-    private MultipartFile[] opisFile;
+    private MultipartFile[] file;
     
-	public ArtikalEsDTO(Long id, String naziv, Double cena) {
+	public ArtikalEsDTO(Long id, String naziv, String opis, Double cena) {
 		super();
 		this.id = id;
 		this.naziv = naziv;
+		this.opis = opis;
+//		this.pdfFile = pdfFile;
 		this.cena = cena;
 	}
     
     //mapper
     public ArtikalEsDTO(ArtikalES artikalEs) {
-    	this(artikalEs.getIdArtikla(), artikalEs.getNaziv(), artikalEs.getCena());
+    	this(artikalEs.getIdArtikla(), artikalEs.getNaziv(), artikalEs.getOpis(), artikalEs.getCena());
     }
 	
 }
