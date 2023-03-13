@@ -35,7 +35,7 @@ import ftn.dostavaOSA2021.DostavaOSA2021.lucene.indexing.handlers.PDFHandler;
 @Service
 public class ArtikalEsService implements ArtikalEsServiceInterface{
 
-	//putanja iz application.properties
+	//putanja iz application.properties 
 	@Value("${files.path}")
 	private String dataFilesPath;
 	
