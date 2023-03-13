@@ -163,7 +163,6 @@ public class ArtikalController {
 
 		artikal = artikalServiceInterface.save(artikal);
 		artikalEsServiceInterface.index(artikalES);
-//		artikalEsServiceInterface.indexUploadFile(new ArtikalEsDTO(artikalES));
 		return new ResponseEntity<ArtikalDTO>(new ArtikalDTO(artikal), HttpStatus.OK);
 	}
 	
@@ -209,7 +208,6 @@ public class ArtikalController {
 		List<Artikal> artikli = (List<Artikal>) session.getAttribute(ArtikalController.ODABRANI_ARTIKAL);
 		if (!artikli.contains(artikal)) {
 			artikli.add(artikal);
-
 		}
 
 		ModelAndView rezultat = new ModelAndView("pocetnaKorpa");

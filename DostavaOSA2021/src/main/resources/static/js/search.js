@@ -72,6 +72,8 @@ $(document).ready(function () {
 function PretragaArtikla(){
 	
 	var tabelaArtikal = $("#pretragaZaArtikal").slideDown('slow');
+	var artikliTablePretraga = $("#artikliTablePretraga").hide();
+	var rezultatPretrage = $('#rezultatPretrage').hide();
 	
 }
 
@@ -81,57 +83,16 @@ function PretragaPorudzbine(){
 	
 }
 
-function pretragaPoNazivuArtikla(){
-	
-    var nazivInput = "";
-    
-    nazivInput = $("#naziv").val();
-
-    var formData = {
-        "naziv" : nazivInput
-    }
-
-    $.ajax({
-        url : "http://localhost:8080/search/nazivQuery?naziv="+nazivInput,
-        type : "POST",
-        contentType: 'application/json; charset=utf-8',
-        data : JSON.stringify(formData),
-        success: function(data){
-	          $('#result').empty();
-	          for(i = 0; i < data.length; i++){
-	              var result = data[i]
-	              $.each(result, function(key, value) {
-	                $('#result').append('<li>' + key + ': ' + value + '</li>');
-	              });
-	          }
-	          console.log("SUCCESS : ", data);
-	          $("#btnNazivArtikla").prop("disabled", false);
-        },
-        error : function(e){
-            alert('Doslo je do neke greške!');
-            console.log("ERROR: ", e);
-        }
-    });
-  
-}
-
 function submitFile(){
 
-    var nazivInput = "";
-    var cenaInput = "";
-    var fileInput = "";
-//    var opisInput = "";
-
-    nazivInput = $("#nazivArtikla").val();
-    cenaInput = $("#cena").val();
-    fileInput = $("#opisFile").val();
-//    opisInput = $("#opis").val();
+    var nazivInput = $("#nazivArtikla").val();
+    var cenaInput = $("#cena").val();
+    var fileInput = $("#opisFile").val();
 
     var formData = new FormData();    
     formData.append( 'naziv', nazivInput );
     formData.append( 'cena', cenaInput );
     formData.append( 'file', $('#opisFile')[0].files[0] );
-//    formData.append( 'opis', opisInput );
     
     $.ajax({
         url : "http://localhost:8080/search/pdf",
@@ -147,16 +108,55 @@ function submitFile(){
             console.log("ERROR: ", e);
         }
     });
+}
 
+function pretragaPoNazivuArtikla(){
+    
+    var tabelaArtikla = $("#artikliTablePretraga");
+    var tbodyArtikla = $("#tbodyArtiklaPretraga");
+    var pretragaZaArtikal = $("#pretragaZaArtikal");
+    var rezultatPretrage = $("#rezultatPretrage");
+    var nazivInput = $("#naziv").val();
+
+    var formData = {
+        "naziv" : nazivInput
+    }
+
+    $.ajax({
+        url : "http://localhost:8080/search/nazivQuery?naziv="+nazivInput,
+        type : "POST",
+        contentType: 'application/json; charset=utf-8',
+        data : JSON.stringify(formData),
+	    success : function(result){
+	        tabelaArtikla.show();
+	        tbodyArtikla.empty();
+	        for(pretraga in result){
+	            tbodyArtikla.append(
+	            '<tr>'
+	        			
+	                +'<td align="center">'+result[pretraga].naziv+'</td>'
+	                +'<td align="center">'+result[pretraga].cena+'</td>'
+	                +'<td align="center">'+result[pretraga].opis+'</a>'+'</td>'
+
+	            +'</tr>')};  
+	         $('#rezultatPretrage').show();
+	         $('#pretragaZaArtikal').hide();
+	    },
+        error : function(e){
+            alert('Doslo je do neke greške!');
+            console.log("ERROR: ", e);
+        }
+    });
+  
 }
 
 function pretragaPoOpisuArtikla(){
 	
-    var opisInput = "";
-    
-    opisInput = $("#opisPretraga").val();
-
-    console.log("OPIS JE : ", opisInput);
+    var tabelaArtikla = $("#artikliTablePretraga");
+    var tbodyArtikla = $("#tbodyArtiklaPretraga");
+    var pretragaZaArtikal = $("#pretragaZaArtikal");
+    var rezultatPretrage = $("#rezultatPretrage");
+    var opisInput = $("#opisPretraga").val();
     
     var formData = {
         "opis" : opisInput
@@ -167,17 +167,21 @@ function pretragaPoOpisuArtikla(){
         type : "POST",
         contentType: 'application/json; charset=utf-8',
         data : JSON.stringify(formData),
-        success: function(data){
-	          $('#result').empty();
-	          for(i = 0; i < data.length; i++){
-	              var result = data[i]
-	              $.each(result, function(key, value) {
-	                $('#result').append('<li>' + key + ': ' + value + '</li>');
-	              });
-	          }
-	          console.log("SUCCESS : ", data);
-	          $("#btnOpisArtikla").prop("disabled", false);
-        },
+	    success : function(result){
+	        tabelaArtikla.show();
+	        tbodyArtikla.empty();
+	        for(pretraga in result){
+	            tbodyArtikla.append(
+	            '<tr>'
+	        			
+	                +'<td align="center">'+result[pretraga].naziv+'</td>'
+	                +'<td align="center">'+result[pretraga].cena+'</td>'
+	                +'<td align="center">'+result[pretraga].opis+'</a>'+'</td>'
+
+	            +'</tr>')};  
+	         $('#rezultatPretrage').show();
+	         $('#pretragaZaArtikal').hide();
+	    },
         error : function(e){
             alert('Doslo je do neke greške!');
             console.log("ERROR: ", e);
@@ -188,11 +192,12 @@ function pretragaPoOpisuArtikla(){
 
 function pretragaPoCeniArtikla(){
 	
-    var fromInput = "";
-    var toInput = "";
-    
-    fromInput = $("#cenaFrom").val();
-    toInput = $("#cenaTo").val();
+    var tabelaArtikla = $("#artikliTablePretraga");
+    var tbodyArtikla = $("#tbodyArtiklaPretraga");
+    var pretragaZaArtikal = $("#pretragaZaArtikal");
+    var rezultatPretrage = $("#rezultatPretrage");
+    var fromInput = $("#cenaFrom").val();
+    var toInput = $("#cenaTo").val();
 
     var formData = {
         "from" : fromInput,
@@ -204,17 +209,21 @@ function pretragaPoCeniArtikla(){
         type : "POST",
         contentType: 'application/json; charset=utf-8',
         data : JSON.stringify(formData),
-        success: function(data){
-	          $('#result').empty();
-	          for(i = 0; i < data.length; i++){
-	              var result = data[i]
-	              $.each(result, function(key, value) {
-	                $('#result').append('<li>' + key + ': ' + value + '</li>');
-	              });
-	          }
-	          console.log("SUCCESS : ", data);
-	          $("#btnCenaArtikla").prop("disabled", false);
-        },
+	    success : function(result){
+	        tabelaArtikla.show();
+	        tbodyArtikla.empty();
+	        for(pretraga in result){
+	            tbodyArtikla.append(
+	            '<tr>'
+	        			
+	                +'<td align="center">'+result[pretraga].naziv+'</td>'
+	                +'<td align="center">'+result[pretraga].cena+'</td>'
+	                +'<td align="center">'+result[pretraga].opis+'</a>'+'</td>'
+
+	            +'</tr>')};  
+	         $('#rezultatPretrage').show();
+	         $('#pretragaZaArtikal').hide();
+	    },
         error : function(e){
             alert('Doslo je do neke greške!');
             console.log("ERROR: ", e);
@@ -225,13 +234,13 @@ function pretragaPoCeniArtikla(){
 
 function pretragaPoNazivuAndCeniArtikla(){
 	
-	var nazivInput = "";
-    var fromInput = "";
-    var toInput = "";
-    
-    nazivInput = $("#nazivAnd").val();
-    fromInput = $("#cenaFromAnd").val();
-    toInput = $("#cenaToAnd").val();
+    var tabelaArtikla = $("#artikliTablePretraga");
+    var tbodyArtikla = $("#tbodyArtiklaPretraga");
+    var pretragaZaArtikal = $("#pretragaZaArtikal");
+    var rezultatPretrage = $("#rezultatPretrage");
+	var nazivInput = $("#nazivAnd").val();
+    var fromInput = $("#cenaFromAnd").val();
+    var toInput = $("#cenaToAnd").val();
 
     var formData = {
     	"naziv" : nazivInput,
@@ -244,17 +253,21 @@ function pretragaPoNazivuAndCeniArtikla(){
         type : "POST",
         contentType: 'application/json; charset=utf-8',
         data : JSON.stringify(formData),
-        success: function(data){
-	          $('#result').empty();
-	          for(i = 0; i < data.length; i++){
-	              var result = data[i]
-	              $.each(result, function(key, value) {
-	                $('#result').append('<li>' + key + ': ' + value + '</li>');
-	              });
-	          }
-	          console.log("SUCCESS : ", data);
-	          $("#btnNazivAndCenaArtikla").prop("disabled", false);
-        },
+	    success : function(result){
+	        tabelaArtikla.show();
+	        tbodyArtikla.empty();
+	        for(pretraga in result){
+	            tbodyArtikla.append(
+	            '<tr>'
+	        			
+	                +'<td align="center">'+result[pretraga].naziv+'</td>'
+	                +'<td align="center">'+result[pretraga].cena+'</td>'
+	                +'<td align="center">'+result[pretraga].opis+'</a>'+'</td>'
+
+	            +'</tr>')};  
+	         $('#rezultatPretrage').show();
+	         $('#pretragaZaArtikal').hide();
+	    },
         error : function(e){
             alert('Doslo je do neke greške!');
             console.log("ERROR: ", e);
@@ -265,13 +278,13 @@ function pretragaPoNazivuAndCeniArtikla(){
 
 function pretragaPoNazivuOrCeniArtikla(){
 	
-	var nazivInput = "";
-    var fromInput = "";
-    var toInput = "";
-    
-    nazivInput = $("#nazivOr").val();
-    fromInput = $("#cenaFromOr").val();
-    toInput = $("#cenaToOr").val();
+    var tabelaArtikla = $("#artikliTablePretraga");
+    var tbodyArtikla = $("#tbodyArtiklaPretraga");
+    var pretragaZaArtikal = $("#pretragaZaArtikal");
+    var rezultatPretrage = $("#rezultatPretrage");
+	var nazivInput = $("#nazivOr").val();
+    var fromInput = $("#cenaFromOr").val();
+    var toInput = $("#cenaToOr").val();
 
     var formData = {
     	"naziv" : nazivInput,
@@ -284,17 +297,21 @@ function pretragaPoNazivuOrCeniArtikla(){
         type : "POST",
         contentType: 'application/json; charset=utf-8',
         data : JSON.stringify(formData),
-        success: function(data){
-	          $('#result').empty();
-	          for(i = 0; i < data.length; i++){
-	              var result = data[i]
-	              $.each(result, function(key, value) {
-	                $('#result').append('<li>' + key + ': ' + value + '</li>');
-	              });
-	          }
-	          console.log("SUCCESS : ", data);
-	          $("#btnNazivOrCenaArtikla").prop("disabled", false);
-        },
+	    success : function(result){
+	        tabelaArtikla.show();
+	        tbodyArtikla.empty();
+	        for(pretraga in result){
+	            tbodyArtikla.append(
+	            '<tr>'
+	        			
+	                +'<td align="center">'+result[pretraga].naziv+'</td>'
+	                +'<td align="center">'+result[pretraga].cena+'</td>'
+	                +'<td align="center">'+result[pretraga].opis+'</a>'+'</td>'
+
+	            +'</tr>')};  
+	         $('#rezultatPretrage').show();
+	         $('#pretragaZaArtikal').hide();
+	    },
         error : function(e){
             alert('Doslo je do neke greške!');
             console.log("ERROR: ", e);

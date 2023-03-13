@@ -54,8 +54,7 @@ public class ArtikalEsService implements ArtikalEsServiceInterface{
 	
 	@Override
 	public void index(ArtikalES artikalEs) {
-		artikalEsRepository.save(artikalEs);
-		
+		artikalEsRepository.save(artikalEs);		
 	}
 	
 	@Override
@@ -135,26 +134,6 @@ public class ArtikalEsService implements ArtikalEsServiceInterface{
 		}
 		
 	}
-	
-//	@Override
-//	public void indexUploadFile(ArtikalES artikalES) throws IOException {
-//		for (MultipartFile file : artikalES.getFile()) {
-//			if(file.isEmpty()) {
-//				continue;
-//			}
-//			
-//			String fileName = saveUploadedFileInFolder(file);
-//			if(fileName != null) {
-//				ArtikalES artikalEsIndexUnit = getHandler(fileName).getIndexUnit(new File(fileName));
-////				artikalEsIndexUnit.setIdArtikla(artikalES.getIdArtikla());
-////				artikalEsIndexUnit.setNaziv(artikalES.getNaziv());
-////				artikalEsIndexUnit.setCena(artikalES.getCena());
-////				artikalEsIndexUnit.setOpis(artikalEsDTO.getOpis());
-//
-//				index(artikalEsIndexUnit);
-//			}
-//		}	
-//	}
 
 	@Override
 	public void indexUploadFile(ArtikalEsDTO artikalEsDTO) throws IOException {

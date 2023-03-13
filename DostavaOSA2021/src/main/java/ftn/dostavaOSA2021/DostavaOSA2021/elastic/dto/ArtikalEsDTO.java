@@ -21,8 +21,6 @@ public class ArtikalEsDTO {
     private String naziv;
     
     private String opis;
-    
-//    private String pdfFile;
 
     private Double cena;
     
@@ -33,7 +31,6 @@ public class ArtikalEsDTO {
 		this.id = id;
 		this.naziv = naziv;
 		this.opis = opis;
-//		this.pdfFile = pdfFile;
 		this.cena = cena;
 	}
     

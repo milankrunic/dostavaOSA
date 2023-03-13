@@ -55,17 +55,6 @@ public class SearchController {
 	public void reindex() {
 		artikalEsServiceInterface.reindex();
 	}
-	
-//	@PostMapping(path = "/pdf", consumes = "multipart/form-data")
-//	public void uploadPdf(@ModelAttribute ArtikalES uploadModel) throws IOException{
-////		ArtikalES a = new ArtikalES();
-////		a.setIdArtikla(uploadModel.getIdArtikla());
-////		a.setNaziv(uploadModel.getNaziv());
-////		a.setCena(uploadModel.getCena());
-////		a.setOpis(uploadModel.getOpis());
-//
-//		artikalEsServiceInterface.indexUploadFile(uploadModel);
-//	}
 
 	@PostMapping(path = "/pdf", consumes = "multipart/form-data")
 	public void uploadPdf(@ModelAttribute ArtikalEsDTO artikalEsDTO) throws IOException{

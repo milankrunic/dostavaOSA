@@ -19,7 +19,6 @@ public class ArtikalMapper {
 		return ArtikalEsDTO.builder()
 				.id(artikalES.getIdArtikla())
 				.naziv(artikalES.getNaziv())
-//				.pdfFile(artikalES.getPdfFile())
 				.opis(artikalES.getOpis())
 				.cena(artikalES.getCena())
 				.build();
