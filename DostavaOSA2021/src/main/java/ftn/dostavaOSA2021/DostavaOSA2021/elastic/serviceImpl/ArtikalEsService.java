@@ -129,7 +129,7 @@ public class ArtikalEsService implements ArtikalEsServiceInterface{
 	private DocumentHandler getHandler(String fileName) {
 		if(fileName.endsWith(".pdf")) {
 			return new PDFHandler();
-		}else {
+		}else { 
 			return new PDFHandler();
 		}
 		
