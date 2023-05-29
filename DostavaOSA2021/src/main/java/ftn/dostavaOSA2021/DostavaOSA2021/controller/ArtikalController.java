@@ -1,9 +1,6 @@
 package ftn.dostavaOSA2021.DostavaOSA2021.controller;
 
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,8 +31,6 @@ import ftn.dostavaOSA2021.DostavaOSA2021.elastic.model.ArtikalES;
 import ftn.dostavaOSA2021.DostavaOSA2021.elastic.serviceInterface.ArtikalEsServiceInterface;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Artikal;
 import ftn.dostavaOSA2021.DostavaOSA2021.model.Komentar;
-import ftn.dostavaOSA2021.DostavaOSA2021.model.Korisnik;
-import ftn.dostavaOSA2021.DostavaOSA2021.model.Prodavac;
 import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.ArtikalServiceInterface;
 import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.KomentarServiceInterface;
 import ftn.dostavaOSA2021.DostavaOSA2021.serviceInterface.KorisnikServiceInterface;
@@ -88,35 +83,10 @@ public class ArtikalController {
 	}
 	
 	@PostMapping(consumes = { "multipart/form-data" })
-	public ResponseEntity<ArtikalDTO> createEmployee(ArtikalDTO artikalDTO, @RequestParam("file") MultipartFile file) {
-		try {
-
-			String fileName = file.getOriginalFilename();
-			String filePath = Paths.get(uploadDirectory, fileName).toString();
-
-			// Cuvanje fajla lokalno
-			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(filePath));
-			stream.write(file.getBytes());
-			stream.close();
-			
-			Korisnik korisnik = korisnikServiceInterface.findOne(artikalDTO.getIdProdavac());
-			Prodavac prodavac = prodavacServiceInterface.findByKorisnickoIme(korisnik.getKorisnickoIme());
-			
-			Artikal a = new Artikal();
-			a.setNaziv(artikalDTO.getNaziv());
-			a.setOpis(artikalDTO.getOpis());
-			a.setCena(artikalDTO.getCena());
-			a.setNazivFajla(fileName);
-			a.setPutanjaFajla(filePath);
-			a.setProdavac(prodavac);
-
-			a = artikalServiceInterface.save(a);
-			return new ResponseEntity<ArtikalDTO>(new ArtikalDTO(a), HttpStatus.CREATED);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
+	public ResponseEntity<ArtikalDTO> createArtikal(ArtikalDTO artikalDTO, @RequestParam("file") MultipartFile file) throws Exception {
+		
+		return ResponseEntity.ok().body(artikalServiceInterface.save(artikalDTO, file));
+		
 	}
 	
 	@GetMapping("/downloadFile/{fileName}")
@@ -144,26 +114,8 @@ public class ArtikalController {
 	@PutMapping(value = "/{id}", consumes = "application/json")
 	public ResponseEntity<ArtikalDTO> updateArtikal(@RequestBody ArtikalDTO artikalDTO, @PathVariable("id") Long id) throws IOException{
 		
-		Artikal artikal = artikalServiceInterface.findById(id);
-		Korisnik korisnik = korisnikServiceInterface.findOne(artikalDTO.getIdProdavac());
-		Prodavac prodavac = prodavacServiceInterface.findByKorisnickoIme(korisnik.getKorisnickoIme());
+		return ResponseEntity.ok().body(artikalServiceInterface.update(id, artikalDTO));
 		
-		if(artikal == null) {
-			return new ResponseEntity<ArtikalDTO>(HttpStatus.BAD_REQUEST);
-		}
-		
-		ArtikalES artikalES = artikalEsServiceInterface.getOneByNaziv(artikal.getNaziv());
-		artikal.setNaziv(artikalDTO.getNaziv());
-		artikal.setOpis(artikalDTO.getOpis());
-		artikal.setCena(artikalDTO.getCena());
-		artikal.setProdavac(prodavac);
-		artikalES.setNaziv(artikalDTO.getNaziv());
-		artikalES.setOpis(artikalDTO.getOpis());
-		artikalES.setCena(artikalDTO.getCena());
-
-		artikal = artikalServiceInterface.save(artikal);
-		artikalEsServiceInterface.index(artikalES);
-		return new ResponseEntity<ArtikalDTO>(new ArtikalDTO(artikal), HttpStatus.OK);
 	}
 	
 	@DeleteMapping(value = "/{id}")
